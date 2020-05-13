@@ -1,0 +1,260 @@
+@import '../../../../node_modules/tags-input/tags-input.css'
+@import '../../../../lib/admin/admin-topics-form/tag-autocomplete/styles'
+
+
+.form-propuesta
+  display: flex
+  flex-direction: column
+  align-items: center
+  .propuesta-header
+    color: white
+    // text-shadow: 0 1px 3px #333
+    display: flex
+    align-items: center
+    flex-direction: column
+    justify-content: center
+    min-height: 250px
+    width: 100%
+    padding: 0 20px
+    text-align: center
+    background-size: cover
+    background-image: unquote("url('ext/lib/site/anfiteatro-1.jpg')")
+    background-repeat: no-repeat
+    h1
+      font-size: 32px
+      margin:0;
+      background-color: #7cbb42;
+      padding: 10px;
+      @media screen and (min-width: 764px)
+        font-size: 50px
+    p
+      font-size: 16px
+      margin:0;
+      padding: 0 5px;
+      // margin-top:6px;
+      // background-color: rgba(23,145,190,0.6)
+      background-color: rgba(23,145,190,1)
+      @media screen and (min-width: 764px)
+        font-size: 20px
+
+  .wrapper
+    max-width:900px
+    width: 100%
+    padding: 20px
+    position: relative
+    .more-info
+      text-align: center;
+      font-size: 1.3em;
+      margin-top: 10px;
+    .small-banner
+      background-color: #1791be
+      padding: 10px;
+      color: #FFF;
+      line-height: normal;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+    .bar-section
+      background-color: #1791be
+      padding: 1.6rem 1rem;
+      p
+        margin: 0
+        color: #FFF
+        text-align: center;
+        line-height: normal;
+      .section-title
+        font-size: 2.5rem;
+        font-weight: bold
+      .section-subtitle
+        font-size: 0.9rem
+    .required
+      color: #1791be
+    label
+      // color: rgba(0, 0, 0, 0.55)
+      margin: 10px 0 10px 0;
+      font-size: 1.4em;
+      font-weight: bold;
+
+    input
+      width:100%
+    .tags-input
+      border-radius: 5px
+      border: 1px solid #CACACA
+      padding: 3px 10px
+      width: 100%
+
+    input, select, textarea
+      border-radius: 0px
+      border: 1px solid #CACACA
+      border-bottom: 2px solid #CACACA
+      font-size: 1.2rem
+      color: #000
+      &:focus
+        box-shadow: none;
+        // border-color: #1791be
+        border: 1px solid #1791be
+        border-bottom: 2px solid #1791be
+    .submit-div
+      text-align: center
+      .submit-btn
+        color: #7cbb42
+        font-weight: 800
+        border: 2px solid #7cbb42
+        background-color: #FFF;
+        border-radius: 10px
+        padding: 10px 40px
+        font-weight: 800;
+        font-size: 21px
+        cursor: pointer
+        &:hover
+          background-color: #7cbb42;
+          color: #FFF
+    .form-section-label
+      color: #9e41b9
+      font-size: 18px
+      font-weight: bold
+      @media screen and (min-width: 1360px)
+        position: relative
+        left: -240px
+        margin-top: 10px
+        top: 30px
+  
+  select.special-height
+    height: 3rem !important;
+
+  ul.tags 
+    list-style: none;
+    margin: 20px 0;
+    overflow: hidden; 
+    padding: 0;
+  ul.tags li 
+    float: left; 
+
+  .tag 
+    background: #eee;
+    border-radius: 3px 0 0 3px;
+    color: #666;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+    &::before 
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+      content: '';
+      height: 6px;
+      left: 10px;
+      position: absolute;
+      width: 6px;
+      top: 10px;
+    &::after 
+      background: #fff;
+      border-bottom: 13px solid transparent;
+      border-left: 10px solid #eee;
+      border-top: 13px solid transparent;
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+    &:hover 
+      background-color: 1791be;
+      color: white !important;
+      cursor: pointer;
+    &:hover::after 
+      border-left-color: 1791be; 
+    &.active
+      background-color: #7cbb42;
+      color: white;
+    &.active::after 
+      border-left-color: #7cbb42;
+    &.active
+      &:hover 
+        background-color: fff;
+        color: #666;
+      &:hover::after 
+        border-left-color: fff; 
+
+  .add-color
+    color: #1791be;
+  .help-text
+    display: block
+    font-size: .8em
+    color: #666
+    margin: 0 0 .3em 
+    &.requerido
+      font-size: .7em
+      font-style: italic
+      color: #828282 
+
+  .span-alert
+    color: #9e41b9
+    font-size:.8em
+    @media screen and (min-width: 1360px)
+        position: relative
+        // left: -240px
+        margin-top: 10px
+        top: 30px  
+  .cronograma-alert
+    padding-top:10px
+
+  .cronograma
+    tex-align:right
+    margin-top: 40px
+
+  .upload-info-container
+    // margin-top: 0px;
+    // padding: 0px;
+    //border: 2px solid #000
+    //border-radius: 5px;
+    background-color: #FFF;
+    p.important
+      margin: 0px 0 10px;
+      padding: 10px;
+      color: #FFF
+      font-size:21px;
+      font-weight: 800;
+      background-color: #7cbb42
+      text-align: center;
+    p.question
+      color: #000
+      font-size:21px;
+    p.pre-fake-checkbox
+      text-align: center;
+      color: #9e41b9
+    p.acepted-terms
+      text-align: center;
+      color: #7cbb42;
+    .fake-checkbox
+      padding: 10px; 
+      font-size:20px;
+      color: #7cbb42
+      font-weight: 800
+      border: 2px solid #7cbb42
+      border-radius: 10px
+      cursor: pointer
+      text-align: center
+      @media screen and (min-width: 764px)
+        margin: 0 auto
+        width: 50%;
+      &:hover
+        background-color: #7cbb42;
+        color: #FFF
+  
+  .error-box
+    border: 2px solid red;
+    border-radius: 10px
+    padding: 15px;
+    margin-bottom: 10px
+    ul
+      margin-bottom: 0
+    li.error-li
+      color: red;
+
+
+

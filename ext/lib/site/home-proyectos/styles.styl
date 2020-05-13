@@ -1,0 +1,22 @@
+@import '../jump-button/styles'
+@import '../datos-forum/styles'
+@import './filter/styles'
+@import './grid/styles'
+
+#forum-home
+  padding-bottom: 0
+  .grid-container
+    padding:5%
+    @media screen and (max-width: 570px)
+      display:flex
+      flex-direction:column
+  .paginacion-container
+    display: flex
+    justify-content: center
+    margin-bottom: 58px
+    span
+      @media screen and (max-width: 570px)
+        font-size:13px
+
+.ext-topic-card
+  width:260px
