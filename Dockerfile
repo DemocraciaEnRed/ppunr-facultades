@@ -11,6 +11,8 @@ COPY ["package.json", "."]
 ENV NODE_ENV=production \
     NODE_PATH=/usr/src
 
+#para debuggear:
+#RUN npm install --verbose
 RUN npm install --quiet
 
 RUN mkdir ext
