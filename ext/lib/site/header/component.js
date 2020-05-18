@@ -139,33 +139,33 @@ class Header extends Component {
 
           <ul className='nav navbar-nav'>
 
-            <div className="header-item">
+            <div className={`header-item ${window.location.pathname.includes('/acerca-de') ? 'active' : ''}`}>
               <Link
                 to='/s/acerca-de'
                 className='header-link'
-                activeStyle={{ color: '#8C1E81' }}>
+                >
                   Acerca de
               </Link>
             </div>
-            <div className="header-item">
+            <div className={`header-item ${window.location.pathname.includes('/propuestas') ? 'active' : ''}`}>
               <Link
                 to='/propuestas'
-                className={`header-link ${window.location.pathname.includes('propuesta') ? 'active' : ''}`}
-                activeStyle={{ color: '#8C1E81' }}>
+                className='header-link'
+                >
                   Foros
               </Link>
             </div>
             { showAdmin &&
-              <div className="header-item">
+              <div className={`header-item ${window.location.pathname.includes('/admin') ? 'active' : ''}`}>
                 <Link
                   to='/proyectos/admin/topics'
-                  className={`header-link ${window.location.pathname.includes('/admin') ? 'active' : ''}`}
-                  activeStyle={{ color: '#8C1E81' }}>
+                  className='header-link'
+                  >
                     Admin
                 </Link>
               </div>
             }
-            {/*<div className="header-item">
+            {/*<div className={`header-item">
               <Link
                 to='/s/herramientas'
                 className='header-link'
