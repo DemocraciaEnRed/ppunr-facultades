@@ -5,7 +5,7 @@ export default function BannerForoVecinal (props) {
   let { adminTexts } = config.store
   return (
     <section className='container-fluid banner-fv'>
-      <div className='blue-background'></div>
+      <div className='violet-background'></div>
       <div className='banner'>
       {
         Math.random(1) > 0.5 ? (

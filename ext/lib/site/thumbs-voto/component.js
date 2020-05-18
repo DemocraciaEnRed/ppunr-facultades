@@ -9,7 +9,7 @@ export default function ThumbsVoto(props) {
   return (
     <section className="thumbs info-landing">
       <div className="container-fluid">
-        <div className="row cont fondo-azul">
+        <div className="row cont fondo-violeta">
           <div className="subtitulo">
             <h2>{ props.texts['home-subtitle'] }</h2>
             {/*<h3>Hasta el 31 de mayo inclusive tenés tiempo para presentar tus propuestas</h3> */}
