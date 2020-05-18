@@ -6,7 +6,6 @@ import userConnector from 'lib/site/connectors/user'
 import UserBadge from 'ext/lib/site/header/user-badge/component'
 import MobileMenu from 'ext/lib/site/header/mobile-menu/component'
 import AnonUser from 'ext/lib/site/header/anon-user/component'
-import ProyectosLink from 'ext/lib/site/header/proyectos-link'
 import forumStore from 'lib/stores/forum-store/forum-store'
 
 class Header extends Component {
@@ -153,18 +152,7 @@ class Header extends Component {
                 to='/propuestas'
                 className={`header-link ${window.location.pathname.includes('propuesta') ? 'active' : ''}`}
                 activeStyle={{ color: '#8C1E81' }}>
-                  Propuestas
-              </Link>
-            </div>
-            <div className="header-item">
-              <ProyectosLink />
-            </div>
-            <div className="header-item">
-              <Link
-                to='/s/datos'
-                className='header-link'
-                activeStyle={{ color: '#8C1E81' }}>
-                  Datos
+                  Foros
               </Link>
             </div>
             { showAdmin &&

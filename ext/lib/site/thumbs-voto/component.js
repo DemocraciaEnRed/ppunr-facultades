@@ -22,7 +22,7 @@ export default function ThumbsVoto(props) {
               <Link
                 to='/formulario-propuesta'
                 className="boton-azul boton-blanco">
-                Mandá tu propuesta
+                Mandá tu idea
               </Link>
               {/*<Link
                 to='/proyectos'
