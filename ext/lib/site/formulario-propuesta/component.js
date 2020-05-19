@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
+import facultadStore from 'lib/stores/facultad-store'
+import claustroStore from 'lib/stores/claustro-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
 import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
@@ -23,7 +25,8 @@ class FormularioPropuesta extends Component {
       telefono: '',
       email: '',
       titulo: '',
-      barrio: '',
+      facultad: '',
+      claustro: '',
       problema: '',
       solucion: '',
       beneficios: '',
@@ -34,6 +37,9 @@ class FormularioPropuesta extends Component {
       availableTags: [],
       selectedTag: '',
       acceptedTerms: false,
+
+      facultades: [],
+      claustros: []
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -58,7 +64,8 @@ class FormularioPropuesta extends Component {
             documento: topic.attrs.documento,
             telefono: topic.attrs.telefono,
             email: topic.attrs.email,
-            barrio: topic.attrs.barrio,
+            facultad: topic.attrs.facultad,
+            claustro: topic.attrs.claustro,
             problema: topic.attrs.problema,
             solucion: topic.attrs.solucion,
             beneficios: topic.attrs.beneficios,
@@ -77,6 +84,9 @@ class FormularioPropuesta extends Component {
     forumStore.findOneByName('proyectos').then((forum) => {
       this.setState({ forum })
     }).catch((err) => { console.error(err) })
+
+    facultadStore.findAll().then(facultades => this.setState({facultades}))
+    claustroStore.findAll().then(claustros => this.setState({claustros}))
   }
 
   handleSubmit (e) {
@@ -89,11 +99,12 @@ class FormularioPropuesta extends Component {
       'attrs.documento': this.state.documento,
       'attrs.telefono': this.state.telefono,
       'attrs.email': this.state.email,
-      'attrs.barrio': this.state.barrio,
       'attrs.problema': this.state.problema,
       'attrs.solucion': this.state.solucion,
       'attrs.beneficios': this.state.beneficios,
-      tags: this.state.tags
+      tags: this.state.tags,
+      facultad: this.state.facultad,
+      claustro: this.state.claustro
     }
     if (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit') {
       formData['attrs.admin-comment'] = this.state.adminComment
@@ -133,7 +144,6 @@ class FormularioPropuesta extends Component {
       'ADULTOS MAYORES',
       'MEDIO AMBIENTE',
       'ANIMALES',
-      'BARRIOS VULNERABLES',
       'BASURA',
       'CIUDADANÍA',
       'CULTURA',
@@ -237,7 +247,8 @@ class FormularioPropuesta extends Component {
     if (this.state.telefono === '') return true
     if (this.state.email === '') return true
     if (this.state.titulo === '') return true
-    if (this.state.barrio === '') return true
+    if (this.state.facultad === '') return true
+    if (this.state.claustro === '') return true
     if (this.state.problema === '') return true
     if (this.state.solucion === '') return true
     if (this.state.beneficios === '') return true
@@ -267,7 +278,7 @@ class FormularioPropuesta extends Component {
   }
 
   render () {
-    const { forum } = this.state
+    const { forum, facultades, claustros } = this.state
 
     if (!forum) return null
     if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
@@ -370,7 +381,7 @@ class FormularioPropuesta extends Component {
                 <li>Serán factibles las propuestas de obras o equipamiento para entidades sin fines de lucro (polideportivos, sociedades de fomento,  centros de jubilados, espacios públicos, escuelas de gestión pública, centros de salud    municipales, etc).</li>
                 <li>Serán factibles campañas o talleres sobre un tema específico cuya ejecución sólo sea durante el 2021.</li>
                 <li>No serán factibles las propuestas que impliquen un gasto corriente (recursos humanos que incrementen la planta municipal).</li>
-                <li>Cada propuesta se debe presentar para un solo barrio. (No se puede presentar una propuesta para todo el Municipio)</li>
+                <li>Cada propuesta se debe presentar para una sola facultad. (No se puede presentar una propuesta para todo el Municipio)</li>
                 <li>El presupuesto máximo de la propuesta no puede superar los $ 4.500.000.</li>
               </ul>
               <hr />
@@ -402,26 +413,41 @@ class FormularioPropuesta extends Component {
               onChange={this.handleInputChange} />
           </div>
           <div className='form-group'>
-            <label className='required' htmlFor='barrio'>
-              Barrio
+            <label className='required' htmlFor='facultad'>
+              Facultad
             </label>
-            <p className="help-text">¿En que barrio impacta el proyecto?</p>
+            <p className="help-text">¿En que facultad impacta el proyecto?</p>
             <select
               className='form-control special-height'
               required
-              name='barrio'
-              value={this.state['barrio']}
+              name='facultad'
+              value={this.state['facultad']}
               onChange={this.handleInputChange}>
-              <option value=''>Seleccione un barrio</option>
-              <option value='villa-martelli'>Villa Martelli</option>
-              <option value='villa-adelina'>Villa Adelina</option>
-              <option value='vicente-lopez'>Vicente Lopez</option>
-              <option value='olivos'>Olivos</option>
-              <option value='munro'>Munro</option>
-              <option value='la-lucila'>La Lucila</option>
-              <option value='florida-oeste'>Florida Oeste</option>
-              <option value='florida-este'>Florida Este</option>
-              <option value='carapachay'>Carapachay</option>
+              <option value=''>Seleccione una facultad</option>
+              {facultades.length > 0 && facultades.map(facultad =>
+                <option key={facultad._id} value={facultad._id}>
+                  {facultad.abreviacion}
+                </option>
+              )}
+            </select>
+          </div>
+          <div className='form-group'>
+            <label className='required' htmlFor='claustro'>
+              Claustro
+            </label>
+            <p className="help-text">¿En que claustro impacta el proyecto?</p>
+            <select
+              className='form-control special-height'
+              required
+              name='claustro'
+              value={this.state['claustro']}
+              onChange={this.handleInputChange}>
+              <option value=''>Seleccione un claustro</option>
+              {claustros.length > 0 && claustros.map(claustro =>
+                <option key={claustro._id} value={claustro._id}>
+                  {claustro.nombre}
+                </option>
+              )}
             </select>
           </div>
           <div className='tags-autocomplete'>
@@ -486,9 +512,9 @@ class FormularioPropuesta extends Component {
           </div>
           <div className='form-group'>
             <label className='required' htmlFor='beneficios'>
-              Beneficios que brindará el proyecto al barrio
+              Beneficios que brindará el proyecto a la facultad
             </label>
-            <p className='help-text'>¿Como ayuda este proyecto al barrio? ¿Quiénes se benefician?</p>
+            <p className='help-text'>¿Como ayuda este proyecto a la facultad? ¿Quiénes se benefician?</p>
             <textarea
               className='form-control'
               required
@@ -552,7 +578,8 @@ class FormularioPropuesta extends Component {
                   {this.hasErrorsField('telefono') && <li className="error-li">El campo "Telefono" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('barrio') && <li className="error-li">El campo "Barrio" de la propuesta no puede quedar vacío</li> }
+                  {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" de la propuesta no puede quedar vacío</li> }
+                  {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('problema') && <li className="error-li">El campo "Problema" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('solucion') && <li className="error-li">El campo "Solución" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('beneficios') && <li className="error-li">El campo "Beneficios" de la propuesta no puede quedar vacío</li> }
