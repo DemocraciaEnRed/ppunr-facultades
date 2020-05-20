@@ -87,6 +87,20 @@ class FormularioPropuesta extends Component {
 
     facultadStore.findAll().then(facultades => this.setState({facultades}))
     claustroStore.findAll().then(claustros => this.setState({claustros}))
+
+    this.props.user.onChange(this.onUserStateChange)
+  }
+
+  onUserStateChange = () => {
+    if (this.props.user.state.fulfilled){
+      let user = this.props.user.state.value
+      this.setState({
+        facultad: user.facultad._id,
+        claustro: user.claustro._id,
+        email: user.email,
+        nombre: user.displayName
+      })
+    }
   }
 
   handleSubmit (e) {
@@ -314,7 +328,48 @@ class FormularioPropuesta extends Component {
               name='nombre'
               value={this.state['nombre']}
               placeholder=""
-              onChange={this.handleInputChange} />
+              onChange={this.handleInputChange}
+              disabled={true} />
+          </div>
+          <div className='form-group'>
+            <label className='required' htmlFor='claustro'>
+              Claustro
+            </label>
+            <p className="help-text">¿En que claustro impacta el proyecto?</p>
+            <select
+              className='form-control special-height'
+              required
+              name='claustro'
+              value={this.state['claustro']}
+              onChange={this.handleInputChange}
+              disabled={true}>
+              <option value=''>Seleccione un claustro</option>
+              {claustros.length > 0 && claustros.map(claustro =>
+                <option key={claustro._id} value={claustro._id}>
+                  {claustro.nombre}
+                </option>
+              )}
+            </select>
+          </div>
+          <div className='form-group'>
+            <label className='required' htmlFor='facultad'>
+              Facultad
+            </label>
+            <p className="help-text">¿En que facultad impacta el proyecto?</p>
+            <select
+              className='form-control special-height'
+              required
+              name='facultad'
+              value={this.state['facultad']}
+              onChange={this.handleInputChange}
+              disabled={true}>
+              <option value=''>Seleccione una facultad</option>
+              {facultades.length > 0 && facultades.map(facultad =>
+                <option key={facultad._id} value={facultad._id}>
+                  {facultad.nombre}
+                </option>
+              )}
+            </select>
           </div>
           <div className='form-group'>
             <label className='required' htmlFor='domicilio'>
@@ -370,7 +425,8 @@ class FormularioPropuesta extends Component {
               name='email'
               placeholder=""
               value={this.state['email']}
-              onChange={this.handleInputChange} />
+              onChange={this.handleInputChange}
+              disabled={true} />
           </div>
            <div className="bar-section">
             <p className="section-title">Acerca de la propuesta</p>
@@ -411,44 +467,6 @@ class FormularioPropuesta extends Component {
               name='titulo'
               value={this.state['titulo']}
               onChange={this.handleInputChange} />
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='facultad'>
-              Facultad
-            </label>
-            <p className="help-text">¿En que facultad impacta el proyecto?</p>
-            <select
-              className='form-control special-height'
-              required
-              name='facultad'
-              value={this.state['facultad']}
-              onChange={this.handleInputChange}>
-              <option value=''>Seleccione una facultad</option>
-              {facultades.length > 0 && facultades.map(facultad =>
-                <option key={facultad._id} value={facultad._id}>
-                  {facultad.abreviacion}
-                </option>
-              )}
-            </select>
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='claustro'>
-              Claustro
-            </label>
-            <p className="help-text">¿En que claustro impacta el proyecto?</p>
-            <select
-              className='form-control special-height'
-              required
-              name='claustro'
-              value={this.state['claustro']}
-              onChange={this.handleInputChange}>
-              <option value=''>Seleccione un claustro</option>
-              {claustros.length > 0 && claustros.map(claustro =>
-                <option key={claustro._id} value={claustro._id}>
-                  {claustro.nombre}
-                </option>
-              )}
-            </select>
           </div>
           <div className='tags-autocomplete'>
             <label className='required'>
