@@ -9,12 +9,23 @@
       .form-group
         label= t('settings.first-name')
         input.form-control(type='text', id='firstName', name='firstName', maxlength=100, placeholder=t('settings.first-name'), value='#{user.firstName}', validate='required firstname')
+
       .form-group
         label= t('settings.last-name')
         input.form-control(type='text', id='lastName', name='lastName', maxlength=100, placeholder=t('settings.last-name'), value='#{user.lastName}', validate='required lastname')
+
+      .form-group
+        label= 'Claustro'
+        select.form-control(disabled='disabled', id='claustro', name='claustro', placeholder='Claustro', value='#{user.claustro}', validate='required')
+
+      .form-group
+        label= 'Facultad'
+        select.form-control(disabled='disabled', id='facultad', name='facultad', placeholder='Facultad', value='#{user.facultad}', validate='required')
+
       .form-group
         label= t('signup.email')
         input.form-control(type='text', disabled='disabled', name='email', maxlength=200, placeholder=t('forgot.mail.example'), value='#{user.email}', validate='required email')
+
       .form-group
         label= t('settings.locale')
         select.form-control(id='locale', name='locale')
