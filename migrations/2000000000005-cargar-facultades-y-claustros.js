@@ -22,7 +22,7 @@ const facultades = [
 const claustros = [
   { nombre: 'Estudiantes' },
   { nombre: 'Docentes' },
-  { nombre: 'No docentes' },
+  { nombre: 'Nodocentes' },
   { nombre: 'Graduados/as' },
 ]
 
