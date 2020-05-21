@@ -22,16 +22,13 @@ class FormularioPropuesta extends Component {
       topic: null,
       mode: null,
       nombre: '',
-      domicilio: '',
       documento: '',
-      telefono: '',
+      genero: '',
       email: '',
       titulo: '',
       facultad: '',
       claustro: '',
       problema: '',
-      solucion: '',
-      beneficios: '',
       eje: '',
       tags: [],
       adminComment: '',
@@ -65,15 +62,12 @@ class FormularioPropuesta extends Component {
           this.setState({
             titulo: topic.mediaTitle,
             nombre: topic.attrs.nombre,
-            domicilio: topic.attrs.domicilio,
             documento: topic.attrs.documento,
-            telefono: topic.attrs.telefono,
+            genero: topic.attrs.genero,
             email: topic.attrs.email,
             facultad: topic.attrs.facultad,
             claustro: topic.attrs.claustro,
             problema: topic.attrs.problema,
-            solucion: topic.attrs.solucion,
-            beneficios: topic.attrs.beneficios,
             tags: topic.tags,
             state: topic.attrs.state,
             adminComment: topic.attrs['admin-comment'],
@@ -117,13 +111,10 @@ class FormularioPropuesta extends Component {
       forum: this.state.forum.id,
       mediaTitle: this.state.titulo,
       'attrs.nombre': this.state.nombre,
-      'attrs.domicilio': this.state.domicilio,
       'attrs.documento': this.state.documento,
-      'attrs.telefono': this.state.telefono,
+      'attrs.genero': this.state.genero,
       'attrs.email': this.state.email,
       'attrs.problema': this.state.problema,
-      'attrs.solucion': this.state.solucion,
-      'attrs.beneficios': this.state.beneficios,
       tags: this.state.tags.map(tag => tag.name),
       facultad: this.state.facultad,
       claustro: this.state.claustro
@@ -203,16 +194,13 @@ class FormularioPropuesta extends Component {
 
   hasErrors = () => {
     if (this.state.nombre === '') return true
-    if (this.state.domicilio === '') return true
     if (this.state.documento === '') return true
-    if (this.state.telefono === '') return true
+    if (this.state.genero === '') return true
     if (this.state.email === '') return true
     if (this.state.titulo === '') return true
     if (this.state.facultad === '') return true
     if (this.state.claustro === '') return true
     if (this.state.problema === '') return true
-    if (this.state.solucion === '') return true
-    if (this.state.beneficios === '') return true
     return false;
 
   }
@@ -319,20 +307,6 @@ class FormularioPropuesta extends Component {
             </select>
           </div>
           <div className='form-group'>
-            <label className='required' htmlFor='domicilio'>
-              Domicilio
-            </label>
-            <input
-              className='form-control'
-              required
-              type='text'
-              max='200'
-              name='domicilio'
-              placeholder=""
-              value={this.state['domicilio']}
-              onChange={this.handleInputChange} />
-          </div>
-          <div className='form-group'>
             <label className='required' htmlFor='documento'>
               DNI
             </label>
@@ -347,17 +321,17 @@ class FormularioPropuesta extends Component {
               onChange={this.handleInputChange} />
           </div>
           <div className='form-group'>
-            <label className='required' htmlFor='telefono'>
-              Teléfono
+            <label className='required' htmlFor='genero'>
+              Género
             </label>
             <input
               className='form-control'
               required
               type='text'
               max='50'
-              name='telefono'
+              name='genero'
               placeholder=""
-              value={this.state['telefono']}
+              value={this.state['genero']}
               onChange={this.handleInputChange} />
           </div>
           <div className='form-group'>
@@ -379,15 +353,7 @@ class FormularioPropuesta extends Component {
             <p className="section-title">Acerca de la propuesta</p>
             </div>
             <div className="upload-info-container">
-              <p className="important">Requisitos para que los proyectos sean factibles:</p>
-              <ul>
-                <li>Serán factibles las propuestas de obras o equipamiento para entidades sin fines de lucro (polideportivos, sociedades de fomento,  centros de jubilados, espacios públicos, escuelas de gestión pública, centros de salud    municipales, etc).</li>
-                <li>Serán factibles campañas o talleres sobre un tema específico cuya ejecución sólo sea durante el 2021.</li>
-                <li>No serán factibles las propuestas que impliquen un gasto corriente (recursos humanos que incrementen la planta municipal).</li>
-                <li>Cada propuesta se debe presentar para una sola facultad. (No se puede presentar una propuesta para todo el Municipio)</li>
-                <li>El presupuesto máximo de la propuesta no puede superar los $ 4.500.000.</li>
-              </ul>
-              <hr />
+              <br />
             { !this.state.acceptedTerms ?
               <section>
               <p className="pre-fake-checkbox"><b>Para comenzar a completar el formulario, debe aceptar los términos y condiciones</b></p>
@@ -465,7 +431,7 @@ class FormularioPropuesta extends Component {
           </div>
           <div className='form-group'>
             <label className='required' htmlFor='problema'>
-              Problema o necesidad existente
+              Tu idea
             </label>
             <p className='help-text'>¿Qué problemas querés resolver? ¿a quiénes afecta? ¿Cómo?</p>
             <textarea
@@ -475,36 +441,6 @@ class FormularioPropuesta extends Component {
               max='5000'
               name='problema'
               value={this.state['problema']}
-              onChange={this.handleInputChange}>
-            </textarea>
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='solucion' >
-              La propuesta de solución
-            </label>
-            <p className='help-text'>Describí la propuesta y cómo va a solucionar el problema</p>
-            <textarea
-              className='form-control'
-              required
-              rows='6'
-              max='5000'
-              name='solucion'
-              value={this.state['solucion']}
-              onChange={this.handleInputChange}>
-            </textarea>
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='beneficios'>
-              Beneficios que brindará el proyecto a la facultad
-            </label>
-            <p className='help-text'>¿Como ayuda este proyecto a la facultad? ¿Quiénes se benefician?</p>
-            <textarea
-              className='form-control'
-              required
-              rows='6'
-              max='5000'
-              name='beneficios'
-              value={this.state['beneficios']}
               onChange={this.handleInputChange}>
             </textarea>
           </div>
@@ -556,16 +492,13 @@ class FormularioPropuesta extends Component {
              <div className="error-box">
              <ul>
                   {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('domicilio') && <li className="error-li">El campo "Domicilio" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('documento') && <li className="error-li">El campo "Documento" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('telefono') && <li className="error-li">El campo "Telefono" del representante no puede quedar vacío</li> }
+                  {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('problema') && <li className="error-li">El campo "Problema" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('solucion') && <li className="error-li">El campo "Solución" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('beneficios') && <li className="error-li">El campo "Beneficios" de la propuesta no puede quedar vacío</li> }
+                  {this.hasErrorsField('problema') && <li className="error-li">El campo "Idea" de la propuesta no puede quedar vacío</li> }
              </ul>
              </div>
           }
