@@ -153,7 +153,7 @@ class TopicArticle extends Component {
                   <a className='btn btn-default'>
                     <i className='icon-pencil' />
                     &nbsp;
-                    {t('proposal-article.edit')}
+                    Editar idea
                   </a>
                 </Link>
               </div>
@@ -167,7 +167,7 @@ class TopicArticle extends Component {
                      className='btn btn-default'>
                      <i className='icon-pencil' />
                       &nbsp;
-                     {t('proposal-article.edit')}
+                     Editar idea
                    </a>
                  </div>
                )
@@ -179,14 +179,8 @@ class TopicArticle extends Component {
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
           <h3 className='topic-article-barrio'>{this.handleBarrio(topic.attrs.barrio)}</h3>
 
-          <span className='topic-article-span'>Problema o necesidad existente</span>
+          <span className='topic-article-span'>Idea</span>
           {topic.attrs.problema && <p className='topic-article-p'>{topic.attrs.problema} </p> }
-
-          <span className='topic-article-span'>Propuesta para solucionar el problema</span>
-          {topic.attrs.problema && <p className='topic-article-p'>{topic.attrs.solucion} </p> }
-
-          <span className='topic-article-span'>Beneficios que brindará el proyecto al barrio</span>
-          {topic.attrs.problema && <p className='topic-article-p'>{topic.attrs.beneficios} </p> }
         </div>
         {/*topic.attrs.state !== 'pendiente' && topic.attrs.state !== 'no-factible' && topic.attrs.state !== 'integrado' && (topic.attrs.anio === '2019' || topic.attrs.anio === '2020')  &&
           <div className='topic-article-content alert alert-success alert-proyecto' role='alert'>
