@@ -4,6 +4,7 @@ import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import facultadStore from 'lib/stores/facultad-store'
 import claustroStore from 'lib/stores/claustro-store'
+import tagStore from 'lib/stores/tag-store/tag-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
 import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
@@ -53,6 +54,7 @@ class FormularioPropuesta extends Component {
 
   componentWillMount () {
     this.getTags()
+
     if (this.props.params.id) {
       this.setState({ mode: 'edit' })
       topicStore.findOne(this.props.params.id)
@@ -116,7 +118,7 @@ class FormularioPropuesta extends Component {
       'attrs.problema': this.state.problema,
       'attrs.solucion': this.state.solucion,
       'attrs.beneficios': this.state.beneficios,
-      tags: this.state.tags,
+      tags: this.state.tags.map(tag => tag.name),
       facultad: this.state.facultad,
       claustro: this.state.claustro
     }
@@ -153,65 +155,7 @@ class FormularioPropuesta extends Component {
   }
 
   getTags = () => {
-    let theTags = [
-      'ACCESIBILIDAD',
-      'ADULTOS MAYORES',
-      'MEDIO AMBIENTE',
-      'ANIMALES',
-      'BASURA',
-      'CIUDADANÍA',
-      'CULTURA',
-      'DEPORTE',
-      'DISCAPACIDAD',
-      'EDUCACIÓN',
-      'EMPLEO',
-      'ESPACIO PÚBLICO',
-      'ESPACIOS VERDES',
-      'HABITAT',
-      'ILUMINACIÓN',
-      'INFRAESTRUCTURA',
-      'JÓVENES',
-      'OFICIOS',
-      'NIÑEZ',
-      'RAMPAS',
-      'RECICLAJE',
-      'SALUD',
-      'SEGURIDAD',
-      'SEMÁFOROS',
-      'SEÑALIZACIÓN',
-      'SUSTENTABILIDAD',
-      'TRANSPORTE',
-      'VEREDAS',
-      'CARAPACHAY',
-      'LA LUCILA',
-      'MUNRO',
-      'OLIVOS',
-      'VICENTE LOPEZ',
-      'VILLA ADELINA',
-      'VILLA MARTELLI',
-      'FLORIDA ESTE',
-      'FLORIDA OESTE',
-    ]
-    // fetch(`/api/v2/all-tags`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     let theTags = res.map(t => {
-    //       return t.name
-    //     })
-    //     theTags = theTags.filter(t => {
-    //       return t !== 'Default'
-    //     })
-    //     this.setState({ availableTags: theTags })
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    this.setState({ availableTags: theTags })
+    tagStore.findAll({field: 'name'}).then((tags) => this.setState({ availableTags: tags }))
   }
 
   editarPropuesta (formData) {
@@ -242,10 +186,7 @@ class FormularioPropuesta extends Component {
       }
          theTags.push(tag)
       return { tags: theTags }
-    }, function () {
-    console.log(this.state.tags);
-})
-    return;
+    })
   }
 
   showWholeForm = ()  => {
@@ -477,9 +418,9 @@ class FormularioPropuesta extends Component {
               this.state.mode === 'edit' && this.state.tags &&
                 <ul className="tags">
                 {
-                  this.state.availableTags.map((t, index) => {
+                  this.state.availableTags.map((tag) => {
                     return (
-                      <li key={index}><span onClick={this.toggleTag(t)} value={t} className={this.state.tags.includes(t) ? 'tag active' : 'tag'}>{t}</span></li>
+                      <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
                     )
                   })
                 }
@@ -489,9 +430,9 @@ class FormularioPropuesta extends Component {
               this.state.mode === 'new' &&
                 <ul className="tags">
                 {
-                  this.state.availableTags.map((t, index) => {
+                  this.state.availableTags.map((tag) => {
                     return (
-                      <li key={index}><span onClick={this.toggleTag(t)} value={t} className={this.state.tags.includes(t) ? 'tag active' : 'tag'}>{t}</span></li>
+                      <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
                     )
                   })
                 }
