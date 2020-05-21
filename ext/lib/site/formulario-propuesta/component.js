@@ -5,6 +5,7 @@ import topicStore from 'lib/stores/topic-store/topic-store'
 import facultadStore from 'lib/stores/facultad-store'
 import claustroStore from 'lib/stores/claustro-store'
 import tagStore from 'lib/stores/tag-store/tag-store'
+import ejeStore from 'lib/stores/eje-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
 import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
@@ -31,6 +32,7 @@ class FormularioPropuesta extends Component {
       problema: '',
       solucion: '',
       beneficios: '',
+      eje: '',
       tags: [],
       adminComment: '',
       adminCommentReference: '',
@@ -40,7 +42,8 @@ class FormularioPropuesta extends Component {
       acceptedTerms: false,
 
       facultades: [],
-      claustros: []
+      claustros: [],
+      ejes: []
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -89,8 +92,11 @@ class FormularioPropuesta extends Component {
 
     facultadStore.findAll().then(facultades => this.setState({facultades}))
     claustroStore.findAll().then(claustros => this.setState({claustros}))
+    ejeStore.findAll().then(ejes => this.setState({ejes}))
 
     this.props.user.onChange(this.onUserStateChange)
+    // si ya está loggeado de antes debería pasar por la función
+    this.onUserStateChange()
   }
 
   onUserStateChange = () => {
@@ -233,7 +239,7 @@ class FormularioPropuesta extends Component {
   }
 
   render () {
-    const { forum, facultades, claustros } = this.state
+    const { forum, facultades, claustros, ejes } = this.state
 
     if (!forum) return null
     if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
@@ -399,7 +405,7 @@ class FormularioPropuesta extends Component {
             <label className='required' htmlFor='titulo'>
               Título
             </label>
-            <p className="help-text">Elegí un título que ayude a reconocer fácilmente el proyecto</p>
+            <p className="help-text">Elegí un título</p>
             <input
               className='form-control'
               required
@@ -409,11 +415,29 @@ class FormularioPropuesta extends Component {
               value={this.state['titulo']}
               onChange={this.handleInputChange} />
           </div>
+          <div className='form-group'>
+            <label className='required' htmlFor='eje'>
+              Eje
+            </label>
+            <select
+              className='form-control special-height'
+              required
+              name='eje'
+              value={this.state['eje']}
+              onChange={this.handleInputChange}>
+              <option value=''>Seleccione un eje</option>
+              {ejes.length > 0 && ejes.map(eje =>
+                <option key={eje._id} value={eje._id}>
+                  {eje.nombre}
+                </option>
+              )}
+            </select>
+          </div>
           <div className='tags-autocomplete'>
             <label className='required'>
-                Etiquetas
+                Temas
             </label>
-            <p className='help-text'>Elegí los temas relacionados a tu propuesta </p>
+            <p className='help-text'>Elegí los temas relacionados a tu idea </p>
             {
               this.state.mode === 'edit' && this.state.tags &&
                 <ul className="tags">
@@ -548,7 +572,7 @@ class FormularioPropuesta extends Component {
           <div className='submit-div'>
             { !this.hasErrors() &&
               <button type='submit' className='submit-btn'>
-                {this.state.mode === 'new' ? 'Enviar la propuesta' : 'Guardar la propuesta'}
+                {this.state.mode === 'new' ? 'Enviar la idea' : 'Guardar la idea'}
               </button>
             }
           </div>
