@@ -116,6 +116,7 @@ class FormularioPropuesta extends Component {
       'attrs.email': this.state.email,
       'attrs.problema': this.state.problema,
       tags: this.state.tags.map(tag => tag.name),
+      eje : this.state.eje,
       facultad: this.state.facultad,
       claustro: this.state.claustro
     }

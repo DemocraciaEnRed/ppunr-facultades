@@ -27,6 +27,7 @@ const EDITABLE_KEYS = [
   'attrs.solucion',
   'attrs.beneficios',
   'attrs.subscribers',
+  'eje'
 ]
 
 class CantUploadProposal extends Error {
