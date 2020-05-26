@@ -2,6 +2,7 @@ const { Router } = require('express')
 const validate = require('lib/api-v2/validate')
 const middlewares = require('lib/api-v2/middlewares')
 const utils = require('./utils')
+const apiNoExt = require('lib/db-api')
 
 const app = Router()
 
@@ -60,7 +61,7 @@ app.get('/topics',
     opts.forum = req.forum
     opts.user = req.user
     Promise.all([
-      utils.findTopics(opts),
+      utils.findTopics(opts).then(topics => apiNoExt.user.populateOwners(topics)),
       utils.findTopicsCount(opts)
     ]).then(([topics, count]) => {
       res.status(200).json({
