@@ -57,17 +57,15 @@ export class TopicCard extends Component {
       <div className='ext-topic-card ideas-topic-card' onClick={this.handleWrapperClick}>
         <div className='topic-card-info'>
           <div className='topic-card-attrs'>
-            {this.props.barrio &&
-              <span className='badge badge-default'>{this.props.barrio.name}</span>
+            {topic.eje &&
+              <span className='badge badge-default'>{topic.eje.nombre}</span>
             }
-            {topic.attrs.anio &&
-              <span className='badge badge-default'>{topic.attrs.anio}</span>
-            }
-            <span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>
           </div>
 
           <div className='topic-creation'>
             <span>Creado por: <span className='topic-card-author'>{topic.attrs.nombre}</span></span>
+            <span className='topic-card-facultad'>{topic.owner.facultad && topic.owner.facultad.abreviacion}</span>
+            <span className='topic-card-claustro'>{topic.owner.claustro && topic.owner.claustro.nombre}</span>
             <span
               className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
               {moment(topic.createdAt).format('D-M-YYYY')}
@@ -147,8 +145,8 @@ function createClauses({ attrs, clauses }) {
       })
       .join('')
   } else {
-    const { problema, solucion, beneficios } = attrs
-    content = `${problema} ${solucion} ${beneficios}`
+    const { problema } = attrs
+    content = `${problema}`
   }
   div.innerHTML = content
   return div.textContent.replace(/\r?\n|\r/g, '').slice(0, 340) + '...'
