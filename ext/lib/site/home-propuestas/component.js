@@ -4,33 +4,11 @@ import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
-import { findAllTags } from 'lib/middlewares/tag-middlewares/tag-middlewares'
+import tagStore from 'lib/stores/tag-store/tag-store'
+import ejeStore from 'lib/stores/eje-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
-
-const barrios = [
-  { 'name': 'Carapachay', 'value': 'carapachay' },
-  { 'name': 'Florida Este', 'value': 'florida-este' },
-  { 'name': 'Florida Oeste', 'value': 'florida-oeste' },
-  { 'name': 'La Lucila', 'value': 'la-lucila' },
-  { 'name': 'Munro', 'value': 'munro' },
-  { 'name': 'Olivos', 'value': 'olivos' },
-  { 'name': 'Vicente López', 'value': 'vicente-lopez' },
-  { 'name': 'Villa Adelina', 'value': 'villa-adelina' },
-  { 'name': 'Villa Martelli', 'value': 'villa-martelli' }
-]
-
-const states = [
-  { 'name': 'Pendiente', 'value': 'pendiente' },
-  { 'name': 'Factible', 'value': 'factible' },
-  { 'name': 'No factible', 'value': 'no-factible' },
-  { 'name': 'Integrado', 'value': 'integrado' },
-]
-
-const anios = ['2018', '2019', '2020', '2021']
-
-let tags = []
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -40,10 +18,7 @@ let tags = []
 
 const defaultValues = {
   limit: 20,
-  barrio: [],
-  anio: ['2021'],
-  //state: ['pendiente', 'factible', 'no-factible', 'integrado'],
-  state: [],
+  eje: [],
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest'
@@ -57,9 +32,9 @@ class HomePropuestas extends Component {
       forum: null,
       topics: null,
 
-      anio: defaultValues.anio,
-      barrio: defaultValues.barrio,
-      state: defaultValues.state,
+      ejes: [],
+      eje: defaultValues.eje,
+      tags: [],
       tag: defaultValues.tag,
       sort: defaultValues.sort,
 
@@ -69,7 +44,12 @@ class HomePropuestas extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this)
 
-    this.getTags()
+    ejeStore.findAll().then(ejes =>
+      this.setState({ejes: ejes.map(eje => { return {value: eje._id, name: eje.nombre}; })})
+    )
+    tagStore.findAll({field: 'name'}).then(tags =>
+      this.setState({tags: tags.map(tag => { return {value: tag.id, name: tag.name}; })})
+    )
   }
 
   componentWillMount () {
@@ -89,15 +69,6 @@ class HomePropuestas extends Component {
     this.fetchTopics()
   }
 
-  getTags = () => {
-    let res = {}
-    findAllTags(res, () => {
-      let barriosKeys = barrios.map((b) => b.value)
-      let tagsNoBarrio = res.tags.filter((t) => ! barriosKeys.includes(t.hash))
-      tags = tagsNoBarrio.filter(t => t.name != 'Default').map((t) => t.name)
-    })
-  }
-
   fetchTopics = (page) => {
     page = page || 1
 
@@ -106,10 +77,8 @@ class HomePropuestas extends Component {
       page: page.toString(),
       limit: defaultValues.limit.toString(),
 
-      anio: this.state.anio,
-      barrio: this.state.barrio,
-      state: this.state.state,
-      tags: this.state.tag,
+      ejes: this.state.eje,
+      tags: this.state.tags.filter(t => this.state.tag.includes(t.value)).map(t => t.name),
       sort: this.state.sort
     }
 
@@ -204,65 +173,20 @@ class HomePropuestas extends Component {
     }).catch((err) => { throw err })
   }
 
-  handleSubscribe = (id) => {
-    const { user } = this.props
-
-    if (user.state.rejected) {
-      return browserHistory.push({
-        pathname: '/signin',
-        query: { ref: window.location.pathname }
-      })
-    }
-
-    // WIP
-    const subscribeURL =`/api/v2/topics/${id}/subscribe` // TO DO CONFIRM URL
-    window.fetch(subscribeURL, {
-      credentials: 'include',
-      method: 'POST'
-    }).then((res) => res.json())
-    .then(res => {
-      let index = this.state.topics.findIndex(topic => {
-        return topic.id == id
-      })
-      let topicsCopy = this.state.topics
-
-      if(res.message === 'Suscribed') {
-        if(topicsCopy[index].attrs.subscribers){
-          let aux = topicsCopy[index].attrs.subscribers.split(',')
-          aux.push(user.state.value.id)
-          topicsCopy[index].attrs.subscribers = aux.join(',')
-        } else {
-          topicsCopy[index].attrs.subscribers = user.state.value.id
-        }
-      }
-      else {
-        if(topicsCopy[index].attrs.subscribers){
-          let aux = topicsCopy[index].attrs.subscribers.split(',')
-          aux = aux.filter( s => s != user.state.value.id)
-          topicsCopy[index].attrs.subscribers = aux.join(',')
-        }
-      }
-      this.setState({
-        topics: topicsCopy
-      })
-    }).catch((err) => { throw err })
-  }
-
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
-    if (this.state.anio.includes(option)){
-      this.setState({ anio: this.state.anio.filter(i => i != option) })
-    }else if (this.state.state.includes(option)){
-      this.setState({ state: this.state.state.filter(i => i != option) })
-    }else if (this.state.barrio.includes(option)){
-      this.setState({ barrio: this.state.barrio.filter(i => i != option) })
+    if (this.state.eje.includes(option)){
+      this.setState({ eje: this.state.eje.filter(i => i != option) })
     }else if (this.state.tag.includes(option)){
       this.setState({ tag: this.state.tag.filter(i => i != option) })
     }
   }
 
   render () {
+    console.log('Render main')
+
     const { forum, topics } = this.state
+
     return (
 
       <div className='ext-home-ideas'>
@@ -292,13 +216,9 @@ class HomePropuestas extends Component {
         <div className='container topics-container'>
 
           <FilterPropuestas
-            barrios={barrios}
-            barrio={this.state.barrio}
-            states={states}
-            state={this.state.state}
-            anios={anios}
-            anio={this.state.anio}
-            tags={tags}
+            ejes={this.state.ejes}
+            eje={this.state.eje}
+            tags={this.state.tags}
             tag={this.state.tag}
             openVotation={true}
             handleFilter={this.handleFilter}
@@ -317,8 +237,6 @@ class HomePropuestas extends Component {
               )}
               {topics && topics.map((topic, i) => (
                 <TopicCard
-                  barrio={topic.attrs && barrios.find(b => b.value == topic.attrs.barrio)}
-                  onSubscribe={this.handleSubscribe}
                   onVote={this.handleVote}
                   key={`${topic.id}-${i}`}
                   forum={forum}

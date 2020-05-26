@@ -23,6 +23,11 @@ app.get('/topics',
         enum: allowedForums,
         required: true
       },
+      ejes: {
+        type: 'string',
+        format: 'ejes',
+        default: ''
+      },
       tags: {
         type: 'string',
         format: 'tags',
@@ -32,15 +37,6 @@ app.get('/topics',
         type: 'string',
         format: 'states',
         default: 'pendiente,factible,no-factible,integrado'
-      },
-      barrio: {
-        type: 'string',
-        format: 'barrio',
-        default: ''
-      },
-      anio: {
-        type: 'string',
-        format: 'anio'
       },
       sort: {
         type: 'string',
@@ -54,11 +50,10 @@ app.get('/topics',
       }
     })
   }, { formats }),
-  utils.parseTags,
   utils.findForum,
   utils.parseStates,
-  utils.parseBarrios,
-  utils.parseAnios,
+  utils.parseEjes,
+  utils.parseTags,
   middlewares.forums.privileges.canView,
   (req, res, next) => {
     const opts = Object.assign({}, req.query)

@@ -1,7 +1,12 @@
 const api = require('lib/api-v2/db-api')
 const topicScopes = require('lib/api-v2/db-api/topics/scopes')
 const { notFound } = require('../errors')
+const ObjectID = require('mongoose').Types.ObjectId
 
+exports.parseEjes = (req, res, next) => {
+  req.query.ejes = req.query.ejes.split(',').filter((t) => !!t)
+  next()
+}
 exports.parseTags = (req, res, next) => {
   req.query.tags = req.query.tags.split(',').filter((t) => !!t)
   next()
@@ -9,18 +14,6 @@ exports.parseTags = (req, res, next) => {
 
 exports.parseStates = (req, res, next) => {
   req.query.state = req.query.state.split(',').filter((t) => !!t)
-  next()
-}
-
-exports.parseBarrios = (req, res, next) => {
-  req.query.barrio = req.query.barrio.split(',').filter((t) => !!t)
-  next()
-}
-
-exports.parseAnios = (req, res, next) => {
-  if (req.query.anio) {
-    req.query.anio = req.query.anio.split(',').filter((t) => !!t)
-  }
   next()
 }
 
@@ -42,17 +35,15 @@ const queryTopics = (opts) => {
   const {
     state,
     forum,
+    ejes,
     tags,
-    barrio,
-    anio,
     related
   } = opts
   const query = {
     forum: forum._id,
     publishedAt: { $ne: null }
   }
-  if (barrio && barrio.length > 0) query['attrs.barrio'] = { $in: barrio }
-  if (anio && anio.length > 0) query['attrs.anio'] = { $in: anio }
+  if (ejes && ejes.length > 0) query.eje = { $in: ejes.map(id => ObjectID(id)) }
   if (tags && tags.length > 0) query.tags = { $in: tags }
   if (state && state.length > 0) query['attrs.state'] = { $in: state }
   if (related && related.length > 0) query['attrs.admin-comment-referencia'] = { $regex: `.*${related}.*` }

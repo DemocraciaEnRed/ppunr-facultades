@@ -70,10 +70,10 @@ export default class FilterPropuestas extends Component {
   }
 
   render () {
+    console.log('Render filters')
+
     const {
-      barrios, barrio,
-      states, state,
-      anios, anio,
+      ejes, eje,
       tags, tag,
       handleRemoveBadge
     } = this.props
@@ -85,53 +85,23 @@ export default class FilterPropuestas extends Component {
     // - el .map(.find().name) hace la conversión de keys a values
     //   p.ej. barrio contiene keys, y para mostrar su formato para humanos hay
     //   que buscar la key dentro de barrios
-    if (barrio.length)
+    if (eje.length)
       allActiveOpts.push(
-        ...barrio.sort().map(i => ({ value: i, name: barrios.find(j => j.value==i).name }))
+        ...eje.sort().map(i => ({ value: i, name: ejes.find(j => j.value==i).name }))
       )
-    if (state.length)
-      allActiveOpts.push(
-        ...state.sort().map(i => ({ value: i, name: states.find(j => j.value==i).name }))
-      )
-    if (anio.length)
-      allActiveOpts.push(...anio.sort().map(i => ({ value: i, name: i })))
     if (tag.length)
-      allActiveOpts.push(...tag.sort().map(i => ({ value: i, name: i })))
+      allActiveOpts.push(
+        ...tag.sort().map(i => ({ value: i, name: tags.find(j => j.value==i).name }))
+      )
 
     return (
       <nav id='filter-propuestas'>
         <div className='filters-nav center'>
           <FilterBox
-            name='barrio'
-            title='Barrio'
-            allOptions={barrios}
-            activeOptions={barrio}
-
-            activeDropdown={this.state.activeDropdown}
-            clearedFilters={this.state.clearedFilters}
-            handleDropdown={this.handleDropdown}
-            handleFilter={this.handleFilter}
-            clearFilter={this.clearFilter}
-            />
-
-          <FilterBox
-            name='state'
-            title='Estado'
-            allOptions={states}
-            activeOptions={state}
-
-            activeDropdown={this.state.activeDropdown}
-            clearedFilters={this.state.clearedFilters}
-            handleDropdown={this.handleDropdown}
-            handleFilter={this.handleFilter}
-            clearFilter={this.clearFilter}
-            />
-
-          <FilterBox
-            name='anio'
-            title='Año'
-            allOptions={anios}
-            activeOptions={anio}
+            name='eje'
+            title='Eje'
+            allOptions={ejes}
+            activeOptions={eje}
 
             activeDropdown={this.state.activeDropdown}
             clearedFilters={this.state.clearedFilters}
@@ -197,14 +167,14 @@ class FilterBox extends Component {
         { activeDropdown === name &&
           <div className='dropdown-options'>
             <div className='options-container'>
-              { allOptions.map((a, i) => (
-                <label className='option-label' key={ i }>
+              { allOptions.map((obj) => (
+                <label className='option-label' key={ obj.value }>
                   <input
                     type='checkbox'
-                    value={ a.value || a }
+                    value={ obj.value }
                     onChange={ handleFilter(name) }
-                    checked={ hasSelection && activeOptions.includes(a.value || a) } />
-                  <span className='checkbox-label'>{ a.name || a }</span>
+                    checked={ hasSelection && activeOptions.includes(obj.value) } />
+                  <span className='checkbox-label'>{ obj.name }</span>
                 </label>
               )) }
             </div>
