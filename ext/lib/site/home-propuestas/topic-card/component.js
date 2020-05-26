@@ -21,30 +21,6 @@ const estados = (state) => {
 }
 
 export class TopicCard extends Component {
-  componentWillMount() {
-    this.setStateFromProps(this.props)
-  }
-
-  componentWillReceiveProps(props) {
-    this.setStateFromProps(props)
-  }
-  setStateFromProps(props) {
-    const { topic, user } = props
-
-    let userAttrs = user.state.fulfilled && (user.state.value || {})
-    let userSuscribed = false
-    if(userAttrs && topic.attrs.subscribers){
-      let userSuscribers = topic.attrs.subscribers.split(',')
-      userSuscribed = userSuscribers.find(user => user === userAttrs.id);
-    } else {
-      userSuscribed = false
-    }
-
-    return this.setState({
-      subscribed: !!userSuscribed
-    })
-
-  }
   handleWrapperClick = (e) => {
     let targTag = e.target && e.target.tagName
     // si hace click en cualquier lugar que no sea un botón o un link mandar a propuesta
@@ -52,8 +28,7 @@ export class TopicCard extends Component {
       browserHistory.push(`/propuestas/topic/${this.props.topic.id}`)
   }
   render() {
-    const { topic, onVote, onSubscribe, user } = this.props
-    const { subscribed } = this.state
+    const { topic, onVote, user } = this.props
     const isStaff = !user.state.rejected && user.state.value.staff
 
     const likesCssClass = topic.voted ? 'voted' : (
@@ -67,14 +42,10 @@ export class TopicCard extends Component {
       </div>
     )
 
-    const subscribeCssClass = subscribed ? 'subscribed' : (
-      topic.privileges.canVote && !isStaff ? 'not-subscribed' : 'cant-subscribe'
-    )
+    const subscribeCssClass = 'not-subscribed'
     const subscribesCountDiv = (
       <div className='participants'>
-        <span className='icon-bell' />
-        &nbsp;
-        {topic.attrs.subscribers && topic.attrs.subscribers.split(',').length || 0}
+        <span className='icon-arrow-right' />
       </div>
     )
 
@@ -140,30 +111,20 @@ export class TopicCard extends Component {
                   disabled={!topic.privileges.canVote || isStaff}
                   onClick={() => onVote(topic.id)}
                   className='btn btn-primary btn-empty'>
-                  Me gusta
+                  Apoyo
                   {likesCountDiv}
                 </button>
               )}
             </div>
 
-            <div className={`subscribe-wrapperr ${subscribeCssClass}`}>
-              {subscribed && (
-                <button
-                  className='btn btn-primary'
-                  onClick={() => onSubscribe(topic.id)}>
-                  Desuscribirse
-                  {subscribesCountDiv}
-                </button>
-              )}
-              {!subscribed && (
-                <button
-                  disabled={!topic.privileges.canVote || isStaff}
-                  className='btn btn-primary btn-empty'
-                  onClick={() => onSubscribe(topic.id)}>
-                  Suscribirse
-                  {subscribesCountDiv}
-                </button>
-              )}
+            <div
+              className={`subscribe-wrapperr ${subscribeCssClass}`}
+              onClick={this.handleWrapperClick}>
+              <div
+                className='btn btn-primary btn-empty'>
+                Comentar
+                {subscribesCountDiv}
+              </div>
             </div>
           </div>
 
