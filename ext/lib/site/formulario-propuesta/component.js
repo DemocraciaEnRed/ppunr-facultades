@@ -234,11 +234,6 @@ class FormularioPropuesta extends Component {
         </div>
         {/* FORMULARIO GOES BEHIND THIS */}
         <form className='wrapper' onSubmit={this.handleSubmit}>
-          <p className="more-info">Si querés conocer más sobre el proceso y qué propuestas podés presentar, hacé click <Link
-              to='/s/acerca-de'
-              className="">
-              AQUÍ
-            </Link></p>
           <div className="bar-section">
             <p className="section-title">Tus datos personales</p>
             <p className="section-subtitle">Todos estos datos son confidenciales</p>
@@ -465,7 +460,6 @@ class FormularioPropuesta extends Component {
                 onChange={this.handleInputChange} />
             </div>
           )}
-          <p className="small-banner">La propuesta será revisada por el equipo de la Municipalidad y notificará su factilibilidad a la brevedad. Si la propuesta es factible pasará a la etapa de votación.</p>
           {
              this.hasErrors() &&
              <div className="error-box">
@@ -485,7 +479,7 @@ class FormularioPropuesta extends Component {
           <div className='submit-div'>
             { !this.hasErrors() &&
               <button type='submit' className='submit-btn'>
-                {this.state.mode === 'new' ? 'Enviar la idea' : 'Guardar la idea'}
+                {this.state.mode === 'new' ? 'Enviar idea' : 'Guardar idea'}
               </button>
             }
           </div>
