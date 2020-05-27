@@ -56,8 +56,7 @@ export class Cause extends Component {
           <button
             className='btn btn-primary'
             disabled='true'>
-            &nbsp;
-            Te gusta
+            Diste tu apoyo
           </button>
         )}
         {!showResults && (
@@ -65,8 +64,7 @@ export class Cause extends Component {
             disabled={!topic.privileges.canVote}
             className='btn btn-primary'
             onClick={this.handleSupport}>
-            &nbsp;
-            Me gusta
+            Apoyo
           </button>
         )}
         <div className='likes-total'>
@@ -78,7 +76,7 @@ export class Cause extends Component {
           <p className='text-mute overlay-vote'>
             <span className='icon-lock' />
             <span className='text'>
-              
+
             </span>
           </p>
         )}

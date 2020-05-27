@@ -10,7 +10,6 @@ import Social from './social/component'
 import Vote from './vote/component'
 import Poll from './poll/component'
 import Cause from './cause/component'
-import Subscribe from './subscribe/component'
 import Comments from './comments/component'
 import AdminActions from './admin-actions/component'
 import Proyectos from 'ext/lib/site/proyectos/component'
@@ -173,11 +172,9 @@ class TopicArticle extends Component {
                )
 
         }
-          <div className='topic-article-status'>Propuesta {this.getEstado(topic.attrs.state)} </div>
         </div>
           <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div>
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
-          <h3 className='topic-article-barrio'>{this.handleBarrio(topic.attrs.barrio)}</h3>
 
           <span className='topic-article-span'>Idea</span>
           {topic.attrs.problema && <p className='topic-article-p'>{topic.attrs.problema} </p> }
@@ -188,8 +185,6 @@ class TopicArticle extends Component {
           </div>
         */}
         <div className='topic-actions topic-article-content'>
-          <Subscribe
-            topic={topic}/>
           <Cause
             topic={topic}
             canVoteAndComment={forum.privileges.canVoteAndComment} />

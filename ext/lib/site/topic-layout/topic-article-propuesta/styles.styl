@@ -8,7 +8,6 @@
   @import './footer/styles'
   @import './social/styles'
   @import './cause/styles'
-  @import './subscribe/styles'
   @import './comments/styles'
   .cover
     width: 100%
@@ -68,7 +67,7 @@
     justify-content: center;
     align-items: center;
     background: #f8f8f8;
-    border-radius: 10px;   
+    border-radius: 10px;
 
 .votar-este
   text-align: center
@@ -241,7 +240,8 @@ topicColor2 = #999
     }
 
 .topic-article-nombre
-  color: #ccc
+  color: #999
+  margin-bottom: 10px;
   font-size: .9em
   @media(max-width: 768px)
       padding: px
@@ -251,13 +251,6 @@ topicColor2 = #999
   font-size: 1.5em
   margin-top:20px
   margin-bottom: 10px
-  
-.topic-article-barrio
-  font-size: 1.2em
-  color:#1D9DC1
-  font-weight: normal
-  text-transform: capitalize
-  margin-top:10px
 
 .topic-article-span
   font-size: 1.3em;
@@ -273,44 +266,13 @@ topicColor2 = #999
   line-height: 1.5em
   margin: 10px 0 30px;
 
-// .topic-article-status-container 
+// .topic-article-status-container
   // @media(max-width: 1100px)
   //   width:100%
 .topic-article-status-container
   position: relative
   margin-bottom: 15px;
 
-.topic-article-status
-  background-color: #8c1e81;
-  position: relative;
-  left: 0;
-  display: inline-block;
-  font-size: 16px;
-  color: #FFF;
-  font-weight: bold;
-  line-height: normal;
-  padding: 8px 11px;
-  &::before
-    border-bottom: 18px solid transparent;
-    border-left: 15px solid #8c1e81;
-    border-top: 17px solid transparent;
-    content: '';
-    position: absolute;
-    right: -15px;
-    top: 0;
-//   font-size: .9em
-//   color:#fff
-//   font-weight: bold
-//   padding:5px 15px 5px 5px
-//   // @media(min-width: 1100px)
-//   float:right
-//   margin-right:0
-//   position:relative
-//   right: 0px
-//   top: 0px
-//   @media(max-width: 450px)
-//     font-size:.7em
-  
 .topic-tags
   &.topic-article-content
     a
@@ -341,8 +303,8 @@ topicColor2 = #999
       p
         padding-top:20px
       p:last-child
-        text-align: right  
-      span 
+        text-align: right
+      span
         font-weight: bold
   &.alert-proyecto
     max-width: 848px;
@@ -352,7 +314,7 @@ topicColor2 = #999
   &.topic-article-content
     header
       margin-top:0px !important
- 
+
 .topic-article-wrapper
   .topic-article-content
     flex-basis: 300px;
@@ -371,11 +333,8 @@ topicColor2 = #999
     width: 100%
     display: block
     margin: 0 auto
-    margin-bottom:40px
-    height: 280px
-    background-size: cover
-    background-image: unquote("url('ext/lib/site/topic-layout/topic-article-propuesta/header.jpg')") 
-    background-repeat: no-repeat
+    margin-top:20px
+    margin-bottom:0
     padding: 0
     @media(max-width: 768px)
       height: auto
@@ -420,9 +379,9 @@ topicColor2 = #999
     //   width: 80%
     //   display: flex
     //   justify-content: flex-end
-      
 
-.admin-comment-referido      
+
+.admin-comment-referido
   font-style:italic
   color: #f2b631
   a
