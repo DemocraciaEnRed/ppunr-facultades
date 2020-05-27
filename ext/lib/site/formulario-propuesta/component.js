@@ -98,7 +98,7 @@ class FormularioPropuesta extends Component {
         facultad: user.facultad._id,
         claustro: user.claustro._id,
         email: user.email,
-        nombre: user.displayName
+        nombre: user.firstName + ' ' + user.lastName
       })
     }
   }
@@ -108,15 +108,12 @@ class FormularioPropuesta extends Component {
     const formData = {
       forum: this.state.forum.id,
       mediaTitle: this.state.titulo,
-      'attrs.nombre': this.state.nombre,
       'attrs.documento': this.state.documento,
       'attrs.genero': this.state.genero,
       'attrs.email': this.state.email,
       'attrs.problema': this.state.problema,
       tags: this.state.tags.map(tag => tag.name),
-      eje : this.state.eje,
-      facultad: this.state.facultad,
-      claustro: this.state.claustro
+      eje : this.state.eje
     }
     if (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit') {
       formData['attrs.admin-comment'] = this.state.adminComment
