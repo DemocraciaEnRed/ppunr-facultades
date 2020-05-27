@@ -36,7 +36,6 @@ class FormularioPropuesta extends Component {
       state: '',
       availableTags: [],
       selectedTag: '',
-      acceptedTerms: false,
 
       facultades: [],
       claustros: [],
@@ -71,8 +70,7 @@ class FormularioPropuesta extends Component {
             tags: topic.tags,
             state: topic.attrs.state,
             adminComment: topic.attrs['admin-comment'],
-            adminCommentReference: topic.attrs['admin-comment-reference'],
-            acceptedTerms: true
+            adminCommentReference: topic.attrs['admin-comment-reference']
           })
         })
         .catch((err) => console.log(err))
@@ -187,12 +185,6 @@ class FormularioPropuesta extends Component {
     })
   }
 
-  showWholeForm = ()  => {
-    this.setState({
-      acceptedTerms: true
-    })
-  }
-
   hasErrors = () => {
     if (this.state.nombre === '') return true
     if (this.state.documento === '') return true
@@ -271,7 +263,6 @@ class FormularioPropuesta extends Component {
             <label className='required' htmlFor='claustro'>
               Claustro
             </label>
-            <p className="help-text">¿En que claustro impacta el proyecto?</p>
             <select
               className='form-control special-height'
               required
@@ -291,7 +282,6 @@ class FormularioPropuesta extends Component {
             <label className='required' htmlFor='facultad'>
               Facultad
             </label>
-            <p className="help-text">¿En que facultad impacta el proyecto?</p>
             <select
               className='form-control special-height'
               required
@@ -350,23 +340,11 @@ class FormularioPropuesta extends Component {
               onChange={this.handleInputChange}
               disabled={true} />
           </div>
-           <div className="bar-section">
-            <p className="section-title">Acerca de la propuesta</p>
-            </div>
-            <div className="upload-info-container">
-              <br />
-            { !this.state.acceptedTerms ?
-              <section>
-              <p className="pre-fake-checkbox"><b>Para comenzar a completar el formulario, debe aceptar los términos y condiciones</b></p>
-               <div onClick={this.showWholeForm} className='fake-checkbox'>
-                Acepto los términos y condiciones
-              </div>
-              </section> :
-              <p className="acepted-terms"><b>¡Gracias por aceptar los términos y condiciones!</b></p>
 
-            }
+          <div className="bar-section acerca-propuesta">
+            <p className="section-title">Acerca de la propuesta</p>
           </div>
-          {this.state.acceptedTerms &&
+
           <section>
           <div className='form-group'>
             <label className='required' htmlFor='titulo'>
@@ -493,13 +471,14 @@ class FormularioPropuesta extends Component {
              <div className="error-box">
              <ul>
                   {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('documento') && <li className="error-li">El campo "Documento" del representante no puede quedar vacío</li> }
+                  {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
+                  {this.hasErrorsField('eje') && <li className="error-li">El campo "Eje" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('problema') && <li className="error-li">El campo "Idea" de la propuesta no puede quedar vacío</li> }
+                  {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" de la propuesta no puede quedar vacío</li> }
              </ul>
              </div>
           }
@@ -512,7 +491,7 @@ class FormularioPropuesta extends Component {
           </div>
           <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
           </section>
-          }
+
         </form>
       </div>
     )
