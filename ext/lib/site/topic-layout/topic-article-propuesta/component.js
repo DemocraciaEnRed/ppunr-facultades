@@ -175,7 +175,7 @@ class TopicArticle extends Component {
         }
           <div className='topic-article-status'>Propuesta {this.getEstado(topic.attrs.state)} </div>
         </div>
-          <div className='topic-article-nombre'>Autor: {topic.attrs.nombre}</div>
+          <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div>
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
           <h3 className='topic-article-barrio'>{this.handleBarrio(topic.attrs.barrio)}</h3>
 

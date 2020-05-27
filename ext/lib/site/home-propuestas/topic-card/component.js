@@ -63,7 +63,7 @@ export class TopicCard extends Component {
           </div>
 
           <div className='topic-creation'>
-            <span>Creado por: <span className='topic-card-author'>{topic.attrs.nombre}</span></span>
+            <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
             <span className='topic-card-facultad'>{topic.owner.facultad && topic.owner.facultad.abreviacion}</span>
             <span className='topic-card-claustro'>{topic.owner.claustro && topic.owner.claustro.nombre}</span>
             <span
