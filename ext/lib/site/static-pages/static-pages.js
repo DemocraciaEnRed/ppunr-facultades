@@ -3,7 +3,7 @@ import router from 'lib/site/boot/router'
 import AcercaDe from './pages/acerca-de'
 import Datos from './pages/datos'
 import TyC from './pages/terminos-y-condiciones'
-import Reglamento from './pages/reglamento'
+//import Reglamento from './pages/reglamento'
 import Herramientas from './pages/herramientas'
 import Documentos from './pages/documentos'
 
@@ -22,10 +22,10 @@ router.childRoutes.unshift({
   component: TyC
 })
 
-router.childRoutes.unshift({
+/*router.childRoutes.unshift({
   path: 's/reglamento',
   component: Reglamento
-})
+})*/
 
 router.childRoutes.unshift({
   path: 's/herramientas',

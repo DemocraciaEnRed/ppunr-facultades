@@ -32,7 +32,7 @@ export default class Page extends Component {
           <div className='ext-acerca-de container'>
             <div className="filas">
               <div className="fila faq text-left">
-                <p className='p-padding'>Podés leer el reglamento completo haciendo click <a href="/s/reglamento">aquí</a></p>
+                <p className='p-padding'>Podés leer el reglamento completo haciendo click <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank">aquí</a></p>
 
                 <Accordion startPosition={-1}>
                   <div data-trigger="+ ¿QUÉ ES EL PRESUPUESTO PARTICIPATIVO DE VICENTE LÓPEZ?">

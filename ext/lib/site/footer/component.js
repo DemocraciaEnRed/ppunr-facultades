@@ -29,8 +29,8 @@ const Footer = () => (
       <div className='terminos'>
         <Link to='/s/terminos-y-condiciones'> Términos y condiciones
         </Link>
-        <Link to='/s/reglamento'> Reglamento
-        </Link>
+        <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank"> Reglamento
+        </a>
       </div>
     </div>
   </footer>
