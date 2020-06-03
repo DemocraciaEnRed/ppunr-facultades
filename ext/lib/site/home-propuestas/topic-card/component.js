@@ -100,7 +100,7 @@ export class TopicCard extends Component {
             <div className={`cause-wrapper ${likesCssClass}`}>
               {topic.voted && (
                 <button disabled className='btn btn-primary btn-filled'>
-                  Te gusta
+                  Ya seguís
                   {likesCountDiv}
                 </button>
               )}
@@ -109,7 +109,7 @@ export class TopicCard extends Component {
                   disabled={!topic.privileges.canVote || isStaff}
                   onClick={() => onVote(topic.id)}
                   className='btn btn-primary btn-empty'>
-                  Apoyo
+                  Seguir
                   {likesCountDiv}
                 </button>
               )}

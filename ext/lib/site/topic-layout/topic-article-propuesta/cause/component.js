@@ -56,7 +56,7 @@ export class Cause extends Component {
           <button
             className='btn btn-primary'
             disabled='true'>
-            Diste tu apoyo
+            Ya seguís
           </button>
         )}
         {!showResults && (
@@ -64,7 +64,7 @@ export class Cause extends Component {
             disabled={!topic.privileges.canVote}
             className='btn btn-primary'
             onClick={this.handleSupport}>
-            Apoyo
+            Seguir
           </button>
         )}
         <div className='likes-total'>
