@@ -5,7 +5,6 @@ import topicStore from 'lib/stores/topic-store/topic-store'
 import facultadStore from 'lib/stores/facultad-store'
 import claustroStore from 'lib/stores/claustro-store'
 import tagStore from 'lib/stores/tag-store/tag-store'
-import ejeStore from 'lib/stores/eje-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
 import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
@@ -29,7 +28,6 @@ class FormularioPropuesta extends Component {
       facultad: '',
       claustro: '',
       problema: '',
-      eje: '',
       tags: [],
       adminComment: '',
       adminCommentReference: '',
@@ -38,8 +36,7 @@ class FormularioPropuesta extends Component {
       selectedTag: '',
 
       facultades: [],
-      claustros: [],
-      ejes: []
+      claustros: []
     }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -84,7 +81,6 @@ class FormularioPropuesta extends Component {
 
     facultadStore.findAll().then(facultades => this.setState({facultades}))
     claustroStore.findAll().then(claustros => this.setState({claustros}))
-    ejeStore.findAll().then(ejes => this.setState({ejes}))
 
     this.props.user.onChange(this.onUserStateChange)
     // si ya está loggeado de antes debería pasar por la función
@@ -112,8 +108,7 @@ class FormularioPropuesta extends Component {
       'attrs.genero': this.state.genero,
       'attrs.email': this.state.email,
       'attrs.problema': this.state.problema,
-      tags: this.state.tags.map(tag => tag.name),
-      eje : this.state.eje
+      tags: this.state.tags.map(tag => tag.name)
     }
     if (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit') {
       formData['attrs.admin-comment'] = this.state.adminComment
@@ -217,7 +212,7 @@ class FormularioPropuesta extends Component {
   }
 
   render () {
-    const { forum, facultades, claustros, ejes } = this.state
+    const { forum, facultades, claustros } = this.state
 
     if (!forum) return null
     if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
@@ -352,24 +347,6 @@ class FormularioPropuesta extends Component {
               value={this.state['titulo']}
               onChange={this.handleInputChange} />
           </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='eje'>
-              Eje
-            </label>
-            <select
-              className='form-control special-height'
-              required
-              name='eje'
-              value={this.state['eje']}
-              onChange={this.handleInputChange}>
-              <option value=''>Seleccione un eje</option>
-              {ejes.length > 0 && ejes.map(eje =>
-                <option key={eje._id} value={eje._id}>
-                  {eje.nombre}
-                </option>
-              )}
-            </select>
-          </div>
           <div className='tags-autocomplete'>
             <label className='required'>
                 Temas
@@ -466,7 +443,6 @@ class FormularioPropuesta extends Component {
                   {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
                   {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('eje') && <li className="error-li">El campo "Eje" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" de la propuesta no puede quedar vacío</li> }
