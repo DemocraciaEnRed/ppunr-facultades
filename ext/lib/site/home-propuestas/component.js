@@ -5,7 +5,8 @@ import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
 import tagStore from 'lib/stores/tag-store/tag-store'
-import ejeStore from 'lib/stores/eje-store'
+import facultadStore from 'lib/stores/facultad-store'
+import claustroStore from 'lib/stores/claustro-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
@@ -18,7 +19,8 @@ import FilterPropuestas from './filter-propuestas/component'
 
 const defaultValues = {
   limit: 20,
-  eje: [],
+  facultad: [],
+  claustro: [],
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest'
@@ -32,8 +34,10 @@ class HomePropuestas extends Component {
       forum: null,
       topics: null,
 
-      ejes: [],
-      eje: defaultValues.eje,
+      facultades: [],
+      facultad: defaultValues.facultad,
+      claustros: [],
+      claustro: defaultValues.claustro,
       tags: [],
       tag: defaultValues.tag,
       sort: defaultValues.sort,
@@ -43,30 +47,30 @@ class HomePropuestas extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
-
-    ejeStore.findAll().then(ejes =>
-      this.setState({ejes: ejes.map(eje => { return {value: eje._id, name: eje.nombre}; })})
-    )
-    tagStore.findAll({field: 'name'}).then(tags =>
-      this.setState({tags: tags.map(tag => { return {value: tag.id, name: tag.name}; })})
-    )
   }
 
   componentWillMount () {
     if (this.props.location.query.tags)
       defaultValues.tag.push(this.props.location.query.tags)
+
+    Promise.all([
+      facultadStore.findAll(),
+      claustroStore.findAll(),
+      tagStore.findAll({field: 'name'}),
+      forumStore.findOneByName('proyectos')
+    ]).then(results => {
+      const [facultades, claustros, tags, forum] = results
+      this.setState({
+        facultades: facultades.map(facultad => { return {value: facultad._id, name: facultad.abreviacion}; }),
+        claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
+        tags: tags.map(tag => { return {value: tag.id, name: tag.name}; }),
+        forum
+      }, () => this.fetchTopics())
+    }).catch((err) => { throw err })
   }
 
   componentDidMount () {
     window.scrollTo(0,0)
-
-    // traer forum al state
-    forumStore.findOneByName('proyectos')
-      .then((forum) => this.setState({ forum }))
-      .catch((err) => { throw err })
-
-    // traer topics
-    this.fetchTopics()
   }
 
   fetchTopics = (page) => {
@@ -77,7 +81,8 @@ class HomePropuestas extends Component {
       page: page.toString(),
       limit: defaultValues.limit.toString(),
 
-      ejes: this.state.eje,
+      facultades: this.state.facultad,
+      claustros: this.state.claustro,
       tags: this.state.tags.filter(t => this.state.tag.includes(t.value)).map(t => t.name),
       sort: this.state.sort
     }
@@ -175,8 +180,10 @@ class HomePropuestas extends Component {
 
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
-    if (this.state.eje.includes(option)){
-      this.setState({ eje: this.state.eje.filter(i => i != option) })
+    if (this.state.facultad.includes(option)){
+      this.setState({ facultad: this.state.facultad.filter(i => i != option) })
+    }else if (this.state.claustro.includes(option)){
+      this.setState({ claustro: this.state.claustro.filter(i => i != option) })
     }else if (this.state.tag.includes(option)){
       this.setState({ tag: this.state.tag.filter(i => i != option) })
     }
@@ -216,8 +223,10 @@ class HomePropuestas extends Component {
         <div className='container topics-container'>
 
           <FilterPropuestas
-            ejes={this.state.ejes}
-            eje={this.state.eje}
+            facultades={this.state.facultades}
+            facultad={this.state.facultad}
+            claustros={this.state.claustros}
+            claustro={this.state.claustro}
             tags={this.state.tags}
             tag={this.state.tag}
             openVotation={true}

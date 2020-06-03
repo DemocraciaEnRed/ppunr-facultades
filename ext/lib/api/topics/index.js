@@ -24,9 +24,14 @@ app.get('/topics',
         enum: allowedForums,
         required: true
       },
-      ejes: {
+      facultades: {
         type: 'string',
-        format: 'ejes',
+        format: 'facultades',
+        default: ''
+      },
+      claustros: {
+        type: 'string',
+        format: 'claustros',
         default: ''
       },
       tags: {
@@ -53,7 +58,8 @@ app.get('/topics',
   }, { formats }),
   utils.findForum,
   utils.parseStates,
-  utils.parseEjes,
+  utils.parseFacultades,
+  utils.parseClaustros,
   utils.parseTags,
   middlewares.forums.privileges.canView,
   (req, res, next) => {
