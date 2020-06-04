@@ -6,15 +6,25 @@ const Tag = models.Tag
 const Eje = models.Eje
 
 const etiquetas = [
-  { nombre: 'Género' },
-  { nombre: 'Infraestructura' },
-  { nombre: 'Innovación' },
-  { nombre: 'Tecnología' },
-  { nombre: 'Accesibilidad' },
-  { nombre: 'Sustentabilidad' },
-  { nombre: 'Recreación y deporte' },
-  { nombre: 'Salud' },
-  { nombre: 'Actividades académicas' },
+  { nombre: "Accesibilidad" },
+  { nombre: "Administración" },
+  { nombre: "Ambiente y Sustentabilidad" },
+  { nombre: "Aprendizajes y actividades académicas" },
+  { nombre: "Arte y Cultura" },
+  { nombre: "Bioseguridad" },
+  { nombre: "Convivencia y Participación" },
+  { nombre: "Derechos Humanos" },
+  { nombre: "Género" },
+  { nombre: "Inclusión" },
+  { nombre: "Infraestructura" },
+  { nombre: "Innovación" },
+  { nombre: "Internacionalización" },
+  { nombre: "Investigación" },
+  { nombre: "Recreación y deporte" },
+  { nombre: "Salud" },
+  { nombre: "Tecnología" },
+  { nombre: "Transparencia" },
+  { nombre: "Vinculación con el medio" },
 ]
 
 const tags = etiquetas.map(etiqueta => {
@@ -43,8 +53,9 @@ exports.up = function up (done) {
   // done() devuelve al Migrator de lib/migrations
   dbReady()
 
-    // borramos tags viejos
+    // borramos data vieja
     .then(() => Tag.collection.deleteMany({}))
+    .then(() => Eje.collection.deleteMany({}))
 
     // Agregamos data
     .then(() => Tag.insertMany(tags) )
