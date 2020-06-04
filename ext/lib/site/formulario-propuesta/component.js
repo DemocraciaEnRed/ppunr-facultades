@@ -171,8 +171,8 @@ class FormularioPropuesta extends Component {
       let theTags = state.tags
       if(theTags.includes(tag)){
         return { tags: theTags.filter(t => t !== tag)}
-      }
-         theTags.push(tag)
+      }else if(theTags.length < 3)
+        theTags.push(tag)
       return { tags: theTags }
     })
   }
@@ -191,7 +191,8 @@ class FormularioPropuesta extends Component {
   }
 
   hasErrorsField = (field) => {
-    if(this.state[field] === '') return true
+    const val = this.state[field]
+    if(val === '' || val && val.length == 0) return true
     return false;
   }
 
@@ -351,7 +352,7 @@ class FormularioPropuesta extends Component {
             <label className='required'>
                 Temas
             </label>
-            <p className='help-text'>Elegí los temas relacionados a tu idea </p>
+            <p className='help-text'>Elegí los temas relacionados a tu idea. Máximo 3 temas. </p>
             {
               this.state.mode === 'edit' && this.state.tags &&
                 <ul className="tags">
@@ -445,6 +446,7 @@ class FormularioPropuesta extends Component {
                   {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
+                  {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" de la propuesta no puede quedar vacío</li> }
                   {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" de la propuesta no puede quedar vacío</li> }
              </ul>
              </div>
