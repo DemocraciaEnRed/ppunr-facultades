@@ -60,14 +60,18 @@
 
           h4.topic-title
             a(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle
+
+          span.topic-date.hide=topic.createdAt
+
           .topic-multi-tags
             span.glyphicon.glyphicon-tag
             span.text.topic-tag=topic.tag && topic.tag.name + ' - '
             span.text.topic-tags=topic.tags.map(toTitleCase).join(', ')
-          span.topic-date.hide=topic.createdAt
+
           .topic-status-data
-            - if (topic.attrs && topic.attrs.anio)
-              span.placa.text=topic.attrs.anio
-            - if (topic.attrs && topic.attrs.state)
-              span.placa.text=topic.attrs && toTitleCase(topic.attrs.state.replace(/-/g,' '))
+            - if (topic.owner && topic.owner.facultad)
+              span.placa.text=topic.owner.facultad.abreviacion
+            - if (topic.owner && topic.owner.claustro)
+              span.placa.text=topic.owner.claustro.nombre
+
     .topics-pagination
