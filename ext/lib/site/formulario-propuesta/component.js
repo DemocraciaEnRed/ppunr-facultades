@@ -106,7 +106,6 @@ class FormularioPropuesta extends Component {
       mediaTitle: this.state.titulo,
       'attrs.documento': this.state.documento,
       'attrs.genero': this.state.genero,
-      'attrs.email': this.state.email,
       'attrs.problema': this.state.problema,
       tags: this.state.tags.map(tag => tag.name)
     }

@@ -27,6 +27,7 @@ const EDITABLE_KEYS = [
   'attrs.solucion',
   'attrs.beneficios',
   'attrs.subscribers',
+  'attrs.genero',
   'eje'
 ]
 

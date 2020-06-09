@@ -23,10 +23,25 @@ const generoField = {
 }
 
 const deleteFields = [
+	'anio',
+	'project-budget-preparacion',
+	'project-budget-compra',
+	'project-budget-ejecucion',
+	'project-budget-finalizado',
+	'nombre',
 	'domicilio',
 	'telefono',
+	'email',
+	// el form usa mediaTitle
+	'titulo',
+	'título',
+	'barrio',
 	'solucion',
-	'beneficios'
+	'beneficios',
+	'description',
+	'votos',
+	'presentado',
+	'beneficiario'
 ]
 
 const deepCopy = obj => {
@@ -72,8 +87,9 @@ exports.up = function up (done) {
 					let deleteIs = forumProyecto.topicsAttrs
 						.map((attr,i) => attr && deleteFields.includes(attr.name) && i)
 						.filter(val => val !== false)
-					// los eliminamos de atrás hacia adelante así no se mueven
-					deleteIs.sort().reverse().forEach(i => forumProyecto.topicsAttrs.splice(i,1))
+
+					// los eliminamos de atrás hacia adelante así no se mueven los índices
+					deleteIs.reverse().forEach(i => forumProyecto.topicsAttrs.splice(i,1))
 
 					forumProyecto.markModified('topicsAttrs')
 
