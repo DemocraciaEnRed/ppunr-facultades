@@ -35,7 +35,7 @@
           input.form-control(type='text', maxlength='200', id='mediaTitle', name='mediaTitle', placeholder=t('admin-topics-form.label.mediaTitle'), value=topic.mediaTitle, validate='required')
 
         .form-group
-          label= t('admin-topics-form.label.tag')
+          label= 'Eje'
           - if (te('admin-topics-form.description.tag'))
             span.help-text= t('admin-topics-form.description.tag')
           select.form-control(name='tag', validate='required')
@@ -45,9 +45,8 @@
                 = tag.name
 
         .form-group
-          label= t('admin-topics-form.label.tags')
-          - if (te('admin-topics-form.description.tags'))
-            span.help-text= t('admin-topics-form.description.tags')
+          label= 'Temas'
+          span.help-text= 'Solo se admiten los temas precargados. Escribí las primeras dos letras y se te sugerirán temas.'
           div.tags-autocomplete
           - if (forum.initialTags && forum.initialTags.length > 0)
             span.help-text= t('admin-topics-form.description.forum-tags')
