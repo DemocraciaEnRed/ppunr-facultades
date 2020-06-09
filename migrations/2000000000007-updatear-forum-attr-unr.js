@@ -6,21 +6,33 @@ const nombreMigrationParaLog = 'updatear forum attr unr'
 
 const groups = [
 	{ name: '', order: 0},
-	{ name: 'Presupuestos', order: 1},
-	{ name: 'Datos del autor', order: 2},
-	{ name: 'Información de la propuesta', order: 3}
+	{ name: 'Datos del autor', order: 1},
 ]
 
-const generoField = {
-	"name" : "genero",
-	"title" : "Género",
-	"kind" : "String",
-	"groupNum" : 0,
-	"mandatory" : false,
-	"order" : 1,
-	"width" : 6,
-	"icon" : ""
-}
+const newFields = [
+	{
+		"name" : "genero",
+		"title" : "Género",
+		"kind" : "String",
+		"mandatory" : true,
+		"groupNum" : 1,
+		"order" : 0,
+		"width" : 6,
+		"icon" : ""
+	},
+	{
+		"name" : "problema",
+		"title" : "Idea",
+		"kind" : "LongString",
+		"mandatory" : true,
+		"groupNum" : 0,
+		"icon" : "",
+		"width" : 12,
+		"order" : 32,
+		"max" : 5000,
+		"min" : 0
+	}
+]
 
 const deleteFields = [
 	'anio',
@@ -41,7 +53,16 @@ const deleteFields = [
 	'description',
 	'votos',
 	'presentado',
-	'beneficiario'
+	'beneficiario',
+	// borramos estos también por si estaban mal cargados
+	'problema',
+	'genero'
+]
+
+const hideFields = [
+	'state',
+	'admin-comment',
+	'admin-comment-referencia'
 ]
 
 const deepCopy = obj => {
@@ -54,8 +75,9 @@ const deepCopy = obj => {
 class SaltearPromises { }
 exports.up = function up (done) {
   dbReady()
+		// - Mejor no chequear y borrar por si está mal cargado
     // Primero chequear si ya no hay cosas cargadas
-    .then(() => {
+    /*.then(() => {
       return new Promise((resolve, reject) => {
         Forum.collection.count({'topicsAttrs.name': generoField.name}, (err, count) => {
           if (err) reject(new Error(err))
@@ -66,21 +88,14 @@ exports.up = function up (done) {
           resolve()
         })
       })
-    })
+    })*/
+
 		// updatear
     .then(() => {
       return new Promise((resolve, reject) => {
 	      Forum.findOne({name: 'proyectos'}, (err, forumProyecto) => {
 	        if (err) reject(new Error(err))
 					if (!forumProyecto || !forumProyecto.topicsAttrs) reject(new Error('No forum proyectos or no topicAttrs in it found'))
-
-					// nuevo field
-					let field = generoField
-					let group = groups[field.groupNum || 0]
-					field.group = group.name
-					field.groupOrder = group.order
-					delete field.groupNum
-					forumProyecto.topicsAttrs.push(field)
 
 					// borramos viejos
 					// agarramos los indices a eliminar
@@ -90,6 +105,28 @@ exports.up = function up (done) {
 
 					// los eliminamos de atrás hacia adelante así no se mueven los índices
 					deleteIs.reverse().forEach(i => forumProyecto.topicsAttrs.splice(i,1))
+
+					// nuevos fields
+					newFields.forEach(field => {
+						let group = groups[field.groupNum || 0]
+						field.group = group.name
+						field.groupOrder = group.order
+						delete field.groupNum
+
+						forumProyecto.topicsAttrs.push(field)
+					})
+
+					// por algún motivo no nos deja editar un item del array
+					const copyAttrs = deepCopy(forumProyecto.topicsAttrs)
+					let hideIs = copyAttrs
+						.map((attr,i) => attr && hideFields.includes(attr.name) && i)
+						.filter(val => val !== false)
+					for (let i=0; i<copyAttrs.length; i++)
+						copyAttrs[i].hide = hideIs.includes(i)
+					console.log(copyAttrs)
+					// borramos todo y volvemos a generar
+					forumProyecto.topicsAttrs.splice(0)
+					forumProyecto.topicsAttrs.push(...copyAttrs)
 
 					forumProyecto.markModified('topicsAttrs')
 
