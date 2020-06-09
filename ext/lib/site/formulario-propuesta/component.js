@@ -16,28 +16,32 @@ import { Link } from 'react-router'
 class FormularioPropuesta extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
+      mode: null,
+
       forum: null,
       topic: null,
-      mode: null,
+
       nombre: '',
+      claustro: '',
+      facultad: '',
       documento: '',
       genero: '',
       email: '',
       titulo: '',
-      facultad: '',
-      claustro: '',
-      problema: '',
       tags: [],
+      problema: '',
+
+      state: '',
       adminComment: '',
       adminCommentReference: '',
-      state: '',
-      availableTags: [],
-      selectedTag: '',
 
+      availableTags: [],
       facultades: [],
       claustros: []
     }
+
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -49,42 +53,59 @@ class FormularioPropuesta extends Component {
   }
 
   componentWillMount () {
-    this.getTags()
+    const isEdit = this.props.params.id ? true : false
 
-    if (this.props.params.id) {
-      this.setState({ mode: 'edit' })
-      topicStore.findOne(this.props.params.id)
-        .then((topic) => {
-          this.setState({
-            titulo: topic.mediaTitle,
-            nombre: topic.attrs.nombre,
-            documento: topic.attrs.documento,
-            genero: topic.attrs.genero,
-            email: topic.attrs.email,
-            facultad: topic.attrs.facultad,
-            claustro: topic.attrs.claustro,
-            problema: topic.attrs.problema,
-            tags: topic.tags,
-            state: topic.attrs.state,
-            adminComment: topic.attrs['admin-comment'],
-            adminCommentReference: topic.attrs['admin-comment-reference']
-          })
+    const promises = [
+      // data del forum
+      forumStore.findOneByName('proyectos'),
+      // tags, facultades y claustros
+      tagStore.findAll({field: 'name'}),
+      facultadStore.findAll(),
+      claustroStore.findAll()
+    ]
+
+    // si es edición traemos data del topic también
+    if (isEdit)
+      promises.push(topicStore.findOne(this.props.params.id))
+
+    Promise.all(promises).then(results => {
+      // topic queda en undefined si no estamos en edit
+      const [ forum, tags, facultades, claustros, topic] = results
+
+      let newState = {
+        forum,
+        availableTags: tags,
+        facultades,
+        claustros,
+        mode: isEdit ? 'edit' : 'new'
+      }
+
+      if (isEdit)
+        Object.assign(newState, {
+          titulo: topic.mediaTitle,
+          documento: topic.attrs.documento,
+          genero: topic.attrs.genero,
+          facultad: topic.attrs.facultad,
+          claustro: topic.attrs.claustro,
+          problema: topic.attrs.problema,
+          // los tags se guardan por nombre (¿por qué?) así que buscamos su respectivo objeto
+          tags: tags.filter(t => topic.tags.includes(t.name)),
+          state: topic.attrs.state,
+          adminComment: topic.attrs['admin-comment'],
+          adminCommentReference: topic.attrs['admin-comment-reference']
         })
-        .catch((err) => console.log(err))
-    } else {
-      this.setState({ mode: 'new' })
-    }
 
-    forumStore.findOneByName('proyectos').then((forum) => {
-      this.setState({ forum })
-    }).catch((err) => { console.error(err) })
-
-    facultadStore.findAll().then(facultades => this.setState({facultades}))
-    claustroStore.findAll().then(claustros => this.setState({claustros}))
-
-    this.props.user.onChange(this.onUserStateChange)
-    // si ya está loggeado de antes debería pasar por la función
-    this.onUserStateChange()
+      console.log(isEdit, newState)
+      this.setState(newState, () => {
+        // updateamos campos de usuario
+        // (recién dps del setState tendremos facultades y claustros cargados)
+        this.props.user.onChange(this.onUserStateChange)
+        // si ya está loggeado de antes debería pasar por la función igualmente
+        this.onUserStateChange()
+      })
+    }).catch(err =>
+      console.error(err)
+    )
   }
 
   onUserStateChange = () => {
@@ -130,19 +151,15 @@ class FormularioPropuesta extends Component {
         'Content-Type': 'application/json'
       }
     })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.status === 200) {
-          window.location.href = `/propuestas/topic/${res.results.topic.id}`
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  getTags = () => {
-    tagStore.findAll({field: 'name'}).then((tags) => this.setState({ availableTags: tags }))
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status === 200) {
+        window.location.href = `/propuestas/topic/${res.results.topic.id}`
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   editarPropuesta (formData) {
@@ -154,14 +171,14 @@ class FormularioPropuesta extends Component {
         'Content-Type': 'application/json'
       }
     })
-      .then((res) => {
-        if (res.status === 200) {
-          window.location.href = `/propuestas/topic/${this.props.params.id}`
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    .then((res) => {
+      if (res.status === 200) {
+        window.location.href = `/propuestas/topic/${this.props.params.id}`
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   toggleTag = (tag) => (e) => {
