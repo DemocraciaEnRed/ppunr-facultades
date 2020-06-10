@@ -18,28 +18,27 @@
             button.btn.btn-primary.sort.por-nombre(data-sort='topic-title')
               span='A - Z'
       .row.row-filtros
+        .col-md-3.col-xs-12
+          .input-group.input-group-md
+            ='Facultad: '
+            select(name='facultad')
+              option(value="") Todos
+              - each obj in uniqAttrs.facultades
+                  option(value="#{obj.value}") #{obj.name}
         .col-md-4.col-xs-12
           .input-group.input-group-md
-            ='Año: '
-            select(name='anio')
+            ='Claustro: '
+            select(name='claustro')
               option(value="") Todos
-              - each anio in uniqAttrs.anio
-                - if (anio != '')
-                  option(value="#{anio}") #{anio}
-        .col-md-4.col-xs-12
+              - each obj in uniqAttrs.claustros
+                option(value="#{obj.value}") #{obj.name}
+        .col-md-5.col-xs-12
           .input-group.input-group-md
-            ='Barrio: '
-            select(name='barrio')
+            ='Temas: '
+            select(name='tema')
               option(value="") Todos
-              - each barrio in uniqAttrs.barrio
-                option(value="#{barrio}") #{toTitleCase(barrio.replace(/-/g,' '))}
-        .col-md-4.col-xs-12
-          .input-group.input-group-md
-            ='Estado: '
-            select(name='state')
-              option(value="") Todos
-              - each state in uniqAttrs.state
-                option(value="#{state}") #{toTitleCase(state)}
+              - each obj in uniqAttrs.tags
+                option(value="#{obj.name}") #{obj.name}
     #topic-list.list.list-group.col-xs-12
       - each topic in topics
         .list-group-item(data-topicid=topic.id, data-topic-ispublic=topic.public)

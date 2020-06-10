@@ -53,6 +53,7 @@ class HomePropuestas extends Component {
     if (this.props.location.query.tags)
       defaultValues.tag.push(this.props.location.query.tags)
 
+    // igual que filtros de admin (lib/admin/admin/admin.js)
     Promise.all([
       facultadStore.findAll(),
       claustroStore.findAll(),
