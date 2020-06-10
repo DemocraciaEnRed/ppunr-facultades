@@ -7,6 +7,7 @@ import UserBadge from 'ext/lib/site/header/user-badge/component'
 import MobileMenu from 'ext/lib/site/header/mobile-menu/component'
 import AnonUser from 'ext/lib/site/header/anon-user/component'
 import forumStore from 'lib/stores/forum-store/forum-store'
+import escuelaStore from 'lib/stores/escuela-store'
 
 class Header extends Component {
   constructor (props) {
@@ -16,7 +17,8 @@ class Header extends Component {
       userForm: null,
       mobileMenu: false,
       userMenu: false,
-      userPrivileges: null
+      userPrivileges: null,
+      escuelas: []
     }
 
     props.user.onChange(this.onUserStateChange)
@@ -24,6 +26,7 @@ class Header extends Component {
 
   componentWillMount () {
     bus.on('user-form:load', this.onLoadUserForm)
+    escuelaStore.findAll().then(escuelas => this.setState({escuelas}))
   }
 
   componentWillUnmount () {
@@ -147,14 +150,18 @@ class Header extends Component {
                   Acerca de
               </Link>
             </div>
-            <div className={`header-item ${window.location.pathname.includes('/propuestas') ? 'active' : ''}`}>
-              <Link
-                to='/propuestas'
-                className='header-link'
-                >
-                  Foros
-              </Link>
-            </div>
+            {this.state.escuelas.length > 0 && this.state.escuelas.map(escuela => (
+              <div
+                key={escuela._id}
+                className={`header-item ${window.location.pathname.includes(`/propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
+                <Link
+                  to={`/propuestas?id=${escuela._id}`}
+                  className='header-link'
+                  >
+                    Foro {escuela.nombre} ({escuela.abreviacion})
+                </Link>
+              </div>
+            ))}
             { showAdmin &&
               <div className={`header-item ${window.location.pathname.includes('/admin') ? 'active' : ''}`}>
                 <Link
