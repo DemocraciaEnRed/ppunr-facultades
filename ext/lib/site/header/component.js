@@ -153,7 +153,7 @@ class Header extends Component {
             {this.state.escuelas.length > 0 && this.state.escuelas.map(escuela => (
               <div
                 key={escuela._id}
-                className={`header-item ${window.location.pathname.includes(`/propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
+                className={`header-item ${window.location.href.includes(`propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
                 <Link
                   to={`/propuestas?id=${escuela._id}`}
                   className='header-link'
