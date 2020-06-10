@@ -123,7 +123,7 @@ exports.up = function up (done) {
 						.filter(val => val !== false)
 					for (let i=0; i<copyAttrs.length; i++)
 						copyAttrs[i].hide = hideIs.includes(i)
-					console.log(copyAttrs)
+						
 					// borramos todo y volvemos a generar
 					forumProyecto.topicsAttrs.splice(0)
 					forumProyecto.topicsAttrs.push(...copyAttrs)
