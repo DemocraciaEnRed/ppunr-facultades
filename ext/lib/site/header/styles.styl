@@ -28,7 +28,7 @@ nav.navbar
     text-transform: uppercase
     font-weight: bold
   .navbar-nav
-    font-size: 17px
+    font-size: 16px
     display: flex
     align-items center
     margin-right: 0
@@ -50,6 +50,8 @@ nav.navbar
   .header-item
     height: 80px;
     padding: 0 20px;
+    @media screen and (max-width: 1033px)
+      padding: 0 13px;
     font-weight: bold
     display: flex;
     align-items: center;
@@ -60,6 +62,7 @@ nav.navbar
     .header-link
       height: auto
       position: relative
+      max-width 170px
   .user-badge-helper
     margin-left 10px
 
