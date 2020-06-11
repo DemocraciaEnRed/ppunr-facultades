@@ -18,6 +18,7 @@ const formats = {
 
 app.get('/topics',
   validate({
+    // los campos de admitidos de esta api están en EDITABLE_KEYS de ext/lib/api-v2/topics/index.js
     query: Object.assign({}, validate.schemas.pagination, {
       forumName: {
         type: 'string',
@@ -62,6 +63,7 @@ app.get('/topics',
   utils.parseTags,
   middlewares.forums.privileges.canView,
   (req, res, next) => {
+    // los campos de admitidos de esta api están en EDITABLE_KEYS de ext/lib/api-v2/topics/index.js
     const opts = Object.assign({}, req.query)
     opts.forum = req.forum
     opts.user = req.user
