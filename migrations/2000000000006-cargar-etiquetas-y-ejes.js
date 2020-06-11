@@ -22,6 +22,7 @@ const etiquetas = [
   { nombre: "Investigación" },
   { nombre: "Recreación y deporte" },
   { nombre: "Salud" },
+  { nombre: "Seguridad y Soberanía Alimentaria" },
   { nombre: "Tecnología" },
   { nombre: "Transparencia" },
   { nombre: "Vinculación con el medio" },
