@@ -24,9 +24,9 @@ app.get('/topics',
         enum: allowedForums,
         required: true
       },
-      facultades: {
+      escuela: {
         type: 'string',
-        format: 'facultades',
+        format: 'escuela',
         default: ''
       },
       claustros: {
@@ -58,7 +58,6 @@ app.get('/topics',
   }, { formats }),
   utils.findForum,
   utils.parseStates,
-  utils.parseFacultades,
   utils.parseClaustros,
   utils.parseTags,
   middlewares.forums.privileges.canView,

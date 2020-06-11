@@ -4,10 +4,6 @@ const topicScopes = require('lib/api-v2/db-api/topics/scopes')
 const { notFound } = require('../errors')
 const ObjectID = require('mongoose').Types.ObjectId
 
-exports.parseFacultades = (req, res, next) => {
-  req.query.facultades = req.query.facultades.split(',').filter((t) => !!t)
-  next()
-}
 exports.parseClaustros = (req, res, next) => {
   req.query.claustros = req.query.claustros.split(',').filter((t) => !!t)
   next()
@@ -42,12 +38,14 @@ const queryTopics = (opts) => {
     forum,
     tags,
     related,
-    owners
+    owners,
+    escuela
   } = opts
 
   const query = {
     forum: forum._id,
-    publishedAt: { $ne: null }
+    publishedAt: { $ne: null },
+    escuela: escuela
   }
 
   if (owners && owners.length > 0) query.owner = { $in: owners }
@@ -60,13 +58,11 @@ const queryTopics = (opts) => {
 
 const getPossibleOwners = (opts) => {
   const {
-    facultades,
     claustros,
   } = opts
 
   const query = {}
 
-  if (facultades && facultades.length > 0) query.facultad = { $in: facultades.map(id => ObjectID(id)) }
   if (claustros && claustros.length > 0) query.claustro = { $in: claustros.map(id => ObjectID(id)) }
 
   if (Object.keys(query).length > 0)
@@ -88,7 +84,8 @@ exports.findTopics = (opts) => {
     limit = 30,
     page = 1,
     sort,
-    user
+    user,
+    escuela
   } = opts
   return getPossibleOwners(opts).then(owners => {
     // si devuelve null es porque no se filtró por owner

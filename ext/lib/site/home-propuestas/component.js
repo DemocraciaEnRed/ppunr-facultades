@@ -86,7 +86,7 @@ class HomePropuestas extends Component {
       page: page.toString(),
       limit: defaultValues.limit.toString(),
 
-      facultades: this.state.facultad,
+      escuela: this.props.location.query.id,
       claustros: this.state.claustro,
       tags: this.state.tags.filter(t => this.state.tag.includes(t.value)).map(t => t.name),
       sort: this.state.sort
