@@ -154,12 +154,12 @@ class Header extends Component {
               <div
                 key={escuela._id}
                 className={`header-item ${window.location.href.includes(`propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
-                <Link
-                  to={`/propuestas?id=${escuela._id}`}
+                <a
+                  href={`/propuestas?id=${escuela._id}`}
                   className='header-link'
                   >
                     Foro {escuela.nombre} ({escuela.abreviacion})
-                </Link>
+                </a>
               </div>
             ))}
             { showAdmin &&

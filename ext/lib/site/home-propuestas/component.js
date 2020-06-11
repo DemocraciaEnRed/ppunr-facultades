@@ -10,6 +10,7 @@ import claustroStore from 'lib/stores/claustro-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
+import escuelaStore from 'lib/stores/escuela-store'
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -33,6 +34,7 @@ class HomePropuestas extends Component {
     this.state = {
       forum: null,
       topics: null,
+      escuela: null,
 
       facultades: [],
       facultad: defaultValues.facultad,
@@ -58,14 +60,16 @@ class HomePropuestas extends Component {
       facultadStore.findAll(),
       claustroStore.findAll(),
       tagStore.findAll({field: 'name'}),
-      forumStore.findOneByName('proyectos')
+      forumStore.findOneByName('proyectos'),
+      escuelaStore.findOneById(this.props.location.query.id)
     ]).then(results => {
-      const [facultades, claustros, tags, forum] = results
+      const [facultades, claustros, tags, forum, escuela] = results
       this.setState({
         facultades: facultades.map(facultad => { return {value: facultad._id, name: facultad.abreviacion}; }),
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
         tags: tags.map(tag => { return {value: tag.id, name: tag.name}; }),
-        forum
+        forum,
+        escuela
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
@@ -193,15 +197,20 @@ class HomePropuestas extends Component {
   render () {
     console.log('Render main')
 
-    const { forum, topics } = this.state
+    const { forum, topics, escuela } = this.state
+    const { user } = this.props
+
+    const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas.map(e => e._id)
+    const perteneceAEscuela = userEscuelasIds && userEscuelasIds.includes(escuela._id)
 
     return (
 
       <div className='ext-home-ideas'>
         <BannerListadoTopics
-          btnText='Mandá tu idea'
-          btnLink='/formulario-propuesta'
+          btnText={perteneceAEscuela ? 'Mandá tu idea' : undefined}
+          btnLink={perteneceAEscuela ? `/formulario-propuesta?id=${escuela && escuela._id}` : undefined}
           title='Ideas'
+          subtitle={escuela && escuela.nombre}
           />
 
         <div className='container'>
@@ -222,7 +231,6 @@ class HomePropuestas extends Component {
         </div>
 
         <div className='container topics-container'>
-
           <FilterPropuestas
             facultades={this.state.facultades}
             facultad={this.state.facultad}
