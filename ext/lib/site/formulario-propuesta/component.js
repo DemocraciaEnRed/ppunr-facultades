@@ -118,6 +118,7 @@ class FormularioPropuesta extends Component {
         claustro: user.claustro._id,
         email: user.email,
         nombre: user.firstName + ' ' + user.lastName,
+        documento: user.dni,
         escuelaEquivocada: ! user.escuelas.map(e => e._id).includes(escuelaUrlId)
       })
     }
@@ -128,7 +129,6 @@ class FormularioPropuesta extends Component {
     const formData = {
       forum: this.state.forum.id,
       mediaTitle: this.state.titulo,
-      'attrs.documento': this.state.documento,
       'attrs.genero': this.state.genero,
       'attrs.problema': this.state.problema,
       tags: this.state.tags.map(tag => tag.name)
@@ -322,7 +322,8 @@ class FormularioPropuesta extends Component {
                 name='documento'
                 placeholder=""
                 value={this.state['documento']}
-                onChange={this.handleInputChange} />
+                onChange={this.handleInputChange}
+                disabled={true}/>
             </div>
             <div className='form-group'>
               <label className='required' htmlFor='genero'>
