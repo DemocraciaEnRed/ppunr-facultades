@@ -131,6 +131,7 @@ class FormularioPropuesta extends Component {
       mediaTitle: this.state.titulo,
       'attrs.genero': this.state.genero,
       'attrs.problema': this.state.problema,
+      escuela: this.state.escuela,
       tags: this.state.tags.map(tag => tag.name)
     }
     if (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit') {
