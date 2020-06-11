@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
-import facultadStore from 'lib/stores/facultad-store'
+import escuelaStore from 'lib/stores/escuela-store'
 import claustroStore from 'lib/stores/claustro-store'
 import tagStore from 'lib/stores/tag-store/tag-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
@@ -25,7 +25,7 @@ class FormularioPropuesta extends Component {
 
       nombre: '',
       claustro: '',
-      facultad: '',
+      escuela: '',
       documento: '',
       genero: '',
       email: '',
@@ -38,8 +38,9 @@ class FormularioPropuesta extends Component {
       adminCommentReference: '',
 
       availableTags: [],
-      facultades: [],
-      claustros: []
+      escuelas: [],
+      claustros: [],
+      escuelaEquivocada: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -58,9 +59,8 @@ class FormularioPropuesta extends Component {
     const promises = [
       // data del forum
       forumStore.findOneByName('proyectos'),
-      // tags, facultades y claustros
+      // tags, escuelas y claustros
       tagStore.findAll({field: 'name'}),
-      facultadStore.findAll(),
       claustroStore.findAll()
     ]
 
@@ -70,12 +70,11 @@ class FormularioPropuesta extends Component {
 
     Promise.all(promises).then(results => {
       // topic queda en undefined si no estamos en edit
-      const [ forum, tags, facultades, claustros, topic] = results
+      const [ forum, tags, claustros, topic] = results
 
       let newState = {
         forum,
         availableTags: tags,
-        facultades,
         claustros,
         mode: isEdit ? 'edit' : 'new'
       }
@@ -85,7 +84,7 @@ class FormularioPropuesta extends Component {
           titulo: topic.mediaTitle,
           documento: topic.attrs.documento,
           genero: topic.attrs.genero,
-          facultad: topic.attrs.facultad,
+          escuela: topic.attrs.escuela,
           claustro: topic.attrs.claustro,
           problema: topic.attrs.problema,
           // los tags se guardan por nombre (¿por qué?) así que buscamos su respectivo objeto
@@ -95,10 +94,9 @@ class FormularioPropuesta extends Component {
           adminCommentReference: topic.attrs['admin-comment-reference']
         })
 
-      console.log(isEdit, newState)
       this.setState(newState, () => {
         // updateamos campos de usuario
-        // (recién dps del setState tendremos facultades y claustros cargados)
+        // (recién dps del setState tendremos escuelas y claustros cargados)
         this.props.user.onChange(this.onUserStateChange)
         // si ya está loggeado de antes debería pasar por la función igualmente
         this.onUserStateChange()
@@ -111,11 +109,16 @@ class FormularioPropuesta extends Component {
   onUserStateChange = () => {
     if (this.props.user.state.fulfilled){
       let user = this.props.user.state.value
+
+      const escuelaUrlId = this.props.location.query.id
+
       this.setState({
-        facultad: user.facultad._id,
+        escuelas: user.escuelas,
+        escuela: escuelaUrlId,
         claustro: user.claustro._id,
         email: user.email,
-        nombre: user.firstName + ' ' + user.lastName
+        nombre: user.firstName + ' ' + user.lastName,
+        escuelaEquivocada: ! user.escuelas.map(e => e._id).includes(escuelaUrlId)
       })
     }
   }
@@ -199,7 +202,7 @@ class FormularioPropuesta extends Component {
     if (this.state.genero === '') return true
     if (this.state.email === '') return true
     if (this.state.titulo === '') return true
-    if (this.state.facultad === '') return true
+    if (this.state.escuela === '') return true
     if (this.state.claustro === '') return true
     if (this.state.problema === '') return true
     return false;
@@ -229,7 +232,7 @@ class FormularioPropuesta extends Component {
   }
 
   render () {
-    const { forum, facultades, claustros } = this.state
+    const { forum, escuelas, claustros, escuelaEquivocada } = this.state
 
     if (!forum) return null
     if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
@@ -242,242 +245,249 @@ class FormularioPropuesta extends Component {
           }
         </div>
         {/* FORMULARIO GOES BEHIND THIS */}
-        <form className='wrapper' onSubmit={this.handleSubmit}>
-          <div className="bar-section">
-            <p className="section-title">Tus datos personales</p>
-            <p className="section-subtitle">Todos estos datos son confidenciales</p>
+        { escuelaEquivocada ?
+          <div className='escuela-equivocada text-center'>
+            <h1>¡Escuela equivocada!</h1>
+            <h2>Solo podés subir ideas en {escuelas.length == 1 ? escuelas[0].abreviacion : escuelas.map(e=>e.abreviacion).join(' y ') }</h2>
           </div>
-          <input type='hidden' name='forum' value={forum.id} />
-          <div className='form-group'>
-            <label className='required' htmlFor='nombre'>
-              Nombre y apellido
-            </label>
-            <input
-              className='form-control'
-              required
-              type='text'
-              max='128'
-              name='nombre'
-              value={this.state['nombre']}
-              placeholder=""
-              onChange={this.handleInputChange}
-              disabled={true} />
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='claustro'>
-              Claustro
-            </label>
-            <select
-              className='form-control special-height'
-              required
-              name='claustro'
-              value={this.state['claustro']}
-              onChange={this.handleInputChange}
-              disabled={true}>
-              <option value=''>Seleccione un claustro</option>
-              {claustros.length > 0 && claustros.map(claustro =>
-                <option key={claustro._id} value={claustro._id}>
-                  {claustro.nombre}
-                </option>
-              )}
-            </select>
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='facultad'>
-              Facultad
-            </label>
-            <select
-              className='form-control special-height'
-              required
-              name='facultad'
-              value={this.state['facultad']}
-              onChange={this.handleInputChange}
-              disabled={true}>
-              <option value=''>Seleccione una facultad</option>
-              {facultades.length > 0 && facultades.map(facultad =>
-                <option key={facultad._id} value={facultad._id}>
-                  {facultad.nombre}
-                </option>
-              )}
-            </select>
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='documento'>
-              DNI
-            </label>
-            <input
-              className='form-control'
-              required
-              type='text'
-              max='50'
-              name='documento'
-              placeholder=""
-              value={this.state['documento']}
-              onChange={this.handleInputChange} />
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='genero'>
-              Género
-            </label>
-            <input
-              className='form-control'
-              required
-              type='text'
-              max='50'
-              name='genero'
-              placeholder=""
-              value={this.state['genero']}
-              onChange={this.handleInputChange} />
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='email'>
-              Email
-            </label>
-            <input
-              className='form-control'
-              required
-              type='text'
-              max='128'
-              name='email'
-              placeholder=""
-              value={this.state['email']}
-              onChange={this.handleInputChange}
-              disabled={true} />
-          </div>
-
-          <div className="bar-section acerca-propuesta">
-            <p className="section-title">Acerca de la propuesta</p>
-          </div>
-
-          <section>
-          <div className='form-group'>
-            <label className='required' htmlFor='titulo'>
-              Título
-            </label>
-            <p className="help-text">Elegí un título</p>
-            <input
-              className='form-control'
-              required
-              type='text'
-              max='128'
-              name='titulo'
-              value={this.state['titulo']}
-              onChange={this.handleInputChange} />
-          </div>
-          <div className='tags-autocomplete'>
-            <label className='required'>
-                Temas
-            </label>
-            <p className='help-text'>Elegí los temas relacionados a tu idea. Máximo 3 temas. </p>
-            {
-              this.state.mode === 'edit' && this.state.tags &&
-                <ul className="tags">
-                {
-                  this.state.availableTags.map((tag) => {
-                    return (
-                      <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
-                    )
-                  })
-                }
-                </ul>
-            }
-            {
-              this.state.mode === 'new' &&
-                <ul className="tags">
-                {
-                  this.state.availableTags.map((tag) => {
-                    return (
-                      <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
-                    )
-                  })
-                }
-                </ul>
-            }
-          </div>
-          <div className='form-group'>
-            <label className='required' htmlFor='problema'>
-              Tu idea
-            </label>
-            <p className='help-text'>¿Qué problemas querés resolver? ¿a quiénes afecta? ¿Cómo?</p>
-            <textarea
-              className='form-control'
-              required
-              rows='6'
-              max='5000'
-              name='problema'
-              value={this.state['problema']}
-              onChange={this.handleInputChange}>
-            </textarea>
-          </div>
-          {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
+        :
+          <form className='wrapper' onSubmit={this.handleSubmit}>
+            <div className="bar-section">
+              <p className="section-title">Tus datos personales</p>
+              <p className="section-subtitle">Todos estos datos son confidenciales</p>
+            </div>
+            <input type='hidden' name='forum' value={forum.id} />
             <div className='form-group'>
-              <label htmlFor='state'>Estado</label>
-              <span className='help-text requerido'>Agregar una descripción del estado del proyecto</span>
+              <label className='required' htmlFor='nombre'>
+                Nombre y apellido
+              </label>
+              <input
+                className='form-control'
+                required
+                type='text'
+                max='128'
+                name='nombre'
+                value={this.state['nombre']}
+                placeholder=""
+                onChange={this.handleInputChange}
+                disabled={true} />
+            </div>
+            <div className='form-group'>
+              <label className='required' htmlFor='claustro'>
+                Claustro
+              </label>
               <select
                 className='form-control special-height'
-                name='state'
-                value={this.state['state']}
-                onChange={this.handleInputChange}>
-                <option value='pendiente'>Pendiente</option>
-                <option value='factible'>Factible</option>
-                <option value='no-factible'>No factible</option>
-                <option value='integrado'>Integrada</option>
+                required
+                name='claustro'
+                value={this.state['claustro']}
+                onChange={this.handleInputChange}
+                disabled={true}>
+                <option value=''>Seleccione un claustro</option>
+                {claustros.length > 0 && claustros.map(claustro =>
+                  <option key={claustro._id} value={claustro._id}>
+                    {claustro.nombre}
+                  </option>
+                )}
               </select>
             </div>
-          )}
-          {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
             <div className='form-group'>
-              <label htmlFor='adminComment'>Comentario del moderador:</label>
-              <span className='help-text requerido'>Escribir aquí un comentario en el caso que se cambie el estado a "factible", "rechazado" o "integrado"</span>
+              <label className='required' htmlFor='escuela'>
+                Escuela
+              </label>
+              <select
+                className='form-control special-height'
+                required
+                name='escuela'
+                value={this.state['escuela']}
+                onChange={this.handleInputChange}
+                disabled={true}>
+                {/*<option value=''>Seleccione una escuela</option>*/}
+                {escuelas.length > 0 && escuelas.map(escuela =>
+                  <option key={escuela._id} value={escuela._id} selected={true}>
+                    {escuela.nombre}
+                  </option>
+                )}
+              </select>
+            </div>
+            <div className='form-group'>
+              <label className='required' htmlFor='documento'>
+                DNI
+              </label>
+              <input
+                className='form-control'
+                required
+                type='text'
+                max='50'
+                name='documento'
+                placeholder=""
+                value={this.state['documento']}
+                onChange={this.handleInputChange} />
+            </div>
+            <div className='form-group'>
+              <label className='required' htmlFor='genero'>
+                Género
+              </label>
+              <input
+                className='form-control'
+                required
+                type='text'
+                max='50'
+                name='genero'
+                placeholder=""
+                value={this.state['genero']}
+                onChange={this.handleInputChange} />
+            </div>
+            <div className='form-group'>
+              <label className='required' htmlFor='email'>
+                Email
+              </label>
+              <input
+                className='form-control'
+                required
+                type='text'
+                max='128'
+                name='email'
+                placeholder=""
+                value={this.state['email']}
+                onChange={this.handleInputChange}
+                disabled={true} />
+            </div>
+
+            <div className="bar-section acerca-propuesta">
+              <p className="section-title">Acerca de la propuesta</p>
+            </div>
+
+            <section>
+            <div className='form-group'>
+              <label className='required' htmlFor='titulo'>
+                Título
+              </label>
+              <p className="help-text">Elegí un título</p>
+              <input
+                className='form-control'
+                required
+                type='text'
+                max='128'
+                name='titulo'
+                value={this.state['titulo']}
+                onChange={this.handleInputChange} />
+            </div>
+            <div className='tags-autocomplete'>
+              <label className='required'>
+                  Temas
+              </label>
+              <p className='help-text'>Elegí los temas relacionados a tu idea. Máximo 3 temas. </p>
+              {
+                this.state.mode === 'edit' && this.state.tags &&
+                  <ul className="tags">
+                  {
+                    this.state.availableTags.map((tag) => {
+                      return (
+                        <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
+                      )
+                    })
+                  }
+                  </ul>
+              }
+              {
+                this.state.mode === 'new' &&
+                  <ul className="tags">
+                  {
+                    this.state.availableTags.map((tag) => {
+                      return (
+                        <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
+                      )
+                    })
+                  }
+                  </ul>
+              }
+            </div>
+            <div className='form-group'>
+              <label className='required' htmlFor='problema'>
+                Tu idea
+              </label>
+              <p className='help-text'>¿Qué problemas querés resolver? ¿a quiénes afecta? ¿Cómo?</p>
               <textarea
                 className='form-control'
+                required
                 rows='6'
                 max='5000'
-                name='adminComment'
-                value={this.state['adminComment']}
+                name='problema'
+                value={this.state['problema']}
                 onChange={this.handleInputChange}>
               </textarea>
             </div>
-          )}
-          {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
-            <div className='form-group'>
-              <label htmlFor='adminCommentReference'>Link a la propuesta definitiva:</label>
-              <span className='help-text requerido'>Escribir aquí el link al proyecto vinculado, en caso que se cambie el estado a "integrado"</span>
-              <input
-                type='text'
-                className='form-control'
-                name='adminCommentReference'
-                value={this.state['adminCommentReference']}
-                onChange={this.handleInputChange} />
-            </div>
-          )}
-          {
-             this.hasErrors() &&
-             <div className="error-box">
-             <ul>
-                  {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
-                  {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" de la propuesta no puede quedar vacío</li> }
-                  {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" de la propuesta no puede quedar vacío</li> }
-             </ul>
-             </div>
-          }
-          <div className='submit-div'>
-            { !this.hasErrors() &&
-              <button type='submit' className='submit-btn'>
-                {this.state.mode === 'new' ? 'Enviar idea' : 'Guardar idea'}
-              </button>
+            {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
+              <div className='form-group'>
+                <label htmlFor='state'>Estado</label>
+                <span className='help-text requerido'>Agregar una descripción del estado del proyecto</span>
+                <select
+                  className='form-control special-height'
+                  name='state'
+                  value={this.state['state']}
+                  onChange={this.handleInputChange}>
+                  <option value='pendiente'>Pendiente</option>
+                  <option value='factible'>Factible</option>
+                  <option value='no-factible'>No factible</option>
+                  <option value='integrado'>Integrada</option>
+                </select>
+              </div>
+            )}
+            {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
+              <div className='form-group'>
+                <label htmlFor='adminComment'>Comentario del moderador:</label>
+                <span className='help-text requerido'>Escribir aquí un comentario en el caso que se cambie el estado a "factible", "rechazado" o "integrado"</span>
+                <textarea
+                  className='form-control'
+                  rows='6'
+                  max='5000'
+                  name='adminComment'
+                  value={this.state['adminComment']}
+                  onChange={this.handleInputChange}>
+                </textarea>
+              </div>
+            )}
+            {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
+              <div className='form-group'>
+                <label htmlFor='adminCommentReference'>Link a la propuesta definitiva:</label>
+                <span className='help-text requerido'>Escribir aquí el link al proyecto vinculado, en caso que se cambie el estado a "integrado"</span>
+                <input
+                  type='text'
+                  className='form-control'
+                  name='adminCommentReference'
+                  value={this.state['adminCommentReference']}
+                  onChange={this.handleInputChange} />
+              </div>
+            )}
+            {
+               this.hasErrors() &&
+               <div className="error-box">
+               <ul>
+                    {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" del representante no puede quedar vacío</li> }
+                    {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" del representante no puede quedar vacío</li> }
+                    {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" del representante no puede quedar vacío</li> }
+                    {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
+                    {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
+                    {this.hasErrorsField('escuela') && <li className="error-li">El campo "Escuela" de la propuesta no puede quedar vacío</li> }
+                    {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
+                    {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" de la propuesta no puede quedar vacío</li> }
+                    {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" de la propuesta no puede quedar vacío</li> }
+               </ul>
+               </div>
             }
-          </div>
-          <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
-          </section>
+            <div className='submit-div'>
+              { !this.hasErrors() &&
+                <button type='submit' className='submit-btn'>
+                  {this.state.mode === 'new' ? 'Enviar idea' : 'Guardar idea'}
+                </button>
+              }
+            </div>
+            <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
+            </section>
 
-        </form>
+          </form>
+        /*end if de escuelaEquivocada*/}
       </div>
     )
 
