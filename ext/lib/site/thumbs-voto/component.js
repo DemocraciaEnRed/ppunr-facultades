@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
+import userConnector from 'lib/site/connectors/user'
 
-export default function ThumbsVoto(props) {
+export default userConnector(function ThumbsVoto(props) {
+  let userState = props.user.state
+  let userLoggedIn = userState.fulfilled
+  let userEscuelaId = userLoggedIn && userState.value.escuelas.length > 0 && userState.value.escuelas[0]._id
   let
     styleIcono1 = { backgroundImage: `url(${props.texts['home-icono1-imagen']})` },
     styleIcono2 = { backgroundImage: `url(${props.texts['home-icono2-imagen']})` },
@@ -20,7 +24,7 @@ export default function ThumbsVoto(props) {
               //</div>
               }
               <Link
-                to='/formulario-propuesta'
+                to={ userLoggedIn ? `/formulario-propuesta?id=${userEscuelaId}` : '/formulario-propuesta' }
                 className="boton-azul boton-blanco">
                 Mandá tu idea
               </Link>
@@ -85,4 +89,4 @@ export default function ThumbsVoto(props) {
       </div>
     </section>
   )
-}
+})
