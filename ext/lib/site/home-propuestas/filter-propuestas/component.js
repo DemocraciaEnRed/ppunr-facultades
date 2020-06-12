@@ -73,7 +73,6 @@ export default class FilterPropuestas extends Component {
     console.log('Render filters')
 
     const {
-      facultad, facultades,
       claustro, claustros,
       tags, tag,
       handleRemoveBadge
@@ -86,10 +85,6 @@ export default class FilterPropuestas extends Component {
     // - el .map(.find().name) hace la conversión de keys a values
     //   p.ej. barrio contiene keys, y para mostrar su formato para humanos hay
     //   que buscar la key dentro de barrios
-    if (facultad.length)
-      allActiveOpts.push(
-        ...facultad.sort().map(i => ({ value: i, name: facultades.find(j => j.value==i).name }))
-      )
     if (claustro.length)
       allActiveOpts.push(
         ...claustro.sort().map(i => ({ value: i, name: claustros.find(j => j.value==i).name }))
@@ -102,18 +97,6 @@ export default class FilterPropuestas extends Component {
     return (
       <nav id='filter-propuestas'>
         <div className='filters-nav center'>
-          <FilterBox
-            name='facultad'
-            title='Facultad'
-            allOptions={facultades}
-            activeOptions={facultad}
-
-            activeDropdown={this.state.activeDropdown}
-            clearedFilters={this.state.clearedFilters}
-            handleDropdown={this.handleDropdown}
-            handleFilter={this.handleFilter}
-            clearFilter={this.clearFilter}
-            />
 
           <FilterBox
             name='claustro'

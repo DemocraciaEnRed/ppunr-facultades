@@ -5,7 +5,6 @@ import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
 import tagStore from 'lib/stores/tag-store/tag-store'
-import facultadStore from 'lib/stores/facultad-store'
 import claustroStore from 'lib/stores/claustro-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
@@ -20,7 +19,6 @@ import escuelaStore from 'lib/stores/escuela-store'
 
 const defaultValues = {
   limit: 20,
-  facultad: [],
   claustro: [],
   tag: [],
   // 'barrio' o 'newest' o 'popular'
@@ -36,8 +34,6 @@ class HomePropuestas extends Component {
       topics: null,
       escuela: null,
 
-      facultades: [],
-      facultad: defaultValues.facultad,
       claustros: [],
       claustro: defaultValues.claustro,
       tags: [],
@@ -57,15 +53,13 @@ class HomePropuestas extends Component {
 
     // igual que filtros de admin (lib/admin/admin/admin.js)
     Promise.all([
-      facultadStore.findAll(),
       claustroStore.findAll(),
       tagStore.findAll({field: 'name'}),
       forumStore.findOneByName('proyectos'),
       escuelaStore.findOneById(this.props.location.query.id)
     ]).then(results => {
-      const [facultades, claustros, tags, forum, escuela] = results
+      const [claustros, tags, forum, escuela] = results
       this.setState({
-        facultades: facultades.map(facultad => { return {value: facultad._id, name: facultad.abreviacion}; }),
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
         tags: tags.map(tag => { return {value: tag.id, name: tag.name}; }),
         forum,
@@ -185,9 +179,7 @@ class HomePropuestas extends Component {
 
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
-    if (this.state.facultad.includes(option)){
-      this.setState({ facultad: this.state.facultad.filter(i => i != option) })
-    }else if (this.state.claustro.includes(option)){
+    if (this.state.claustro.includes(option)){
       this.setState({ claustro: this.state.claustro.filter(i => i != option) })
     }else if (this.state.tag.includes(option)){
       this.setState({ tag: this.state.tag.filter(i => i != option) })
@@ -201,7 +193,7 @@ class HomePropuestas extends Component {
     const { user } = this.props
 
     const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas.map(e => e._id)
-    const perteneceAEscuela = userEscuelasIds && userEscuelasIds.includes(escuela._id)
+    const perteneceAEscuela = escuela && userEscuelasIds && userEscuelasIds.includes(escuela._id)
 
     return (
 
@@ -232,8 +224,6 @@ class HomePropuestas extends Component {
 
         <div className='container topics-container'>
           <FilterPropuestas
-            facultades={this.state.facultades}
-            facultad={this.state.facultad}
             claustros={this.state.claustros}
             claustro={this.state.claustro}
             tags={this.state.tags}
