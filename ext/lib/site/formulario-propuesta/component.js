@@ -103,6 +103,18 @@ class FormularioPropuesta extends Component {
         // si ya está loggeado de antes debería pasar por la función igualmente
         this.onUserStateChange()
       })
+      const hash = window.location.hash;
+      if (hash && document.getElementById(hash.substr(1))) {
+          // Check if there is a hash and if an element with that id exists
+          const element = document.getElementById(hash.substr(1));
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition - headerOffset;
+          window.scrollTo({
+               top: offsetPosition,
+               behavior: "smooth"
+          });
+      }
     }).catch(err =>
       console.error(err)
     )
@@ -345,7 +357,7 @@ class FormularioPropuesta extends Component {
               disabled={true} />
           </div>
 
-          <div className="bar-section acerca-propuesta">
+          <div id="acerca-propuesta" className="bar-section acerca-propuesta">
             <p className="section-title">Acerca de la propuesta</p>
           </div>
 
