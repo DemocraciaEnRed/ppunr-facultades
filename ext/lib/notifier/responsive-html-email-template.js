@@ -7,7 +7,7 @@ const juice = require('juice');
 
 const baseUrl = utils.buildUrl(config)
 const fontFamily = 'Roboto, sans-serif'
-const colorBotones = '#00a9ce'
+const colorBotones = '#990070'
 
 // template sacado de: https://github.com/leemunroe/responsive-html-email-template
 module.exports = ({
@@ -377,12 +377,12 @@ module.exports = ({
                       <tr>
                         <td class="align-center">
                           <p>
-                            <span style="color:#7cbb42">PRESUPUESTO PARTICIPATIVO DE VICENTE LOPEZ</span>
-                            <br> <span style="color:#00a9ce">#PresupuestoParticipativo #VLParticipa</span>
+                            <span style="color:#990070">PRESUPUESTO PARTICIPATIVO DE LA UNIVERSIDAD DE ROSARIO</span>
+                            <br> <span style="color:#005e80">#PPUNR #LaUniversidadQueQueremos</span>
                           </p>
                           <!-- When inserting images remember to include the following attributes or
                           risk them breaking in different clients: src, alt, width, height, border -->
-                          <a href="${baseUrl}"><img class="block-center" src="${baseUrl}/ext/lib/site/footer/vicente-lopez-footer-black.png" alt="Useful alt text" width="202" height="60" border="0" style="border:0; outline:none; text-decoration:none; display:block;"></a>
+                          <a href="${baseUrl}"><img class="block-center" src="${baseUrl}/ext/lib/boot/logo.png" alt="Presupuesto Participativo de la Universidad de Rosario" width="202" height="86" border="0" style="border:0; outline:none; text-decoration:none; display:block;"></a>
                           <!-- <a href="${baseUrl}"><img class="block-center" src="https://presupuestoparticipativo.vicentelopez.gob.ar/ext/lib/boot/logo.png" alt="Logo" width="358" height="66" border="0" style="border:0; outline:none; text-decoration:none; display:block;"></a> -->
                         </td>
                       </tr>
