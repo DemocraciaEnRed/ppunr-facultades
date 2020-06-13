@@ -88,7 +88,7 @@ class TopicArticle extends Component {
   }
 
   twitText = () => {
-    return encodeURIComponent('Apoyemos esta propuesta para mejorar Vicente López. ')
+    return encodeURIComponent('Sumate a pensar la Universidad que queremos. Apoyemos esta idea para mejorar la UNR. ')
   }
 
   render () {
