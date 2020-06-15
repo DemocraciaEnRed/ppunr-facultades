@@ -134,17 +134,16 @@
 
   .tag
     background: #eee;
-    border-radius: 3px 0 0 3px;
-    color: #666;
+    border-radius: 8px;
+    color: #000;
     display: inline-block;
-    height: 26px;
-    line-height: 26px;
-    padding: 0 20px 0 23px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 11px;
     position: relative;
     margin: 0 10px 10px 0;
     text-decoration: none;
-    -webkit-transition: color 0.2s;
-    &::before
+    /* &::before
       background: #fff;
       border-radius: 10px;
       box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
@@ -162,18 +161,21 @@
       content: '';
       position: absolute;
       right: 0;
-      top: 0;
+      top: 0; */
     &:hover
-      background-color: #8c1e80;
+      background-color: #a5629d;
       color: white !important;
       cursor: pointer;
-    &:hover::after
-      border-left-color: #8c1e80;
+    /* &:hover::after
+      border-left-color: #8c1e80; */
     &.active
-      background-color: #8c1e80;
+      background-color: #a5629d;
       color: white;
-    &.active::after
-      border-left-color: #8c1e80;
+      &:after
+        content: 'x'
+        padding-left: 12px
+   /*  &.active::after
+      border-left-color: #8c1e80; */
 
   .add-color
     color: #8c1e80;

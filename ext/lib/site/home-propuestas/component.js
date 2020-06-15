@@ -245,6 +245,9 @@ class HomePropuestas extends Component {
                   </div>
                 </div>
               )}
+              {topics && topics.length > 0 && (
+                <h4 className="topics-title">Lista de ideas</h4>
+              )}
               {topics && topics.map((topic) => (
                 <TopicCard
                   key={topic.id}
