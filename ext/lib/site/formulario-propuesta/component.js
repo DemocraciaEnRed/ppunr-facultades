@@ -256,8 +256,8 @@ class FormularioPropuesta extends Component {
         {/* FORMULARIO GOES BEHIND THIS */}
         <form className='wrapper' onSubmit={this.handleSubmit}>
           <div className="bar-section">
+            <p className="section-intro">Todos estos datos son confidenciales</p>
             <p className="section-title">Tus datos personales</p>
-            <p className="section-subtitle">Todos estos datos son confidenciales</p>
           </div>
           <input type='hidden' name='forum' value={forum.id} />
           <div className='form-group'>
