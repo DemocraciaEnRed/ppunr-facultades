@@ -49,7 +49,8 @@ class HomePropuestas extends Component {
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  componentWillMount () {
+  componentDidMount () {
+    window.scrollTo(0,0)
     if (this.props.location.query.tags)
       defaultValues.tag.push(this.props.location.query.tags)
 
@@ -61,17 +62,16 @@ class HomePropuestas extends Component {
       forumStore.findOneByName('proyectos')
     ]).then(results => {
       const [facultades, claustros, tags, forum] = results
+      const tagsMap = tags.map(tag => { return {value: tag.id, name: tag.name}; });
+      const tag = this.props.location.query.tags ? [tagsMap.find(j => j.name == this.props.location.query.tags).value] : [];
       this.setState({
         facultades: facultades.map(facultad => { return {value: facultad._id, name: facultad.abreviacion}; }),
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
-        tags: tags.map(tag => { return {value: tag.id, name: tag.name}; }),
+        tags: tagsMap,
+        tag,
         forum
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
-  }
-
-  componentDidMount () {
-    window.scrollTo(0,0)
   }
 
   fetchTopics = (page) => {
@@ -182,11 +182,14 @@ class HomePropuestas extends Component {
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
     if (this.state.facultad.includes(option)){
-      this.setState({ facultad: this.state.facultad.filter(i => i != option) })
+      this.setState({ facultad: this.state.facultad.filter(i => i != option) }
+      ,() => this.fetchTopics());
     }else if (this.state.claustro.includes(option)){
-      this.setState({ claustro: this.state.claustro.filter(i => i != option) })
+      this.setState({ claustro: this.state.claustro.filter(i => i != option) }
+      ,() => this.fetchTopics());
     }else if (this.state.tag.includes(option)){
-      this.setState({ tag: this.state.tag.filter(i => i != option) })
+      this.setState({ tag: this.state.tag.filter(i => i != option) }
+      ,() => this.fetchTopics());
     }
   }
 
@@ -255,7 +258,7 @@ class HomePropuestas extends Component {
                   forum={forum}
                   topic={topic} />
               ))}
-              {!this.state.noMore && (
+              {topics && !this.state.noMore && (
                 <div className='more-topics'>
                   <button onClick={this.paginateForward}>Ver Más</button>
                 </div>
