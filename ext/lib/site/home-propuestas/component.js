@@ -223,6 +223,11 @@ class HomePropuestas extends Component {
         </div>
 
         <div className='container topics-container'>
+          {!perteneceAEscuela &&
+            <div className='not-in-escuela-reminder'>
+              <span>Recordá que podés subir ideas en el foro de tu escuela</span>
+            </div>
+          }
           <FilterPropuestas
             claustros={this.state.claustros}
             claustro={this.state.claustro}
