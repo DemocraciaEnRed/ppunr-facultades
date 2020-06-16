@@ -24,16 +24,16 @@
       font-size: 32px
       margin:0;
       background-color: #990070;
-      padding: 10px;
+      padding: 10px 20px;
       @media screen and (min-width: 764px)
-        font-size: 50px
+        font-size: 32px
     p
       font-size: 16px
       margin:0;
-      padding: 0 5px;
+      padding: 4px 30px;
       // margin-top:6px;
       // background-color: rgba(23,145,190,0.6)
-      background-color: #005e80
+      background-color: #0396a6
       @media screen and (min-width: 764px)
         font-size: 20px
 
@@ -50,26 +50,34 @@
       font-size: 1.3em;
       margin-top: 10px;
     .bar-section
-      background-color: #005e80
-      padding: 1.6rem 1rem;
+      padding: 2rem 1rem;
+      text-align: center
       &.acerca-propuesta
         margin-top: 50px;
       p
         margin: 0
-        color: #FFF
+        color: #000
         text-align: center;
         line-height: normal;
       .section-title
-        font-size: 2.5rem;
+        font-size: 30px
         font-weight: bold
+        color: #000
       .section-subtitle
         font-size: 0.9rem
+      .section-intro
+        background-color: #8c1e80
+        font-size: 16px
+        color: white
+        padding: 4px 20px
+        display: inline-block
+        margin-bottom: 25px
     .required
-      color: #005e80
+      color: #000
     label
       // color: rgba(0, 0, 0, 0.55)
-      margin: 10px 0 10px 0;
-      font-size: 1.4em;
+      margin: 10px 0 15px;
+      font-size: 25px;
       font-weight: bold;
 
     input
@@ -94,17 +102,17 @@
     .submit-div
       text-align: center
       .submit-btn
-        color: #7cbb42
+        color: #8c1e80
         font-weight: 800
-        border: 2px solid #7cbb42
+        border: 2px solid #8c1e80
         background-color: #FFF;
-        border-radius: 10px
-        padding: 10px 40px
+        border-radius: 5px
+        padding: 12px 60px
         font-weight: 800;
         font-size: 21px
         cursor: pointer
         &:hover
-          background-color: #7cbb42;
+          background-color: #8c1e80;
           color: #FFF
     .form-section-label
       color: #9e41b9
@@ -129,17 +137,16 @@
 
   .tag
     background: #eee;
-    border-radius: 3px 0 0 3px;
-    color: #666;
+    border-radius: 8px;
+    color: #000;
     display: inline-block;
-    height: 26px;
-    line-height: 26px;
-    padding: 0 20px 0 23px;
+    //height: 25px;
+    line-height: 25px;
+    padding: 0 11px;
     position: relative;
     margin: 0 10px 10px 0;
     text-decoration: none;
-    -webkit-transition: color 0.2s;
-    &::before
+    /* &::before
       background: #fff;
       border-radius: 10px;
       box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
@@ -157,25 +164,28 @@
       content: '';
       position: absolute;
       right: 0;
-      top: 0;
+      top: 0; */
     &:hover
-      background-color: 1791be;
+      background-color: #a5629d;
       color: white !important;
       cursor: pointer;
-    &:hover::after
-      border-left-color: 1791be;
+    /* &:hover::after
+      border-left-color: #8c1e80; */
     &.active
-      background-color: #7cbb42;
+      background-color: #a5629d;
       color: white;
-    &.active::after
-      border-left-color: #7cbb42;
+      &:after
+        content: 'x'
+        padding-left: 12px
+   /*  &.active::after
+      border-left-color: #8c1e80; */
 
   .add-color
-    color: #1791be;
+    color: #8c1e80;
   .help-text
     display: block
-    font-size: .8em
-    color: #666
+    font-size: 16px
+    color: #000
     margin: 0 0 .3em
     &.requerido
       font-size: .7em

@@ -100,7 +100,7 @@ export default class FilterPropuestas extends Component {
 
           <FilterBox
             name='claustro'
-            title='Clautro'
+            title='Claustro'
             allOptions={claustros}
             activeOptions={claustro}
 

@@ -47,7 +47,8 @@ class HomePropuestas extends Component {
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  componentWillMount () {
+  componentDidMount () {
+    window.scrollTo(0,0)
     if (this.props.location.query.tags)
       defaultValues.tag.push(this.props.location.query.tags)
 
@@ -59,17 +60,15 @@ class HomePropuestas extends Component {
       escuelaStore.findOneById(this.props.location.query.id)
     ]).then(results => {
       const [claustros, tags, forum, escuela] = results
+      const tagsMap = tags.map(tag => { return {value: tag.id, name: tag.name}; });
+      const tag = this.props.location.query.tags ? [tagsMap.find(j => j.name == this.props.location.query.tags).value] : [];
       this.setState({
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
-        tags: tags.map(tag => { return {value: tag.id, name: tag.name}; }),
+        tags: tagsMap,
         forum,
         escuela
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
-  }
-
-  componentDidMount () {
-    window.scrollTo(0,0)
   }
 
   fetchTopics = (page) => {
@@ -180,9 +179,12 @@ class HomePropuestas extends Component {
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
     if (this.state.claustro.includes(option)){
-      this.setState({ claustro: this.state.claustro.filter(i => i != option) })
+      ,() => this.fetchTopics());
+      this.setState({ claustro: this.state.claustro.filter(i => i != option) }
+      ,() => this.fetchTopics());
     }else if (this.state.tag.includes(option)){
-      this.setState({ tag: this.state.tag.filter(i => i != option) })
+      this.setState({ tag: this.state.tag.filter(i => i != option) }
+      ,() => this.fetchTopics());
     }
   }
 
@@ -248,6 +250,9 @@ class HomePropuestas extends Component {
                   </div>
                 </div>
               )}
+              {topics && topics.length > 0 && (
+                <h4 className="topics-title">Lista de ideas</h4>
+              )}
               {topics && topics.map((topic) => (
                 <TopicCard
                   key={topic.id}
@@ -255,7 +260,7 @@ class HomePropuestas extends Component {
                   forum={forum}
                   topic={topic} />
               ))}
-              {!this.state.noMore && (
+              {topics && !this.state.noMore && (
                 <div className='more-topics'>
                   <button onClick={this.paginateForward}>Ver Más</button>
                 </div>

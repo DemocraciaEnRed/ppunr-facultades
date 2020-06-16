@@ -101,6 +101,18 @@ class FormularioPropuesta extends Component {
         // si ya está loggeado de antes debería pasar por la función igualmente
         this.onUserStateChange()
       })
+      const hash = window.location.hash;
+      if (hash && document.getElementById(hash.substr(1))) {
+          // Check if there is a hash and if an element with that id exists
+          const element = document.getElementById(hash.substr(1));
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition - headerOffset;
+          window.scrollTo({
+               top: offsetPosition,
+               behavior: "smooth"
+          });
+      }
     }).catch(err =>
       console.error(err)
     )
@@ -254,8 +266,8 @@ class FormularioPropuesta extends Component {
         :
           <form className='wrapper' onSubmit={this.handleSubmit}>
             <div className="bar-section">
+            <p className="section-intro">Todos estos datos son confidenciales</p>
               <p className="section-title">Tus datos personales</p>
-              <p className="section-subtitle">Todos estos datos son confidenciales</p>
             </div>
             <input type='hidden' name='forum' value={forum.id} />
             <div className='form-group'>
@@ -356,7 +368,7 @@ class FormularioPropuesta extends Component {
                 disabled={true} />
             </div>
 
-            <div className="bar-section acerca-propuesta">
+          <div id="acerca-propuesta" className="bar-section acerca-propuesta">
               <p className="section-title">Acerca de la propuesta</p>
             </div>
 

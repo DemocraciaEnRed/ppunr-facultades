@@ -25,7 +25,7 @@ export default userConnector(function ThumbsVoto(props) {
               }
               <Link
                 to={ userLoggedIn ? `/formulario-propuesta?id=${userEscuelaId}` : '/formulario-propuesta' }
-                className="boton-azul boton-blanco">
+                className="boton-mandar-idea">
                 Mandá tu idea
               </Link>
               {/*<Link

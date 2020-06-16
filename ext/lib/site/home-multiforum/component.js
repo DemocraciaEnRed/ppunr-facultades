@@ -47,7 +47,7 @@ export default class HomeMultiforumOverride extends Component {
     return (
       <div className='ext-home-multiforum'>
         <Anchor id='container'>
-          <BannerForoVecinal title="Presupuesto participativo" texts={this.state.texts} />
+          <BannerForoVecinal title="Presupuesto participativo - Facultades" texts={this.state.texts} />
           <ThumbsVoto texts={this.state.texts} />
           {/* <Proyectos /> */}
           {/* <ProyectosFactibles /> */}

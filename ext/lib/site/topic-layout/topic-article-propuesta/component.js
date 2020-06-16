@@ -88,7 +88,7 @@ class TopicArticle extends Component {
   }
 
   twitText = () => {
-    return encodeURIComponent('Apoyemos esta propuesta para mejorar Vicente López. ')
+    return encodeURIComponent('Sumate a pensar la Universidad que queremos. Apoyemos esta idea para mejorar la UNR. ')
   }
 
   render () {
@@ -148,7 +148,7 @@ class TopicArticle extends Component {
           (forum.privileges && forum.privileges.canChangeTopics)
             ? (
               <div className='topic-article-content topic-admin-actions'>
-                <Link href={`/formulario-propuesta/${topic.id}?id=${topic.escuela._id}`}>
+                <Link href={`/formulario-propuesta/${topic.id}#acerca-propuesta?id=${topic.escuela._id}`}>
                   <a className='btn btn-default'>
                     <i className='icon-pencil' />
                     &nbsp;
@@ -162,7 +162,7 @@ class TopicArticle extends Component {
                (
                  <div className='topic-article-content topic-admin-actions'>
                    <a
-                     href={`/formulario-propuesta/${topic.id}?id=${topic.escuela._id}`}
+                     href={`/formulario-propuesta/${topic.id}#acerca-propuesta?id=${topic.escuela._id}`}
                      className='btn btn-default'>
                      <i className='icon-pencil' />
                       &nbsp;
@@ -195,7 +195,7 @@ class TopicArticle extends Component {
           socialLinksUrl={socialLinksUrl} />
         <div className='topic-tags topic-article-content'>
           {
-            this.props.topic.tags && this.props.topic.tags.map((tag, i) => <a className='topic-article-tag' href={`${window.location.origin}${urlBuilder.for('site.forum', { forum: this.props.forum.name })}?tag=${tag}`} key={i}>{ tag } </a>)
+            this.props.topic.tags && this.props.topic.tags.map((tag, i) => <a className='topic-article-tag' href={`${window.location.origin}/propuestas?tags=${tag}`} key={i}>{ tag } </a>)
           }
         </div>
 
