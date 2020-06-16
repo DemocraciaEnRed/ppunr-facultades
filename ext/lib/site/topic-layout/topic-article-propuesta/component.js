@@ -148,7 +148,7 @@ class TopicArticle extends Component {
           (forum.privileges && forum.privileges.canChangeTopics)
             ? (
               <div className='topic-article-content topic-admin-actions'>
-                <Link href={`/formulario-propuesta/${topic.id}#acerca-propuesta?id=${topic.escuela._id}`}>
+                <Link href={`/formulario-propuesta/${topic.id}?id=${topic.escuela._id}#acerca-propuesta`}>
                   <a className='btn btn-default'>
                     <i className='icon-pencil' />
                     &nbsp;
@@ -162,7 +162,7 @@ class TopicArticle extends Component {
                (
                  <div className='topic-article-content topic-admin-actions'>
                    <a
-                     href={`/formulario-propuesta/${topic.id}#acerca-propuesta?id=${topic.escuela._id}`}
+                     href={`/formulario-propuesta/${topic.id}?id=${topic.escuela._id}#acerca-propuesta`}
                      className='btn btn-default'>
                      <i className='icon-pencil' />
                       &nbsp;
