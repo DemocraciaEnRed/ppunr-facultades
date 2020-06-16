@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import t from 't-component'
+import userConnector from 'lib/site/connectors/user'
 import CommentsForm from './form/component'
 import CommentsList from './list/component'
 import CommentsOrderBy from './order-by/component'
@@ -25,7 +26,11 @@ export class Comments extends Component {
   }
 
   render () {
-    const { commentsFetch } = this.props
+    const { commentsFetch, topic, user } = this.props
+
+    const topicEscuelaId = topic.escuela._id
+    const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas && user.state.value.escuelas.map(e=>e._id)
+    const isFromEscuela = userEscuelasIds && userEscuelasIds.includes(topicEscuelaId)
 
     return (
       <div className='topic-comments'>
@@ -34,10 +39,14 @@ export class Comments extends Component {
             {t('comments.arguments')}
             <CommentsOrderBy onSort={this.props.handleSort} />
           </h2>
-          <CommentsForm
-            topic={this.props.topic}
-            onSubmit={this.props.handleCreate}
-            commentsCreating={this.props.commentsCreating} />
+          {isFromEscuela ?
+            <CommentsForm
+              topic={this.props.topic}
+              onSubmit={this.props.handleCreate}
+              commentsCreating={this.props.commentsCreating} />
+          :
+            <p className='not-in-escuela'>No podés hacer comentarios en ideas de esta escuela</p>
+          }
           {!commentsFetch.rejected && (
             <CommentsList
               forum={this.props.forum}
@@ -83,4 +92,4 @@ export class Comments extends Component {
   }
 }
 
-export default commentsConnector(Comments)
+export default  commentsConnector(userConnector(Comments))
