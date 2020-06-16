@@ -23,14 +23,23 @@ const Footer = () => (
         <a className='social-twitter' href='https://twitter.com/unroficial/' target="_blank" />
         <a className='social-mail' href='mailto:presupuestoparticipativo@unr.edu.ar' target="_blank"/>
       </div>
-      <div className='logo'>
-        <a href='http://www.vicentelopez.gov.ar/' />
-      </div>
-      <div className='terminos'>
-        <Link to='/s/terminos-y-condiciones'> Términos y condiciones
-        </Link>
-        <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank"> Reglamento
-        </a>
+      <div className='logos'>
+        <div className='logo-der'>
+          <img src="/ext/lib/site/footer/logo-der.png" alt="Democracia en Red"/>
+          <span>Desarrollado por<br /><b>Democracia en red</b></span>
+        </div>
+        <div className='logo'>
+          <a className="logo-unr" href='https://www.unr.edu.ar/' />
+          <div className='terminos'>
+            <Link to='/s/terminos-y-condiciones'> Términos y condiciones
+            </Link>
+            <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank"> Reglamento
+            </a>
+          </div>
+        </div>
+        <div className='logo-universidad'>
+          <img src="/ext/lib/site/footer/logo-universidad-que-queremos.png" alt="Democracia en Red"/>
+        </div>
       </div>
     </div>
   </footer>
