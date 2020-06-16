@@ -64,7 +64,8 @@ export class Comments extends Component {
               onFlag={this.props.handleFlag}
               onUnflag={this.props.handleUnflag}
               onReplyEdit={this.props.handleReplyEdit}
-              onEdit={this.props.handleEdit} />
+              onEdit={this.props.handleEdit}
+              isFromEscuela={isFromEscuela} />
           )}
           {
             this.state.pagination &&

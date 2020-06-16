@@ -30,6 +30,7 @@ export default function CommentsList (props) {
               commentDeleting={props.commentDeleting}
               forum={props.forum}
               topic={props.topic}
+              isFromEscuela={props.isFromEscuela}
               {...handlers} />
           )
         })

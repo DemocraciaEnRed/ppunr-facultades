@@ -125,7 +125,8 @@ export class Comment extends Component {
       comment,
       user,
       forum,
-      topic
+      topic,
+      isFromEscuela
     } = this.props
 
     if (user.state.pending) return null
@@ -194,7 +195,8 @@ export class Comment extends Component {
           onReply={this.props.onReply}
           onDeleteReply={this.props.onDeleteReply}
           onReplyEdit={this.props.onReplyEdit}
-          commentsReplying={this.props.commentsReplying} />
+          commentsReplying={this.props.commentsReplying}
+          isFromEscuela={isFromEscuela} />
 
         {
           this.state.overlayVisibility &&
