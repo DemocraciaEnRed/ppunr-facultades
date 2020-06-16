@@ -201,7 +201,7 @@ class TopicArticle extends Component {
           socialLinksUrl={socialLinksUrl} />
         <div className='topic-tags topic-article-content'>
           {
-            this.props.topic.tags && this.props.topic.tags.map((tag, i) => <a className='topic-article-tag' href={`${window.location.origin}/propuestas?tags=${tag}`} key={i}>{ tag } </a>)
+            this.props.topic.tags && this.props.topic.tags.map((tag, i) => <span className='topic-article-tag' key={i}>{ tag } </span>)
           }
         </div>
 

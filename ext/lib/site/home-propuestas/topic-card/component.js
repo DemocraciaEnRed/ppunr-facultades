@@ -94,12 +94,11 @@ export class TopicCard extends Component {
               <div className='topic-card-tags'>
                 <span className="glyphicon glyphicon-tag"></span>
                 {topic.tags.slice(0, 12).map((tag, i) => (
-                  <a
-                    href={`${window.location.origin + '/propuestas?tags=' + tag}`}
+                  <span
                     key={`${tag}-${i}`}
                     className='tag-wrapper' >
                     {capitalizeFirstLetter(tag)}
-                  </a>
+                  </span>
                 ))}
               </div>
           ) }
