@@ -179,7 +179,6 @@ class HomePropuestas extends Component {
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
     if (this.state.claustro.includes(option)){
-      ,() => this.fetchTopics());
       this.setState({ claustro: this.state.claustro.filter(i => i != option) }
       ,() => this.fetchTopics());
     }else if (this.state.tag.includes(option)){
