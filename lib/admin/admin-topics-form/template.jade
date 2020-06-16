@@ -15,7 +15,7 @@
     h2
       = t(form.title)
       - if (form.type === 'edit')
-        a(class='btn btn-link btn-md', href=topic.url, target='_blank')
+        a(class='btn btn-link btn-md', href=`/propuestas/topic/${topic.id}`, target='_blank')
           = t('admin-topics-form.title.preview')
           | &nbsp;
           i.icon-eye
@@ -66,8 +66,8 @@
           input.form-control(disabled=true, value=topic.owner.lastName)
 
         .form-group.col-md-6.pl-0
-          label= 'Facultad'
-          input.form-control(disabled=true, value=topic.owner.facultad.abreviacion)
+          label= 'Escuela'
+          input.form-control(disabled=true, value=topic.escuela.nombre)
 
         .form-group.col-md-6.pr-0
           label= 'Claustro'

@@ -125,6 +125,12 @@ class TopicArticle extends Component {
     const socialLinksUrl = window.location.origin + topic.url
     const twitterText = this.twitText()
 
+    const editUrl = userAttrs.staff ?
+      urlBuilder.for('admin.topics.id', {forum: forum.name, id: topic.id})
+    :
+      `/formulario-propuesta/${topic.id}?id=${topic.escuela._id}#acerca-propuesta`
+    ;
+
     return (
       <div className='topic-article-wrapper'>
         {
@@ -148,7 +154,7 @@ class TopicArticle extends Component {
           (forum.privileges && forum.privileges.canChangeTopics)
             ? (
               <div className='topic-article-content topic-admin-actions'>
-                <Link href={`/formulario-propuesta/${topic.id}?id=${topic.escuela._id}#acerca-propuesta`}>
+                <Link href={editUrl}>
                   <a className='btn btn-default'>
                     <i className='icon-pencil' />
                     &nbsp;
@@ -162,7 +168,7 @@ class TopicArticle extends Component {
                (
                  <div className='topic-article-content topic-admin-actions'>
                    <a
-                     href={`/formulario-propuesta/${topic.id}?id=${topic.escuela._id}#acerca-propuesta`}
+                     href={editUrl}
                      className='btn btn-default'>
                      <i className='icon-pencil' />
                       &nbsp;
