@@ -20,9 +20,11 @@
       .row.row-filtros
         .col-md-3.col-xs-12
           .input-group.input-group-md
-            ='Facultad: '
-            select(name='facultad')
+            ='Escuela: '
+            select(name='escuela')
               option(value="") Todos
+              - each obj in uniqAttrs.escuelas
+                option(value="#{obj.value}") #{obj.name}
         .col-md-4.col-xs-12
           .input-group.input-group-md
             ='Claustro: '
@@ -66,8 +68,8 @@
             span.text.topic-tags=topic.tags.map(toTitleCase).join(', ')
 
           .topic-status-data
-            - if (topic.owner && topic.owner.facultad)
-              span.placa.text=topic.owner.facultad.abreviacion
+            - if (topic.owner && topic.escuela)
+              span.placa.text=topic.escuela.nombre
             - if (topic.owner && topic.owner.claustro)
               span.placa.text=topic.owner.claustro.nombre
 
