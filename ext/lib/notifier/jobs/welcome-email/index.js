@@ -21,6 +21,7 @@ module.exports = function welcomeEmail (notifier) {
 
       const html = template({
         userName: user.firstName,
+        escuelaId: user.escuelas && user.escuelas.length > 0 && user.escuelas[0],
         validateUrl: data.validateUrl
       })
 
