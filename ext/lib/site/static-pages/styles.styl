@@ -190,6 +190,13 @@
     background-position: right bottom -50px;
     background-size: 30%;
 
+.container-imagen-acerca-de
+    @media (min-width: 768px)
+      background-image: unquote("url('ext/lib/site/static-pages/acercade.png')")
+      background-repeat: no-repeat;
+      background-position: right bottom -50px;
+      background-size: 30%;
+
 .ext-herramientas
 .ext-reglamento
 .ext-datos
@@ -466,8 +473,9 @@
     display: block
     margin: 0 auto
     height: 180px
+    background-color: #c4c4c4;
     background-size: cover
-    background-image: unquote("url('ext/lib/site/VialCosteroVteLopezImgBanner.jpg')")
+    //background-image: unquote("url('ext/lib/site/VialCosteroVteLopezImgBanner.jpg')")
     background-repeat: no-repeat
     padding: 0
     &.gradient
