@@ -49,6 +49,11 @@ export default class HomeMultiforumOverride extends Component {
         <Anchor id='container'>
           <BannerForoVecinal title="Presupuesto participativo - Facultades" texts={this.state.texts} />
           <ThumbsVoto texts={this.state.texts} />
+          <div className="banner-ideas">
+            <img src="/ext/lib/site/home-multiforum/icon-idea.svg" alt="Ideas"/>
+            <p>Conocé las ideas subidas para colaborar y debatir con el resto de la comunidad sobre el PPUNR</p>
+            <Link to={'/propuestas'} className="boton-foro" href="">Ir a foro</Link>
+          </div>
           {/* <Proyectos /> */}
           {/* <ProyectosFactibles /> */}
           {/* <ProyectosGanadores /> */}
