@@ -29,7 +29,7 @@ const Footer = () => (
           <span>Desarrollado por<br /><b>Democracia en red</b></span>
         </div>
         <div className='logo'>
-          <a className="logo-unr" href='https://www.unr.edu.ar/' />
+          <a className='logo-unr' href='https://www.unr.edu.ar/' />
           <div className='terminos'>
             <Link to='/s/terminos-y-condiciones'> Términos y condiciones
             </Link>
@@ -37,8 +37,11 @@ const Footer = () => (
             </a>
           </div>
         </div>
+        <div className='logo-flor'>
+          <img src="/ext/lib/site/footer/logo-flor.png" alt="Flor"/>
+        </div>
         <div className='logo-universidad'>
-          <img src="/ext/lib/site/footer/logo-universidad-que-queremos.png" alt="Democracia en Red"/>
+          <img src="/ext/lib/site/footer/logo-universidad-que-queremos.png" alt="Universidad que queremos"/>
         </div>
       </div>
     </div>
