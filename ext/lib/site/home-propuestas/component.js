@@ -10,6 +10,8 @@ import claustroStore from 'lib/stores/claustro-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
+import Jump from 'ext/lib/site/jump-button/component'
+import Footer from 'ext/lib/site/footer/component'
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -24,6 +26,17 @@ const defaultValues = {
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest'
+}
+
+const filters = {
+  popular: {
+    text: 'Más Populares',
+    sort: 'popular',
+  },
+  newest: {
+    text: 'Más Actualizados',
+    sort: 'newest',
+  },
 }
 
 class HomePropuestas extends Component {
@@ -47,6 +60,7 @@ class HomePropuestas extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.renderSortFilter = this.renderSortFilter.bind(this)
   }
 
   componentDidMount () {
@@ -193,6 +207,30 @@ class HomePropuestas extends Component {
     }
   }
 
+  onChangeSortFilter = (key) => {
+    this.setState({ sort: key }, () => this.fetchTopics());
+  }
+
+  renderSortFilter() {
+    return (
+      <div>
+        <h4 className="topics-title">Lista de ideas</h4>
+        <div className='topics-sort-filter'>
+          <span>Ordenar por</span>
+          {Object.keys(filters).map((key) => (
+              <button
+                key={key}
+                className={`btn-sort-filter ${this.state.sort === key ? 'active' : ''}`}
+                onClick={() => this.onChangeSortFilter(filters[key].sort)}>
+                <span className="glyphicon glyphicon-ok" />
+                {filters[key].text}
+              </button>
+            ))}
+        </div>
+      </div>
+    )
+  }
+
   render () {
     console.log('Render main')
 
@@ -249,7 +287,7 @@ class HomePropuestas extends Component {
                 </div>
               )}
               {topics && topics.length > 0 && (
-                <h4 className="topics-title">Lista de ideas</h4>
+                this.renderSortFilter()
               )}
               {topics && topics.map((topic) => (
                 <TopicCard
@@ -266,6 +304,8 @@ class HomePropuestas extends Component {
             </div>
           </div>
         </div>
+        <Jump goTop={this.goTop} />
+        <Footer />
       </div>
     )
   }

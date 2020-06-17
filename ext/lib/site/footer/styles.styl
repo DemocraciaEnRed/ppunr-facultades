@@ -82,15 +82,38 @@
       @media screen and (min-width: 500px)
         padding-top: 52%
         margin-top: 40px
-
+  .logos 
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    padding: 20px;
+    @media (max-width: 550px)
+      flex-direction: column
+      align-items: center
+  .logo-der
+    display: flex;
+    align-items: center;
+    span
+      color:white
+      font-size: 12px;
+      margin-left: 10px;
+    img
+      width: 35px
+  .logo-universidad
+      background-color: white
+      img
+        width: 150px
   .logo
     clear: both
     width: 163px
     margin: auto
     padding-right: 3px;
-    background-color: white
-    a
+    @media (max-width: 550px)
+      margin: 30px auto
+    .logo-unr
       display: block
+      background-color: white
       background-image: unquote("url('ext/lib/boot/logo.png')")
       width: 100%
       padding-top: 33%
