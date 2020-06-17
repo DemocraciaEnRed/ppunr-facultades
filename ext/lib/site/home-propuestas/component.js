@@ -10,6 +10,8 @@ import claustroStore from 'lib/stores/claustro-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
+import Jump from 'ext/lib/site/jump-button/component'
+import Footer from 'ext/lib/site/footer/component'
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -302,6 +304,8 @@ class HomePropuestas extends Component {
             </div>
           </div>
         </div>
+        <Jump goTop={this.goTop} />
+        <Footer />
       </div>
     )
   }
