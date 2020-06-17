@@ -51,8 +51,7 @@ ENV LOCALE=es \
   HEADER_BACKGROUND_COLOR=#ffffff \
   HEADER_FONT_COLOR=#4a4949
 
-#RUN npm run build -- --minify
-RUN npm run build
+RUN npm run build -- --minify
 
 EXPOSE 3000
 
