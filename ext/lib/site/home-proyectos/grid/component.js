@@ -7,42 +7,6 @@ export default class TopicGrid extends Component {
   constructor (props) {
     super(props)
     this.barrios = [
-      {
-        'name': 'carapachay',
-        'title': 'Carapachay'
-      },
-      {
-        'name': 'florida-este',
-        'title': 'Florida Este'
-      },
-      {
-        'name': 'florida-oeste',
-        'title': 'Florida Oeste'
-      },
-      {
-        'name': 'la-lucila',
-        'title': 'La Lucila'
-      },
-      {
-        'name': 'olivos',
-        'title': 'Olivos'
-      },
-      {
-        'name': 'munro',
-        'title': 'Munro'
-      },
-      {
-        'name': 'vicente-lopez',
-        'title': 'Vicente Lopez'
-      },
-      {
-        'name': 'villa-adelina',
-        'title': 'Villa Adelina'
-      },
-      {
-        'name': 'villa-martelli',
-        'title': 'Villa Martelli'
-      }
     ]
     this.states = [
       'finalizado',
@@ -55,11 +19,11 @@ export default class TopicGrid extends Component {
 
   renderTopics = (barrio) => {
     const topicsFiltered = this.props.topics.filter((topic) => topic.attrs.barrio === barrio.name);
-    const topicsSortByState = sortBy(topicsFiltered ,(topic) => { 
+    const topicsSortByState = sortBy(topicsFiltered ,(topic) => {
       return indexOf(this.states, topic.attrs.state);
     });
     return topicsSortByState.map((topic, i) => (
-      <TopicCard key={i} topic={topic} forum={{ title: topic.attrs.barrio }} /> 
+      <TopicCard key={i} topic={topic} forum={{ title: topic.attrs.barrio }} />
     ))
   }
 

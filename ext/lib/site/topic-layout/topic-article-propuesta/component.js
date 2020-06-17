@@ -50,16 +50,6 @@ class TopicArticle extends Component {
 
   handleBarrio = (barrio) => {
     const barrios = {
-      'vicente-lopez': 'Vicente Lopez',
-      'carapachay': 'Carapachay',
-      'florida-oeste': 'Florida Oeste',
-      'villa-martelli': 'Villa Martelli',
-      'florida-este': 'Florida Este',
-      'la-lucila': 'La Lucila',
-      'munro': 'munro',
-      'villa-adelina': 'Villa Adelina',
-      'olivos': 'Olivos'
-
     }
     let barrioName = ''
     Object.keys(barrios).find((key) => {

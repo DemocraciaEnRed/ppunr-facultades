@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default () => {
-  const forumsNames = ['villa-martelli', 'villa-adelina', 'vicente-lopez', 'olivos', 'munro', 'la-lucila', 'florida-oeste', 'florida-este', 'carapachay', 'proyectos']
+  const forumsNames = ['proyectos']
   const isActive = forumsNames.includes(window.location.pathname.replace('/', ''))
   return (
     <a
