@@ -48,12 +48,12 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
-                  <p className='p-padding'>Vas a encontrar en el <Link to='/formulario-propuesta'>formulario</Link> una serie etiquetas que refieren a diversos siguientes temas:</p>
+                  <p className='p-padding'>Vas a encontrar en el <Link to='/formulario-idea'>formulario</Link> una serie etiquetas que refieren a diversos siguientes temas:</p>
                   <p>Accesibilidad - Administración - Ambiente y Sustentabilidad - Aprendizajes y actividades académicas - Arte y Cultura - Bioseguridad Convivencia y Participación - Derechos Humanos - Género - Inclusión Infraestructura - Innovación - Internacionalización - Investigación - Recreación y deporte  - Salud - Tecnología - Transparencia Vinculación con el medio</p>
                   </div>
 
                   <div data-trigger="+ ¿Cómo subo una idea?">
-                    <p className='p-padding'>Encontrarás <Link to='/formulario-propuesta'>aquí</Link> el espacio para colocar tu idea: incluí un título y escribí un breve párrafo explicando tu idea. Agregá etiquetas preconfiguradas para clasificar tu idea. Eso ayudará a agruparlas por afinidad para la próxima fase del Foro. </p>
+                    <p className='p-padding'>Encontrarás <Link to='/formulario-idea'>aquí</Link> el espacio para colocar tu idea: incluí un título y escribí un breve párrafo explicando tu idea. Agregá etiquetas preconfiguradas para clasificar tu idea. Eso ayudará a agruparlas por afinidad para la próxima fase del Foro. </p>
                   </div>
 
                   <div data-trigger="+ ¿Qué pasa si no puedo registrarme?">

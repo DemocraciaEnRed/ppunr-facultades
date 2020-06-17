@@ -17,7 +17,6 @@ import Footer from 'ext/lib/site/footer/component'
 // config.propuestasAbiertas
 // config.propuestasTextoAbiertas
 // config.propuestasTextoCerradas
-// Botón manda a: href='/formulario-propuesta'
 
 const defaultValues = {
   limit: 20,
@@ -241,7 +240,7 @@ class HomePropuestas extends Component {
       <div className='ext-home-ideas'>
         <BannerListadoTopics
           btnText='Mandá tu idea'
-          btnLink='/formulario-propuesta'
+          btnLink='/formulario-idea'
           title='Ideas'
           />
 
