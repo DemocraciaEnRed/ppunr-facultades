@@ -15,7 +15,7 @@
     h2
       = t(form.title)
       - if (form.type === 'edit')
-        a(class='btn btn-link btn-md', href=`/propuestas/topic/${topic.id}`, target='_blank')
+        a(class='btn btn-link btn-md', href='/propuestas/topic/'+topic.id, target='_blank')
           = t('admin-topics-form.title.preview')
           | &nbsp;
           i.icon-eye
