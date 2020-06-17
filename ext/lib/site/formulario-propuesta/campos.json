@@ -148,42 +148,6 @@
       "mandatory" : true,
       "kind" : "Enum",
       "options" : [
-          {
-              "name": "villa-martelli",
-              "title": "Villa Martelli"
-          },
-          {
-              "name": "villa-adelina",
-              "title": "Villa Adelina"
-          },
-          {
-              "name": "vicente-lopez",
-              "title": "Vicente Lopez"
-          },
-          {
-              "name": "olivos",
-              "title": "Olivos"
-          },
-          {
-              "name": "munro",
-              "title": "Munro"
-          },
-          {
-              "name": "la-lucila",
-              "title": "La Lucila"
-          },
-          {
-              "name": "florida-oeste",
-              "title": "Florida Oeste"
-          },
-          {
-              "name": "florida-este",
-              "title": "Florida Este"
-          },
-          {
-              "name": "carapachay",
-              "title": "Carapachay"
-          }
       ]
   },
   {
@@ -212,7 +176,7 @@
   },
   {
     "name" : "description",
-    "title" : "Descripción", 
+    "title" : "Descripción",
     "mandatory" : false,
     "kind" : "String",
     "max" : 512,

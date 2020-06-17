@@ -3,42 +3,6 @@ import { browserHistory, Link } from 'react-router'
 import urlBuilder from 'lib/url-builder'
 
 const barrios = [
-  {
-    'name': 'carapachay',
-    'title': 'Carapachay'
-  },
-  {
-    'name': 'florida-este',
-    'title': 'Florida Este'
-  },
-  {
-    'name': 'florida-oeste',
-    'title': 'Florida Oeste'
-  },
-  {
-    'name': 'la-lucila',
-    'title': 'La Lucila'
-  },
-  {
-    'name': 'olivos',
-    'title': 'Olivos'
-  },
-  {
-    'name': 'munro',
-    'title': 'Munro'
-  },
-  {
-    'name': 'vicente-lopez',
-    'title': 'Vicente Lopez'
-  },
-  {
-    'name': 'villa-adelina',
-    'title': 'Villa Adelina'
-  },
-  {
-    'name': 'villa-martelli',
-    'title': 'Villa Martelli'
-  }
 ]
 
 const states = [
@@ -63,7 +27,7 @@ const getBudget = (state) => {
     case 'finalizado':
       return 'project-budget-finalizado'
     default:
-      return false  
+      return false
   }
 }
 
@@ -91,11 +55,11 @@ export default ({ topic, forum }) => {
                 <li className='item-finalizado'><span>&#10004;</span></li>
               </ul>
             </div>
-          </div> 
+          </div>
         }
         {topic.attrs && topic.attrs.state && topic.attrs.state === 'no-ganador' && (
-          <p className='winner'>{states.find((st) => st.value === topic.attrs.state).name}</p>       
-        )} 
+          <p className='winner'>{states.find((st) => st.value === topic.attrs.state).name}</p>
+        )}
       </div>
       <div className='topic-card-info'>
         <div className='topic-card-body'>

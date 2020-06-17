@@ -10,42 +10,6 @@ export default class Carrusel extends Component {
     this.state = {
       topics: null,
       barrios: [
-        {
-          'name': 'carapachay',
-          'title': 'Carapachay'
-        },
-        {
-          'name': 'florida-este',
-          'title': 'Florida Este'
-        },
-        {
-          'name': 'florida-oeste',
-          'title': 'Florida Oeste'
-        },
-        {
-          'name': 'la-lucila',
-          'title': 'La Lucila'
-        },
-        {
-          'name': 'munro',
-          'title': 'Munro'
-        },
-        {
-          'name': 'olivos',
-          'title': 'Olivos'
-        },
-        {
-          'name': 'vicente-lopez',
-          'title': 'Vicente Lopez'
-        },
-        {
-          'name': 'villa-adelina',
-          'title': 'Villa Adelina'
-        },
-        {
-          'name': 'villa-martelli',
-          'title': 'Villa Martelli'
-        }
       ],
     }
   }

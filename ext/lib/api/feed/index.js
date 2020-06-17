@@ -8,15 +8,6 @@ const privileges = require('lib/privileges/forum')
 const app = Router()
 
 const forumsNames = [
-  'villa-martelli',
-  'villa-adelina',
-  'vicente-lopez',
-  'olivos',
-  'munro',
-  'la-lucila',
-  'florida-oeste',
-  'florida-este',
-  'carapachay'
 ]
 
 app.get('/feed',
