@@ -128,7 +128,7 @@ class TopicArticle extends Component {
     const editUrl = userAttrs.staff ?
       urlBuilder.for('admin.topics.id', {forum: forum.name, id: topic.id})
     :
-      `/formulario-propuesta/${topic.id}?id=${topic.escuela._id}#acerca-propuesta`
+      `/formulario-propuesta/${topic.id}#acerca-propuesta`
     ;
 
     return (
