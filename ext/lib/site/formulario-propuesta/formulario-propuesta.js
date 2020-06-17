@@ -3,11 +3,11 @@ import router from 'lib/site/boot/router'
 import CrearPropuesta from './component'
 
 router.childRoutes.unshift({
-  path: 'formulario-propuesta',
+  path: 'formulario-idea',
   component: CrearPropuesta
 })
 
 router.childRoutes.unshift({
-  path: 'formulario-propuesta/:id',
+  path: 'formulario-idea/:id',
   component: CrearPropuesta
 })

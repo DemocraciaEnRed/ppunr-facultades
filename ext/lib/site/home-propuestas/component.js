@@ -15,7 +15,6 @@ import escuelaStore from 'lib/stores/escuela-store'
 // config.propuestasAbiertas
 // config.propuestasTextoAbiertas
 // config.propuestasTextoCerradas
-// Botón manda a: href='/formulario-propuesta'
 
 const defaultValues = {
   limit: 20,
@@ -201,7 +200,7 @@ class HomePropuestas extends Component {
       <div className='ext-home-ideas'>
         <BannerListadoTopics
           btnText={perteneceAEscuela ? 'Mandá tu idea' : undefined}
-          btnLink={perteneceAEscuela ? `/formulario-propuesta?id=${escuela && escuela._id}` : undefined}
+          btnLink={perteneceAEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
           title='Ideas'
           subtitle={escuela && escuela.nombre}
           />

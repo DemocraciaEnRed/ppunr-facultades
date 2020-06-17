@@ -241,7 +241,7 @@ class FormularioPropuesta extends Component {
 
   componentWillUpdate (props, state) {
     if (this.props.user.state.rejected) {
-      browserHistory.push('/signin?ref=/formulario-propuesta')
+      browserHistory.push('/signin?ref=/formulario-idea')
     }
   }
 
