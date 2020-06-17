@@ -214,13 +214,14 @@ class FormularioPropuesta extends Component {
     if (this.state.facultad === '') return true
     if (this.state.claustro === '') return true
     if (this.state.problema === '') return true
+    if (!this.state.tags || this.state.tags.length == 0) return true
     return false;
 
   }
 
   hasErrorsField = (field) => {
     const val = this.state[field]
-    if(val === '' || val && val.length == 0) return true
+    if(val === '' || (val && val.length == 0)) return true
     return false;
   }
 
