@@ -4,7 +4,7 @@ const t = translations.t
 
 const overrides = {
   'templates.email.greeting': 'Hola, {userName}',
-  'templates.email.signature': 'Presupuesto Participativo - Municipalidad de Vicente Lopez',
+  'templates.email.signature': 'Presupuesto Participativo - Universidad de Rosario',
 
   'templates.forgot-password.subject': 'Reestablecer contraseña',
   'templates.forgot-password.body': 'Por favor <a href="{resetPasswordUrl}">cliquea aquí</a> para reestablecer tu contraseña',

@@ -17,7 +17,6 @@ import Proyectos from 'ext/lib/site/proyectos/component'
 import DefaultContent from './default-content/component'
 import RelatedProposals from './related-proposals/component'
 import Subscribe from './subscribe/component'
-import Banner400Proyectos from '../../banner-400-proyectos/component'
 
 class TopicArticle extends Component {
   constructor (props) {
@@ -99,7 +98,7 @@ class TopicArticle extends Component {
       case 'finalizado':
         return 'project-budget-finalizado'
       default:
-        return false  
+        return false
     }
   }
   handleCreateTopic = () => {
@@ -111,11 +110,11 @@ class TopicArticle extends Component {
   twitText = () => {
     switch (this.props.topic.attrs.state) {
       case 'pendiente':
-      return encodeURIComponent('Apoyemos este proyecto para mejorar Vicente López. ')
+      return encodeURIComponent('Apoyemos este proyecto para mejorar la Universidad de Rosario. ')
       case 'perdedor':
       return encodeURIComponent(this.props.topic.mediaTitle)
       case 'proyectado':
-      return encodeURIComponent('Este proyecto se va a realizar gracias a la participación de los vecinos. ')
+      return encodeURIComponent('Este proyecto se va a realizar gracias a la participación ciudadana de la Universidad de Rosario. ')
       default:
       return ''
     }
@@ -214,11 +213,10 @@ class TopicArticle extends Component {
           {
             this.props.topic.tags && this.props.topic.tags.map((tag, i) => <a href={`${window.location.origin}${urlBuilder.for('site.forum', { forum: this.props.forum.name })}?tag=${tag}`} key={i}>#{tag}</a>)
           }
-        </div>  
+        </div>
         {
           !user.state.pending && <Comments forum={forum} topic={topic} />
         }
-        <Banner400Proyectos/>
         <Proyectos />
       </div>
     )
