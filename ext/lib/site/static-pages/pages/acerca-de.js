@@ -74,7 +74,7 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cuáles son las dos etapas de los Foros?">
-                    <p className='p-padding'>La primera es del 29 de Junio al 20 de Julio para que subas tu idea y/o comentes las de otros/as.</p> 
+                    <p className='p-padding'>La primera es del 29 de Junio al 20 de Julio para que subas tu idea y/o comentes las de otros/as.</p>
                     <p>La segunda del 3 de agosto al 14 de agosto será para que te propongas como proyectista de las ideas que desees desarrollar para que se transforme en un proyecto factible.</p>
                   </div>
 
@@ -86,7 +86,7 @@ export default class Page extends Component {
                   <div data-trigger="+ ¿Qué implica ser proyectista?">
                     <p className='p-padding'>Luego de los Foros, la segunda etapa del PP es la conformación de la Comisión Universitaria. La misma estará integrada por todas las personas que se hayan propuesto para transformar las ideas en proyectos. Funcionará durantes dos meses (agosto- octubre) en el marco de encuentros con técnicos de la Universidad que contribuirán a darle factibilidad a los proyectos que serán elegidos por la comunidad y serán ejecutados en 2021.</p>
                   </div>
-                  
+
                   <div data-trigger="+ ¿Qué condiciones deben respetar los proyectos?">
                     <ul className='p-padding'>
                       <li>Ser elaborados por integrantes de más de un claustro.</li>
@@ -94,7 +94,7 @@ export default class Page extends Component {
                       <li>No exceder el límite presupuestario.</li>
                       <li>No exceder el ámbito de la Universidad.</li>
                       <li>No afectar partidas presupuestarias de años posteriores.</li>
-                      <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegido.</li>  
+                      <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegido.</li>
                     </ul>
                   </div>
 
@@ -124,99 +124,6 @@ export default class Page extends Component {
 
                 </Accordion>
 
-              </div>
-
-              <div className="fila no-bg hidden">
-                <Anchor id='mapa'>
-                  <div className="map-box">
-                    <div className='mapa'>
-                      <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1DEX8V6qaMQy-8NYKNPhsLH_xQnY&z=11&ll=-34.5174, -58.5026" width="640" height="480"></iframe>
-                    </div>
-                  </div>
-                </Anchor>
-                <Anchor id='cronograma'>
-                  <div className='table-responsive'>
-                    <h3>Cronograma de reuniones por barrio</h3>
-                    <div>El horario de las reuniones de presentación de propuestas es de 19 a 21 hs</div>
-                    <table className='table tabla-reuniones'>
-                      <tbody>
-                        <tr>
-                          <th>Olivos</th>
-                          <th>Martes 20 de marzo</th>
-                          <th>Colegio Virgen Del Carmen</th>
-                          <th>Valle Grande 3141</th>
-                        </tr>
-                        <tr>
-                          <td>Olivos</td>
-                          <td>Jueves 22 de marzo</td>
-                          <td>Colegio Asunción De La Virgen</td>
-                          <td>Ugarte 2379</td>
-                        </tr>
-                        <tr>
-                          <td>Olivos</td>
-                          <td>Jueves 5 de abril</td>
-                          <td>Escuela Primaria nº 2</td>
-                          <td>Pelliza 1390</td>
-                        </tr>
-                        <tr>
-                          <td>La Lucila</td>
-                          <td>Martes 10 de abril</td>
-                          <td>Jardín De Infantes nº 8</td>
-                          <td>Díaz Vélez 1129</td>
-                        </tr>
-                        <tr>
-                          <td>Munro</td>
-                          <td>Jueves 12 de abril</td>
-                          <td>Inst. De Ed. Integral De Munro</td>
-                          <td>Carlos Tejedor 2761</td>
-                        </tr>
-                        <tr>
-                          <td>Munro</td>
-                          <td>Martes 17 de abril</td>
-                          <td>Colegio María Auxiliadora</td>
-                          <td>Panamá 3274</td>
-                        </tr>
-                        <tr>
-                          <td>Vicente López</td>
-                          <td>Jueves 19 de abril</td>
-                          <td>Colegio Saint Gregory</td>
-                          <td>Melo 948</td>
-                        </tr>
-                        <tr>
-                          <td>Carapachay</td>
-                          <td>Jueves 3 de Mayo</td>
-                          <td>Escuela Secundaria nº 3</td>
-                          <td>Drysale 5635</td>
-                        </tr>
-                        <tr>
-                          <td>Florida Oeste</td>
-                          <td>Martes 8 de mayo</td>
-                          <td>Instituto Florentino Ameghino</td>
-                          <td>C. De Alvear 1144</td>
-                        </tr>
-                        <tr>
-                          <td>Villa Martelli</td>
-                          <td>Jueves 10 de mayo</td>
-                          <td>Instituto Fátima</td>
-                          <td>Laprida 4075</td>
-                        </tr>
-
-                        <tr>
-                          <td>Villa Adelina</td>
-                          <td>Martes 15 de mayo</td>
-                          <td>Avapea</td>
-                          <td>Plaza Ader</td>
-                        </tr>
-                        <tr>
-                          <td>Florida Este</td>
-                          <td>Jueves 17 de mayo</td>
-                          <td>Escuela Primaria nº 12</td>
-                          <td>Haedo 2180</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </Anchor>
               </div>
             </div>
           </div>

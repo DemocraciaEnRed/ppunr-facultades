@@ -20,6 +20,6 @@ module.exports = ({
       url: `${baseUrl}/propuesta/topic/${topic.id}`,
       text: 'Mirá los cambios'
     })}
-    <p>¡Sigamos mejorando juntos los barrios de Vicente López!</p>
+    <p>¡Sigamos mejorando juntos la Universidad de Rosario!</p>
   `
   })

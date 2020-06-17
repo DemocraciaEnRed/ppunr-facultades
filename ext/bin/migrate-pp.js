@@ -88,7 +88,7 @@ const nuevosCampos = Forum.find({ 'name': 'proyectos' }).exec()
     forum.set('topicsAttrs', newTopicsAttrs)
     return forum.save()
   })
-  .then((forum) => { 
+  .then((forum) => {
     console.log('Foro proyectos actualizado!')
  })
 
