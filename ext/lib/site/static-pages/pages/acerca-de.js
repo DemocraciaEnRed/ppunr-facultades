@@ -28,7 +28,7 @@ export default class Page extends Component {
             </div>
           </div>
         </section>
-        <div id='container'>
+        <div id='container' className="container-imagen-acerca-de">
           <div className='ext-acerca-de container'>
             <div className="filas">
               <div className="fila faq text-left">
