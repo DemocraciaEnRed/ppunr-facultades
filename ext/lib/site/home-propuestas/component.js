@@ -229,14 +229,14 @@ class HomePropuestas extends Component {
     const { user } = this.props
 
     const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas.map(e => e._id)
-    const perteneceAEscuela = escuela && userEscuelasIds && userEscuelasIds.includes(escuela._id)
+    const isFromEscuela = escuela && userEscuelasIds && userEscuelasIds.includes(escuela._id)
 
     return (
 
       <div className='ext-home-ideas'>
         <BannerListadoTopics
-          btnText={perteneceAEscuela ? 'Mandá tu idea' : undefined}
-          btnLink={perteneceAEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
+          btnText={isFromEscuela ? 'Mandá tu idea' : undefined}
+          btnLink={isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
           title='Ideas'
           subtitle={escuela && escuela.nombre}
           />
@@ -259,7 +259,7 @@ class HomePropuestas extends Component {
         </div>
 
         <div className='container topics-container'>
-          {!perteneceAEscuela &&
+          {!isFromEscuela &&
             <div className='not-in-escuela-reminder'>
               <span>Recordá que podés subir ideas en el foro de tu escuela</span>
             </div>
