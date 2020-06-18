@@ -54,7 +54,13 @@ export default function ThumbsVoto(props) {
             </div>
             <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
-              { props.texts['home-icono2-texto']}
+              {/* props.texts['home-icono2-texto']*/}
+              Registrá tu usuario, completá el espacio con tus ideas para hacer la Universidad que Queremos y envianos tus propuestas. Tenés tiempo hasta el 30 de Junio. Podés, abrir nuevos temas o sumarte a una conversación activa&nbsp;
+              <Link to='/formulario-idea'>
+                aquí
+              </Link>.
+              <br />
+              ¡Iremos subiendo las novedades en esta plataforma y en nuestras redes sociales! Entrá a <a href='https://presupuestoparticipativo.unr.edu.ar/' rel="noopener noreferer" target="_blank">nuestra web</a> para más información.
             </p>
 
           </div>
@@ -68,7 +74,7 @@ export default function ThumbsVoto(props) {
               { props.texts['home-icono3-titulo']}
             </h2>
             <p className="donde-voto-cont">
-              { props.texts['home-icono3-texto']} <Link to='/proyectos?stage=seguimiento' className="">Seguimiento proyectos</Link>
+              { props.texts['home-icono3-texto']} <a href='https://presupuestoparticipativo.unr.edu.ar/como-participo/' rel="noopener noreferer" target="_blank">Presupuesto Participativo UNR</a>
             </p>
           </div>
 
