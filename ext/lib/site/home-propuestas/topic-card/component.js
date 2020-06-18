@@ -28,7 +28,7 @@ export class TopicCard extends Component {
       browserHistory.push(`/propuestas/topic/${this.props.topic.id}`)
   }
   render() {
-    const { topic, onVote, user } = this.props
+    const { topic, onVote, user, isFromEscuela } = this.props
     const isStaff = !user.state.rejected && user.state.value.staff
 
     const likesCssClass = topic.voted ? 'voted' : (
@@ -65,7 +65,7 @@ export class TopicCard extends Component {
 
           <div className='topic-creation'>
             <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
-            {topic.owner.claustro && 
+            {topic.owner.claustro &&
               <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
             }
             <span
@@ -99,13 +99,19 @@ export class TopicCard extends Component {
 
           <div className='buttons-wrapper'>
             <div className={`cause-wrapper ${likesCssClass}`}>
-              {topic.voted && (
+              {!isFromEscuela && (
+                <button disabled className='btn btn-primary btn-filled'>
+                  Seguir
+                  {likesCountDiv}
+                </button>
+              )}
+              {isFromEscuela && topic.voted && (
                 <button disabled className='btn btn-primary btn-filled'>
                   Ya seguís
                   {likesCountDiv}
                 </button>
               )}
-              {!topic.voted && (
+              {isFromEscuela && !topic.voted && (
                 <button
                   disabled={!topic.privileges.canVote || isStaff}
                   onClick={() => onVote(topic.id)}

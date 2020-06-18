@@ -292,7 +292,8 @@ class HomePropuestas extends Component {
                   key={topic.id}
                   onVote={this.handleVote}
                   forum={forum}
-                  topic={topic} />
+                  topic={topic}
+                  isFromEscuela={isFromEscuela} />
               ))}
               {topics && !this.state.noMore && (
                 <div className='more-topics'>
