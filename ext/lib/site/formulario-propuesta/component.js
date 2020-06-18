@@ -123,6 +123,8 @@ class FormularioPropuesta extends Component {
       let user = this.props.user.state.value
 
       const escuelaUrlId = this.props.location.query.id
+      if (!escuelaUrlId)
+        window.location.href = `/formulario-idea?id=${user.escuelas[0]._id}`
 
       this.setState({
         escuelas: user.escuelas,
