@@ -75,7 +75,7 @@ module.exports = function topicPublished (notifier) {
     log('Enviando mail a %o', to)
     return mailer.send({
       to,
-      subject: t(`templates.${jobName}.subject`),
+      subject: `Alguien respondió a tu comentario en "${topicTitle}"`,
       html
     }).then(() => { done() }).catch(err => {
       log('Error: %o', err)
