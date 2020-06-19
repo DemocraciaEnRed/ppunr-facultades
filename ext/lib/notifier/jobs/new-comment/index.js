@@ -69,7 +69,7 @@ module.exports = function topicPublished (notifier) {
     log('Enviando mail a %o', to)
     return mailer.send({
       to,
-      subject: t(`templates.${jobName}.subject`, { topicTitle }),
+      subject: `Tenés un nuevo comentario en "${topicTitle}"`,
       html
     }).then(() => { done() }).catch(err => {
       log('Error: %o', err)
