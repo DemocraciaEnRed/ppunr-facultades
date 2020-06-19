@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeProyectos from '../home-proyectos/component'
+//import HomeProyectos from '../home-proyectos/component'
 import HomePropuestas from '../home-propuestas/component'
 
 const HomeForum = (props) => {
@@ -8,7 +8,9 @@ const HomeForum = (props) => {
     case 'propuestas':
       return <HomePropuestas {...props} />
     default:
-      return <HomeProyectos {...props} />
+      // que nunca caiga en la vieja pantalla de proyectos
+      //return <HomeProyectos {...props} />
+      return <HomePropuestas {...props} />
   }
 }
 
