@@ -12,6 +12,7 @@ import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Footer from 'ext/lib/site/footer/component'
+import Anchor from 'ext/lib/site/anchor'
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -210,6 +211,10 @@ class HomePropuestas extends Component {
     this.setState({ sort: key }, () => this.fetchTopics());
   }
 
+  goTop () {
+    Anchor.goTo('container')
+  }
+
   renderSortFilter() {
     return (
       <div>
@@ -236,75 +241,76 @@ class HomePropuestas extends Component {
     const { forum, topics } = this.state
 
     return (
-
       <div className='ext-home-ideas'>
-        <BannerListadoTopics
-          btnText='Mandá tu idea'
-          btnLink='/formulario-idea'
-          title='Ideas'
-          />
+        <Anchor id='container'>
+          <BannerListadoTopics
+            btnText='Mandá tu idea'
+            btnLink='/formulario-idea'
+            title='Ideas'
+            />
 
-        <div className='container'>
-          <div className="row">
-            { config.propuestasAbiertas
-              ? (
-                  <div className='notice'>
-                    <h1>{config.propuestasTextoAbiertas}</h1>
-                  </div>
-              ) : (
-                <span className='alert-duedate' >
-                  <span className="text-info">Formulario cerrado, ¡Gracias por participar!</span><br />
-                  {config.propuestasTextoCerradas}
-                </span>
-              )
-            }
-          </div>
-        </div>
-
-        <div className='container topics-container'>
-
-          <FilterPropuestas
-            facultades={this.state.facultades}
-            facultad={this.state.facultad}
-            claustros={this.state.claustros}
-            claustro={this.state.claustro}
-            tags={this.state.tags}
-            tag={this.state.tag}
-            openVotation={true}
-            handleFilter={this.handleFilter}
-            handleDefaultFilter={this.handleDefaultFilter}
-            clearFilter={this.clearFilter}
-            handleRemoveBadge={this.handleRemoveBadge} />
-
-          <div className='row'>
-            <div className='col-md-10 offset-md-1'>
-              {topics && topics.length === 0 && (
-                <div className='empty-msg'>
-                  <div className='alert alert-success' role='alert'>
-                    No se encontraron propuestas.
-                  </div>
-                </div>
-              )}
-              {topics && topics.length > 0 && (
-                this.renderSortFilter()
-              )}
-              {topics && topics.map((topic) => (
-                <TopicCard
-                  key={topic.id}
-                  onVote={this.handleVote}
-                  forum={forum}
-                  topic={topic} />
-              ))}
-              {topics && !this.state.noMore && (
-                <div className='more-topics'>
-                  <button onClick={this.paginateForward}>Ver Más</button>
-                </div>
-              )}
+          <div className='container'>
+            <div className="row">
+              { config.propuestasAbiertas
+                ? (
+                    <div className='notice'>
+                      <h1>{config.propuestasTextoAbiertas}</h1>
+                    </div>
+                ) : (
+                  <span className='alert-duedate' >
+                    <span className="text-info">Formulario cerrado, ¡Gracias por participar!</span><br />
+                    {config.propuestasTextoCerradas}
+                  </span>
+                )
+              }
             </div>
           </div>
-        </div>
-        <Jump goTop={this.goTop} />
-        <Footer />
+
+          <div className='container topics-container'>
+
+            <FilterPropuestas
+              facultades={this.state.facultades}
+              facultad={this.state.facultad}
+              claustros={this.state.claustros}
+              claustro={this.state.claustro}
+              tags={this.state.tags}
+              tag={this.state.tag}
+              openVotation={true}
+              handleFilter={this.handleFilter}
+              handleDefaultFilter={this.handleDefaultFilter}
+              clearFilter={this.clearFilter}
+              handleRemoveBadge={this.handleRemoveBadge} />
+
+            <div className='row'>
+              <div className='col-md-10 offset-md-1'>
+                {topics && topics.length === 0 && (
+                  <div className='empty-msg'>
+                    <div className='alert alert-success' role='alert'>
+                      No se encontraron propuestas.
+                    </div>
+                  </div>
+                )}
+                {topics && topics.length > 0 && (
+                  this.renderSortFilter()
+                )}
+                {topics && topics.map((topic) => (
+                  <TopicCard
+                    key={topic.id}
+                    onVote={this.handleVote}
+                    forum={forum}
+                    topic={topic} />
+                ))}
+                {topics && !this.state.noMore && (
+                  <div className='more-topics'>
+                    <button onClick={this.paginateForward}>Ver Más</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <Jump goTop={this.goTop} />
+          <Footer />
+        </Anchor>
       </div>
     )
   }
