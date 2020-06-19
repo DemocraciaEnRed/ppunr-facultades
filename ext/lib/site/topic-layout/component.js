@@ -6,16 +6,24 @@ import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
 import topicConnector from 'lib/site/connectors/topic'
-import TopicArticleProyecto from './topic-article-proyecto/component'
+//import TopicArticleProyecto from './topic-article-proyecto/component'
 import TopicArticlePropuesta from './topic-article-propuesta/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Anchor from 'ext/lib/site/anchor'
 import Footer from 'ext/lib/site/footer/component'
 
 export class TopicLayout extends Component {
-  state = {
-    forum: null,
-    name: null
+  constructor (props) {
+
+    if(props.params.forum == "proyectos")
+      window.location.href = window.location.href.replace("/proyectos/", "/propuestas/")
+
+    super(props)
+
+    this.state = {
+      forum: null,
+      name: null
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -68,10 +76,10 @@ export class TopicLayout extends Component {
       <div>
         <Anchor id='container'>
           <div id='topic-wrapper'>
-            {
-              name === 'propuestas'
+            { <TopicArticlePropuesta topic={topic} forum={forum}/>
+              /*name === 'propuestas'
                 ? <TopicArticlePropuesta topic={topic} forum={forum}/>
-                : <TopicArticleProyecto topic={topic} forum={forum} />
+                : <TopicArticleProyecto topic={topic} forum={forum} />*/
             }
           </div>
           <Jump goTop={this.goTop} />
