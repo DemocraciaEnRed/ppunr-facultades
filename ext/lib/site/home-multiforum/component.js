@@ -13,13 +13,15 @@ import Footer from 'ext/lib/site/footer/component'
 // import forumStore from 'lib/stores/forum-store/forum-store'
 // import topicStore from 'lib/stores/topic-store/topic-store'
 import textStore from 'lib/stores/text-store'
+import escuelaStore from 'lib/stores/escuela-store'
 
 export default class HomeMultiforumOverride extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      texts: {}
+      texts: {},
+      escuelas: []
     }
   }
 
@@ -37,6 +39,8 @@ export default class HomeMultiforumOverride extends Component {
 
   componentDidMount () {
     this.goTop()
+    escuelaStore.findAll().then(escuelas => this.setState({escuelas}))
+
   }
 
   goTop () {
@@ -49,6 +53,22 @@ export default class HomeMultiforumOverride extends Component {
         <Anchor id='container'>
           <BannerForoVecinal title="Presupuesto participativo - Escuelas" texts={this.state.texts} />
           <ThumbsVoto texts={this.state.texts} />
+          <div className="banner-escuelas">
+            <h4>Empezá a participar</h4>
+            {this.state.escuelas.length > 0 && this.state.escuelas.map(escuela => (
+              <div
+              key={escuela._id}
+              className={`bloque-escuela bloque-escuela-${escuela.abreviacion}`}>
+                <p>Conocé todas las ideas publicadas para {escuela.abreviacion == 'IPS' ? 'el' : 'la'} <b>{escuela.tituloForo}</b></p>
+                <a className="foro-escuela-link"
+                 href={`/propuestas?id=${escuela._id}`}>
+                  <span className="glyphicon glyphicon-menu-right"></span>
+                  Accedé al<br />
+                  <span>Foro {escuela.nombre}</span>
+                </a>
+              </div>
+            ))}
+          </div>
           {/* <Proyectos /> */}
           {/* <ProyectosFactibles /> */}
           {/* <ProyectosGanadores /> */}

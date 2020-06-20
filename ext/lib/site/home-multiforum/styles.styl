@@ -263,3 +263,83 @@
         font-size: 8vw
         @media screen and (min-width: 750px)
           font-size: 4rem
+
+  .thumbs.info-landing 
+    padding-bottom: 300px
+    background-image: unquote("url('/ext/lib/site/home-propuestas/fondo-propuestas.png')")
+    background-repeat: no-repeat;
+    background-position: center bottom -100px;
+    background-size: 70%;
+    @media (max-width: 1000px)
+      background-position: center bottom -60px;
+      padding-bottom: 250px
+    @media (max-width: 500px)
+      background-position: center bottom -40px;
+      padding-bottom: 200px
+      background-size: 90%;
+    @media (max-width: 400px)
+      background-position: center bottom -20px;
+  .banner-escuelas
+    background-color: #f3f3f3;
+    padding: 100px 20px 50px
+    position: relative
+    display: flex
+    @media(max-width: 768px)
+      flex-direction: column
+    h4
+      color: white
+      font-size: 30px
+      font-weight: bold
+      background-color: #802983;
+      padding: 20px 30px
+      margin: 0;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    .bloque-escuela
+      padding: 30px
+      text-align: left
+      &:nth-of-type(2)
+        border-right: 1px solid #4646
+        border-left: 1px solid #4646
+        @media(max-width: 768px)
+          border-top: 1px solid #4646
+          border-bottom: 1px solid #4646
+          border-left: none 
+          border-right: none
+      p
+        margin: 0
+        line-height: 1.2
+        font-size: 22px;
+        color: #4b3c59;
+      .foro-escuela-link
+        margin-top: 40px;
+        border-radius: 5px;
+        box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.25);
+        font-size: 18px
+        line-height: 1.5
+        position: relative;
+        display: block;
+        padding: 25px 20px;
+        border: 1px solid;
+        cursor: pointer
+        span
+          text-transform: uppercase
+        .glyphicon
+          font-size: 30px;
+          float: right;
+          padding-top: 15px;
+      &.bloque-escuela-EAC
+        .foro-escuela-link
+          border-color: #38701d;
+          color: #38701d;
+      &.bloque-escuela-IPS
+        .foro-escuela-link
+          border-color: #ad3f3d;
+          color: #ad3f3d;
+      &.bloque-escuela-ESUPCOM
+        .foro-escuela-link
+          border-color: #5795f8;
+          color: #5795f8;
+
