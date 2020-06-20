@@ -241,7 +241,7 @@ class HomePropuestas extends Component {
     const { forum, topics } = this.state
 
     return (
-      <div className='ext-home-ideas'>
+      <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <Anchor id='container'>
           <BannerListadoTopics
             btnText='Mandá tu idea'
