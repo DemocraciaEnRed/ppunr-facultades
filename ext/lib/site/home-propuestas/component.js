@@ -235,7 +235,7 @@ class HomePropuestas extends Component {
 
     return (
 
-      <div className='ext-home-ideas'>
+      <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <BannerListadoTopics
           btnText={isFromEscuela ? 'Mandá tu idea' : undefined}
           btnLink={isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}

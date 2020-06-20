@@ -73,7 +73,7 @@ export class TopicLayout extends Component {
     const { forum, name } = this.state
     if (!topic || !forum) return null
     return (
-      <div>
+      <div className={`ext-topic-container ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <Anchor id='container'>
           <div id='topic-wrapper'>
             { <TopicArticlePropuesta topic={topic} forum={forum}/>
