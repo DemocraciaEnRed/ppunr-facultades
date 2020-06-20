@@ -25,10 +25,7 @@
       .form-group
         label= t('signup.email')
         input.form-control(type='text', disabled='disabled', name='email', maxlength=200, placeholder=t('forgot.mail.example'), value='#{user.email}', validate='required email')
-
-      .form-group
-        label= t('settings.locale')
-        select.form-control(id='locale', name='locale')
+        
       .form-group.profile-picture
         label= t('settings.profile-picture')
         .profile-picture-form
