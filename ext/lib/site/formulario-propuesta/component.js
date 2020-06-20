@@ -359,7 +359,7 @@ class FormularioPropuesta extends Component {
           </div>
 
           <div id="acerca-propuesta" className="bar-section acerca-propuesta">
-            <p className="section-title">Acerca de la propuesta</p>
+              <p className="section-title">Acerca de tu idea</p>
           </div>
 
           <section>
