@@ -240,7 +240,7 @@ class HomePropuestas extends Component {
           btnText={isFromEscuela ? 'Mandá tu idea' : undefined}
           btnLink={isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
           title='Ideas'
-          subtitle={escuela && escuela.nombre}
+          subtitle={escuela && escuela.tituloForo}
           />
 
         <div className='container'>
@@ -263,7 +263,7 @@ class HomePropuestas extends Component {
         <div className='container topics-container'>
           {!isFromEscuela &&
             <div className='not-in-escuela-reminder'>
-              <span>Recordá que podés subir ideas en el foro de tu escuela</span>
+              <span>Recordá que sólo podés subir ideas en el foro de tu escuela</span>
             </div>
           }
           <FilterPropuestas
