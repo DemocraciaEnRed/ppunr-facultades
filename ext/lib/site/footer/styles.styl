@@ -1,6 +1,6 @@
 .footer-static
   font-family: 'Roboto', sans-serif
-  background-color: #4b3c59
+  background-color: #3c3c3c
   width: 100%
   font-size: 16px
   padding: 5%
@@ -83,15 +83,41 @@
         padding-top: 52%
         margin-top: 40px
 
+  .logos
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    padding: 20px;
+    @media (max-width: 550px)
+      flex-direction: column
+      align-items: center
+  .logo-der
+    display: flex;
+    align-items: center;
+    span
+      color:white
+      font-size: 12px;
+      margin-left: 10px;
+    img
+      width: 65px
+  .logo-flor
+      img
+        padding: 10px 20px 0;
+        width: 120px
+  .logo-universidad
+      img
+        width: 150px
+        @media (max-width: 550px)
+          margin: 30px auto
   .logo
     clear: both
     width: 163px
-    margin: auto
-    padding-right: 3px;
-    background-color: white
-    a
+    @media (max-width: 550px)
+      margin: 30px auto
+    .logo-unr
       display: block
-      background-image: unquote("url('ext/lib/boot/logo.png')")
+      background-image: unquote("url('ext/lib/site/footer/logo-pp.png')")
       width: 100%
       padding-top: 33%
       background-repeat: no-repeat
