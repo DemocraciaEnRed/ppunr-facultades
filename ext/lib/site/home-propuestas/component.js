@@ -263,7 +263,7 @@ class HomePropuestas extends Component {
         <div className='container topics-container'>
           {!isFromEscuela &&
             <div className='not-in-escuela-reminder'>
-              <span>Recordá que sólo podés subir ideas en el foro de tu escuela</span>
+              <span><i className="glyphicon glyphicon-warning-sign"></i>Recordá que sólo podés subir ideas en el foro de tu escuela</span>
             </div>
           }
           <FilterPropuestas
