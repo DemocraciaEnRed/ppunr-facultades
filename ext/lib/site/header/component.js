@@ -157,7 +157,7 @@ class Header extends Component {
                 className={`header-item ${window.location.href.includes(`propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
                 <a
                   href={`/propuestas?id=${escuela._id}`}
-                  className='header-link'
+                  className={`header-link header-link-${escuela.abreviacion}`}
                   >
                     Foro{escuela.abreviacion == 'ESUPCOM' ? ' ' : <br />}{escuela.nombre}&nbsp;({escuela.abreviacion})
                 </a>

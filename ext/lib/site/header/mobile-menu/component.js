@@ -59,7 +59,7 @@ class MobileMenu extends Component {
                     className={`header-item mobile-link ${window.location.href.includes(`propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
                     <Link
                       to={`/propuestas?id=${escuela._id}`}
-                      className='header-link'
+                      className={`header-link header-link-${escuela.abreviacion}`}
                       onClick={this.props.toggleOnClick}> Foro {escuela.nombre} ({escuela.abreviacion})
                     </Link>
                   </div>
