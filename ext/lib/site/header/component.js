@@ -123,7 +123,8 @@ class Header extends Component {
             <MobileMenu
               form={this.state.userForm}
               menuOn={this.state.mobileMenu}
-              toggleOnClick={this.toggleMobileMenu} />
+              toggleOnClick={this.toggleMobileMenu}
+              escuelas={this.state.escuelas} />
 
           </ul>
         </nav>

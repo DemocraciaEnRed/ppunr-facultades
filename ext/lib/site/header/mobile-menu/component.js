@@ -44,7 +44,7 @@ class MobileMenu extends Component {
                     Acerca de
                   </Link>
                 </div> 
-                <div className='header-item'>
+                {/* <div className='header-item'>
                   <Link
                     to='/propuestas'
                     className={`header-link ${!~window.location.pathname.includes('propuesta') ? 'active' : ''}`}
@@ -52,7 +52,18 @@ class MobileMenu extends Component {
                     onClick={this.props.toggleOnClick}>
                     Foro
                   </Link>
-                </div>
+                </div> */}
+                {this.props.escuelas.length > 0 && this.props.escuelas.map(escuela => (
+                  <div
+                    key={escuela._id}
+                    className={`header-item mobile-link ${window.location.href.includes(`propuestas?id=${escuela._id}`) ? 'active' : ''}`}>
+                    <Link
+                      to={`/propuestas?id=${escuela._id}`}
+                      className='header-link'
+                      onClick={this.props.toggleOnClick}> Foro {escuela.nombre} ({escuela.abreviacion})
+                    </Link>
+                  </div>
+                ))}
                 {/* <div className='header-item mobile-link'>
                   <ProyectosLink />
                 </div>
