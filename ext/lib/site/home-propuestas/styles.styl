@@ -71,9 +71,17 @@
     color: #000
     margin-top: 0
     display: inline-block
+    @media (max-width: 500px)
+      margin-bottom: 20px
   .topics-sort-filter
     display: inline-block;
     float: right;
+    @media (max-width: 500px)
+      float: none
+      margin-bottom: 20px
+      span
+        margin-bottom: 10px
+        display: block
     span
       font-size: 14px;
       font-weight: 600;
@@ -88,6 +96,7 @@
       margin: 0
       border-top-right-radius: 2px
       border-bottom-right-radius: 2px
+      background-color: white
       .glyphicon
         display: none
       &:first-of-type
@@ -116,5 +125,6 @@
       font-weight: 600;
       font-size: 20px;
       padding: 17px 30px;
+      display: inline-block;
       i
         margin-right: 10px;
