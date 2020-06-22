@@ -11,14 +11,14 @@ export default function BannerForoVecinal (props) {
         Math.random(1) > 0.5 ? (
           window.innerWidth >= 630 &&
             <video playsInline autoPlay muted loop>
-              <source src={ adminTexts['home-video1-webm'] } type='video/webm' />
-              <source src={ adminTexts['home-video1-mp4'] }  type='video/mp4' />
+              <source src={ adminTexts && adminTexts['home-video1-webm'] } type='video/webm' />
+              <source src={ adminTexts && adminTexts['home-video1-mp4'] }  type='video/mp4' />
             </video>
         ) : (
           window.innerWidth >= 630 &&
             <video playsInline autoPlay muted loop>
-              <source src={ adminTexts['home-video2-webm'] } type='video/webm' />
-              <source src={ adminTexts['home-video2-mp4'] } type='video/mp4' />
+              <source src={ adminTexts && adminTexts['home-video2-webm'] } type='video/webm' />
+              <source src={ adminTexts && adminTexts['home-video2-mp4'] } type='video/mp4' />
             </video>
         )
       }
