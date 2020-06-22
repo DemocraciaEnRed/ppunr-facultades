@@ -7,9 +7,23 @@ header.banner-proyectos
   flex-direction: column
   justify-content: center
   align-items: center
-  background: linear-gradient(90deg, rgba(140,3,117,1) 0%, rgba(140,3,117,1) 35%, rgba(191,69,136,1) 100%); 
+  background: linear-gradient(90deg, rgba(140,3,117,1) 0%, rgba(140,3,117,1) 35%, rgba(191,69,136,1) 100%);
   text-align: center
   color: #FFF
+
+  background-size: cover;
+  &.fondo-eac {
+    background-position: center;
+    background-image: url("/ext/lib/site/home-propuestas/fondo-eac.jpg");
+  }
+  &.fondo-ips {
+    background-position: bottom;
+    background-image: url("/ext/lib/site/home-propuestas/fondo-ips.jpg");
+  }
+  &.fondo-esupcom {
+    background-position: center;
+    background-image: url("/ext/lib/site/home-propuestas/fondo-esupcom.jpg");
+  }
 
   .proyectos-title
     font-family: 'Roboto', sans-serif
@@ -22,6 +36,7 @@ header.banner-proyectos
   .proyectos-subtitle
     font-family: 'Roboto', sans-serif
     font-size: 24px
+    font-weight: 600
     @media screen and (max-width: 570px)
           font-size: 18px
           margin: 20px 5 5 0

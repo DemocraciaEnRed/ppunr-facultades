@@ -241,6 +241,7 @@ class HomePropuestas extends Component {
           btnLink={isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
           title='Ideas'
           subtitle={escuela && escuela.tituloForo}
+          esculeaAbrev={escuela && escuela.abreviacion}
           />
 
         <div className='container'>
