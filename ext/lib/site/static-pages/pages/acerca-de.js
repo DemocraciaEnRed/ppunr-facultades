@@ -24,7 +24,7 @@ export default class Page extends Component {
           <div className="banner"></div>
           <div className='contenedor'>
             <div className='fondo-titulo'>
-              <h1>Presupuesto Participativo</h1>
+              <h1>Presupuesto Participativo UNR</h1>
             </div>
           </div>
         </section>
