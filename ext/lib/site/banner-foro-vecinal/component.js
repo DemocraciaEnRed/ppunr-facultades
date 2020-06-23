@@ -9,17 +9,19 @@ export default function BannerForoVecinal (props) {
       <div className='banner'>
       {
         Math.random(1) > 0.5 ? (
-          window.innerWidth >= 630 &&
-            <video playsInline autoPlay muted loop>
-              <source src={ adminTexts && adminTexts['home-video1-webm'] } type='video/webm' />
+          <video playsInline autoPlay muted loop>
+            {window.innerWidth >= 630 &&
               <source src={ adminTexts && adminTexts['home-video1-mp4'] }  type='video/mp4' />
-            </video>
+            }
+            <source src={ adminTexts && adminTexts['home-video1-webm'] } type='video/webm' />
+          </video>
         ) : (
-          window.innerWidth >= 630 &&
-            <video playsInline autoPlay muted loop>
-              <source src={ adminTexts && adminTexts['home-video2-webm'] } type='video/webm' />
+          <video playsInline autoPlay muted loop>
+            {window.innerWidth >= 630 &&
               <source src={ adminTexts && adminTexts['home-video2-mp4'] } type='video/mp4' />
-            </video>
+            }
+            <source src={ adminTexts && adminTexts['home-video2-webm'] } type='video/webm' />
+          </video>
         )
       }
 
