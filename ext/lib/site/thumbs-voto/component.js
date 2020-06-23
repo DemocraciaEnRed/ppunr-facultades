@@ -55,7 +55,7 @@ export default function ThumbsVoto(props) {
             <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
               {/* props.texts['home-icono2-texto']*/}
-              Registrá tu usuario, completá el espacio con tus ideas para hacer la Universidad que Queremos y envianos tus propuestas. Tenés tiempo hasta el 30 de Junio. Podés, abrir nuevos temas o sumarte a una conversación activa&nbsp;
+              Registrá tu usuario, completá el espacio con tus ideas para hacer la Universidad que Queremos y envianos tus propuestas. Tenés tiempo hasta el 20 de julio. Podés, abrir nuevos temas o sumarte a una conversación activa&nbsp;
               <Link to='/formulario-idea'>
                 aquí
               </Link>.
