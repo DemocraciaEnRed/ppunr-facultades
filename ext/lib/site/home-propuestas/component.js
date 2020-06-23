@@ -107,13 +107,15 @@ class HomePropuestas extends Component {
       .fetch(`/ext/api/topics?${queryString}`, {credentials: 'include'})
       .then((res) => res.json())
       .then((res) => {
+        const topics = res.results ? res.results.topics : []
+        const noMore = res.pagination ? page >= res.pagination.pageCount : true
         // pagination contiene: count, page, pageCount, limit
         this.setState({
-          topics: page == 1 ? res.results.topics : this.state.topics.concat(res.results.topics),
+          topics: page == 1 ? topics : this.state.topics.concat(topics),
           page: page,
-          noMore: page >= res.pagination.pageCount
+          noMore: noMore
         })
-        return res.results.topics
+        return topics
       })
       .catch((err) => console.error(err))
   }
