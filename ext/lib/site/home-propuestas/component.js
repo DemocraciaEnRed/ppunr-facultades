@@ -177,7 +177,7 @@ class HomePropuestas extends Component {
     }, () => this.fetchTopics())
   }
 
-  handleVote = (id) => {
+  handleVote = (id, isVoted) => {
     const { user } = this.props
 
     if (user.state.rejected) {
@@ -187,7 +187,7 @@ class HomePropuestas extends Component {
       })
     }
 
-    topicStore.vote(id, 'apoyo-idea').then((res) => {
+    topicStore.vote(id, !isVoted ? 'apoyo-idea' : 'no-apoyo-idea').then((res) => {
       const topics = this.state.topics
       const index = topics.findIndex((t) => t.id === id)
       topics[index] = res

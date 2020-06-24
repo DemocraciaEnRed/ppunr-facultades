@@ -22,9 +22,17 @@ const estados = (state) => {
 
 export class TopicCard extends Component {
   handleWrapperClick = (e) => {
+    // https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
+    function findAncestor (el, cls) {
+      while ((el = el.parentElement) && !el.classList.contains(cls));
+      return el;
+    }
+
     let targTag = e.target && e.target.tagName
-    // si hace click en cualquier lugar que no sea un botón o un link mandar a propuesta
-    if (targTag != 'BUTTON' && targTag != 'A')
+
+    const isSeguirButton = findAncestor(e.target, 'cause-wrapper')
+
+    if (!isSeguirButton)
       browserHistory.push(`/propuestas/topic/${this.props.topic.id}`)
   }
   render() {
@@ -107,6 +115,9 @@ export class TopicCard extends Component {
             <div className={`cause-wrapper ${likesCssClass}`}>
               {topic.voted && (
                 <button disabled className='btn btn-primary btn-filled'>
+                <button
+                  onClick={() => onVote(topic.id, topic.voted)}
+                  className='btn btn-primary btn-filled'>
                   Ya seguís
                   {likesCountDiv}
                 </button>
@@ -114,7 +125,7 @@ export class TopicCard extends Component {
               {!topic.voted && (
                 <button
                   disabled={!topic.privileges.canVote || isStaff}
-                  onClick={() => onVote(topic.id)}
+                  onClick={() => onVote(topic.id, topic.voted)}
                   className='btn btn-primary btn-empty'>
                   Seguir
                   {likesCountDiv}
