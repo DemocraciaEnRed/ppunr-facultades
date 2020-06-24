@@ -73,13 +73,13 @@ export class TopicCard extends Component {
 
           <div className='topic-creation'>
             <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
-            {topic.owner.facultad && topic.owner.claustro && 
+            {topic.owner.facultad && topic.owner.claustro &&
               <span className='topic-card-facultad-claustro'>({topic.owner.facultad.abreviacion}, {topic.owner.claustro.nombre})</span>
             }
-            {topic.owner.facultad && !topic.owner.claustro && 
+            {topic.owner.facultad && !topic.owner.claustro &&
             <span className='topic-card-facultad'>({topic.owner.facultad.abreviacion})</span>
             }
-            {!topic.owner.facultad && topic.owner.claustro && 
+            {!topic.owner.facultad && topic.owner.claustro &&
               <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
             }
             <span
@@ -114,7 +114,6 @@ export class TopicCard extends Component {
           <div className='buttons-wrapper'>
             <div className={`cause-wrapper ${likesCssClass}`}>
               {topic.voted && (
-                <button disabled className='btn btn-primary btn-filled'>
                 <button
                   onClick={() => onVote(topic.id, topic.voted)}
                   className='btn btn-primary btn-filled'>
