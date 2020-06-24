@@ -36,11 +36,11 @@ export default class Page extends Component {
 
                 <Accordion>
                   <div data-trigger="+ ¿Quiénes pueden participar del PP Escuelas?">
-                    <p className='p-padding'>Pueden participar docentes, nodocentes, estudiantes, graduados y graduadas de cada Escuela: Agrotécnica, Superior, Politécnico.</p>
+                    <p className='p-padding'>Pueden participar docentes, nodocentes, estudiantes, graduados y graduadas de cada Escuela: Agrotécnica, Superior y Politécnico.</p>
                   </div>
 
                   <div data-trigger="+ ¿En qué se basa la etapa de Foros del PP Escuelas?" data-triggerDisabled={true}>
-                    <p className='p-padding'>Cada Escuela tendrá su propio Foro. El foro tiene por objetivo que las/os integrantes de la comunidad propongan ideas que aporten en la construcción de la Escuela que quieren hacer realidad. Estará abierto desde el 29 de junio al 20 de julio. En la segunda etapa del Foro, a partir del 3 de agosto, se podrán inscribir quienes  deseen ser proyectistas y trabajar para convertir las ideas en proyectos.</p>
+                    <p className='p-padding'>Cada Escuela tendrá su propio Foro que tiene por objetivo que las/os integrantes de la comunidad propongan ideas que aporten en la construcción de la Escuela que quieren hacer realidad. Estará abierto desde el 29 de junio al 20 de julio. En la segunda etapa del Foro, a partir del 3 de agosto, se podrán inscribir quienes  deseen ser proyectistas y trabajar para convertir las ideas en proyectos.</p>
                   </div>
 
                   <div data-trigger="+ ¿Cómo participo?">
@@ -48,16 +48,16 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
-                  <p className='p-padding'>Vas a encontrar en el <Link to='/formulario-idea'>formulario</Link> una serie etiquetas que refieren a diversos siguientes temas:</p>
+                  <p className='p-padding'>Vas a encontrar en el <Link to='/formulario-idea'>formulario</Link> una serie de etiquetas que refieren a diversos temas:</p>
                   <p>Accesibilidad - Administración - Ambiente y Sustentabilidad - Aprendizajes y actividades académicas - Arte y Cultura - Bioseguridad Convivencia y Participación - Derechos Humanos - Género - Inclusión Infraestructura - Innovación - Internacionalización - Investigación - Recreación y deporte  - Salud - Tecnología - Transparencia Vinculación con el medio</p>
                   </div>
 
                   <div data-trigger="+ ¿Cómo subo una idea?">
-                    <p className='p-padding'>Encontrarás <Link to='/formulario-idea'>aquí</Link> el espacio para colocar tu idea: incluí un título y escribí un breve párrafo explicando tu idea. Agregá etiquetas preconfiguradas para clasificar tu idea. Eso ayudará a agruparlas por afinidad para la próxima fase del Foro. </p>
+                    <p className='p-padding'>Encontrarás <Link to='/formulario-idea'>aquí</Link> el espacio para colocar tu idea: incluí un título y escribí un breve párrafo explicándola. Agregá etiquetas preconfiguradas para clasificar tu idea. Eso ayudará a agruparlas por afinidad para la próxima fase del Foro. </p>
                   </div>
 
                   <div data-trigger="+ ¿Qué pasa si no puedo registrarme?">
-                    <p className='p-padding'>Te invitamos a que nos mandes un correo con todos tus datos (nombre completo, DNI, Facultad, claustro, mail o forma de contacto) a al mail de tu escuela:
+                    <p className='p-padding'>Te invitamos a que nos mandes un correo con todos tus datos (nombre completo, DNI, Facultad, claustro, mail o forma de contacto) al mail de tu escuela:
                       <ul>
                         <li>Agrotécnica: <a href="mailto:presupuestoparticipativoagro@gmail.com">presupuestoparticipativoagro@gmail.com</a></li>
                         <li>Superior: <a href="mailto:superiorparticipativo@unr.edu.ar">superiorparticipativo@unr.edu.ar</a></li>
@@ -67,25 +67,32 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cuántas ideas puedo subir?">
-                    <p className='p-padding'>Podés subir todas las ideas que quieras, pero para cargar cada una de ellas tenés que utilizar un formulario independiente.</p>
+                    <p className='p-padding'>Podés subir todas las ideas que quieras pero cada una de ellas tenés en un formulario independiente.</p>
                   </div>
 
                   <div data-trigger="+ ¿Qué tipo de ideas esperamos que subas al Foro?">
-                    <p className='p-padding'>Las ideas tienen que beneficien a la comunidad de tu escuela.</p>
+                    <p className='p-padding'>Las ideas tienen que beneficiar a la comunidad de tu escuela.</p>
+                  </div>
+
+                  <div data-trigger="+ ¿Puedo modificar mi idea una vez que fue enviada?">
+                    <p className='p-padding'>Sí, puedes modificar tu idea tantas veces como quieras mientras el Foro esté abierto.</p>
+                  </div>
+
+                  <div data-trigger="+ ¿Cuándo se cierra el Foro?">
+                    <p className='p-padding'>El Foro se cerrará, en una primera fase, el 20 de Julio. Hasta entonces tenes tiempo para modificar tu idea e intercambiar sobre las ideas de otros/as participantes. Luego, se abrirá el 3 de agosto y se dará por finalizada la etapa el 14 del mismo mes, fecha en la cual podes revisar las ideas y sumarte para transformarlas en proyectos.</p>
                   </div>
 
                   <div data-trigger="+ ¿Qué pasará con mi idea?">
-                    <p className='p-padding'>Otros/as participantes pueden comentar tu idea o apoyarla. Te invitamos a entrar en diálogo con otros/as participantes. Luego de la primera etapa del Foro (del 29 de Junio al 20 de Julio) haremos una sistematización de ideas por temas para colocarlas de manera ordenada en la plataforma para que, si te interesa sumarte como proyectista, te inscribas en la que quieras desarrollar como proyecto en el marco del Consejo Escolar.</p>
+                    <p className='p-padding'>Otros/as participantes pueden comentar tu idea o apoyarla. Te invitamos a entrar en diálogo con otros/as participantes. Luego de la primera etapa del Foro (del 29 de junio al 20 de julio) haremos una sistematización de ideas por temas para colocarlas de manera ordenada en la plataforma para que, si te interesa sumarte como proyectista, te inscribas en la que quieras desarrollar como proyecto en el marco del Consejo Escolar.</p>
                   </div>
 
                   <div data-trigger="+ ¿Cuáles son las dos etapas de los Foros?">
-                    <p className='p-padding'>La primera es del 29 de Junio al 20 de Julio para que subas tu idea y/o comentes las de otros/as.</p>
+                    <p className='p-padding'>La primera es del 29 de junio al 20 de julio para que subas tu idea y/o comentes las de otros/as.</p>
                     <p>La segunda del 3 de agosto al 14 de agosto será para que te propongas como proyectista de las ideas que desees desarrollar para que se transforme en un proyecto factible.</p>
                   </div>
 
                   <div data-trigger="+ Si no participé de una etapa anterior, ¿puedo sumarme?">
-                    <p className='p-padding'>Podés sumarte en cualquier etapa del proceso aunque no hayas participado de las anteriores.</p>
-                    <p>No es necesario participar de una etapa para sumarse a la otra. Es decir, podés no haber propuesto o comentado ideas pero interesarte por sumar tu aporte como proyectista.</p>
+                    <p className='p-padding'>Podés sumarte en cualquier etapa del proceso aunque no hayas participado de las anteriores. Es decir, podés no haber propuesto o comentado ideas pero interesarte por sumar tu aporte como proyectista.</p>
                   </div>
 
                   <div data-trigger="+ ¿Qué implica ser proyectista?">
@@ -95,7 +102,7 @@ export default class Page extends Component {
                   <div data-trigger="+ ¿Qué condiciones deben respetar los proyectos?">
                     <ul className='p-padding'>
                       <li>Ser elaborados por integrantes de más de un claustro.</li>
-                      <li>No exceder el límite presupuestario (1 millón de pesos)</li>
+                      <li>No exceder el límite presupuestario (1 millón de pesos).</li>
                       <li>No exceder el ámbito de la Universidad.</li>
                       <li>No afectar partidas presupuestarias de años posteriores.</li>
                       <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegido.</li>
@@ -103,11 +110,11 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cuál es el monto asignado para cada Escuela en el PPUNR 2020?">
-                    <p className='p-padding'>Cada Escuela tendrá disponible un millón para discutir en el marco de su comunidad.</p>
+                    <p className='p-padding'>Cada Escuela tendrá disponible un millón de pesos para discutir en el marco de su comunidad.</p>
                   </div>
 
                   <div data-trigger="+ ¿Cómo elegiremos los proyectos a ejecutarse en 2021?">
-                    <p className='p-padding'>Se realizarán jornadas de votación en el mes de octubre/noviembre, previa difusión de los proyectos elegibles, para que toda la comunidad de la Escuela puede decidir cuáles serán ejecutarán hasta alcanzar el total de la partida presupuestaria disponible. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
+                    <p className='p-padding'>Se realizarán jornadas de votación en el mes de octubre o noviembre, previa difusión de los proyectos elegibles, para que toda la comunidad de la Escuela puede decidir cuáles serán ejecutados hasta alcanzar el total de la partida presupuestaria disponible. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
                   </div>
 
                 </Accordion>
