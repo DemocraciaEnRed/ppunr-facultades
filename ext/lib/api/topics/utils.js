@@ -58,16 +58,22 @@ const queryTopics = (opts) => {
   return api.topics.find().where(query)
 }
 
+// esta misma función está en lib/api-v2/db-api/topics/index.js!
+// si modificás esta, habría que modificar la otra (considerar)
 const getPossibleOwners = (opts) => {
   const {
     facultades,
+    facultad,
     claustros,
+    claustro
   } = opts
 
   const query = {}
 
   if (facultades && facultades.length > 0) query.facultad = { $in: facultades.map(id => ObjectID(id)) }
+  else if (facultad) query.facultad = facultad
   if (claustros && claustros.length > 0) query.claustro = { $in: claustros.map(id => ObjectID(id)) }
+  else if (claustro) query.claustro = claustro
 
   if (Object.keys(query).length > 0)
     return apiV1.user.findIds(query)
