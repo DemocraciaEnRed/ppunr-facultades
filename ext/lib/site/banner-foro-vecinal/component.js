@@ -7,23 +7,19 @@ export default function BannerForoVecinal (props) {
     <section className='container-fluid banner-fv'>
       <div className='violet-background'></div>
       <div className='banner'>
-      {
+      { window.innerWidth >= 630 && (
         Math.random(1) > 0.5 ? (
           <video playsInline autoPlay muted loop>
-            {window.innerWidth >= 630 &&
-              <source src={ adminTexts && adminTexts['home-video1-mp4'] }  type='video/mp4' />
-            }
+            <source src={ adminTexts && adminTexts['home-video1-mp4'] }  type='video/mp4' />
             <source src={ adminTexts && adminTexts['home-video1-webm'] } type='video/webm' />
           </video>
         ) : (
           <video playsInline autoPlay muted loop>
-            {window.innerWidth >= 630 &&
-              <source src={ adminTexts && adminTexts['home-video2-mp4'] } type='video/mp4' />
-            }
+            <source src={ adminTexts && adminTexts['home-video2-mp4'] } type='video/mp4' />
             <source src={ adminTexts && adminTexts['home-video2-webm'] } type='video/webm' />
           </video>
         )
-      }
+      )}
 
       </div>
       <div className='contenedor'>
