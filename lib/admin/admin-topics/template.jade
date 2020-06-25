@@ -53,9 +53,8 @@
               span.glyphicon.glyphicon-eye-open
             select.mas-acciones(data-topic-edit-url=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}))
               option(value="") Más acciones
-              option(value="anchor-cover") > Cambiar imagen
-              option(value="anchor-attrs.state") > Cambiar estado
-              option(value="anchor-fecha-cierre") > Cambiar fecha de cierre
+              option(value="anchor-title") > Cambiar título
+              option(value="anchor-attrs.problema") > Cambiar texto
 
           h4.topic-title
             a(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle

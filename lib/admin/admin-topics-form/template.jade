@@ -29,7 +29,7 @@
         ul.form-messages
 
         .form-group
-          label= t('admin-topics-form.label.mediaTitle')
+          label#anchor-title= t('admin-topics-form.label.mediaTitle')
           - if (te('admin-topics-form.description.mediaTitle'))
             span.help-text= t('admin-topics-form.description.mediaTitle')
           input.form-control(type='text', maxlength='200', id='mediaTitle', name='mediaTitle', placeholder=t('admin-topics-form.label.mediaTitle'), value=topic.mediaTitle, validate='required')
