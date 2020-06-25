@@ -6,7 +6,7 @@ import userConnector from 'lib/site/connectors/user'
 
 export class Cause extends Component {
   state = {
-    showResults: false,
+    topicClosed: false,
     showLoginMessage: false,
     results: null
   }
@@ -24,13 +24,13 @@ export class Cause extends Component {
 
     return this.setState({
       showLoginMessage: false,
-      showResults: topic.closed || !!topic.voted,
+      topicClosed: topic.closed,
       supported: !!topic.voted
     })
   }
 
   handleSupport = (e) => {
-    if (this.state.showResults) return
+    if (this.state.topicClosed) return
 
     if (!this.props.user.state.fulfilled) {
       return browserHistory.push({
@@ -39,7 +39,7 @@ export class Cause extends Component {
       })
     }
 
-    topicStore.vote(this.props.topic.id, 'support')
+    topicStore.vote(this.props.topic.id, !this.state.supported ? 'apoyo-idea' : 'no-apoyo-idea')
       .catch((err) => { throw err })
   }
 
@@ -48,18 +48,19 @@ export class Cause extends Component {
 
     if (user.state.pending) return null
 
-    const { supported, showResults } = this.state
+    const { supported, topicClosed } = this.state
     if (user.state.fulfilled && !topic.privileges.canVote) return null
     return (
       <div className='topics-cause-propuesta'>
         {supported && (
           <button
             className='btn btn-primary'
-            disabled='true'>
+            onClick={this.handleSupport}
+            disabled={topicClosed}>
             Ya seguís
           </button>
         )}
-        {!showResults && (
+        {!topicClosed && !supported && (
           <button
             disabled={!topic.privileges.canVote}
             className='btn btn-primary'
