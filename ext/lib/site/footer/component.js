@@ -24,18 +24,14 @@ const Footer = () => (
         <a className='social-mail' href='mailto:presupuestoparticipativo@unr.edu.ar' target="_blank"/>
       </div>
       <div className='logos'>
-        <div className='logo-der'>
-          <img src="/ext/lib/site/footer/logo-der.png" alt="Democracia en Red"/>
-          <span>Desarrollado por<br /><b>Democracia en red</b></span>
-        </div>
-        <div className='logo'>
-          <a className='logo-unr' href='https://www.unr.edu.ar/' />
-          <div className='terminos'>
-            <Link to='/s/terminos-y-condiciones'> Términos y condiciones
-            </Link>
-            <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank"> Reglamento
-            </a>
+        <a href="https://democraciaenred.org/" rel="noopener noreferer" target="_blank">
+          <div className='logo-der'>
+            <img src="/ext/lib/site/footer/logo-der.png" alt="Democracia en Red"/>
+            <span>Desarrollado por<br /><b>Democracia en red</b></span>
           </div>
+        </a>
+        <div className='logo'>
+          <a className='logo-unr' href='https://www.unr.edu.ar/' rel="noopener noreferer" target="_blank" />
         </div>
         <div className='logo-flor'>
           <img src="/ext/lib/site/footer/logo-flor.png" alt="Flor"/>
@@ -43,6 +39,12 @@ const Footer = () => (
         <div className='logo-universidad'>
           <img src="/ext/lib/site/footer/logo-universidad-que-queremos.png" alt="Universidad que queremos"/>
         </div>
+      </div>
+      <div className='terminos'>
+        <Link to='/s/terminos-y-condiciones'> Términos y condiciones
+        </Link>
+        <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank"> Reglamento
+        </a>
       </div>
     </div>
   </footer>
