@@ -21,6 +21,10 @@ COPY ["ext/package.json", "ext"]
 RUN mkdir bin
 COPY ["bin/dos-ext-install", "bin"]
 
+# Para windows habilitar esto:
+#RUN sudo apt-get install dos2unix
+#RUN sed 's/\r//g' -i bin/dos-ext-install
+
 RUN bin/dos-ext-install --quiet
 
 COPY [".", "/usr/src/"]
