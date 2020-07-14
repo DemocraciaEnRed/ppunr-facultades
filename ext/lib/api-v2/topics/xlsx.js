@@ -1,6 +1,7 @@
 const express = require('express')
 const debug = require('debug')
 const json2xls = require('ext/node_modules/json2xls')
+const moment = require('moment')
 // const middlewaresNew = require('lib/api-v2/middlewares')
 const middlewares = require('lib/api-v2/middlewares')
 var api = require('lib/db-api')
@@ -28,7 +29,7 @@ app.get('/export/topics/xlsx',
   middlewares.forums.findByName,
   middlewares.topics.findAllFromForum,
   middlewares.forums.privileges.canChangeTopics,
-  function getAllTags(req, res, next) {
+  /*function getAllTags(req, res, next) {
     api.tag.all(function (err, tags) {
       let tagsName = {}
       if (err) {
@@ -39,31 +40,73 @@ app.get('/export/topics/xlsx',
       req.tagsName = tagsName
       next()
     })
+  },*/
+  function getAllUserMails(req, res, next) {
+    api.user.all(function (err, users) {
+      let usersMail = {}
+      if (err) {
+        log('error serving users from DB:', err)
+        return res.status(500).end()
+      }
+      users.forEach(u => usersMail[u._id] = u.email)
+      req.usersMail = usersMail
+      next()
+    })
   },
+  (req, res, next) => Promise.all(
+    // populamos owners (parecido a populateOwners)
+    req.topics.map(topic =>
+      api.user.getFullUserById(topic.owner, true).then(user => {
+        topic.owner = user
+        return topic
+      })
+    )
+  ).then((topics) => Promise.all(
+    // populamos votos
+    topics.map(topic =>
+      api.vote.getVotesByTopic(topic._id).then(votes => {
+        topic.action.results = votes.map(v => req.usersMail[v.author])
+        return topic
+      })
+    )
+  )).then((topics) => {
+    req.topics = topics
+    next()
+  }),
   function getXlsx(req, res, next) {
     let infoTopics = []
     const attrsNames = req.forum.topicsAttrs
       .map((attr) => attr.name)
+
     req.topics.forEach((topic) => {
       if (topic.attrs === undefined) {
         topic.attrs = {}
       }
       let theTopic = {
-        'Topic ID': topic.id,
-        'Topic Title': `${escapeTxt(topic.mediaTitle)}`,
-        'Topic Category': req.tagsName[topic.tag.toString()]
+        'Idea ID': topic.id,
+        'Idea Fecha': `${escapeTxt(moment(topic.createdAt, '', req.locale).format('LL LT'))}`,
+        'Idea Título': `${escapeTxt(topic.mediaTitle)}`,
+        'Idea Temas': `${escapeTxt(topic.tags.join(', '))}`,
+        'Idea Facultad': `${escapeTxt(topic.owner.facultad.abreviacion)}`,
+        'Idea Texto': `${escapeTxt(topic.attrs['problema'])}`,
+        'Autor/a nombre': `${escapeTxt(topic.owner.firstName)}`,
+        'Autor/a apellido': `${escapeTxt(topic.owner.lastName)}`,
+        'Autor/a email': `${escapeTxt(topic.owner.email)}`,
+        'Autor/a claustro': `${escapeTxt(topic.owner.claustro.nombre)}`,
+        'Autor/a género': `${escapeTxt(topic.attrs['genero'])}`,
+        'Seguidores cantidad': `${escapeTxt(topic.action.count)}`,
+        'Seguidores emails': `${escapeTxt(topic.action.results.join(', '))}`
       }
 
-      attrsNames.map((name) => {
+      /*attrsNames.map((name) => {
         theTopic[name] = `${escapeTxt(topic.attrs[name])}` || ''
-      });
+      });*/
       infoTopics.push(theTopic);
     });
     try {
-      res.xls(`excel-${req.forum.name.replace(/\s/g, '-')}-${Math.floor((new Date()) / 1000)}.xlsx`, infoTopics);
+      res.xls(`ideas-facultades.xlsx`, infoTopics);
     } catch (err) {
       log('get csv: array to csv error', err)
       return res.status(500).end()
     }
   })
-
