@@ -208,10 +208,10 @@ class TopicArticle extends Component {
               <div className='alert alert-info alert-propuesta' role='alert'>
                 <p>{topic.attrs['admin-comment']}</p>
 
-                {topic.attrs.state === 'integrado' && topic.attrs['admin-comment-referencia'] && topic.attrs['admin-comment-referencia'] !== '' &&
-                  <p className='admin-comment-referido'>Podés ver el proyecto final <a className='admin-comment-referido' href={topic.attrs['admin-comment-referencia']}>aquí</a>.</p>
+                {topic.attrs['admin-comment-referencia'] && topic.attrs['admin-comment-referencia'] !== '' &&
+                  <p className='admin-comment-referido'>Podés ver la idea final <a className='admin-comment-referido' href={topic.attrs['admin-comment-referencia']}>aquí</a>.</p>
                 }
-                <p className='font-weight-bold'>Universidad de Rosario</p>
+                <p className='font-weight-bold'>Presupuesto Participativo de la Universidad de Rosario</p>
               </div>
             )
         }
