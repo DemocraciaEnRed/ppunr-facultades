@@ -26,6 +26,7 @@
           .block-overlay
         - if (form.forum)
           input(type='hidden', name='forum', value=form.forum)
+        input(type='hidden', name='admin-comment-original', value=topic.attrs && topic.attrs['admin-comment'])
         ul.form-messages
 
         .form-group

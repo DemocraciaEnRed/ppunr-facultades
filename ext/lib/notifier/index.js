@@ -17,7 +17,8 @@ const interval = setInterval(function () {
       require('./jobs/subscriber-update-proposal'),
       require('./jobs/new-comment'),
       require('./jobs/comment-reply'),
-      require('./jobs/forgot-password')
+      require('./jobs/forgot-password'),
+      require('./jobs/admin-comment')
     ].forEach((job) => job(notifier))
     log('Ext notifier email jobs loaded')
 
@@ -27,8 +28,9 @@ const interval = setInterval(function () {
     // puede ser una de: welcome-email, new-proposal, update-proposal, update-project,
     // subscriber-update-proposal, subscriber-update-project, new-comment o comment-reply
     const testMailJobs = ['welcome-email', 'new-proposal', 'update-proposal', 'update-project',
-      'subscriber-update-proposal', 'subscriber-update-project', 'new-comment', 'comment-reply']
-    const testMailJob = testMailJobs[2]
+      'subscriber-update-proposal', 'subscriber-update-project', 'new-comment', 'comment-reply',
+      'admin-comment']
+    const testMailJob = testMailJobs[8]
     // cuenta a la cual le llegarán los emails
     const testMailAccount = 'bungew@gmail.com'
     // id usado para 'subscriber-update-X', tiene que estar en la DB
