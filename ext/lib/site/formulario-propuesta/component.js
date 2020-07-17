@@ -482,15 +482,15 @@ class FormularioPropuesta extends Component {
                this.hasErrors() &&
                <div className="error-box">
                <ul>
-                    {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" del representante no puede quedar vacío</li> }
-                    {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" del representante no puede quedar vacío</li> }
-                    {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" del representante no puede quedar vacío</li> }
-                    {this.hasErrorsField('email') && <li className="error-li">El campo "Email" del representante no puede quedar vacío</li> }
-                    {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" de la propuesta no puede quedar vacío</li> }
-                    {this.hasErrorsField('escuela') && <li className="error-li">El campo "Escuela" de la propuesta no puede quedar vacío</li> }
-                    {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" de la propuesta no puede quedar vacío</li> }
-                    {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" de la propuesta no puede quedar vacío</li> }
-                    {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" de la propuesta no puede quedar vacío</li> }
+                    {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" no puede quedar vacío</li> }
+                    {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" no puede quedar vacío</li> }
+                    {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" no puede quedar vacío</li> }
+                    {this.hasErrorsField('email') && <li className="error-li">El campo "Email" no puede quedar vacío</li> }
+                    {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" no puede quedar vacío</li> }
+                    {this.hasErrorsField('escuela') && <li className="error-li">El campo "Escuela" no puede quedar vacío</li> }
+                    {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" no puede quedar vacío</li> }
+                    {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
+                    {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" no puede quedar vacío</li> }
                </ul>
                </div>
             }
