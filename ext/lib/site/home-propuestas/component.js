@@ -246,8 +246,8 @@ class HomePropuestas extends Component {
       <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <Anchor id='container'>
           <BannerListadoTopics
-            btnText='Mandá tu idea'
-            btnLink='/formulario-idea'
+          btnText={config.propuestasAbiertas ? 'Mandá tu idea' : undefined}
+          btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
             title='Ideas'
             />
 
@@ -259,10 +259,9 @@ class HomePropuestas extends Component {
                       <h1>{config.propuestasTextoAbiertas}</h1>
                     </div>
                 ) : (
-                  <span className='alert-duedate' >
-                    <span className="text-info">Formulario cerrado, ¡Gracias por participar!</span><br />
-                    {config.propuestasTextoCerradas}
-                  </span>
+                  <div className='notice'>
+                    <h1>{config.propuestasTextoCerradas}</h1>
+                  </div>
                 )
               }
             </div>
