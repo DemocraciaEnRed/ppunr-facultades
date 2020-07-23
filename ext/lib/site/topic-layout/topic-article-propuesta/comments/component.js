@@ -32,6 +32,8 @@ export class Comments extends Component {
     const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas && user.state.value.escuelas.map(e=>e._id)
     const isFromEscuela = userEscuelasIds && userEscuelasIds.includes(topicEscuelaId)
 
+    const enabled = false
+
     return (
       <div className='topic-comments'>
         <div className='topic-article-content'>
@@ -39,12 +41,15 @@ export class Comments extends Component {
             {t('comments.arguments')}
             <CommentsOrderBy onSort={this.props.handleSort} />
           </h2>
-          {isFromEscuela ?
-            <CommentsForm
-              topic={this.props.topic}
-              onSubmit={this.props.handleCreate}
-              commentsCreating={this.props.commentsCreating} />
-          :
+          {isFromEscuela ? (
+            enabled ?
+              <CommentsForm
+                topic={this.props.topic}
+                onSubmit={this.props.handleCreate}
+                commentsCreating={this.props.commentsCreating} />
+            :
+              <p className='not-in-escuela'>¡Gracias por haber comentando!<br />En esta fase del presupuesto participativo esta sección se encuentra deshabilitada.</p>
+          ) :
             <p className='not-in-escuela'>No podés hacer comentarios en ideas de esta escuela</p>
           }
           {!commentsFetch.rejected && (
@@ -53,8 +58,8 @@ export class Comments extends Component {
               topic={this.props.topic}
               loading={commentsFetch.pending}
               comments={this.state.comments}
-              onReply={this.props.handleReply}
-              commentsReplying={this.props.commentsReplying}
+              onReply={enabled && this.props.handleReply}
+              commentsReplying={enabled && this.props.commentsReplying}
               onDelete={this.props.handleDelete}
               onDeleteReply={this.props.handleDeleteReply}
               commentDeleting={this.props.commentDeleting}
@@ -63,8 +68,8 @@ export class Comments extends Component {
               onDownvote={this.props.handleDownvote}
               onFlag={this.props.handleFlag}
               onUnflag={this.props.handleUnflag}
-              onReplyEdit={this.props.handleReplyEdit}
-              onEdit={this.props.handleEdit}
+              onReplyEdit={enabled && this.props.handleReplyEdit}
+              onEdit={enabled && this.props.handleEdit}
               isFromEscuela={isFromEscuela} />
           )}
           {
