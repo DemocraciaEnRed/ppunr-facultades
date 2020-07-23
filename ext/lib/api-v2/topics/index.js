@@ -28,6 +28,7 @@ const EDITABLE_KEYS = [
   'attrs.beneficios',
   'attrs.subscribers',
   'attrs.genero',
+  'attrs.escuela',
   'escuela',
   'eje'
 ]

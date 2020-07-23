@@ -1,15 +1,9 @@
 const dbReady = require('lib/models').ready
 
 const Forum = require('lib/models').Forum
+const Escuela = require('lib/models').Escuela
 
 const nombreMigrationParaLog = 'editar forum attrs'
-
-const groups = [
-	{ name: '', order: 0},
-	{ name: 'Presupuestos', order: 1},
-	{ name: 'Datos del autor', order: 2},
-	{ name: 'Información de la propuesta', order: 3}
-]
 
 const estadoOptions = [
 	{
@@ -17,20 +11,15 @@ const estadoOptions = [
 		"title" : "Sistematizada"
 	},
 	{
-		"name" : "original",
+		"name" : "pendiente",
 		"title" : "Original"
 	}
-]
-
-const escuelas = [
-  { nombre: 'Politécnico', abreviacion: 'IPS' },
-  { nombre: 'Agrotécnica', abreviacion: 'EAC' },
-  { nombre: 'Superior de Comercio', abreviacion: 'ESUPCOM' },
 ]
 
 const escuelaField = {
 		"name" : "escuela",
 		"title" : "Escuela",
+		"description" : "Este campo solo se usa para ideas sistematizadas.",
 		"kind" : "Enum",
 		"mandatory" : true,
 		"groupOrder" : 0,
@@ -38,9 +27,7 @@ const escuelaField = {
 		"order" : 1,
 		"width" : 6,
 		"icon" : "",
-		"options" : escuelas.map(e => {
-			return { name: e.abreviacion, title: e.abreviacion }
-		})
+		"options" : [{name: 'ninguna', title: 'Ninguna'}]
 }
 
 const deepCopy = obj => {
@@ -54,7 +41,8 @@ class SaltearPromises { }
 exports.up = function up (done) {
   dbReady()
 
-    .then(() => {
+    .then(() => Escuela.find())
+    .then((escuelas) => {
       return new Promise((resolve, reject) => {
 	      Forum.findOne({name: 'proyectos'}, (err, forumProyecto) => {
 	        if (err) reject(new Error(err))
@@ -66,7 +54,7 @@ exports.up = function up (done) {
 					let attr = copyAttrs.find(a => a.name == 'state')
 					attr.options = estadoOptions
 					attr.title = "Tipo de idea"
-					attr.description = ""
+					attr.description = "Si es cargada por alumnas/os (original) o si es sistematizada."
 					attr.hide = false
 					attr.order = 0
 					attr.icon = ''
@@ -77,6 +65,7 @@ exports.up = function up (done) {
 						copyAttrs.splice(escuelaIndex, 1)
 
 					// agregamos campo escuela
+					escuelas.forEach(e => escuelaField.options.push({name: e._id, title: e.abreviacion}))
 					copyAttrs.push(escuelaField)
 
 					// borramos todo y volvemos a generar
