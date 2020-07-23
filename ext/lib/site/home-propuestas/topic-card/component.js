@@ -83,6 +83,11 @@ export class TopicCard extends Component {
             {!topic.owner.facultad && topic.owner.claustro &&
               <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
             }
+            {!topic.owner.facultad && topic.attrs && topic.attrs.facultad &&
+            <span className='topic-card-facultad'>
+              ({this.props.facultades.length > 0 && this.props.facultades.find(f => f.value == topic.attrs.facultad).name})
+            </span>
+            }
             <span
               className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
               {moment(topic.createdAt).format('D-M-YYYY')}

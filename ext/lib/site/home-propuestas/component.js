@@ -270,7 +270,7 @@ class HomePropuestas extends Component {
   render () {
     console.log('Render main')
 
-    const { forum, topics } = this.state
+    const { forum, topics, facultades } = this.state
 
     return (
       <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
@@ -327,7 +327,8 @@ class HomePropuestas extends Component {
                     key={topic.id}
                     onVote={this.handleVote}
                     forum={forum}
-                    topic={topic} />
+                    topic={topic}
+                    facultades={facultades} />
                 ))}
                 {topics && !this.state.noMore && (
                   <div className='more-topics'>
