@@ -115,6 +115,11 @@ export class TopicCard extends Component {
           <div className='buttons-wrapper'>
             {!isSistematizada && /* antes en className estaba tmb ${likesCssClass} */
               <div className={`cause-wrapper`}>
+                <div
+                  className='btn btn-primary btn-empty'>
+                  Seguidores
+                  {likesCountDiv}
+                </div>
               {/*topic.voted && (
                   <button
                     onClick={() => onVote(topic.id, topic.voted)}

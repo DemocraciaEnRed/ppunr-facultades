@@ -44,7 +44,7 @@ export class Comments extends Component {
                 commentsCreating={this.props.commentsCreating} />
             :
               <p className=''>¡Gracias por haber comentando!<br />En esta fase del presupuesto participativo esta sección se encuentra deshabilitada.</p>
-          ) :
+          }
           {!commentsFetch.rejected && (
             <CommentsList
               forum={this.props.forum}

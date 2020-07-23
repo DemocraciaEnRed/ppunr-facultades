@@ -94,7 +94,7 @@ exports.findTopics = (opts) => {
     limit = 30,
     page = 1,
     sort,
-    user
+    user,
     state
   } = opts
   return getPossibleOwners(opts).then(owners => {

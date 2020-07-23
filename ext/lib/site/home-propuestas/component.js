@@ -85,7 +85,7 @@ class HomePropuestas extends Component {
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
         tags: tagsMap,
         tag,
-        forum
+        forum,
         forumStates: forum.topicsAttrs.find(a => a.name=='state').options
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
@@ -220,7 +220,7 @@ class HomePropuestas extends Component {
   goTop () {
     Anchor.goTo('container')
   }
-  
+
   onChangeTipoIdeaFilter = (name) => {
     this.setState({ tipoIdea: name }, () => this.fetchTopics());
   }
@@ -314,16 +314,13 @@ class HomePropuestas extends Component {
 
             <div className='row'>
               <div className='col-md-10 offset-md-1'>
-              { this.renderSortFilter() }
+                {  this.renderSortFilter() }
                 {topics && topics.length === 0 && (
                   <div className='empty-msg'>
                     <div className='alert alert-success' role='alert'>
                       No se encontraron propuestas.
                     </div>
                   </div>
-                )}
-                {topics && topics.length > 0 && (
-                  this.renderSortFilter()
                 )}
                 {topics && topics.map((topic) => (
                   <TopicCard

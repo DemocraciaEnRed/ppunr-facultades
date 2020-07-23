@@ -83,6 +83,8 @@ exports.up = function up (done) {
 					// agregamos campo facultad
 					facultades.forEach(e => facultadField.options.push({name: e._id, title: e.abreviacion}))
 
+					copyAttrs.push(facultadField)
+
 					// borramos todo y volvemos a generar
 					forumProyecto.topicsAttrs.splice(0)
 					forumProyecto.topicsAttrs.push(...copyAttrs)
