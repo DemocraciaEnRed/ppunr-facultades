@@ -52,7 +52,12 @@ export class Cause extends Component {
     if (user.state.fulfilled && !topic.privileges.canVote) return null
     return (
       <div className='topics-cause-propuesta'>
-        {supported && (
+        <div className='btn btn-primary' disabled={true}>
+          Seguidores:&nbsp;
+          {topic.action.count}&nbsp;
+          <span className='icon-like' />
+        </div>
+        {/*supported && (
           <button
             className='btn btn-primary'
             onClick={this.handleSupport}
@@ -67,11 +72,8 @@ export class Cause extends Component {
             onClick={this.handleSupport}>
             Seguir
           </button>
-        )}
+        )*/}
         <div className='likes-total'>
-          {topic.action.count}
-          &nbsp;
-          <span className='icon-like' />
         </div>
         {user.state.fulfilled && !topic.privileges.canVote && (
           <p className='text-mute overlay-vote'>

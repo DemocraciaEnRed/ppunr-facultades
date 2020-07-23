@@ -38,6 +38,7 @@ export class TopicCard extends Component {
   render() {
     const { topic, onVote, user } = this.props
     const isStaff = !user.state.rejected && user.state.value.staff
+    const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
 
     const likesCssClass = topic.voted ? 'voted' : (
       topic.privileges.canVote && !isStaff ? 'not-voted' : 'cant-vote'
@@ -112,35 +113,38 @@ export class TopicCard extends Component {
           ) }
 
           <div className='buttons-wrapper'>
-            <div className={`cause-wrapper ${likesCssClass}`}>
-              {topic.voted && (
-                <button
-                  onClick={() => onVote(topic.id, topic.voted)}
-                  className='btn btn-primary btn-filled'>
-                  Ya seguís
-                  {likesCountDiv}
-                </button>
-              )}
+            {!isSistematizada && /* antes en className estaba tmb ${likesCssClass} */
+              <div className={`cause-wrapper`}>
+              {/*topic.voted && (
+                  <button
+                    onClick={() => onVote(topic.id, topic.voted)}
+                    className='btn btn-primary btn-filled'>
+                    Ya seguís
+                    {likesCountDiv}
+                  </button>
+                )}
               {!topic.voted && (
-                <button
-                  disabled={!topic.privileges.canVote || isStaff}
-                  onClick={() => onVote(topic.id, topic.voted)}
-                  className='btn btn-primary btn-empty'>
-                  Seguir
-                  {likesCountDiv}
-                </button>
-              )}
-            </div>
-
-            <div
-              className={`subscribe-wrapperr ${subscribeCssClass}`}
-              onClick={this.handleWrapperClick}>
-              <div
-                className='btn btn-primary btn-empty'>
-                Comentar
-                {subscribesCountDiv}
+                  <button
+                    disabled={!topic.privileges.canVote || isStaff}
+                    onClick={() => onVote(topic.id, topic.voted)}
+                    className='btn btn-primary btn-empty'>
+                    Seguir
+                    {likesCountDiv}
+                  </button>
+                )*/}
               </div>
-            </div>
+            }
+            {!isSistematizada &&
+              <div
+                className={`subscribe-wrapperr ${subscribeCssClass}`}
+                onClick={this.handleWrapperClick}>
+                <div
+                  className='btn btn-primary btn-empty'>
+                  Comentarios
+                  {subscribesCountDiv}
+                </div>
+              </div>
+            }
           </div>
 
         </div>

@@ -27,6 +27,8 @@ export class Comments extends Component {
   render () {
     const { commentsFetch } = this.props
 
+    const enabled = false
+
     return (
       <div className='topic-comments'>
         <div className='topic-article-content'>
@@ -34,18 +36,23 @@ export class Comments extends Component {
             {t('comments.arguments')}
             <CommentsOrderBy onSort={this.props.handleSort} />
           </h2>
-          <CommentsForm
-            topic={this.props.topic}
-            onSubmit={this.props.handleCreate}
-            commentsCreating={this.props.commentsCreating} />
+          {
+            enabled ?
+              <CommentsForm
+                topic={this.props.topic}
+                onSubmit={this.props.handleCreate}
+                commentsCreating={this.props.commentsCreating} />
+            :
+              <p className=''>¡Gracias por haber comentando!<br />En esta fase del presupuesto participativo esta sección se encuentra deshabilitada.</p>
+          ) :
           {!commentsFetch.rejected && (
             <CommentsList
               forum={this.props.forum}
               topic={this.props.topic}
               loading={commentsFetch.pending}
               comments={this.state.comments}
-              onReply={this.props.handleReply}
-              commentsReplying={this.props.commentsReplying}
+              onReply={enabled && this.props.handleReply}
+              commentsReplying={enabled && this.props.commentsReplying}
               onDelete={this.props.handleDelete}
               onDeleteReply={this.props.handleDeleteReply}
               commentDeleting={this.props.commentDeleting}
@@ -54,8 +61,8 @@ export class Comments extends Component {
               onDownvote={this.props.handleDownvote}
               onFlag={this.props.handleFlag}
               onUnflag={this.props.handleUnflag}
-              onReplyEdit={this.props.handleReplyEdit}
-              onEdit={this.props.handleEdit} />
+              onReplyEdit={enabled && this.props.handleReplyEdit}
+              onEdit={enabled && this.props.handleEdit} />
           )}
           {
             this.state.pagination &&
