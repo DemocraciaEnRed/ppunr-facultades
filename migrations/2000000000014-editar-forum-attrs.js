@@ -11,7 +11,7 @@ const estadoOptions = [
 		"title" : "Sistematizada"
 	},
 	{
-		"name" : "original",
+		"name" : "pendiente",
 		"title" : "Original"
 	}
 ]
@@ -35,6 +35,7 @@ const facultades = [
 const facultadField = {
 		"name" : "facultad",
 		"title" : "Facultad",
+		"description" : "Este campo solo se usa para ideas sistematizadas.",
 		"kind" : "Enum",
 		"mandatory" : true,
 		"groupOrder" : 0,
@@ -42,9 +43,7 @@ const facultadField = {
 		"order" : 1,
 		"width" : 6,
 		"icon" : "",
-		"options" : facultades.map(e => {
-			return { name: e.abreviacion, title: e.abreviacion }
-		})
+		"options" : [{name: 'ninguna', title: 'Ninguna'}]
 }
 
 const deepCopy = obj => {
@@ -58,7 +57,8 @@ class SaltearPromises { }
 exports.up = function up (done) {
   dbReady()
 
-    .then(() => {
+    .then(() => Facultad.find())
+    .then((facultades) => {
       return new Promise((resolve, reject) => {
 	      Forum.findOne({name: 'proyectos'}, (err, forumProyecto) => {
 	        if (err) reject(new Error(err))
@@ -70,7 +70,7 @@ exports.up = function up (done) {
 					let attr = copyAttrs.find(a => a.name == 'state')
 					attr.options = estadoOptions
 					attr.title = "Tipo de idea"
-					attr.description = ""
+					attr.description = "Si es cargada por alumnas/os (original) o si es sistematizada."
 					attr.hide = false
 					attr.order = 0
 					attr.icon = ''
@@ -81,7 +81,7 @@ exports.up = function up (done) {
 						copyAttrs.splice(facultadIndex, 1)
 
 					// agregamos campo facultad
-					copyAttrs.push(facultadField)
+					facultades.forEach(e => facultadField.options.push({name: e._id, title: e.abreviacion}))
 
 					// borramos todo y volvemos a generar
 					forumProyecto.topicsAttrs.splice(0)
