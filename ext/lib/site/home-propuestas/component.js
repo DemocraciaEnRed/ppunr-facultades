@@ -23,7 +23,8 @@ const defaultValues = {
   claustro: [],
   tag: [],
   // 'barrio' o 'newest' o 'popular'
-  sort: 'newest'
+  sort: 'newest',
+  tipoIdea: 'sistematizada'
 }
 
 const filters = {
@@ -51,6 +52,7 @@ class HomePropuestas extends Component {
       tags: [],
       tag: defaultValues.tag,
       sort: defaultValues.sort,
+      tipoIdea: defaultValues.tipoIdea,
 
       page: null,
       noMore: null
@@ -79,7 +81,8 @@ class HomePropuestas extends Component {
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
         tags: tagsMap,
         forum,
-        escuela
+        escuela,
+        forumStates: forum.topicsAttrs.find(a => a.name=='state').options
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
@@ -95,7 +98,8 @@ class HomePropuestas extends Component {
       escuela: this.props.location.query.id,
       claustros: this.state.claustro,
       tags: this.state.tags.filter(t => this.state.tag.includes(t.value)).map(t => t.name),
-      sort: this.state.sort
+      sort: this.state.sort,
+      tipoIdea: this.state.tipoIdea
     }
 
     let queryString = Object.keys(query)
@@ -206,21 +210,47 @@ class HomePropuestas extends Component {
     this.setState({ sort: key }, () => this.fetchTopics());
   }
 
+  onChangeTipoIdeaFilter = (name) => {
+    this.setState({ tipoIdea: name }, () => this.fetchTopics());
+  }
+
   renderSortFilter() {
     return (
       <div>
         <h4 className="topics-title">Lista de ideas</h4>
-        <div className='topics-sort-filter'>
-          <span>Ordenar por</span>
-          {Object.keys(filters).map((key) => (
-              <button
-                key={key}
-                className={`btn-sort-filter ${this.state.sort === key ? 'active' : ''}`}
-                onClick={() => this.onChangeSortFilter(filters[key].sort)}>
-                <span className="glyphicon glyphicon-ok" />
-                {filters[key].text}
-              </button>
-            ))}
+        <div className='topics-filters'>
+          {this.state.forumStates &&
+            <div className='topics-filter topics-state-filter'>
+              <span>Mostrar ideas</span>
+              {this.state.forumStates.map((state) => (
+                  <button
+                    key={state.name}
+                    className={`btn-sort-filter ${this.state.tipoIdea === state.name ? 'active' : ''}`}
+                    onClick={() => this.onChangeTipoIdeaFilter(state.name)}>
+                    <span className="glyphicon glyphicon-ok" />
+                    {
+                      (state.name == 'pendiente' && 'Originales') ||
+                      (state.name == 'sistematizada' && 'Sistematizadas') ||
+                      state.title
+                    }
+                  </button>
+                ))}
+            </div>
+          }
+          {this.state.topics && this.state.topics.length > 0 &&
+            <div className='topics-filter topics-sort-filter'>
+              <span>Ordenar por</span>
+              {Object.keys(filters).map((key) => (
+                  <button
+                    key={key}
+                    className={`btn-sort-filter ${this.state.sort === key ? 'active' : ''}`}
+                    onClick={() => this.onChangeSortFilter(filters[key].sort)}>
+                    <span className="glyphicon glyphicon-ok" />
+                    {filters[key].text}
+                  </button>
+                ))}
+            </div>
+          }
         </div>
       </div>
     )
@@ -281,15 +311,13 @@ class HomePropuestas extends Component {
 
           <div className='row'>
             <div className='col-md-10 offset-md-1'>
+              { this.renderSortFilter() }
               {topics && topics.length === 0 && (
                 <div className='empty-msg'>
                   <div className='alert alert-success' role='alert'>
                     No se encontraron propuestas.
                   </div>
                 </div>
-              )}
-              {topics && topics.length > 0 && (
-                this.renderSortFilter()
               )}
               {topics && topics.map((topic) => (
                 <TopicCard

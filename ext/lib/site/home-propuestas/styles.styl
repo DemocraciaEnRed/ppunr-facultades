@@ -50,7 +50,7 @@
     max-width: 345px
     @media screen and (min-width: 600px)
       padding-top:30px
-  
+
   .topics-container
     background-image: unquote("url('ext/lib/site/home-propuestas/bg-mundo.png')")
     background-repeat: no-repeat
@@ -75,47 +75,53 @@
     display: inline-block
     @media (max-width: 500px)
       margin-bottom: 20px
-  .topics-sort-filter
-    display: inline-block;
+  .topics-filters
     float: right;
-    @media (max-width: 500px)
-      float: none
-      margin-bottom: 20px
+    .topics-filter
+      display: inline-block;
+      float: right;
+      &.topics-state-filter
+        margin-bottom: 5px
+      &.topics-sort-filter
+        clear: both;
+      @media (max-width: 500px)
+        float: none
+        margin-bottom: 20px
+        span
+          margin-bottom: 10px
+          display: block
       span
-        margin-bottom: 10px
-        display: block
-    span
-      font-size: 14px;
-      font-weight: 600;
-      color: #000
-      margin-right: 10px
-    .btn-sort-filter
-      color: #8c1e80;
-      font-size: 12px
-      font-weight: 500
-      padding: 6px 14px
-      border: solid 1px #8c1e80;
-      margin: 0
-      border-top-right-radius: 2px
-      border-bottom-right-radius: 2px
-      background-color: white
-      .glyphicon
-        display: none
-      &:first-of-type
-        border-right: none
-        border-top-right-radius: 0
-        border-bottom-right-radius: 0
-        border-top-left-radius: 2px
-        border-bottom-left-radius: 2px
-      &.active
-        background-color: #f2dcf0;
-        font-weight: bold
+        font-size: 14px;
+        font-weight: 600;
+        color: #000
+        margin-right: 10px
+      .btn-sort-filter
+        color: #8c1e80;
+        font-size: 12px
+        font-weight: 500
+        padding: 6px 14px
+        border: solid 1px #8c1e80;
+        margin: 0
+        border-top-right-radius: 2px
+        border-bottom-right-radius: 2px
+        background-color: white
         .glyphicon
-          display: inline
-          display: inline;
-          margin-right: 5px;
-          color: #8c1e80;
-          font-size: 12px
+          display: none
+        &:first-of-type
+          border-right: none
+          border-top-right-radius: 0
+          border-bottom-right-radius: 0
+          border-top-left-radius: 2px
+          border-bottom-left-radius: 2px
+        &.active
+          background-color: #f2dcf0;
+          font-weight: bold
+          .glyphicon
+            display: inline
+            display: inline;
+            margin-right: 5px;
+            color: #8c1e80;
+            font-size: 12px
 
   .not-in-escuela-reminder
     text-align: center;

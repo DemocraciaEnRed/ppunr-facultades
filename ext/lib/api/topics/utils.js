@@ -50,7 +50,7 @@ const queryTopics = (opts) => {
 
   if (owners && owners.length > 0) query.owner = { $in: owners }
   if (tags && tags.length > 0) query.tags = { $in: tags }
-  if (state && state.length > 0) query['attrs.state'] = { $in: state }
+  if (state && state.length > 0) query['attrs.state'] = state
   if (related && related.length > 0) query['attrs.admin-comment-referencia'] = { $regex: `.*${related}.*` }
 
   return api.topics.find().where(query)
@@ -85,7 +85,8 @@ exports.findTopics = (opts) => {
     page = 1,
     sort,
     user,
-    escuela
+    escuela,
+    state
   } = opts
   return getPossibleOwners(opts).then(owners => {
     // si devuelve null es porque no se filtró por owner

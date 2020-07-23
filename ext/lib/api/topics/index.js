@@ -54,6 +54,10 @@ app.get('/topics',
         type: 'string',
         default: '',
         format: 'barrio'
+      },
+      tipoIdea: {
+        type: 'string',
+        default: 'sistematizada'
       }
     })
   }, { formats }),
@@ -67,6 +71,7 @@ app.get('/topics',
     const opts = Object.assign({}, req.query)
     opts.forum = req.forum
     opts.user = req.user
+    opts.state = opts.tipoIdea
     Promise.all([
       utils.findTopics(opts).then(topics => apiNoExt.user.populateOwners(topics)),
       utils.findTopicsCount(opts)
