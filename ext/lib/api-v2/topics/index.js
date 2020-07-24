@@ -271,7 +271,8 @@ app.post('/topics',
     else return middlewares.forums.privileges.canCreateTopics(req, res, next)
   },
   purgeBody,
-  sendToAdmin,
+  // desactivado para segunda fase del PP
+  //sendToAdmin,
   goToNextRoute)
 
 app.put('/topics/:id',
