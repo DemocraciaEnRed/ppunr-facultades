@@ -51,7 +51,7 @@ export default ReactOutsideEvent(class ReplyHeader extends Component {
                       )
                     }
                     {
-                      this.props.isOwner &&
+                      this.props.enabled && this.props.isOwner &&
                       (
                         <button
                           onClick={this.props.onEditShow}>

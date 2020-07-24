@@ -56,13 +56,14 @@ export class Comments extends Component {
               onDelete={this.props.handleDelete}
               onDeleteReply={this.props.handleDeleteReply}
               commentDeleting={this.props.commentDeleting}
-              onUnvote={this.props.handleUnvote}
-              onUpvote={this.props.handleUpvote}
-              onDownvote={this.props.handleDownvote}
+              onUnvote={enabled && this.props.handleUnvote}
+              onUpvote={enabled && this.props.handleUpvote}
+              onDownvote={enabled && this.props.handleDownvote}
               onFlag={this.props.handleFlag}
               onUnflag={this.props.handleUnflag}
               onReplyEdit={enabled && this.props.handleReplyEdit}
-              onEdit={enabled && this.props.handleEdit} />
+              onEdit={enabled && this.props.handleEdit}
+              enabled={enabled} />
           )}
           {
             this.state.pagination &&

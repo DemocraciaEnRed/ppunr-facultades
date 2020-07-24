@@ -13,12 +13,15 @@ export default function CommentReplies (props) {
         replies={props.replies}
         onReplyEdit={props.onReplyEdit}
         forum={props.forum}
-        user={props.user} />
-      <RepliesForm
-        commentId={props.commentId}
-        onSubmit={props.onReply}
-        commentsReplying={props.commentsReplying}
-        topic={props.topic} />
+        user={props.user}
+        enabled={props.enabled} />
+      {props.enabled &&
+        <RepliesForm
+          commentId={props.commentId}
+          onSubmit={props.onReply}
+          commentsReplying={props.commentsReplying}
+          topic={props.topic} />
+      }
     </div>
   )
 }
