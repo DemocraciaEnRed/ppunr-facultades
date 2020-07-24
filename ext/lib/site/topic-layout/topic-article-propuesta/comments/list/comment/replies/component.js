@@ -13,8 +13,9 @@ export default function CommentReplies (props) {
         replies={props.replies}
         onReplyEdit={props.onReplyEdit}
         forum={props.forum}
-        user={props.user} />
-      {props.isFromEscuela &&
+        user={props.user}
+        enabled={props.enabled} />
+      {props.isFromEscuela && props.enabled &&
         <RepliesForm
           commentId={props.commentId}
           onSubmit={props.onReply}

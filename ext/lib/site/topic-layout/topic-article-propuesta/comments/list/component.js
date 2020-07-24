@@ -31,6 +31,7 @@ export default function CommentsList (props) {
               forum={props.forum}
               topic={props.topic}
               isFromEscuela={props.isFromEscuela}
+              enabled={props.enabled}
               {...handlers} />
           )
         })

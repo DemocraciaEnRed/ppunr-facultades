@@ -164,7 +164,8 @@ export class Comment extends Component {
           flags={comment.flags}
           commentId={comment.id}
           onFlag={this.props.onFlag}
-          onUnflag={this.props.onUnflag} />
+          onUnflag={this.props.onUnflag}
+          enabled={this.props.enabled} />
 
         <CommentContent
           textHtml={comment.textHtml}
@@ -183,7 +184,8 @@ export class Comment extends Component {
           onUnvote={this.handleUnvote}
           onUpvote={this.handleUpvote}
           onDownvote={this.handleDownvote}
-          onToggleReplies={this.handleToggleReplies} />
+          onToggleReplies={this.handleToggleReplies}
+          enabled={this.props.enabled} />
 
         <CommentReplies
           commentId={comment.id}
@@ -196,7 +198,8 @@ export class Comment extends Component {
           onDeleteReply={this.props.onDeleteReply}
           onReplyEdit={this.props.onReplyEdit}
           commentsReplying={this.props.commentsReplying}
-          isFromEscuela={isFromEscuela} />
+          isFromEscuela={isFromEscuela}
+          enabled={this.props.enabled} />
 
         {
           this.state.overlayVisibility &&

@@ -19,7 +19,8 @@ export default function RepliesList (props) {
               commentId={props.commentId}
               onReplyEdit={props.onReplyEdit}
               forum={props.forum}
-              onDeleteReply={props.onDeleteReply} />
+              onDeleteReply={props.onDeleteReply}
+              enabled={props.enabled} />
           )
         })
       }
@@ -78,7 +79,8 @@ class Reply extends Component {
           onToggleOptionsMenu={this.handleToggleOptionsMenu}
           showOptionsMenu={this.state.showOptionsMenu}
           onEditShow={this.handleEditShow(true)}
-          onToggleDeleteConfirmation={this.handleToggleDeleteConfirmation} />
+          onToggleDeleteConfirmation={this.handleToggleDeleteConfirmation}
+          enabled={this.props.enabled} />
 
         <ReplyContent
           textHtml={reply.textHtml}
