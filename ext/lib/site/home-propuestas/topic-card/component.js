@@ -77,10 +77,12 @@ export class TopicCard extends Component {
             {topic.owner.claustro &&
               <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
             }
-            <span
-              className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
-              {moment(topic.createdAt).format('D-M-YYYY')}
-            </span>
+            {topic.attrs.state != 'sistematizada' &&
+              <span
+                className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
+                {moment(topic.createdAt).format('D-M-YYYY')}
+              </span>
+            }
           </div>
 
           <h1 className='topic-card-title'>
