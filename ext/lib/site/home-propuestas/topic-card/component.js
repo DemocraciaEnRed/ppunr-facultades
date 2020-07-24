@@ -83,7 +83,7 @@ export class TopicCard extends Component {
             {!topic.owner.facultad && topic.owner.claustro &&
               <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
             }
-            {!topic.owner.facultad && topic.attrs && topic.attrs.facultad &&
+            {!topic.owner.facultad && topic.attrs && topic.attrs.facultad && topic.attrs.facultad != 'ninguna' &&
             <span className='topic-card-facultad'>
               ({this.props.facultades.length > 0 && this.props.facultades.find(f => f.value == topic.attrs.facultad).name})
             </span>
