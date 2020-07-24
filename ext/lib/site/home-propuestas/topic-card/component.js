@@ -88,10 +88,12 @@ export class TopicCard extends Component {
               ({this.props.facultades.length > 0 && this.props.facultades.find(f => f.value == topic.attrs.facultad).name})
             </span>
             }
-            <span
-              className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
-              {moment(topic.createdAt).format('D-M-YYYY')}
-            </span>
+            {topic.attrs.state != 'sistematizada' &&
+              <span
+                className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
+                {moment(topic.createdAt).format('D-M-YYYY')}
+              </span>
+            }
           </div>
 
           <h1 className='topic-card-title'>
