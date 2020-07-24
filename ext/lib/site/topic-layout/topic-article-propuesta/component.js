@@ -173,7 +173,14 @@ class TopicArticle extends Component {
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
 
           <span className='topic-article-span'>Idea</span>
-          {topic.attrs.problema && <p className='topic-article-p'>{topic.attrs.problema} </p> }
+          {topic.attrs.problema &&
+            <div
+              className='topic-article-p'
+              dangerouslySetInnerHTML={{
+                __html: topic.attrs.problema.replace(/https?:\/\/[a-zA-Z0-9./]+/g, '<a href="$&" rel="noopener noreferer" target="_blank">$&</a>')
+              }}>
+            </div>
+          }
         </div>
         {/*topic.attrs.state !== 'pendiente' && topic.attrs.state !== 'no-factible' && topic.attrs.state !== 'integrado' && (topic.attrs.anio === '2019' || topic.attrs.anio === '2020')  &&
           <div className='topic-article-content alert alert-success alert-proyecto' role='alert'>
