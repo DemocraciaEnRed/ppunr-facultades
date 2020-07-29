@@ -31,17 +31,19 @@ export class TopicCard extends Component {
     let targTag = e.target && e.target.tagName
 
     const isSeguirButton = findAncestor(e.target, 'cause-wrapper')
+    const isProyectistaButton = findAncestor(e.target, 'proyectista-wrapper')
 
-    if (!isSeguirButton)
+    if (!isSeguirButton && !isProyectistaButton)
       browserHistory.push(`/propuestas/topic/${this.props.topic.id}`)
   }
   render() {
-    const { topic, onVote, user, isFromEscuela } = this.props
+    const { topic, onVote, onProyectista, user, isFromEscuela } = this.props
     const isStaff = !user.state.rejected && user.state.value.staff
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
+    const isProyectista = topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id)
 
     const likesCssClass = topic.voted ? 'voted' : (
-      topic.privileges.canVote && !isStaff ? 'not-voted' : 'cant-vote'
+      topic.privileges && topic.privileges.canVote && !isStaff ? 'not-voted' : 'cant-vote'
     )
     const likesCountDiv = (
       <div className='participants'>
@@ -149,6 +151,17 @@ export class TopicCard extends Component {
                   Comentarios
                   {subscribesCountDiv}
                 </div>
+              </div>
+            }
+            {isSistematizada &&
+              <div
+                className='proyectista-wrapper'>
+                <button
+                  className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+                  onClick={() => onProyectista(topic.id, !isProyectista)}
+                  disabled={isProyectista}>
+                  {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
+                </button>
               </div>
             }
           </div>

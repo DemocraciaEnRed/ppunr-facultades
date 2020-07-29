@@ -195,6 +195,24 @@ class HomePropuestas extends Component {
     }).catch((err) => { throw err })
   }
 
+  handleProyectista = (id, hacerProyectista) => {
+    const { user } = this.props
+
+    if (user.state.rejected) {
+      return browserHistory.push({
+        pathname: '/signin',
+        query: { ref: window.location.pathname }
+      })
+    }
+
+    topicStore.updateProyectista(id, hacerProyectista).then((res) => {
+      const topics = this.state.topics
+      const index = topics.findIndex((t) => t.id === id)
+      topics[index] = res
+      this.setState({ topics })
+    }).catch((err) => { throw err })
+  }
+
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
     if (this.state.claustro.includes(option)){
@@ -323,6 +341,7 @@ class HomePropuestas extends Component {
                 <TopicCard
                   key={topic.id}
                   onVote={this.handleVote}
+                    onProyectista={this.handleProyectista}
                   forum={forum}
                   topic={topic}
                   isFromEscuela={isFromEscuela} />
