@@ -74,29 +74,33 @@ export class TopicCard extends Component {
             }
           </div>
 
-          <div className='topic-creation'>
-            <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
-            {topic.owner.facultad && topic.owner.claustro &&
-              <span className='topic-card-facultad-claustro'>({topic.owner.facultad.abreviacion}, {topic.owner.claustro.nombre})</span>
-            }
-            {topic.owner.facultad && !topic.owner.claustro &&
-            <span className='topic-card-facultad'>({topic.owner.facultad.abreviacion})</span>
-            }
-            {!topic.owner.facultad && topic.owner.claustro &&
-              <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
-            }
-            {!topic.owner.facultad && topic.attrs && topic.attrs.facultad && topic.attrs.facultad != 'ninguna' &&
-            <span className='topic-card-facultad'>
-              ({this.props.facultades.length > 0 && this.props.facultades.find(f => f.value == topic.attrs.facultad).name})
-            </span>
-            }
-            {topic.attrs.state != 'sistematizada' &&
+          {isSistematizada ?
+            <div className='topic-creation'>
+              <span>Creado por: <span className='topic-card-author'>PPUNR</span></span>
+            </div>
+            :
+            <div className='topic-creation'>
+              <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
+              {topic.owner.facultad && topic.owner.claustro &&
+                <span className='topic-card-facultad-claustro'>({topic.owner.facultad.abreviacion}, {topic.owner.claustro.nombre})</span>
+              }
+              {topic.owner.facultad && !topic.owner.claustro &&
+              <span className='topic-card-facultad'>({topic.owner.facultad.abreviacion})</span>
+              }
+              {!topic.owner.facultad && topic.owner.claustro &&
+                <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
+              }
+              {!topic.owner.facultad && topic.attrs && topic.attrs.facultad && topic.attrs.facultad != 'ninguna' &&
+              <span className='topic-card-facultad'>
+                ({this.props.facultades.length > 0 && this.props.facultades.find(f => f.value == topic.attrs.facultad).name})
+              </span>
+              }
               <span
                 className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
                 {moment(topic.createdAt).format('D-M-YYYY')}
               </span>
-            }
-          </div>
+            </div>
+          }
 
           <h1 className='topic-card-title'>
             {topic.mediaTitle}
