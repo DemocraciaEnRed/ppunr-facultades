@@ -40,7 +40,7 @@ export class TopicCard extends Component {
     const { topic, onVote, onProyectista, user, isFromEscuela } = this.props
     const isStaff = !user.state.rejected && user.state.value.staff
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
-    const isProyectista = topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id)
+    const isProyectista = !user.state.rejected && topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id)
 
     const likesCssClass = topic.voted ? 'voted' : (
       topic.privileges && topic.privileges.canVote && !isStaff ? 'not-voted' : 'cant-vote'
