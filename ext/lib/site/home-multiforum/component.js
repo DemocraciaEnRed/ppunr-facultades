@@ -51,7 +51,7 @@ export default class HomeMultiforumOverride extends Component {
           <ThumbsVoto texts={this.state.texts} />
           <div className="banner-ideas">
             <img src="/ext/lib/site/home-multiforum/icon-idea.svg" alt="Ideas"/>
-            <p>Conocé las ideas subidas para colaborar y debatir con el resto de la comunidad sobre el PPUNR</p>
+            <p>Conocé <strong>las ideas sistematizadas</strong> que podrán ser desarrolladas como proyectos elegibles en la próxima etapa. Todos/as los/as miembros de la comunidad pueden sumarse para ser proyectistas (aún si no participaste en la primera fase). </p>
             <Link to={'/propuestas'} className="boton-foro" href="">Ir a foro</Link>
           </div>
           {/* <Proyectos /> */}

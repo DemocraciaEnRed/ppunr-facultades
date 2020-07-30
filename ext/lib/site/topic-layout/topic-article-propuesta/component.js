@@ -216,9 +216,9 @@ class TopicArticle extends Component {
                 <p>{topic.attrs['admin-comment']}</p>
 
                 {topic.attrs['admin-comment-referencia'] && topic.attrs['admin-comment-referencia'] !== '' &&
-                  <p className='admin-comment-referido'>Podés ver la idea final <a className='admin-comment-referido' href={topic.attrs['admin-comment-referencia']}>aquí</a>.</p>
+                  <p className='admin-comment-referido'>Podés ver la idea integrada <a className='admin-comment-referido' href={topic.attrs['admin-comment-referencia']}>aquí</a>.</p>
                 }
-                <p className='font-weight-bold'>Presupuesto Participativo de la Universidad de Rosario</p>
+                <p className='font-weight-bold'>Equipo de Coordinación y Gestión PPUNR</p>
               </div>
             )
         }

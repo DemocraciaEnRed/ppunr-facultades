@@ -296,7 +296,7 @@ class HomePropuestas extends Component {
           <BannerListadoTopics
           btnText={config.propuestasAbiertas ? 'Mandá tu idea' : undefined}
           btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
-            title='Ideas'
+          title='Sumate como proyectista'
             />
 
           <div className='container'>
