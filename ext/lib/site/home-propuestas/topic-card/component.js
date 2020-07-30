@@ -74,18 +74,22 @@ export class TopicCard extends Component {
             }
           </div>
 
-          <div className='topic-creation'>
-            <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
+          {isSistematizada ?
+            <div className='topic-creation'>
+              <span>Creado por: <span className='topic-card-author'>PPUNR</span></span>
+            </div>
+            :
+            <div className='topic-creation'>
+              <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
             {topic.owner.claustro &&
-              <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
-            }
-            {topic.attrs.state != 'sistematizada' &&
+                <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
+              }
               <span
                 className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
                 {moment(topic.createdAt).format('D-M-YYYY')}
               </span>
-            }
-          </div>
+            </div>
+          }
 
           <h1 className='topic-card-title'>
             {topic.mediaTitle}
