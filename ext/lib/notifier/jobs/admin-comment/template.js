@@ -22,7 +22,7 @@ module.exports = ({
      <br />
      ${buttonTemplate({
        url: topicUrl,
-       text: '¡Quiero ser proyectista!'
+       text: 'Ver comentario'
      })}
   `
 })
