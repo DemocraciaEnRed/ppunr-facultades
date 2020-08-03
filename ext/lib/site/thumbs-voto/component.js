@@ -60,10 +60,7 @@ export default userConnector(function ThumbsVoto(props) {
             <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
               {/* props.texts['home-icono2-texto']*/}
-              Registrá tu usuario, completá el espacio con tus ideas para hacer la Universidad que Queremos y envianos tus propuestas. Tenés tiempo hasta el 20 de julio. Podés, abrir nuevos temas o sumarte a una conversación activa&nbsp;
-              <Link to={ userLoggedIn ? `/formulario-idea?id=${userEscuelaId}` : '/formulario-idea' }>
-                aquí
-              </Link>.
+              Si aún no lo hiciste, registrá tu usuario. Si ya tenés uno, ingresá y podrás ver en el Foro las <strong>Ideas Sistematizadas</strong>. <strong>Sumate como proyectista</strong> de la idea que te interese desarrollar como proyecto en la segunda etapa del PP UNR. Tenés tiempo <strong>hasta el 14 de Agosto</strong>. Para buscar las ideas, está disponible la opción de filtrar por tema. Podés ser proyectista de cualquiera de las ideas publicadas.
               <br />
               ¡Iremos subiendo las novedades en esta plataforma y en nuestras redes sociales! Entrá a <a href='https://presupuestoparticipativo.unr.edu.ar/' rel="noopener noreferer" target="_blank">nuestra web</a> para más información.
             </p>
