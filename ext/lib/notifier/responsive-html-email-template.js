@@ -377,7 +377,7 @@ module.exports = ({
                       <tr>
                         <td class="align-center">
                           <p>
-                            <span style="color:#990070">PRESUPUESTO PARTICIPATIVO DE LA UNIVERSIDAD DE ROSARIO</span>
+                            <span style="color:#990070">PRESUPUESTO PARTICIPATIVO DE LA UNIVERSIDAD NACIONAL DE ROSARIO</span>
                             <br> <span style="color:#005e80">#PPUNR #LaUniversidadQueQueremos</span>
                           </p>
                           <!-- When inserting images remember to include the following attributes or
