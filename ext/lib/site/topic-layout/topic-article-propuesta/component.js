@@ -94,6 +94,7 @@ class TopicArticle extends Component {
       forum &&
       forum.privileges &&
       forum.privileges.canChangeTopics
+    const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
 
     if (!topic) {
       return (
@@ -224,7 +225,7 @@ class TopicArticle extends Component {
         }
 
         {
-          !user.state.pending && <Comments forum={forum} topic={topic} />
+          !user.state.pending && !isSistematizada && <Comments forum={forum} topic={topic} />
         }
       </div>
     )
