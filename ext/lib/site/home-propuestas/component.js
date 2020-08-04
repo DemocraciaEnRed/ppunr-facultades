@@ -311,11 +311,11 @@ class HomePropuestas extends Component {
         </div>
 
         <div className='container topics-container'>
-          {!isFromEscuela &&
+          {/*!isFromEscuela &&
             <div className='not-in-escuela-reminder'>
-              <span><i className="glyphicon glyphicon-warning-sign"></i>Recordá que sólo podés subir ideas en el foro de tu escuela</span>
+              <span><i className="glyphicon glyphicon-warning-sign"></i>Recordá que sólo podés ser proyectista en ideas del foro de tu escuela</span>
             </div>
-          }
+          */}
           <FilterPropuestas
             claustros={this.state.claustros}
             claustro={this.state.claustro}
