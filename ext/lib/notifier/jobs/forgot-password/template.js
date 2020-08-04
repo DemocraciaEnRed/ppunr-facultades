@@ -22,6 +22,7 @@ module.exports = ({
       url: resetPasswordUrl,
       text: 'Reestablecer contraseña'
     })}
+    <p>O ingresá al siguiente link: <a href="${resetPasswordUrl}">${resetPasswordUrl}</a></p>
     <p><i>PD: si no solicitaste reestablecer tu contraseña podés ignorar este correo.</i></p>
   `
 })

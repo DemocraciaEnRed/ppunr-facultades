@@ -29,12 +29,12 @@ const interval = setInterval(function () {
     // subscriber-update-proposal, subscriber-update-project, new-comment o comment-reply
     const testMailJobs = ['welcome-email', 'new-proposal', 'update-proposal', 'update-project',
       'subscriber-update-proposal', 'subscriber-update-project', 'new-comment', 'comment-reply',
-      'admin-comment']
-    const testMailJob = testMailJobs[8]
+      'admin-comment', 'forgot-password']
+    const testMailJob = testMailJobs[9]
     // cuenta a la cual le llegarán los emails
     const testMailAccount = 'bungew@gmail.com'
     // id usado para 'subscriber-update-X', tiene que estar en la DB
-    const testMailUserId = '5e3c5cb34324aca40d6727d7'
+    const testMailUserId = '5eecfb8124f8213e89fc842b'
     process.env.NOTIFICATIONS_MAILER_EMAIL = testMailAccount
 
     log(`Mandando email de testeo a ${testMailAccount}`)
@@ -62,7 +62,8 @@ const interval = setInterval(function () {
       },
       // para welcome-email
       to: testMailAccount,
-      validateUrl: 'https://validateUrl'
+      validateUrl: 'https://validateUrl.com',
+      resetUrl: 'https://resetUrl.com'
     }).then(()=> {
       // solo queremos testear el mail, no levantar el site
       throw new Error('¡Error para que no continuar! Solo queremos probar los mails.')
