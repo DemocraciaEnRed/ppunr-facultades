@@ -8,7 +8,8 @@ export class Cause extends Component {
   state = {
     topicClosed: false,
     showLoginMessage: false,
-    results: null
+    results: null,
+    forceProyectista: false
   }
 
   componentWillMount () {
@@ -43,20 +44,49 @@ export class Cause extends Component {
       .catch((err) => { throw err })
   }
 
+  handleProyectista = (id, hacerProyectista) => {
+    const { user } = this.props
+
+    if (user.state.rejected) {
+      return browserHistory.push({
+        pathname: '/signin',
+        query: { ref: window.location.pathname }
+      })
+    }
+
+    topicStore.updateProyectista(id, hacerProyectista).then((res) =>
+      this.setState({ forceProyectista: true })
+    ).catch((err) => { throw err })
+  }
+
   render () {
     const { user, topic } = this.props
+    const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
+    const isProyectista = !user.state.rejected && (this.state.forceProyectista || topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id))
 
     if (user.state.pending) return null
 
     const { supported, topicClosed } = this.state
-    if (user.state.fulfilled && !topic.privileges.canVote) return null
+    if (user.state.fulfilled && topic.privileges && !topic.privileges.canVote) return null
     return (
       <div className='topics-cause-propuesta'>
-        <div className='btn btn-primary' disabled={true}>
-          Seguidores:&nbsp;
-          {topic.action.count}&nbsp;
-          <span className='icon-like' />
-        </div>
+        {isSistematizada ?
+          <div
+            className='proyectista-wrapper'>
+            <button
+              className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+              onClick={() => this.handleProyectista(topic.id, !isProyectista)}
+              disabled={isProyectista}>
+              {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
+            </button>
+          </div>
+        :
+          <div className='btn btn-primary' disabled={true}>
+            Seguidores:&nbsp;
+            {topic.action.count}&nbsp;
+            <span className='icon-like' />
+          </div>
+        }
         {/*supported && (
           <button
             className='btn btn-primary'
@@ -75,7 +105,7 @@ export class Cause extends Component {
         )*/}
         <div className='likes-total'>
         </div>
-        {user.state.fulfilled && !topic.privileges.canVote && (
+        {user.state.fulfilled  && topic.privileges && !topic.privileges.canVote && (
           <p className='text-mute overlay-vote'>
             <span className='icon-lock' />
             <span className='text'>
