@@ -157,7 +157,7 @@ export class TopicCard extends Component {
                 </div>
               </div>
             }
-            {isSistematizada &&
+            {isFromEscuela && isSistematizada &&
               <div
                 className='proyectista-wrapper'>
                 <button

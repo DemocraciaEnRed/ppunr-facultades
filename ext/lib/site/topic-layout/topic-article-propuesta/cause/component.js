@@ -60,7 +60,7 @@ export class Cause extends Component {
   }
 
   render () {
-    const { user, topic } = this.props
+    const { user, topic, isFromEscuela } = this.props
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
     const isProyectista = !user.state.rejected && (this.state.forceProyectista || topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id))
 
@@ -75,8 +75,8 @@ export class Cause extends Component {
             className='proyectista-wrapper'>
             <button
               className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
-              onClick={() => this.handleProyectista(topic.id, !isProyectista)}
-              disabled={isProyectista}>
+              onClick={isFromEscuela && (() => this.handleProyectista(topic.id, !isProyectista))}
+              disabled={!isFromEscuela || isProyectista}>
               {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
             </button>
           </div>

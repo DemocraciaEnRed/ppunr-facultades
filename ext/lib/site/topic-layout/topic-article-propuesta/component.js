@@ -94,7 +94,12 @@ class TopicArticle extends Component {
       forum &&
       forum.privileges &&
       forum.privileges.canChangeTopics
+
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
+
+    const topicEscuelaId = topic.escuela._id
+    const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas && user.state.value.escuelas.map(e=>e._id)
+    const isFromEscuela = userEscuelasIds && userEscuelasIds.includes(topicEscuelaId)
 
     if (!topic) {
       return (
@@ -191,7 +196,8 @@ class TopicArticle extends Component {
         <div className='topic-actions topic-article-content'>
           <Cause
             topic={topic}
-            canVoteAndComment={forum.privileges.canVoteAndComment} />
+            canVoteAndComment={forum.privileges.canVoteAndComment}
+            isFromEscuela={isFromEscuela} />
         </div>
         <Social
           topic={topic}
@@ -225,7 +231,7 @@ class TopicArticle extends Component {
         }
 
         {
-          !user.state.pending && !isSistematizada && <Comments forum={forum} topic={topic} />
+          !user.state.pending && !isSistematizada && <Comments forum={forum} topic={topic} isFromEscuela={isFromEscuela} />
         }
       </div>
     )

@@ -26,11 +26,7 @@ export class Comments extends Component {
   }
 
   render () {
-    const { commentsFetch, topic, user } = this.props
-
-    const topicEscuelaId = topic.escuela._id
-    const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas && user.state.value.escuelas.map(e=>e._id)
-    const isFromEscuela = userEscuelasIds && userEscuelasIds.includes(topicEscuelaId)
+    const { commentsFetch, topic, user, isFromEscuela } = this.props
 
     const enabled = false
 
