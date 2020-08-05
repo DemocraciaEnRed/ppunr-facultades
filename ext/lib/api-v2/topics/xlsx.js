@@ -73,6 +73,9 @@ app.get('/export/topics/xlsx',
     req.topics = topics
     next()
   }),
+  (req, res, next) =>
+    api.user.populateProyectistas(req.topics).then(() => next())
+  ,
   function getXlsx(req, res, next) {
     let infoTopics = []
     const attrsNames = req.forum.topicsAttrs
@@ -92,10 +95,12 @@ app.get('/export/topics/xlsx',
         'Autor/a nombre': `${escapeTxt(topic.owner.firstName)}`,
         'Autor/a apellido': `${escapeTxt(topic.owner.lastName)}`,
         'Autor/a email': `${escapeTxt(topic.owner.email)}`,
-        'Autor/a claustro': `${escapeTxt(topic.owner.claustro.nombre)}`,
+        'Autor/a claustro': `${escapeTxt(topic.owner.claustro && topic.owner.claustro.nombre)}`,
         'Autor/a género': `${escapeTxt(topic.attrs['genero'])}`,
         'Seguidores cantidad': `${escapeTxt(topic.action.count)}`,
-        'Seguidores emails': `${escapeTxt(topic.action.results.join(', '))}`
+        'Seguidores emails': `${escapeTxt(topic.action.results.join(', '))}`,
+        'Proyectistas cantidad': `${escapeTxt(topic.proyectistas && topic.proyectistas.length)}`,
+        'Proyectistas emails': `${escapeTxt(topic.proyectistas && topic.proyectistas.map(p=>p.email).join(','))}`
       }
 
       /*attrsNames.map((name) => {
