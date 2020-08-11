@@ -157,7 +157,7 @@ export class TopicCard extends Component {
                 </div>
               </div>
             }
-            {isFromEscuela && isSistematizada &&
+            {/*isFromEscuela && isSistematizada &&
               <div
                 className='proyectista-wrapper'>
                 <button
@@ -167,7 +167,7 @@ export class TopicCard extends Component {
                   {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
                 </button>
               </div>
-            }
+            */}
           </div>
 
         </div>
