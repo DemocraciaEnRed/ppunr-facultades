@@ -71,7 +71,7 @@ export class Cause extends Component {
     return (
       <div className='topics-cause-propuesta'>
         {isSistematizada ?
-          <div
+          /*<div
             className='proyectista-wrapper'>
             <button
               className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
@@ -79,7 +79,7 @@ export class Cause extends Component {
               disabled={isProyectista}>
               {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
             </button>
-          </div>
+          </div>*/null
         :
           <div className='btn btn-primary' disabled={true}>
             Seguidores:&nbsp;
