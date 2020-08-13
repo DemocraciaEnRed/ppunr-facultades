@@ -24,7 +24,7 @@ export default class AnonUser extends Component {
   render () {
     return (
       <div className='header-item'>
-        {
+        {/*
           this.state.signup &&
            (
              <Link
@@ -34,7 +34,7 @@ export default class AnonUser extends Component {
                {t('header.signup')}
              </Link>
            )
-        }
+        */}
         {
           this.state.signin &&
            (
