@@ -289,7 +289,7 @@ class HomePropuestas extends Component {
         <BannerListadoTopics
           btnText={config.propuestasAbiertas && isFromEscuela ? 'Mandá tu idea' : undefined}
           btnLink={config.propuestasAbiertas && isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
-          title='Sumate como proyectista'
+          title='Conocé las ideas-proyectos del PPUNR'
           subtitle={escuela && escuela.tituloForo}
           esculeaAbrev={escuela && escuela.abreviacion}
           />
