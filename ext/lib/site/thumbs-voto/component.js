@@ -56,9 +56,9 @@ export default function ThumbsVoto(props) {
             <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
               {/* props.texts['home-icono2-texto']*/}
-              Si aún no lo hiciste, registrá tu usuario. Si ya tenés uno, ingresá y podrás ver en el Foro las <strong>Ideas Sistematizadas</strong>. <strong>Sumate como proyectista</strong> de la idea que te interese desarrollar como proyecto en la segunda etapa del PP UNR. Tenés tiempo <strong>hasta el 14 de Agosto</strong>. Para buscar las ideas, está disponible la opción de filtrar por tema. Podés ser proyectista de cualquiera de las ideas publicadas.
+              La etapa de los Foros ha finalizado. En este momento, quienes se inscribieron como <strong>proyectistas</strong> están trabajando en la Comisión Universitaria, junto con técnicos de la UNR, para transformar las ideas surgidas en los Foros en <strong>proyectos factibles</strong> que podrás elegir en Noviembre.
               <br />
-              ¡Iremos subiendo las novedades en esta plataforma y en nuestras redes sociales! Entrá a <a href='https://presupuestoparticipativo.unr.edu.ar/' rel="noopener noreferer" target="_blank">nuestra web</a> para más información.
+              ¡Iremos subiendo las novedades en la web y en nuestras redes sociales! Entrá a <a href='https://presupuestoparticipativo.unr.edu.ar/' rel="noopener noreferer" target="_blank">nuestra web</a> para más información.
             </p>
 
           </div>
