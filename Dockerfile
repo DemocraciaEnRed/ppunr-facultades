@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:8
 
 MAINTAINER Francisco Pensa <francisco@democracyos.io>
 
@@ -7,13 +7,15 @@ RUN npm config set python python2.7
 WORKDIR /usr/src
 
 COPY ["package.json", "."]
+COPY ["package-lock.json", "."]
 
 ENV NODE_ENV=production \
     NODE_PATH=/usr/src
 
 #para debuggear:
 #RUN npm install --verbose
-RUN npm install --quiet
+#RUN npm install --quiet
+RUN npm ci --quiet
 
 RUN mkdir ext
 COPY ["ext/package.json", "ext"]
