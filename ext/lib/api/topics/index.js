@@ -3,6 +3,8 @@ const validate = require('lib/api-v2/validate')
 const middlewares = require('lib/api-v2/middlewares')
 const utils = require('./utils')
 const apiNoExt = require('lib/db-api')
+const log = require('debug')('democracyos:ext:api:topics')
+
 
 const app = Router()
 
@@ -56,12 +58,13 @@ app.get('/topics',
       },
       tipoIdea: {
         type: 'string',
-        default: 'sistematizada'
+        default: 'sistematizada,pendiente,idea-proyecto'
       }
     })
   }, { formats }),
   utils.findForum,
   utils.parseStates,
+  utils.parseTipoIdea,
   utils.parseFacultades,
   utils.parseClaustros,
   utils.parseTags,
@@ -75,6 +78,9 @@ app.get('/topics',
       utils.findTopics(opts).then(topics => apiNoExt.user.populateOwners(topics)),
       utils.findTopicsCount(opts)
     ]).then(([topics, count]) => {
+      // pidieron mostrar siempre primero las ideas-proyecto
+      const ideasProyectos = topics.filter(t => t.attrs.state == 'idea-proyecto')
+      const ideasResto = topics.filter(t => t.attrs.state != 'idea-proyecto')
       res.status(200).json({
         status: 200,
         pagination: {
@@ -84,7 +90,7 @@ app.get('/topics',
           limit: opts.limit
         },
         results: {
-          topics: topics
+          topics: ideasProyectos.concat(ideasResto)
         }
       })
     }).catch(next)

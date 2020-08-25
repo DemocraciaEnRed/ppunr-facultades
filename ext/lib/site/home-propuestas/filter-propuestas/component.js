@@ -70,12 +70,13 @@ export default class FilterPropuestas extends Component {
   }
 
   render () {
-    console.log('Render filters')
+    //console.log('Render filters')
 
     const {
-      facultad, facultades,
-      claustro, claustros,
+      //facultad, facultades,
+      //claustro, claustros,
       tags, tag,
+      tiposIdea, tipoIdea,
       handleRemoveBadge
     } = this.props
 
@@ -86,17 +87,21 @@ export default class FilterPropuestas extends Component {
     // - el .map(.find().name) hace la conversión de keys a values
     //   p.ej. barrio contiene keys, y para mostrar su formato para humanos hay
     //   que buscar la key dentro de barrios
-    if (facultad.length)
+    /*if (facultad.length)
       allActiveOpts.push(
         ...facultad.sort().map(i => ({ value: i, name: facultades.find(j => j.value==i).name }))
       )
     if (claustro.length)
       allActiveOpts.push(
         ...claustro.sort().map(i => ({ value: i, name: claustros.find(j => j.value==i).name }))
-      )
-    if (tag.length)
+      )*/
+    if (tag.length && tags.length)
       allActiveOpts.push(
         ...tag.sort().map(i => ({ value: i, name: tags.find(j => j.value==i).name }))
+      )
+    if (tipoIdea.length && tiposIdea.length)
+      allActiveOpts.push(
+        ...tipoIdea.sort().map(i => ({ value: i, name: tiposIdea.find(j => j.value==i).name }))
       )
 
     return (
@@ -127,6 +132,19 @@ export default class FilterPropuestas extends Component {
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
             />*/}
+
+          <FilterBox
+            name='tipoIdea'
+            title='Tipo de idea'
+            allOptions={tiposIdea}
+            activeOptions={tipoIdea}
+
+            activeDropdown={this.state.activeDropdown}
+            clearedFilters={this.state.clearedFilters}
+            handleDropdown={this.handleDropdown}
+            handleFilter={this.handleFilter}
+            clearFilter={this.clearFilter}
+            />
 
           <FilterBox
             name='tag'
