@@ -24,7 +24,7 @@ const defaultValues = {
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest',
-  tipoIdea: 'sistematizada'
+  tipoIdea: []
 }
 
 const filters = {
@@ -37,6 +37,12 @@ const filters = {
     sort: 'newest',
   },
 }
+
+const tiposIdeaData = [
+  { value: 'sistematizada', name: 'Sistematizada'},
+  { value: 'pendiente', name: 'Original'},
+  { value: 'idea-proyecto', name: 'Idea-Proyecto'}
+]
 
 class HomePropuestas extends Component {
   constructor () {
@@ -51,6 +57,8 @@ class HomePropuestas extends Component {
       claustro: defaultValues.claustro,
       tags: [],
       tag: defaultValues.tag,
+      tiposIdea: [],
+      tipoIdea: defaultValues.tipoIdea,
       sort: defaultValues.sort,
       tipoIdea: defaultValues.tipoIdea,
 
@@ -77,12 +85,13 @@ class HomePropuestas extends Component {
       const [claustros, tags, forum, escuela] = results
       const tagsMap = tags.map(tag => { return {value: tag.id, name: tag.name}; });
       const tag = this.props.location.query.tags ? [tagsMap.find(j => j.name == this.props.location.query.tags).value] : [];
+      const tiposIdea = forum.topicsAttrs.find(a => a.name=='state').options.map(state => { return {value: state.name, name: state.title}; })
       this.setState({
         claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
         tags: tagsMap,
-        forum,
+        tiposIdea,
         escuela,
-        forumStates: forum.topicsAttrs.find(a => a.name=='state').options
+        forum
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
@@ -148,19 +157,24 @@ class HomePropuestas extends Component {
   }
 
   handleFilter = (filter, value) => {
-    // If the value is not included in the filter array, add it
-    if (!this.state[filter].includes(value)) {
-      this.setState({
-        [filter]: [...this.state[filter], value]
-      }, () => this.fetchTopics())
-      // If it's already included and it's the only filter applied, apply default filters
-    /* } else if (this.state[filter].length === 1) {
-      this.clearFilter(filter) */
-      // If it's already included erase it
-    } else {
-      this.setState({
-        [filter]: [...this.state[filter]].filter((item) => item !== value)
-      }, () => this.fetchTopics())
+    if (filter == 'tipoIdea'){
+      // solo permitir una elección en tipo de idea
+      this.handleDefaultFilter(filter,value)
+    }else{
+      // If the value is not included in the filter array, add it
+      if (!this.state[filter].includes(value)) {
+        this.setState({
+          [filter]: [...this.state[filter], value]
+        }, () => this.fetchTopics())
+        // If it's already included and it's the only filter applied, apply default filters
+      /* } else if (this.state[filter].length === 1) {
+        this.clearFilter(filter) */
+        // If it's already included erase it
+      } else {
+        this.setState({
+          [filter]: [...this.state[filter]].filter((item) => item !== value)
+        }, () => this.fetchTopics())
+      }
     }
   }
 
@@ -237,7 +251,7 @@ class HomePropuestas extends Component {
       <div>
         <h4 className="topics-title">Lista de ideas</h4>
         <div className='topics-filters'>
-          {this.state.forumStates &&
+          {/*this.state.forumStates &&
             <div className='topics-filter topics-state-filter'>
               <span>Mostrar ideas</span>
               {this.state.forumStates.map((state) => (
@@ -254,7 +268,7 @@ class HomePropuestas extends Component {
                   </button>
                 ))}
             </div>
-          }
+          */}
           {/*this.state.topics && this.state.topics.length > 0 &&
             <div className='topics-filter topics-sort-filter'>
               <span>Ordenar por</span>
@@ -275,7 +289,7 @@ class HomePropuestas extends Component {
   }
 
   render () {
-    console.log('Render main')
+    //console.log('Render main')
 
     const { forum, topics, escuela } = this.state
     const { user } = this.props
@@ -321,6 +335,8 @@ class HomePropuestas extends Component {
             claustro={this.state.claustro}
             tags={this.state.tags}
             tag={this.state.tag}
+              tiposIdea={this.state.tiposIdea}
+              tipoIdea={this.state.tipoIdea}
             openVotation={true}
             handleFilter={this.handleFilter}
             handleDefaultFilter={this.handleDefaultFilter}

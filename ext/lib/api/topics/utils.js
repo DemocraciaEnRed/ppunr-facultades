@@ -18,6 +18,11 @@ exports.parseStates = (req, res, next) => {
   next()
 }
 
+exports.parseTipoIdea = (req, res, next) => {
+  req.query.tipoIdea = req.query.tipoIdea.split(',').filter((t) => !!t)
+  next()
+}
+
 exports.findForum = (req, res, next) => {
   api.forums.find({ name: req.query.forumName })
     .findOne()
@@ -50,7 +55,7 @@ const queryTopics = (opts) => {
 
   if (owners && owners.length > 0) query.owner = { $in: owners }
   if (tags && tags.length > 0) query.tags = { $in: tags }
-  if (state && state.length > 0) query['attrs.state'] = state
+  if (state && state.length > 0) query['attrs.state'] = { $in: state }
   if (related && related.length > 0) query['attrs.admin-comment-referencia'] = { $regex: `.*${related}.*` }
 
   return api.topics.find().where(query)
