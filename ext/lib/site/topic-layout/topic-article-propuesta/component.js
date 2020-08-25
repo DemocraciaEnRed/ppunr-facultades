@@ -96,6 +96,7 @@ class TopicArticle extends Component {
       forum.privileges.canChangeTopics
 
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
+    const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
 
     const topicEscuelaId = topic.escuela._id
     const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas && user.state.value.escuelas.map(e=>e._id)
@@ -178,7 +179,7 @@ class TopicArticle extends Component {
           <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div>
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
 
-          <span className='topic-article-span'>Idea</span>
+          <span className='topic-article-span'>{isIdeaProyecto ? 'Idea - Proyecto' : 'Idea'}</span>
           {topic.attrs.problema &&
             <div
               className='topic-article-p'
@@ -231,7 +232,7 @@ class TopicArticle extends Component {
         }
 
         {
-          !user.state.pending && !isSistematizada && <Comments forum={forum} topic={topic} isFromEscuela={isFromEscuela} />
+          !user.state.pending && !isSistematizada && !isIdeaProyecto && <Comments forum={forum} topic={topic} isFromEscuela={isFromEscuela} />
         }
       </div>
     )

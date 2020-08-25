@@ -62,7 +62,8 @@ export class Cause extends Component {
   render () {
     const { user, topic, isFromEscuela } = this.props
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
-    const isProyectista = !user.state.rejected && (this.state.forceProyectista || topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id))
+    const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
+    const isProyectista = !user.state.rejected && user.state.value && (this.state.forceProyectista || topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id))
 
     if (user.state.pending) return null
 
@@ -70,7 +71,7 @@ export class Cause extends Component {
     if (user.state.fulfilled && topic.privileges && !topic.privileges.canVote) return null
     return (
       <div className='topics-cause-propuesta'>
-        {isSistematizada ?
+        {isSistematizada || isIdeaProyecto  ?
           /*<div
             className='proyectista-wrapper'>
             <button
