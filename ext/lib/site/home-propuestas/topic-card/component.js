@@ -125,7 +125,8 @@ export class TopicCard extends Component {
           ) }
 
           <div className='buttons-wrapper'>
-            {!isSistematizada && !isIdeaProyecto && /* antes en className estaba tmb ${likesCssClass} */
+            {/* antes en className estaba tmb ${likesCssClass} */}
+            {/*!isSistematizada && !isIdeaProyecto &&
               <div className={`cause-wrapper`}>
                 <div
                   className='btn btn-primary btn-empty'>
@@ -148,10 +149,10 @@ export class TopicCard extends Component {
                     Seguir
                     {likesCountDiv}
                   </button>
-                )*/}
+                )}
               </div>
-            }
-            {!isSistematizada && !isIdeaProyecto &&
+            */}
+            {/*!isSistematizada && !isIdeaProyecto &&
               <div
                 className={`subscribe-wrapperr ${subscribeCssClass}`}
                 onClick={this.handleWrapperClick}>
@@ -161,7 +162,7 @@ export class TopicCard extends Component {
                   {subscribesCountDiv}
                 </div>
               </div>
-            }
+            */}
             {/*isSistematizada &&
               <div
                 className='proyectista-wrapper'>
