@@ -5,17 +5,14 @@ import userConnector from 'lib/site/connectors/user'
 
 const estados = (state) => {
   switch (state) {
-    case 'no-factible':
-      return 'No factible'
+    case 'sistematizada':
+      return 'Sistematizada'
       break
-    case 'integrado':
-      return 'Integrada'
+    case 'idea-proyecto':
+      return 'Idea-Proyecto'
       break
     case 'pendiente':
-      return 'Pendiente'
-      break
-    default:
-      return 'Factible'
+      return 'Original'
       break
   }
 }
@@ -40,6 +37,7 @@ export class TopicCard extends Component {
     const { topic, onVote, onProyectista, user, isFromEscuela } = this.props
     const isStaff = !user.state.rejected && user.state.value.staff
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
+    const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
     const isProyectista = !user.state.rejected && topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id)
 
     const likesCssClass = topic.voted ? 'voted' : (
@@ -72,9 +70,10 @@ export class TopicCard extends Component {
             {topic.eje &&
               <span className='badge badge-default'>{topic.eje.nombre}</span>
             }
+            <span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>
           </div>
 
-          {isSistematizada ?
+          {isSistematizada || isIdeaProyecto ?
             <div className='topic-creation'>
               <span>Creado por: <span className='topic-card-author'>PPUNR</span></span>
             </div>
@@ -115,7 +114,7 @@ export class TopicCard extends Component {
           ) }
 
           <div className='buttons-wrapper'>
-            {!isSistematizada && /* antes en className estaba tmb ${likesCssClass} */
+            {!isSistematizada && !isIdeaProyecto && /* antes en className estaba tmb ${likesCssClass} */
               <div className={`cause-wrapper`}>
                 <div className='btn btn-primary btn-empty'>
                   Seguidores
@@ -146,7 +145,7 @@ export class TopicCard extends Component {
                 )*/}
               </div>
             }
-            {!isSistematizada &&
+            {!isSistematizada && !isIdeaProyecto &&
               <div
                 className={`subscribe-wrapperr ${subscribeCssClass}`}
                 onClick={this.handleWrapperClick}>
