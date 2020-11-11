@@ -24,7 +24,7 @@ const defaultValues = {
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest',
-  tipoIdea: []
+  tipoIdea: ['proyecto']
 }
 
 const filters = {
@@ -37,12 +37,6 @@ const filters = {
     sort: 'newest',
   },
 }
-
-const tiposIdeaData = [
-  { value: 'sistematizada', name: 'Sistematizada'},
-  { value: 'pendiente', name: 'Original'},
-  { value: 'idea-proyecto', name: 'Idea-Proyecto'}
-]
 
 class HomePropuestas extends Component {
   constructor () {
@@ -330,7 +324,7 @@ class HomePropuestas extends Component {
               <span><i className="glyphicon glyphicon-warning-sign"></i>Recordá que sólo podés ser proyectista en ideas del foro de tu escuela</span>
             </div>
           */}
-          <FilterPropuestas
+          {/*<FilterPropuestas
             claustros={this.state.claustros}
             claustro={this.state.claustro}
             tags={this.state.tags}
@@ -341,7 +335,7 @@ class HomePropuestas extends Component {
             handleFilter={this.handleFilter}
             handleDefaultFilter={this.handleDefaultFilter}
             clearFilter={this.clearFilter}
-            handleRemoveBadge={this.handleRemoveBadge} />
+            handleRemoveBadge={this.handleRemoveBadge} />*/}
 
           <div className='row'>
             <div className='col-md-10 offset-md-1'>
