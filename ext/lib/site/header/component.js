@@ -4,6 +4,7 @@ import bus from 'bus'
 import config from 'lib/config'
 import userConnector from 'lib/site/connectors/user'
 import UserBadge from 'ext/lib/site/header/user-badge/component'
+import PopupMessage from 'ext/lib/site/header/popup-message/component'
 import MobileMenu from 'ext/lib/site/header/mobile-menu/component'
 import AnonUser from 'ext/lib/site/header/anon-user/component'
 import forumStore from 'lib/stores/forum-store/forum-store'
@@ -84,6 +85,9 @@ class Header extends Component {
       backgroundColor: config.headerBackgroundColor
     }
     const showAdmin = this.state.userPrivileges && this.state.userPrivileges.canChangeTopics
+
+    const userState = this.props.user.state
+
     // MEDIA QUERY - Si es menor al breakpoint muestra un menú, si es mayor, otro
     if (window.matchMedia('(max-width: 975px)').matches) {
       return (
@@ -101,7 +105,7 @@ class Header extends Component {
           <ul
             className='nav navbar-nav nav-mobile'>
 
-            {/*this.props.user.state.fulfilled && (
+            {/*userState.fulfilled && (
               <li className='nav-item'>
                 <Link
                   to='/notifications'
@@ -111,10 +115,14 @@ class Header extends Component {
               </li>
             )*/}
 
-            {this.props.user.state.fulfilled && (
+            {userState.fulfilled && (
               <UserBadge
                 menuOn={this.state.userMenu}
                 toggleOnClick={this.toggleUserMenu} />
+            )}
+
+            {userState.fulfilled && userState.value && !userState.value.dni && !this.state.userMenu && (
+              <PopupMessage msg='¡Para votar completá tu perfil con tu DNI!' />
             )}
 
             <MobileMenu
@@ -174,7 +182,7 @@ class Header extends Component {
               </Link>
             </div>*/}
 
-            {/*this.props.user.state.fulfilled && (
+            {/*userState.fulfilled && (
               <li className='nav-item'>
                 <Link
                   to='/notifications'
@@ -184,13 +192,17 @@ class Header extends Component {
               </li>
             )*/}
 
-            {this.props.user.state.fulfilled && (
+            {userState.fulfilled && (
               <UserBadge
                 menuOn={this.state.userMenu}
                 toggleOnClick={this.toggleUserMenu} />
             )}
 
-            {this.props.user.state.rejected && (
+            {userState.fulfilled && userState.value && !userState.value.dni && !this.state.userMenu && (
+              <PopupMessage msg='¡Para votar completá tu perfil con tu DNI!' />
+            )}
+
+            {userState.rejected && (
               <AnonUser form={this.state.userForm} />
             )}
           </ul>
