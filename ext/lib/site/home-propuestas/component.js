@@ -26,7 +26,7 @@ const defaultValues = {
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest',
-  tipoIdea: []
+  tipoIdea: ['proyecto']
 }
 
 const filters = {
@@ -39,12 +39,6 @@ const filters = {
     sort: 'newest',
   },
 }
-
-const tiposIdeaData = [
-  { value: 'sistematizada', name: 'Sistematizada'},
-  { value: 'pendiente', name: 'Original'},
-  { value: 'idea-proyecto', name: 'Idea-Proyecto'}
-]
 
 class HomePropuestas extends Component {
   constructor () {
@@ -331,7 +325,7 @@ class HomePropuestas extends Component {
 
           <div className='container topics-container'>
 
-            <FilterPropuestas
+            {/*<FilterPropuestas
               facultades={this.state.facultades}
               facultad={this.state.facultad}
               claustros={this.state.claustros}
@@ -344,7 +338,7 @@ class HomePropuestas extends Component {
               handleFilter={this.handleFilter}
               handleDefaultFilter={this.handleDefaultFilter}
               clearFilter={this.clearFilter}
-              handleRemoveBadge={this.handleRemoveBadge} />
+              handleRemoveBadge={this.handleRemoveBadge} />*/}
 
             <div className='row'>
               <div className='col-md-10 offset-md-1'>
