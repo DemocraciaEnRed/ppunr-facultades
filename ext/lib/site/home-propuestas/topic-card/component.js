@@ -31,7 +31,7 @@ export class TopicCard extends Component {
     const isProyectistaButton = findAncestor(e.target, 'proyectista-wrapper')
 
     if (!isSeguirButton && !isProyectistaButton)
-      browserHistory.push(`/propuestas/topic/${this.props.topic.id}`)
+      window.open(`/propuestas/topic/${this.props.topic.id}`, '_blank');
   }
   render() {
     const { topic, onVote, onProyectista, user } = this.props
