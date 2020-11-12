@@ -170,6 +170,7 @@
     "react-remarkable": "^1.1.1",
     "react-responsive-accordion": "^1.0.0",
     "react-router": "^2.6.1",
+    "react-select": "^2.4.4",
     "removed": "0.0.5",
     "serve-favicon": "~2.4.1",
     "simple-line-icons": "2.4.1",
