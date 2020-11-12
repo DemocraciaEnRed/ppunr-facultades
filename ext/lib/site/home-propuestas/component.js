@@ -13,6 +13,8 @@ import FilterPropuestas from './filter-propuestas/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Footer from 'ext/lib/site/footer/component'
 import Anchor from 'ext/lib/site/anchor'
+// https://www.npmjs.com/package/react-select/v/2.4.4
+import Select from 'react-select'; // ! VERSIÓN 2.4.4 !
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -60,7 +62,10 @@ class HomePropuestas extends Component {
       tipoIdea: defaultValues.tipoIdea,
 
       page: null,
-      noMore: null
+      noMore: null,
+
+      selectedProyecto: null,
+      searchableProyectos: []
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -77,9 +82,10 @@ class HomePropuestas extends Component {
       facultadStore.findAll(),
       claustroStore.findAll(),
       tagStore.findAll({field: 'name'}),
-      forumStore.findOneByName('proyectos')
+      forumStore.findOneByName('proyectos'),
+      topicStore.findAllProyectos()
     ]).then(results => {
-      const [facultades, claustros, tags, forum] = results
+      const [facultades, claustros, tags, forum, proyectos] = results
       const tagsMap = tags.map(tag => { return {value: tag.id, name: tag.name}; });
       const tag = this.props.location.query.tags ? [tagsMap.find(j => j.name == this.props.location.query.tags).value] : [];
       const tiposIdea = forum.topicsAttrs.find(a => a.name=='state').options.map(state => { return {value: state.name, name: state.title}; })
@@ -89,7 +95,8 @@ class HomePropuestas extends Component {
         tags: tagsMap,
         tag,
         tiposIdea,
-        forum
+        forum,
+        searchableProyectos: proyectos.map(p => ({label: p.mediaTitle, value: p._id}))
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
@@ -293,10 +300,19 @@ class HomePropuestas extends Component {
     )
   }
 
+  handleSelectedProyecto = (selectedProyecto) => {
+    this.setState({ selectedProyecto });
+    console.log(`Option selected:`, selectedProyecto);
+  }
+
   render () {
     //console.log('Render main')
 
-    const { forum, topics, facultades } = this.state
+    const { forum, topics, facultades, searchableProyectos, selectedProyecto } = this.state
+    let filteredTopics;
+
+    if (selectedProyecto)
+      filteredTopics = topics.filter(t => t.id == selectedProyecto.value)
 
     return (
       <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
@@ -342,6 +358,22 @@ class HomePropuestas extends Component {
 
             <div className='row'>
               <div className='col-md-10 offset-md-1'>
+
+                <div className='search-proyecto-wrapper'>
+                  {/* para esto usamos react-select version 2.4.4 */}
+                  <Select
+                    value={selectedProyecto}
+                    onChange={this.handleSelectedProyecto}
+                    options={searchableProyectos}
+                    placeholder='Buscá un proyecto por nombre'
+                    isSearchable={true}
+                    className='search-proyecto-select'
+                  />
+                  <button onClick={()=>this.setState({selectedProyecto: null})} disabled={selectedProyecto ? false : true}>
+                    Limpiar filtro
+                  </button>
+                </div>
+
                 {  this.renderSortFilter() }
                 {topics && topics.length === 0 && (
                   <div className='empty-msg'>
@@ -350,7 +382,7 @@ class HomePropuestas extends Component {
                     </div>
                   </div>
                 )}
-                {topics && topics.map((topic) => (
+                {topics && (filteredTopics || topics).map((topic) => (
                   <TopicCard
                     key={topic.id}
                     onVote={this.handleVote}
@@ -359,7 +391,7 @@ class HomePropuestas extends Component {
                     topic={topic}
                     facultades={facultades} />
                 ))}
-                {topics && !this.state.noMore && (
+                {!filteredTopics && topics && !this.state.noMore && (
                   <div className='more-topics'>
                     <button onClick={this.paginateForward}>Ver Más</button>
                   </div>
