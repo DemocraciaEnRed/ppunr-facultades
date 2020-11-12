@@ -12,6 +12,8 @@ import FilterPropuestas from './filter-propuestas/component'
 import escuelaStore from 'lib/stores/escuela-store'
 import Jump from 'ext/lib/site/jump-button/component'
 import Footer from 'ext/lib/site/footer/component'
+// https://www.npmjs.com/package/react-select/v/2.4.4
+import Select from 'react-select'; // ! VERSIÓN 2.4.4 !
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasAbiertas
@@ -57,7 +59,10 @@ class HomePropuestas extends Component {
       tipoIdea: defaultValues.tipoIdea,
 
       page: null,
-      noMore: null
+      noMore: null,
+
+      selectedProyecto: null,
+      searchableProyectos: []
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -74,9 +79,10 @@ class HomePropuestas extends Component {
       claustroStore.findAll(),
       tagStore.findAll({field: 'name'}),
       forumStore.findOneByName('proyectos'),
-      escuelaStore.findOneById(this.props.location.query.id)
+      escuelaStore.findOneById(this.props.location.query.id),
+      topicStore.findAllProyectos(this.props.location.query.id)
     ]).then(results => {
-      const [claustros, tags, forum, escuela] = results
+      const [claustros, tags, forum, escuela, proyectos] = results
       const tagsMap = tags.map(tag => { return {value: tag.id, name: tag.name}; });
       const tag = this.props.location.query.tags ? [tagsMap.find(j => j.name == this.props.location.query.tags).value] : [];
       const tiposIdea = forum.topicsAttrs.find(a => a.name=='state').options.map(state => { return {value: state.name, name: state.title}; })
@@ -85,7 +91,8 @@ class HomePropuestas extends Component {
         tags: tagsMap,
         tiposIdea,
         escuela,
-        forum
+        forum,
+        searchableProyectos: proyectos.map(p => ({label: p.mediaTitle, value: p._id}))
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
@@ -282,14 +289,24 @@ class HomePropuestas extends Component {
     )
   }
 
+  handleSelectedProyecto = (selectedProyecto) => {
+    this.setState({ selectedProyecto });
+    console.log(`Option selected:`, selectedProyecto);
+  }
+
   render () {
     //console.log('Render main')
 
-    const { forum, topics, escuela } = this.state
+    const { forum, topics, escuela, searchableProyectos, selectedProyecto } = this.state
     const { user } = this.props
+
+    let filteredTopics;
 
     const userEscuelasIds = user.state.fulfilled && user.state.value.escuelas.map(e => e._id)
     const isFromEscuela = escuela && userEscuelasIds && userEscuelasIds.includes(escuela._id)
+
+    if (selectedProyecto)
+      filteredTopics = topics.filter(t => t.id == selectedProyecto.value)
 
     return (
 
@@ -339,6 +356,22 @@ class HomePropuestas extends Component {
 
           <div className='row'>
             <div className='col-md-10 offset-md-1'>
+
+                <div className='search-proyecto-wrapper'>
+                  {/* para esto usamos react-select version 2.4.4 */}
+                  <Select
+                    value={selectedProyecto}
+                    onChange={this.handleSelectedProyecto}
+                    options={searchableProyectos}
+                    placeholder='Buscá un proyecto por nombre'
+                    isSearchable={true}
+                    className='search-proyecto-select'
+                  />
+                  <button onClick={()=>this.setState({selectedProyecto: null})} disabled={selectedProyecto ? false : true}>
+                    Limpiar filtro
+                  </button>
+                </div>
+
               { this.renderSortFilter() }
               {topics && topics.length === 0 && (
                 <div className='empty-msg'>
@@ -347,7 +380,7 @@ class HomePropuestas extends Component {
                   </div>
                 </div>
               )}
-              {topics && topics.map((topic) => (
+              {topics && (filteredTopics || topics).map((topic) => (
                 <TopicCard
                   key={topic.id}
                   onVote={this.handleVote}
@@ -356,7 +389,7 @@ class HomePropuestas extends Component {
                   topic={topic}
                   isFromEscuela={isFromEscuela} />
               ))}
-              {topics && !this.state.noMore && (
+              {!filteredTopics && topics && !this.state.noMore && (
                 <div className='more-topics'>
                   <button onClick={this.paginateForward}>Ver Más</button>
                 </div>
