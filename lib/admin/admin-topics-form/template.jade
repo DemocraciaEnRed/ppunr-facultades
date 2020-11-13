@@ -58,21 +58,5 @@
           fieldset.attrs-wrapper
             div(data-attrs)
 
-        .form-group.col-md-6.pl-0
-          label= 'Nombre'
-          input.form-control(disabled=true, value=topic.owner && topic.owner.firstName)
-
-        .form-group.col-md-6.pr-0
-          label= 'Apellido'
-          input.form-control(disabled=true, value=topic.owner && topic.owner.lastName)
-
-        .form-group.col-md-6.pl-0
-          label= 'Facultad'
-          input.form-control(disabled=true, value=topic.owner && topic.owner.facultad && topic.owner.facultad.abreviacion)
-
-        .form-group.col-md-6.pr-0
-          label= 'Claustro'
-          input.form-control(disabled=true, value=topic.owner && topic.owner.claustro && topic.owner.claustro.nombre)
-
         input.btn.btn-success.hide(type='submit', value=t('admin-topics-form.button.submit'))
     include commands
