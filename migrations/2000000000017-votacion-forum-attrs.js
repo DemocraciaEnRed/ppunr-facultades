@@ -99,7 +99,8 @@ exports.up = function up (done) {
 						// y otras modificaciones manuales posteriores
 						if (hideFields.includes(attr.name)) {
 							attr.hide = true
-						}else if (attr.name.indexOf('admin-comment') == 0){
+						}
+						if (attr.name.indexOf('admin-comment') == 0){
 							attr.group = ''
 							attr.groupOrder = 0
 						}else if (attr.name == 'facultad') {
