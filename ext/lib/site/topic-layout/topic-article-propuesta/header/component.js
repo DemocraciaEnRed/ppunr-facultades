@@ -35,7 +35,7 @@ export default class Header extends Component {
     //     </p>
     //   )
     // }
-    
+
     let author = null
     if (this.props.author) {
       let authorName
@@ -62,8 +62,8 @@ export default class Header extends Component {
         { this.props.children }
         {learnMore}
         {closingAt}
-        <h1>{this.props.mediaTitle}</h1>
-        
+        <h1>{this.props.numero && `#${this.props.numero} ` }{this.props.mediaTitle}</h1>
+
 
       </header>
     )
