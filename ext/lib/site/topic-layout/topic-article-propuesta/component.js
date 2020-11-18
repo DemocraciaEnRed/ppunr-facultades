@@ -78,7 +78,7 @@ class TopicArticle extends Component {
   }
 
   twitText = () => {
-    return encodeURIComponent('Sumate a pensar la Universidad que queremos. Apoyemos esta idea para mejorar la UNR. ')
+    return encodeURIComponent('Sumate a pensar la Universidad que queremos. Apoyemos este proyecto para mejorar la UNR. ')
   }
 
   render () {
@@ -96,6 +96,7 @@ class TopicArticle extends Component {
       forum.privileges.canChangeTopics
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
     const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
+    const isProyecto = topic && topic.attrs && topic.attrs.state == 'proyecto'
 
     if (!topic) {
       return (
@@ -150,7 +151,7 @@ class TopicArticle extends Component {
                   <a className='btn btn-default'>
                     <i className='icon-pencil' />
                     &nbsp;
-                    Editar idea
+                    Editar proyecto
                   </a>
                 </Link>
               </div>
@@ -164,17 +165,18 @@ class TopicArticle extends Component {
                      className='btn btn-default'>
                      <i className='icon-pencil' />
                       &nbsp;
-                     Editar idea
+                     Editar proyecto
                    </a>
                  </div>
                )
 
         }
         </div>
-          <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div>
+          { !isProyecto && <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div> }
+          { isProyecto && <div className='topic-article-presupuesto'>Presupuesto: ${topic.attrs.presupuesto.toLocaleString()}</div> }
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
 
-          <span className='topic-article-span'>{isIdeaProyecto ? 'Idea - Proyecto' : 'Idea'}</span>
+          <span className='topic-article-span'>{isProyecto ? 'Proyecto' : 'Idea'}</span>
           {topic.attrs.problema &&
             <div
               className='topic-article-p'
@@ -190,9 +192,9 @@ class TopicArticle extends Component {
           </div>
         */}
         <div className='topic-actions topic-article-content'>
-          <Cause
+          { !isProyecto && <Cause
             topic={topic}
-            canVoteAndComment={forum.privileges.canVoteAndComment} />
+            canVoteAndComment={forum.privileges.canVoteAndComment} /> }
         </div>
         <Social
           topic={topic}
@@ -226,7 +228,7 @@ class TopicArticle extends Component {
         }
 
         {
-          !user.state.pending && !isSistematizada && !isIdeaProyecto && <Comments forum={forum} topic={topic} />
+          !user.state.pending && !isSistematizada && !isIdeaProyecto && !isProyecto && <Comments forum={forum} topic={topic} />
         }
       </div>
     )
