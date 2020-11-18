@@ -14,6 +14,9 @@ const estados = (state) => {
     case 'pendiente':
       return 'Original'
       break
+    case 'proyecto':
+      return 'Proyecto'
+      break
   }
 }
 
@@ -38,6 +41,7 @@ export class TopicCard extends Component {
     const isStaff = !user.state.rejected && user.state.value.staff
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
     const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
+    const isProyecto = topic && topic.attrs && topic.attrs.state == 'proyecto'
     const isProyectista = !user.state.rejected && topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id)
 
     const likesCssClass = topic.voted ? 'voted' : (
@@ -73,7 +77,7 @@ export class TopicCard extends Component {
             <span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>
           </div>
 
-          {isSistematizada || isIdeaProyecto ?
+          {!isProyecto && (isSistematizada || isIdeaProyecto ?
             <div className='topic-creation'>
               <span>Creado por: <span className='topic-card-author'>PPUNR</span></span>
             </div>
@@ -88,9 +92,12 @@ export class TopicCard extends Component {
                 {moment(topic.createdAt).format('D-M-YYYY')}
               </span>
             </div>
-          }
+          )}
 
-          <h1 className='topic-card-title'>
+          <h1 className={`topic-card-title ${isProyecto && 'mt-5'}`}>
+            {isProyecto && topic.attrs &&
+              <span className='topic-number'>#{topic.attrs.numero}</span>
+            }
             {topic.mediaTitle}
           </h1>
           <p className='topic-card-description'>
@@ -100,6 +107,11 @@ export class TopicCard extends Component {
         </div>
 
         <div className='topic-card-footer'>
+          {isProyecto && topic.attrs &&
+            <div className='topic-card-presupuesto'>
+              Presupuesto: ${topic.attrs.presupuesto.toLocaleString()}
+            </div>
+          }
           { topic.tags && topic.tags.length > 0 && (
               <div className='topic-card-tags'>
                 <span className="glyphicon glyphicon-tag"></span>
@@ -193,7 +205,8 @@ function createClauses({ attrs, clauses }) {
     content = `${problema}`
   }
   div.innerHTML = content
-  return div.textContent.replace(/\r?\n|\r/g, '').slice(0, 340) + '...'
+  let returnText = div.textContent.replace(/\r?\n|\r/g, '')
+  return returnText.length > 340 ? returnText.slice(0, 340) + '...' : returnText
 }
 
 export default userConnector(TopicCard)
