@@ -138,7 +138,8 @@ class TopicArticle extends Component {
             authorUrl={null}
             tags={topic.tags}
             forumName={forum.name}
-            mediaTitle={topic.mediaTitle} />
+            mediaTitle={topic.mediaTitle}
+            numero={topic.attrs && topic.attrs.numero} />
         </div>
 
         <div className='topic-article-content entry-content skeleton-propuesta'>
