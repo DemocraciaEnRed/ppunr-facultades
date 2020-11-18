@@ -201,6 +201,7 @@ class TopicArticle extends Component {
             topic={topic}
             canVoteAndComment={forum.privileges.canVoteAndComment}
             isFromEscuela={isFromEscuela} />
+          }
         </div>
         <Social
           topic={topic}
