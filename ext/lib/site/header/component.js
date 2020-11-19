@@ -160,7 +160,7 @@ class Header extends Component {
                 to='/propuestas'
                 className='header-link'
                 >
-                  Foro
+                  Votá
               </Link>
             </div>
             { showAdmin &&
