@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
 import moment from 'moment'
 import userConnector from 'lib/site/connectors/user'
+import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
 
 const estados = (state) => {
   switch (state) {
@@ -32,16 +33,21 @@ export class TopicCard extends Component {
 
     const isSeguirButton = findAncestor(e.target, 'cause-wrapper')
     const isProyectistaButton = findAncestor(e.target, 'proyectista-wrapper')
+    const isVotarButton = findAncestor(e.target, 'votar-button-wrapper')
 
-    if (!isSeguirButton && !isProyectistaButton)
+    if (!isSeguirButton && !isProyectistaButton && !isVotarButton)
       window.open(`/propuestas/topic/${this.props.topic.id}`, '_blank');
   }
   render() {
     const { topic, onVote, onProyectista, user, isFromEscuela } = this.props
+
     const isStaff = !user.state.rejected && user.state.value.staff
+
+    // tipo de propuesta
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
     const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
     const isProyecto = topic && topic.attrs && topic.attrs.state == 'proyecto'
+
     const isProyectista = !user.state.rejected && topic.proyectistas && topic.proyectistas.length > 0 && topic.proyectistas.includes(user.state.value.id)
 
     const likesCssClass = topic.voted ? 'voted' : (
@@ -180,6 +186,9 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
+            {isProyecto &&
+              <VotarButton topic={topic} onVote={onVote} />
+            }
           </div>
 
         </div>

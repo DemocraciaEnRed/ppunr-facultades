@@ -221,11 +221,12 @@ class HomePropuestas extends Component {
       })
     }
 
-    topicStore.vote(id, !isVoted ? 'apoyo-idea' : 'no-apoyo-idea').then((res) => {
+    //topicStore.vote(id, !isVoted ? 'apoyo-idea' : 'no-apoyo-idea').then((res) => {
+    topicStore.vote(id, 'voto').then((res) => {
       const topics = this.state.topics
       const index = topics.findIndex((t) => t.id === id)
       topics[index] = res
-      this.setState({ topics })
+      user.fetch(true).then(() => this.setState({ topics }))
     }).catch((err) => { throw err })
   }
 
