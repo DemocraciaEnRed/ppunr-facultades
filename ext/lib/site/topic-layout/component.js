@@ -63,6 +63,23 @@ export class TopicLayout extends Component {
     Anchor.goTo('container')
   }
 
+  // esta misma función está en ext/lib/site/home-propuestas/component.js
+  handleVote = (id, isVoted) => {
+    const { user } = this.props
+
+    if (user.state.rejected) {
+      return browserHistory.push({
+        pathname: '/signin',
+        query: { ref: window.location.pathname }
+      })
+    }
+
+    //topicStore.vote(id, !isVoted ? 'apoyo-idea' : 'no-apoyo-idea').then((res) => {
+    topicStore.vote(id, 'voto').then((res) => {
+      location.reload()
+    }).catch((err) => { throw err })
+  }
+
   render () {
     if (config.visibility === 'hidden' && this.props.user.state.rejected) {
       browserHistory.push('/signin')
@@ -76,7 +93,7 @@ export class TopicLayout extends Component {
       <div className={`ext-topic-container ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <Anchor id='container'>
           <div id='topic-wrapper'>
-            { <TopicArticlePropuesta topic={topic} forum={forum}/>
+            { <TopicArticlePropuesta topic={topic} forum={forum} onVote={this.handleVote} />
               /*name === 'propuestas'
                 ? <TopicArticlePropuesta topic={topic} forum={forum}/>
                 : <TopicArticleProyecto topic={topic} forum={forum} />*/
