@@ -14,6 +14,7 @@ import Comments from './comments/component'
 import AdminActions from './admin-actions/component'
 import Proyectos from 'ext/lib/site/proyectos/component'
 import { Link } from 'react-router'
+import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
 
 class TopicArticle extends Component {
   constructor (props) {
@@ -85,7 +86,8 @@ class TopicArticle extends Component {
     const {
       topic,
       forum,
-      user
+      user,
+      onVote
     } = this.props
 
     const userAttrs = user.state.fulfilled && (user.state.value || {})
@@ -202,6 +204,9 @@ class TopicArticle extends Component {
             topic={topic}
             canVoteAndComment={forum.privileges.canVoteAndComment}
             isFromEscuela={isFromEscuela} />
+          }
+          { isProyecto &&
+            <VotarButton topic={topic} onVote={onVote} />
           }
         </div>
         <Social

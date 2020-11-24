@@ -211,6 +211,7 @@ class HomePropuestas extends Component {
     }, () => this.fetchTopics())
   }
 
+  // esta misma función está en ext/lib/site/topic-layout/component.js
   handleVote = (id, isVoted) => {
     const { user } = this.props
 
