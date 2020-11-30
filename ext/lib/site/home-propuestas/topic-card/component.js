@@ -186,7 +186,7 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            {isProyecto &&
+            {isFromEscuela && isProyecto &&
               <VotarButton topic={topic} onVote={onVote} />
             }
           </div>

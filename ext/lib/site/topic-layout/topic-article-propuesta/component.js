@@ -205,7 +205,7 @@ class TopicArticle extends Component {
             canVoteAndComment={forum.privileges.canVoteAndComment}
             isFromEscuela={isFromEscuela} />
           }
-          { isProyecto &&
+          { isFromEscuela && isProyecto &&
             <VotarButton topic={topic} onVote={onVote} />
           }
         </div>
