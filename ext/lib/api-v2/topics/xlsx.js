@@ -115,3 +115,62 @@ app.get('/export/topics/xlsx',
       return res.status(500).end()
     }
   })
+
+  app.get('/export/topics/export-resultados',
+    middlewares.users.restrict,
+    middlewares.forums.findByName,
+    middlewares.forums.privileges.canChangeTopics,
+    // cargar claustros a req
+    (req, res, next) =>
+      api.claustro.all(function (err, claustros) {
+        let claustrosName = {}
+        if (err) {
+          log('error serving claustros from DB:', err)
+          return res.status(500).end()
+        }
+        claustros.forEach(c => claustrosName[c._id] = c.nombre)
+        req.claustrosName = claustrosName
+        next()
+      })
+    ,
+    // cargar facultades a req
+    (req, res, next) =>
+      api.facultad.all(function (err, facultades) {
+        let facultadesName = {}
+        if (err) {
+          log('error serving facultades from DB:', err)
+          return res.status(500).end()
+        }
+        facultades.forEach(f => facultadesName[f._id] = f.abreviacion)
+        req.facultadesName = facultadesName
+        next()
+      })
+    ,
+    // cargar votos a req
+    (req, res, next) =>
+      api.vote.getVotesVotacion().then(votes => {
+        req.votes = votes || []
+        next()
+      })
+    ,
+    function getXlsx(req, res, next) {
+      let infoVotes = []
+
+      req.votes.forEach((vote) => {
+        const topicAttrs = vote.topic.attrs
+        const theVote = {
+          'Fecha': `${escapeTxt(moment(vote.createdAt, '', req.locale).format('LL LT'))}`,
+          'Facultad': `${escapeTxt(req.facultadesName[vote.author.facultad])}`,
+          'Claustro': `${escapeTxt(req.claustrosName[vote.author.claustro])}`,
+          '#Proyecto': `${escapeTxt(topicAttrs.numero || '')}`,
+          'Título Proyecto': `${escapeTxt(vote.topic.mediaTitle)}`,
+        }
+        infoVotes.push(theVote);
+      });
+      try {
+        res.xls(`resultados-votacion.xlsx`, infoVotes);
+      } catch (err) {
+        log('get csv: array to csv error', err)
+        return res.status(500).end()
+      }
+    })
