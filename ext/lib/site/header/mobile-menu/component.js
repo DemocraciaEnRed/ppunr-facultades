@@ -61,7 +61,7 @@ class MobileMenu extends Component {
                       href={`/propuestas?id=${escuela._id}`}
                       className={`header-link header-link-${escuela.abreviacion}`}
                       onClick={this.props.toggleOnClick}>
-                        {escuela.abreviacion == 'EAC' ? 'La' : 'El'} {escuela.nombre} elige
+                        {escuela.abreviacion == 'ESUPCOM' ? 'Superior' : escuela.nombre} elige
                     </a>
                   </div>
                 ))}

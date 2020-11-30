@@ -60,9 +60,7 @@ export default userConnector(function ThumbsVoto(props) {
             <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
               {/* props.texts['home-icono2-texto']*/}
-              La etapa de los Foros ha finalizado. En este momento, quienes se inscribieron como <strong>proyectistas</strong> están trabajando en cada Consejo Escolar, junto con técnicos de la UNR, para transformar las ideas surgidas en los Foros en <strong>proyectos factibles</strong> que podrás elegir en Noviembre.
-              <br />
-              ¡Iremos subiendo las novedades en la web y en nuestras redes sociales! Entrá a <a href='https://presupuestoparticipativo.unr.edu.ar/' rel="noopener noreferer" target="_blank">nuestra web</a> para más información.
+              En esta plataforma podrás elegir el proyecto que querés que se ejecute durante 2021 en tu Escuela. Presioná en el botón <strong>Ingresar</strong> para loguearte y entrá a la sección de votación de tu Escuela. Allí encontrarás el listado de proyectos entre los que podrás votar tu preferido.Se te pedirá confirmar tu elección. Puede votar toda la comunidad de la UNR. Si tenés alguna consulta escribirnos a <a href="mailto:presupuestoparticipativo@unr.edu.ar">presupuestoparticipativo@unr.edu.ar</a>
             </p>
 
           </div>

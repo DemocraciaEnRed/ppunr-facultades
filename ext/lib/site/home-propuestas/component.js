@@ -271,7 +271,7 @@ class HomePropuestas extends Component {
   renderSortFilter() {
     return (
       <div>
-        <h4 className="topics-title">Lista de ideas</h4>
+        <h4 className="topics-title">Lista de proyectos</h4>
         <div className='topics-filters'>
           {/*this.state.forumStates &&
             <div className='topics-filter topics-state-filter'>
@@ -335,7 +335,7 @@ class HomePropuestas extends Component {
         <BannerListadoTopics
           btnText={config.propuestasAbiertas && isFromEscuela ? 'Mandá tu idea' : undefined}
           btnLink={config.propuestasAbiertas && isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
-          title='Conocé las ideas-proyectos del PPUNR'
+          title='Conocé los proyectos del PPUNR'
           subtitle={escuela && escuela.tituloForo}
           esculeaAbrev={escuela && escuela.abreviacion}
           />

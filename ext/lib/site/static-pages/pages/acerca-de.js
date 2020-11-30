@@ -44,7 +44,7 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cómo participo?">
-                    <p className='p-padding'>Te invitamos a registrarte <Link to='/signup'>aquí</Link> para sumar ideas y comentar las ideas de otros/as participantes.  Podrás también expresar tu interés en apoyar y sumarte a alguna de las propuestas. Es muy importante que fomentemos el diálogo informado y respetuoso.</p>
+                    <p className='p-padding'>Te invitamos a registrarte <Link to='/signup'>aquí</Link> para luego ingresar en UNR Decide y poder votar. Podrás elegir un proyecto que de resultar ganador se ejecutará durante 2021.</p>
                   </div>
 
                   <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
@@ -114,7 +114,7 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cómo elegiremos los proyectos a ejecutarse en 2021?">
-                    <p className='p-padding'>Se realizarán jornadas de votación en el mes de octubre o noviembre, previa difusión de los proyectos elegibles, para que toda la comunidad de la Escuela puede decidir cuáles serán ejecutados hasta alcanzar el total de la partida presupuestaria disponible. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
+                    <p className='p-padding'>Previa difusión de los proyectos para que toda la comunidad de la UNR pueda conocerlos, se realizará la votación, a través de la cual se decidirá cuál/es será/n ejecutado/s hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
                   </div>
 
                 </Accordion>
