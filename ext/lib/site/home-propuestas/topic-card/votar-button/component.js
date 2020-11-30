@@ -10,6 +10,7 @@ class VotarButton extends Component {
     const { topic, onVote, user } = this.props
     let { openQuestion } = this.state
 
+    const userLoggedIn = user.state && user.state.fulfilled
     const userVoto = user.state && user.state.value && user.state.value.voto
     const topicVoted = userVoto && userVoto == topic.id
 
@@ -24,7 +25,12 @@ class VotarButton extends Component {
           { !openQuestion &&
             <button
               className={`btn btn-primary btn-${topicVoted ? 'voted' : 'filled'}`}
-              onClick={!topicVoted && (() => this.setState({openQuestion: true}))}>
+              onClick={
+                userLoggedIn ?
+                  !topicVoted && (() => this.setState({openQuestion: true}))
+                :
+                 () => window.location.href = `/signin?ref=${encodeURIComponent(window.location.pathname)}`
+              }>
               {topicVoted ? 'Votaste este proyecto' : 'Votar este proyecto'}
             </button>
           }
