@@ -43,14 +43,14 @@ class MobileMenu extends Component {
                     onClick={this.props.toggleOnClick}>
                     Acerca de
                   </Link>
-                </div> 
+                </div>
                 <div className='header-item'>
                   <Link
                     to='/propuestas'
                     className={`header-link ${!~window.location.pathname.includes('propuesta') ? 'active' : ''}`}
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}>
-                    Foro
+                    UNR Decide
                   </Link>
                 </div>
                 {/* <div className='header-item mobile-link'>
