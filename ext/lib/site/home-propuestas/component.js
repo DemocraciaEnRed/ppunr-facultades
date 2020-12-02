@@ -333,8 +333,8 @@ class HomePropuestas extends Component {
 
       <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <BannerListadoTopics
-          btnText={config.propuestasAbiertas && isFromEscuela ? 'Mandá tu idea' : undefined}
-          btnLink={config.propuestasAbiertas && isFromEscuela ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
+          btnText={config.propuestasAbiertas && isFromEscuela && false ? 'Mandá tu idea' : undefined}
+          btnLink={config.propuestasAbiertas && isFromEscuela && false ? `/formulario-idea?id=${escuela && escuela._id}` : undefined}
           title='Conocé los proyectos del PPUNR'
           subtitle={escuela && escuela.tituloForo}
           esculeaAbrev={escuela && escuela.abreviacion}
