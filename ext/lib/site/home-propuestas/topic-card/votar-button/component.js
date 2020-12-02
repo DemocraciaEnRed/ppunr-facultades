@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import userConnector from 'lib/site/connectors/user'
+import config from 'lib/config'
 
 class VotarButton extends Component {
   state = {
@@ -22,7 +23,12 @@ class VotarButton extends Component {
     return (
         <div
           className='votar-button-wrapper'>
-          { !openQuestion &&
+          { !config.propuestasAbiertas && topicVoted &&
+            <button className='btn btn-primary btn-voted'>
+              Votaste este proyecto
+            </button>
+          }
+          { config.propuestasAbiertas && !openQuestion &&
             <button
               className={`btn btn-primary btn-${topicVoted ? 'voted' : 'filled'}`}
               onClick={
@@ -34,7 +40,7 @@ class VotarButton extends Component {
               {topicVoted ? 'Votaste este proyecto' : 'Votar este proyecto'}
             </button>
           }
-          { openQuestion &&
+          { config.propuestasAbiertas && openQuestion &&
             <div>
               <span className='confirmas-voto'>¿Confirmás tu voto?</span>
               <button

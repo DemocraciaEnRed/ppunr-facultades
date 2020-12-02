@@ -339,8 +339,8 @@ class HomePropuestas extends Component {
       <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <Anchor id='container'>
           <BannerListadoTopics
-          btnText={config.propuestasAbiertas ? 'Mandá tu idea' : undefined}
-          btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
+          btnText={config.propuestasAbiertas && false ? 'Mandá tu idea' : undefined}
+          btnLink={config.propuestasAbiertas && false ? '/formulario-idea' : undefined}
           title='Conocé los proyectos del PPUNR'
             />
 
