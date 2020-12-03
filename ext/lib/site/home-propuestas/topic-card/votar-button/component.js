@@ -12,7 +12,8 @@ class VotarButton extends Component {
     let { openQuestion } = this.state
 
     const userLoggedIn = user.state && user.state.fulfilled
-    const userVoto = user.state && user.state.value && user.state.value.voto
+    const userVoto = userLoggedIn && user.state.value.voto
+    const userDNI = userLoggedIn && user.state.value.dni
     const topicVoted = userVoto && userVoto == topic.id
 
     // si ya votó algo y no es este topic, no muestres botón
@@ -36,7 +37,8 @@ class VotarButton extends Component {
                   !topicVoted && (() => this.setState({openQuestion: true}))
                 :
                  () => window.location.href = `/signin?ref=${encodeURIComponent(window.location.pathname)}`
-              }>
+              }
+              disabled={userLoggedIn && !userDNI}>
               {topicVoted ? 'Votaste este proyecto' : 'Votar este proyecto'}
             </button>
           }
