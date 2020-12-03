@@ -90,6 +90,7 @@ class TopicArticle extends Component {
       onVote
     } = this.props
 
+    const isLoggedIn = user.state && user.state.fulfilled
     const userAttrs = user.state.fulfilled && (user.state.value || {})
     const canCreateTopics = userAttrs.privileges &&
       userAttrs.privileges.canManage &&
@@ -205,7 +206,7 @@ class TopicArticle extends Component {
             canVoteAndComment={forum.privileges.canVoteAndComment}
             isFromEscuela={isFromEscuela} />
           }
-          { isFromEscuela && isProyecto &&
+          { ((isLoggedIn && isFromEscuela) || !isLoggedIn) && isProyecto &&
             <VotarButton topic={topic} onVote={onVote} />
           }
         </div>

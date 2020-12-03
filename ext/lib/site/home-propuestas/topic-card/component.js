@@ -42,6 +42,7 @@ export class TopicCard extends Component {
     const { topic, onVote, onProyectista, user, isFromEscuela } = this.props
 
     const isStaff = !user.state.rejected && user.state.value.staff
+    const isLoggedIn = user.state && user.state.fulfilled
 
     // tipo de propuesta
     const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
@@ -186,7 +187,7 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            {isFromEscuela && isProyecto &&
+            { ((isLoggedIn && isFromEscuela) || !isLoggedIn) && isProyecto &&
               <VotarButton topic={topic} onVote={onVote} />
             }
           </div>

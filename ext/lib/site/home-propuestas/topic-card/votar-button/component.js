@@ -35,7 +35,7 @@ class VotarButton extends Component {
                 userLoggedIn ?
                   !topicVoted && (() => this.setState({openQuestion: true}))
                 :
-                 () => window.location.href = `/signin?ref=${encodeURIComponent(window.location.pathname)}`
+                 () => window.location.href = `/signin?ref=${encodeURIComponent(window.location.pathname + window.location.search)}`
               }>
               {topicVoted ? 'Votaste este proyecto' : 'Votar este proyecto'}
             </button>
