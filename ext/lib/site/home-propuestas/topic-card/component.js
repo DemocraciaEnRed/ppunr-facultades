@@ -216,7 +216,7 @@ function createClauses({ attrs, clauses }) {
   }
   div.innerHTML = content
   let returnText = div.textContent.replace(/\r?\n|\r/g, '')
-  return returnText.length > 340 ? returnText.slice(0, 340) + '...' : returnText
+  return returnText.length > 400 ? returnText.slice(0, 400) + '...' : returnText
 }
 
 export default userConnector(TopicCard)
