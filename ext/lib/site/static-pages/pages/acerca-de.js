@@ -68,7 +68,7 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cómo elegiremos los proyectos a ejecutarse en 2021?">
-                    <p className='p-padding'>Previa difusión de los proyectos para que toda la comunidad de la UNR pueda conocerlos, se realizará la votación, a través de la cual se decidirá cuál/es será/n ejecutado/s hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
+                    <p className='p-padding'>Previa difusión de los proyectos para que toda la comunidad de la Escuela pueda conocerlos, se realizará la votación, a través de la cual se decidirá cuál/es será/n ejecutado/s hasta alcanzar el total de la partida presupuestaria afectada al PP de tu Escuela. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
                   </div>
 
                 </Accordion>
