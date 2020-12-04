@@ -126,7 +126,7 @@ export class TopicCard extends Component {
         <div className='topic-card-footer'>
           {isProyecto && topic.attrs &&
             <div className='topic-card-presupuesto'>
-              Presupuesto: ${topic.attrs.presupuesto.toLocaleString()}
+              Monto estimado: ${topic.attrs.presupuesto.toLocaleString()}
             </div>
           }
           { topic.tags && topic.tags.length > 0 && (

@@ -176,7 +176,7 @@ class TopicArticle extends Component {
         }
         </div>
           { !isProyecto && <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div> }
-          { isProyecto && <div className='topic-article-presupuesto'>Presupuesto: ${topic.attrs.presupuesto.toLocaleString()}</div> }
+          { isProyecto && <div className='topic-article-presupuesto'>Monto estimado: ${topic.attrs.presupuesto.toLocaleString()}</div> }
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
 
           <span className='topic-article-span'>{isProyecto ? 'Proyecto' : 'Idea'}</span>
