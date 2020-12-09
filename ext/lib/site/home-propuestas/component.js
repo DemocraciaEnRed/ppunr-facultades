@@ -322,8 +322,26 @@ class HomePropuestas extends Component {
   }
 
   handleSelectedProyecto = (selectedProyecto) => {
-    this.setState({ selectedProyecto });
-    console.log(`Option selected:`, selectedProyecto);
+    //console.log(`Option selected:`, selectedProyecto);
+
+    const topicId = selectedProyecto.value
+    if (this.state.topics.find(t => t.id == selectedProyecto.value) == undefined){
+      // si el topic no está en la actual lista de resultados lo vamos a buscar
+      //console.log('Topic not found, searching it:', topicId)
+      topicStore.getTopic(topicId).then(topic => {
+        if (!topic)
+          return
+
+        //console.log('Adding topic:', topic.id)
+        this.setState(prevState => ({
+          topics: prevState.topics.concat(topic),
+          selectedProyecto
+        }));
+      })
+    }else{
+      //console.log('Topic found, filtering it')
+      this.setState({ selectedProyecto });
+    }
   }
 
   render () {
