@@ -92,7 +92,7 @@ class HomePropuestas extends Component {
         tiposIdea,
         escuela,
         forum,
-        searchableProyectos: proyectos.map(p => ({label: p.mediaTitle, value: p._id}))
+        searchableProyectos: proyectos.map(p => ({label: `#${p.attrs && p.attrs.numero} ${p.mediaTitle}`, value: p._id}))
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
