@@ -23,6 +23,7 @@ module.exports = ({
       url: validateUrl,
       text: 'Validá tu cuenta'
     })}
+    <p>O copiá y pegá en tu navegador este link: <a href="${validateUrl}">${validateUrl}</a></p>
     <p>Podrás votar tu proyecto preferido en el PPUNR.</p>
     <p>Te invitamos a seguir construyendo la Universidad que queremos.</p>
     <p>Muchas gracias.</p>
