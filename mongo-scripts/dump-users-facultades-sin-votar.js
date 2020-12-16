@@ -5,7 +5,7 @@ mongo --quiet localhost:26017/ppunr-prod dump-users-facultades.js > ppunr-facult
 print('Nombre,Apellido,Email,DNI,Facultad,Claustro,Fecha de registro,Validado')
 
 db.users.aggregate([
-  {$match: { emailValidated: false } },
+  {$match: { emailValidated : true } },
   // hacemos joins
   {$lookup: {
     from:'claustros',
@@ -23,6 +23,9 @@ db.users.aggregate([
   {$unwind: {path:'$facultad'} },
   {$sort: {createdAt: -1}}
 ]).forEach(u => {
+        if (db.votes.findOne({author:u._id}))
+                return
+
 	let d = u.createdAt 
 	// convertimos a GMT-3
 	d.setHours(d.getHours() - 3)

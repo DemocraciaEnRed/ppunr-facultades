@@ -1,7 +1,3 @@
-mails=[
-"aca_los_emails"
-]
-
 /* Ejecutar haciendo túnel con servidor mongo a localhost:26017 y después:
 mongo --quiet localhost:26017/ppunre-prod dump-users-escuelas.js > ppunr-escuelas-usuarios.csv
 */
@@ -13,7 +9,7 @@ let escuelas = {}
 db.escuelas.find().forEach(e => escuelas[e._id] = e)
 
 db.users.aggregate([
-  {$match: { email: { $in: mails } } },
+  {$match: { emailValidated: false } },
   // hacemos joins
   {$lookup: {
     from:'claustros',
