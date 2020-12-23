@@ -10,12 +10,28 @@ export default userConnector(function ThumbsVoto(props) {
     styleIcono1 = { backgroundImage: `url(${props.texts['home-icono1-imagen']})` },
     styleIcono2 = { backgroundImage: `url(${props.texts['home-icono2-imagen']})` },
     styleIcono3 = { backgroundImage: `url(${props.texts['home-icono3-imagen']})` };
+
+  let subtitle = props.texts['home-subtitle']
+
+  const urlRegex = /[a-zA-Z]+(\.[a-zA-Z]+){2,}/
+  let subtitleUrl = null
+  if (subtitle && urlRegex.test(subtitle)){
+    subtitleUrl = urlRegex.exec(subtitle)[0]
+    // escapeamos por si trae cosas raras
+    subtitle = subtitle.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    subtitle = subtitle.replace(subtitleUrl, `<a href="${subtitleUrl}">${subtitleUrl}</a>`)
+  }
+
   return (
     <section className="thumbs info-landing">
       <div className="container-fluid">
         <div className="row cont fondo-violeta">
           <div className="subtitulo">
-            <h2>{ props.texts['home-subtitle'] }</h2>
+            { subtitleUrl ?
+              <h2 dangerouslySetInnerHTML={{__html: subtitle}} />
+              :
+              <h2>{ subtitle }</h2>
+            }
             {/*<h3>Hasta el 31 de mayo inclusive tenés tiempo para presentar tus propuestas</h3> */}
             <h3>{ props.texts['home-subtitle-text'] }</h3>
             <div className="btn-container">
