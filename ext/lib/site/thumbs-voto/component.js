@@ -13,14 +13,18 @@ export default userConnector(function ThumbsVoto(props) {
 
   let subtitle = props.texts['home-subtitle']
 
-  const urlRegex = /[a-zA-Z]+(\.[a-zA-Z]+){2,}/
+  const urlRegex = /(https?:\/\/)([a-zA-Z]+(?:\.[a-zA-Z]+){2,})/
   let subtitleUrl = null
-  if (subtitle && urlRegex.test(subtitle)){
-    subtitleUrl = urlRegex.exec(subtitle)[0]
-    // escapeamos por si trae cosas raras
-    subtitle = subtitle.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    subtitle = subtitle.replace(subtitleUrl, `<a href="${subtitleUrl}">${subtitleUrl}</a>`)
-  }
+  try {
+    if (subtitle && urlRegex.test(subtitle)){
+      let groups = urlRegex.exec(subtitle)
+      subtitleUrl = groups[0]
+      let subtitleUrlName = groups[2]
+      // escapeamos por si trae cosas raras
+      subtitle = subtitle.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      subtitle = subtitle.replace(subtitleUrl, `<a href="${subtitleUrl}">${subtitleUrlName}</a>`)
+    }
+  } catch (e) {}
 
   return (
     <section className="thumbs info-landing">
