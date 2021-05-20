@@ -43,7 +43,7 @@ export default userConnector(function ThumbsVoto(props) {
               //  <a href="https://forosvecinales.blob.core.windows.net/informes/Escrutinio-2019.xlsx">Ver Resultados</a>
               //</div>
               }
-              { config.propuestasAbiertas && false && <Link
+              { config.propuestasAbiertas && <Link
                 to={ userLoggedIn ? `/formulario-idea?id=${userEscuelaId}` : '/formulario-idea' }
                 className="boton-mandar-idea">
                 Mandá tu idea
