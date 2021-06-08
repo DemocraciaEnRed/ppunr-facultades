@@ -14,18 +14,32 @@ const leaveOnlyFields = [
 ]
 
 const hideFields = [
-	'state',
+	// 'state',
 	'admin-comment',
 	'admin-comment-referencia'
 ]
 
 const newFields = [
 	{
+		"name" : "genero",
+		"title" : "Genero del postulante",
+		"description" : "Opcional. El genero del postulante",
+		"kind" : "String",
+		"mandatory" : false,
+		"groupOrder" : 0,
+		"group" : "",
+		"order" : 3,
+		"width" : 12,
+		"icon" : "",
+		"min": 1,
+		"max": 256
+	},
+	{
 		"name" : "numero",
 		"title" : "Número",
-		"description" : "El número identificador del proyecto",
-		"kind" : "Number",
-		"mandatory" : true,
+		"description" : "Opcional. El número identificador del proyecto (Sin el #)",
+		"kind" : "String",
+		"mandatory" : false,
 		"groupOrder" : 0,
 		"group" : "",
 		"order" : 0,
@@ -37,16 +51,16 @@ const newFields = [
 	{
 		"name" : "presupuesto",
 		"title" : "Presupuesto",
-		"description" : "Sin comas ni puntos",
-		"kind" : "Number",
-		"mandatory" : true,
+		"description" : "Opcional. El presupuesto del proyecto",
+		"kind" : "String",
+		"mandatory" : false,
 		"groupOrder" : 0,
 		"group" : "",
 		"order" : 1,
 		"width" : 6,
 		"icon" : "",
 		"min": 1,
-		"max": 1000 * 1000 * 1000 //1 billon
+		"max": 1000 //1 billon
 	},
 	{
 		"name" : "escuela",

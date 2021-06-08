@@ -15,6 +15,7 @@ import AdminActions from './admin-actions/component'
 import Proyectos from 'ext/lib/site/proyectos/component'
 import { Link } from 'react-router'
 import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
+import config from 'lib/config'
 
 class TopicArticle extends Component {
   constructor (props) {
@@ -98,8 +99,8 @@ class TopicArticle extends Component {
       forum.privileges &&
       forum.privileges.canChangeTopics
 
-    const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
-    const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
+    // const isSistematizada = topic && topic.attrs && topic.attrs.state == 'sistematizada'
+    // const isIdeaProyecto = topic && topic.attrs && topic.attrs.state == 'idea-proyecto'
     const isProyecto = topic && topic.attrs && topic.attrs.state == 'proyecto'
 
     const topicEscuelaId = topic.escuela._id
@@ -153,7 +154,7 @@ class TopicArticle extends Component {
         <div className='topic-article-content entry-content skeleton-propuesta'>
          <div className='topic-article-status-container'>
         {
-          (forum.privileges && forum.privileges.canChangeTopics)
+          (forum.privileges && forum.privileges.canChangeTopics && config.propuestasAbiertas)
             ? (
               <div className='topic-article-content topic-admin-actions'>
                 <Link href={editUrl}>
@@ -165,7 +166,7 @@ class TopicArticle extends Component {
                 </Link>
               </div>
             )
-            : (topic.privileges && topic.privileges.canEdit) &&
+            : (topic.privileges && topic.privileges.canEdit && config.propuestasAbiertas) &&
 
                (
                  <div className='topic-article-content topic-admin-actions'>
@@ -178,7 +179,6 @@ class TopicArticle extends Component {
                    </a>
                  </div>
                )
-
         }
         </div>
           { !isProyecto && <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div> }
@@ -200,16 +200,18 @@ class TopicArticle extends Component {
             Podés ver el proyecto final presentado en la votación <Link to={`/proyectos/topic/${topic.id}`} className='alert-link'>aquí</Link>.
           </div>
         */}
-        <div className='topic-actions topic-article-content'>
-          { !isProyecto && <Cause
-            topic={topic}
-            canVoteAndComment={forum.privileges.canVoteAndComment}
-            isFromEscuela={isFromEscuela} />
+        {!isProyecto && config.habilitarApoyo && config.propuestasVisibles && <div className='topic-actions topic-article-content'>
+              <Cause
+              topic={topic}
+              canVoteAndComment={forum.privileges.canVoteAndComment}
+              isFromEscuela={isFromEscuela} />
+            </div>
           }
-          { ((isLoggedIn && isFromEscuela) || !isLoggedIn) && isProyecto &&
-            <VotarButton topic={topic} onVote={onVote} />
+        { ((isLoggedIn && isFromEscuela) || !isLoggedIn) && isProyecto && config.votacionVisible && config.votacionAbierta && <div className='topic-actions topic-article-content'>
+              <VotarButton topic={topic} onVote={onVote} />
+            </div>
           }
-        </div>
+
         <Social
           topic={topic}
           twitterText={twitterText}
@@ -220,14 +222,14 @@ class TopicArticle extends Component {
           }
         </div>
 
-        { (topic.privileges && !topic.privileges.canEdit && user.state.value && topic.owner.id === user.state.value.id) &&
+        { /*(topic.privileges && !topic.privileges.canEdit && user.state.value && topic.owner.id === user.state.value.id) &&
             (
               <p className='alert alert-info alert-propuesta'>
                 El estado de ésta propuesta fue cambiado a {this.getEstado(topic.attrs.state)}, por lo tanto ya no puede ser editada por su autor/a.
               </p>
             )
-        }
-        {
+            */}
+        {/*
           (topic.attrs['admin-comment'] && topic.attrs['admin-comment'] !== '') &&
             (
               <div className='alert alert-info alert-propuesta' role='alert'>
@@ -239,10 +241,10 @@ class TopicArticle extends Component {
                 <p className='font-weight-bold'>Equipo de Coordinación y Gestión PPUNR</p>
               </div>
             )
-        }
+        */}
 
         {
-          !user.state.pending && !isSistematizada && !isIdeaProyecto && !isProyecto && <Comments forum={forum} topic={topic} isFromEscuela={isFromEscuela} />
+          !user.state.pending && !isProyecto && <Comments forum={forum} topic={topic} isFromEscuela={isFromEscuela} />
         }
       </div>
     )

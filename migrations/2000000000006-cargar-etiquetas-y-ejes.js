@@ -6,26 +6,14 @@ const Tag = models.Tag
 const Eje = models.Eje
 
 const etiquetas = [
-  { nombre: "Accesibilidad" },
-  { nombre: "Administración" },
   { nombre: "Ambiente y Sustentabilidad" },
-  { nombre: "Aprendizajes y actividades académicas" },
-  { nombre: "Arte y Cultura" },
-  { nombre: "Bioseguridad" },
-  { nombre: "Convivencia y Participación" },
-  { nombre: "Derechos Humanos" },
-  { nombre: "Género" },
-  { nombre: "Inclusión" },
+  { nombre: "Género / DDHH / Accesibilidad" },
   { nombre: "Infraestructura" },
-  { nombre: "Innovación" },
-  { nombre: "Internacionalización" },
-  { nombre: "Investigación" },
-  { nombre: "Recreación y deporte" },
-  { nombre: "Salud" },
-  { nombre: "Seguridad y Soberanía Alimentaria" },
-  { nombre: "Tecnología" },
-  { nombre: "Transparencia" },
+  { nombre: "Académica / Aprendizajes " },
   { nombre: "Vinculación con el medio" },
+  { nombre: "Arte / Deporte / Salud " },
+  { nombre: "Convivencia y Participación" },
+ 
 ]
 
 const tags = etiquetas.map(etiqueta => {

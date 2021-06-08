@@ -3,15 +3,17 @@ import { Link, browserHistory } from 'react-router'
 import moment from 'moment'
 import userConnector from 'lib/site/connectors/user'
 import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
+// import { config } from 'democracyos-notifier'
+import config from 'lib/config'
 
 const estados = (state) => {
   switch (state) {
-    case 'sistematizada':
-      return 'Sistematizada'
-      break
-    case 'idea-proyecto':
-      return 'Idea-Proyecto'
-      break
+    // case 'sistematizada':
+    //   return 'Sistematizada'
+    //   break
+    // case 'idea-proyecto':
+    //   return 'Idea-Proyecto'
+    //   break
     case 'pendiente':
       return 'Original'
       break
@@ -84,7 +86,7 @@ export class TopicCard extends Component {
             <span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>
           </div>
 
-          {!isProyecto && (isSistematizada || isIdeaProyecto ?
+          {/*!isProyecto && (isSistematizada || isIdeaProyecto ?
             <div className='topic-creation'>
               <span>Creado por: <span className='topic-card-author'>PPUNR</span></span>
             </div>
@@ -99,7 +101,18 @@ export class TopicCard extends Component {
                 {moment(topic.createdAt).format('D-M-YYYY')}
               </span>
             </div>
-          )}
+          )*/}
+
+          <div className='topic-creation'>
+            <span>Creado por: <span className='topic-card-author'>{topic.owner.firstName}</span></span>
+            {topic.owner.claustro &&
+              <span className='topic-card-claustro'>({topic.owner.claustro.nombre})</span>
+            }
+            <span
+              className={`date ${(topic.attrs.state !== 'pendiente') && 'space'}`}>
+              {moment(topic.createdAt).format('D-M-YYYY')}
+            </span>
+          </div>
 
           <h1 className={`topic-card-title ${isProyecto && 'mt-5'}`}>
             {isProyecto && topic.attrs &&
@@ -110,15 +123,17 @@ export class TopicCard extends Component {
           <p className='topic-card-description'>
             {createClauses(topic)}
           </p>
+          { isProyecto &&
+            <p className='topic-card-presupuesto'>
+            Monto estimado: ${topic.attrs.presupuesto.toLocaleString()}
+            </p>
+          }
 
         </div>
 
         <div className='topic-card-footer'>
-          {isProyecto && topic.attrs &&
-            <div className='topic-card-presupuesto'>
-              Monto estimado: ${topic.attrs.presupuesto.toLocaleString()}
-            </div>
-          }
+          {/* {isProyecto && topic.attrs &&
+          } */}
           { topic.tags && topic.tags.length > 0 && (
               <div className='topic-card-tags'>
                 <span className="glyphicon glyphicon-tag"></span>
@@ -187,8 +202,20 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            { ((isLoggedIn && isFromEscuela) || !isLoggedIn) && isProyecto &&
+            {((isLoggedIn && isFromEscuela) || !isLoggedIn) && isProyecto && config.votacionVisible && config.votacionAbierta &&
               <VotarButton topic={topic} onVote={onVote} />
+            }
+            {
+              ((isLoggedIn && isFromEscuela) || !isLoggedIn) && !isProyecto && !config.votacionVisible && config.propuestasVisibles && config.habilitarApoyo &&
+              <div
+                className='proyectista-wrapper'>
+                <button
+                  className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+                  onClick={() => onProyectista(topic.id, !isProyectista)}
+                  disabled={isProyectista}>
+                  {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
+                </button>
+              </div>
             }
           </div>
 

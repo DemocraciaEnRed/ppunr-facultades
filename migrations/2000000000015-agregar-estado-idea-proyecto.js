@@ -15,40 +15,40 @@ exports.up = function up (done) {
   // done() devuelve al Migrator de lib/migrations
   dbReady()
 
-    // Código principal de migración
-    .then(() => Forum.findOne({name: 'proyectos'}))
-    .then((forumProyecto) => {
-      if (!forumProyecto || !forumProyecto.topicsAttrs)
-        throw new Error('No forum proyectos or no topicAttrs in it found')
+    // // Código principal de migración
+    // .then(() => Forum.findOne({name: 'proyectos'}))
+    // .then((forumProyecto) => {
+    //   if (!forumProyecto || !forumProyecto.topicsAttrs)
+    //     throw new Error('No forum proyectos or no topicAttrs in it found')
 
-			// por algún motivo no nos deja editar un item del array
-			const copyAttrs = deepCopy(forumProyecto.topicsAttrs)
+		// 	// por algún motivo no nos deja editar un item del array
+		// 	const copyAttrs = deepCopy(forumProyecto.topicsAttrs)
 
-			const stateAttr = copyAttrs.find(a => a.name == 'state')
+		// 	const stateAttr = copyAttrs.find(a => a.name == 'state')
 
-			// borramos campo anterior si ya estaba
-			const ideaProyectoIndex = stateAttr.options.findIndex(a => a.name == 'idea-proyecto')
-			if (ideaProyectoIndex != -1)
-				stateAttr.options.splice(ideaProyectoIndex, 1)
+		// 	// borramos campo anterior si ya estaba
+		// 	const ideaProyectoIndex = stateAttr.options.findIndex(a => a.name == 'idea-proyecto')
+		// 	if (ideaProyectoIndex != -1)
+		// 		stateAttr.options.splice(ideaProyectoIndex, 1)
 
-      stateAttr.options.push({
-        name: 'idea-proyecto',
-        title: 'Idea-Proyecto'
-      })
+    //   stateAttr.options.push({
+    //     name: 'idea-proyecto',
+    //     title: 'Idea-Proyecto'
+    //   })
 
-      // borramos todo y volvemos a generar
-      forumProyecto.topicsAttrs.splice(0)
-      forumProyecto.topicsAttrs.push(...copyAttrs)
+    //   // borramos todo y volvemos a generar
+    //   forumProyecto.topicsAttrs.splice(0)
+    //   forumProyecto.topicsAttrs.push(...copyAttrs)
 
-      forumProyecto.markModified('topicsAttrs')
+    //   forumProyecto.markModified('topicsAttrs')
 
-      return new Promise((resolve, reject) =>
-        Forum.collection.save(forumProyecto, (err) => {
-          if (err) reject(new Error(err))
-          resolve()
-        })
-      )
-    })
+    //   return new Promise((resolve, reject) =>
+    //     Forum.collection.save(forumProyecto, (err) => {
+    //       if (err) reject(new Error(err))
+    //       resolve()
+    //     })
+    //   )
+    // })
 
     // Todo OK
     .then(() => {

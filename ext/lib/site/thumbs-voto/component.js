@@ -36,13 +36,9 @@ export default userConnector(function ThumbsVoto(props) {
               :
               <h2>{ subtitle }</h2>
             }
-            {/*<h3>Hasta el 31 de mayo inclusive tenés tiempo para presentar tus propuestas</h3> */}
             <h3>{ props.texts['home-subtitle-text'] }</h3>
             <div className="btn-container">
-              {//<div className="boton-azul boton-blanco">
-              //  <a href="https://forosvecinales.blob.core.windows.net/informes/Escrutinio-2019.xlsx">Ver Resultados</a>
-              //</div>
-              }
+           
               { config.propuestasAbiertas && <Link
                 to={ userLoggedIn ? `/formulario-idea?id=${userEscuelaId}` : '/formulario-idea' }
                 className="boton-mandar-idea">
@@ -79,8 +75,7 @@ export default userConnector(function ThumbsVoto(props) {
             </div>
             <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
-              {/* props.texts['home-icono2-texto']*/}
-              En esta plataforma podrás elegir el proyecto que querés que se ejecute durante 2021 en tu Escuela. Presioná en el botón <strong>Ingresar</strong> para loguearte y entrá a la sección de votación de tu Escuela. Allí encontrarás el listado de proyectos entre los que podrás votar tu preferido.Se te pedirá confirmar tu elección. Puede votar toda la comunidad de la UNR. Si tenés alguna consulta escribirnos a <a href="mailto:presupuestoparticipativo@unr.edu.ar">presupuestoparticipativo@unr.edu.ar</a>
+              {props.texts['home-icono2-texto']}
             </p>
 
           </div>
@@ -94,20 +89,20 @@ export default userConnector(function ThumbsVoto(props) {
               { props.texts['home-icono3-titulo']}
             </h2>
             <p className="donde-voto-cont">
-              { props.texts['home-icono3-texto']} <a href='https://presupuestoparticipativo.unr.edu.ar/como-participo/' rel="noopener noreferer" target="_blank">Presupuesto Participativo UNR</a>
+              { props.texts['home-icono3-texto']}
             </p>
           </div>
 
         </div>
 
-        {/* <div
+        <div
           className='row'>
           <div className='cont-boton-azul'>
-            <Link to='/s/acerca-de' className="boton-azul">
-                    Más información
+            <Link to='https://presupuestoparticipativo.unr.edu.ar/como-participo/' className="boton-azul">
+              ¿Como participo?
             </Link>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   )

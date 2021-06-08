@@ -5,6 +5,7 @@ import CommentsForm from './form/component'
 import CommentsList from './list/component'
 import CommentsOrderBy from './order-by/component'
 import commentsConnector from './connector'
+import config from 'lib/config'
 
 export class Comments extends Component {
   constructor (props) {
@@ -12,7 +13,8 @@ export class Comments extends Component {
 
     this.state = {
       comments: props.commentsFetch.value,
-      pagination: props.commentsFetch.meta.pagination
+      pagination: props.commentsFetch.meta.pagination,
+      isFromEscuelaReactive: props.isFromEscuela
     }
   }
 
@@ -28,7 +30,7 @@ export class Comments extends Component {
   render () {
     const { commentsFetch, topic, user, isFromEscuela } = this.props
 
-    const enabled = false
+    const enabled = config.habilitarComentarios
 
     return (
       <div className='topic-comments'>
@@ -37,14 +39,14 @@ export class Comments extends Component {
             {t('comments.arguments')}
             <CommentsOrderBy onSort={this.props.handleSort} />
           </h2>
-          {isFromEscuela ? (
+          {this.state.isFromEscuelaReactive ? (
             enabled ?
               <CommentsForm
                 topic={this.props.topic}
                 onSubmit={this.props.handleCreate}
                 commentsCreating={this.props.commentsCreating} />
             :
-              <p className='not-in-escuela'>¡Gracias por haber comentando!<br />En esta fase del presupuesto participativo esta sección se encuentra deshabilitada.</p>
+              <p className='not-in-escuela'>¡Gracias por haber comentando!<br />Los comentarios de esta sección se encuentra deshabilitada.</p>
           ) :
             <p className='not-in-escuela'>No podés hacer comentarios en ideas de esta escuela</p>
           }

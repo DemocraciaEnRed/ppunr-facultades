@@ -24,23 +24,30 @@
               span='A - Z'
       .row.row-filtros
         .col-md-3.col-xs-12
-          .input-group.input-group-md
-            ='Escuela: '
-            select(name='escuela')
+          .form-group
+            label='Escuela: '
+            select.form-control(name='escuela')
               option(value="") Todos
               - each obj in uniqAttrs.escuelas
                 option(value="#{obj.value}") #{obj.name}
-        .col-md-4.col-xs-12
-          .input-group.input-group-md
-            ='Claustro: '
-            select(name='claustro')
+        .col-md-3.col-xs-12
+          .form-group
+            label='Claustro: '
+            select.form-control(name='claustro')
               option(value="") Todos
               - each obj in uniqAttrs.claustros
                 option(value="#{obj.value}") #{obj.name}
-        .col-md-5.col-xs-12
-          .input-group.input-group-md
-            ='Temas: '
-            select(name='tema')
+        //- .col-md-3.col-xs-12
+        //-   .form-group
+        //-     label='Tipo: '
+        //-     select.form-control(name='tipo')
+        //-       option(value="") Todos
+        //-       option(value="pendiente") Idea
+        //-       option(value="proyecto") Proyecto
+        .col-md-3.col-xs-12
+          .form-group
+            label='Temas: '
+            select.form-control(name='tema')
               option(value="") Todos
               - each obj in uniqAttrs.tags
                 option(value="#{obj.name}") #{obj.name}
@@ -62,18 +69,43 @@
               option(value="anchor-attrs.problema") > Cambiar texto
 
           h4.topic-title
-            a(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle
+            a(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle 
+            - if (topic.attrs.state == 'pendiente')
+                span.placa.idea.text
+                  span.glyphicon.glyphicon-leaf
+                  span='  Idea'
+            - if (topic.attrs.state == 'proyecto')
+                span.placa.proyecto.text
+                  span.glyphicon.glyphicon-grain
+                  span='  Proyecto'
 
           span.topic-date.hide=topic.createdAt
 
           .topic-multi-tags
+            - if (topic.tag)
+              span.text.topic-tag
+                u='Eje principal'
+                b=': ' + topic.tag.name
+                br
             span.glyphicon.glyphicon-tag
-            span.text.topic-tag=topic.tag && topic.tag.name + ' - '
             span.text.topic-tags=topic.tags.map(toTitleCase).join(', ')
 
           .topic-status-data
             - if (topic.owner && topic.escuela)
-              span.placa.text=topic.escuela.nombre
+              -if(topic.escuela.abreviacion == 'EAC')
+                //- span.placa.eac.text=topic.escuela.nombre
+                span.placa.eac.text
+                  span.glyphicon.glyphicon-education
+                  span=' ' + topic.escuela.nombre
+              -if(topic.escuela.abreviacion == 'IPS')
+                //- span.placa.ips.text=topic.escuela.nombre
+                span.placa.ips.text
+                  span.glyphicon.glyphicon-education
+                  span=' ' + topic.escuela.nombre
+              -if(topic.escuela.abreviacion == 'ESUPCOM')
+                span.placa.esupcom.text
+                  span.glyphicon.glyphicon-education
+                  span=' ' + topic.escuela.nombre
             - if (topic.owner && topic.owner.claustro)
               span.placa.text=topic.owner.claustro.nombre
 

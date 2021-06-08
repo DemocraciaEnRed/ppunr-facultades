@@ -59,7 +59,7 @@ app.get('/topics',
       },
       tipoIdea: {
         type: 'string',
-        default: 'sistematizada,pendiente,idea-proyecto'
+        default: 'pendiente,proyecto'
       }
     })
   }, { formats }),

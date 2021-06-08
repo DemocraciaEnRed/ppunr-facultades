@@ -16,9 +16,14 @@ import Footer from 'ext/lib/site/footer/component'
 import Select from 'react-select'; // ! VERSIÓN 2.4.4 !
 
 // Variables para fases de propuestas abiertas o cerrdas:
+// config.propuestasVisibles
 // config.propuestasAbiertas
 // config.propuestasTextoAbiertas
 // config.propuestasTextoCerradas
+// config.votacionVisible
+// config.votacionAbierta
+// config.votacionTextoAbierta
+// config.votacionTextoCerrada
 
 const defaultValues = {
   limit: 20,
@@ -26,7 +31,7 @@ const defaultValues = {
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest',
-  tipoIdea: ['proyecto']
+  tipoIdea: config.votacionVisible ? ['proyecto'] : (config.propuestasVisibles ? ['pendiente'] : [])
 }
 
 const filters = {
@@ -360,26 +365,41 @@ class HomePropuestas extends Component {
 
         <div className='container'>
           <div className="row">
-            { config.propuestasAbiertas
-              ? (
-                  <div className='notice'>
+            {config.propuestasVisibles && 
+              (config.propuestasAbiertas 
+                ? (
+                    <div className='notice'>
                     <h1>{config.propuestasTextoAbiertas}</h1>
-                  </div>
-              ) : (
+                    </div>
+                ) : (
                   <div className='notice'>
-                    <h1>{config.propuestasTextoCerradas}</h1>
+                      <h1>{config.propuestasTextoCerradas}</h1>
+                    </div>
+                )
+              )
+            }
+            {config.votacionVisible &&
+              (config.votacionAbierta
+                ? (
+                  <div className='notice'>
+                    <h1>{config.votacionTextoAbierta}</h1>
                   </div>
+                ) : (
+                  <div className='notice'>
+                    <h1>{config.votacionTextoCerrada}</h1>
+                  </div>
+                )
               )
             }
           </div>
         </div>
 
         <div className='container topics-container'>
-          {!isFromEscuela &&
+          {/* {!isFromEscuela &&
             <div className='not-in-escuela-reminder'>
               <span><i className="glyphicon glyphicon-warning-sign"></i>Recordá que sólo podés ser proyectista en ideas del foro de tu escuela</span>
             </div>
-          }
+          } */}
           <FilterPropuestas
             claustros={this.state.claustros}
             claustro={this.state.claustro}

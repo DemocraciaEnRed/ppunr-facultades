@@ -3,13 +3,16 @@ import t from 't-component'
 import { Link, browserHistory } from 'react-router'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
+import config from 'lib/config'
 
 export class Cause extends Component {
   state = {
     topicClosed: false,
     showLoginMessage: false,
     results: null,
-    forceProyectista: false
+    forceProyectista: false,
+    supported: null
+    // isFromEscuelaReactive: false
   }
 
   componentWillMount () {
@@ -71,8 +74,8 @@ export class Cause extends Component {
     if (user.state.fulfilled && topic.privileges && !topic.privileges.canVote) return null
     return (
       <div className='topics-cause-propuesta'>
-        {isSistematizada || isIdeaProyecto  ?
-          /*<div
+        {/*isSistematizada || isIdeaProyecto  ?
+          <div
             className='proyectista-wrapper'>
             <button
               className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
@@ -80,14 +83,27 @@ export class Cause extends Component {
               disabled={!isFromEscuela || isProyectista}>
               {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
             </button>
-          </div>*/null
+          </div>null
         :
           <div className='btn btn-primary' disabled={true}>
             Seguidores:&nbsp;
             {topic.action.count}&nbsp;
             <span className='icon-like' />
           </div>
-        }
+        */}
+        <div
+          className='proyectista-wrapper text-center'>
+            <button
+            className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+            onClick={isFromEscuela && (() => this.handleProyectista(topic.id, !isProyectista))}
+            disabled={!isFromEscuela || isProyectista}>
+            {isProyectista ? '¡Gracias! ¡Registramos tu "Me gusta"!' : 'Me gusta'}&nbsp;&nbsp;({topic.proyectistas.length})&nbsp;&nbsp;<span className='icon-like' />
+          </button>
+            {/* {
+              !this.state.isFromEscuelaReactive && <p><span>Solo miembros de la escuela pueden enviar un "Me Gusta"</span></p>
+            } */}
+          
+        </div>
         {/*supported && (
           <button
             className='btn btn-primary'

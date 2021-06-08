@@ -52,29 +52,30 @@ const defaultValues = () => ({
 // Only allow to edit specific keys when is a proposal
 // and the users doesn't have forum privileges.
 const purgeBody = (req, res, next) => {
-  //console.log('Entre a purgeBody')
+  // console.log('Entre a purgeBody')
   // beware with subscribers fields
   if (isCitizenOnProposal(req.user, req.forum)) {
-    //console.log('Entre por true')
+    // console.log('Entre por true')
     if (config.propuestasAbiertas){
       // IF THE FORM IS OPEN, RUN THIS
       req.body = Object.assign(
-         defaultValues(),
-         pick(req.body, EDITABLE_KEYS)
-      )
+        defaultValues(),
+        pick(req.body, EDITABLE_KEYS)
+        )
+      // console.log(req.body)
     }else{
       // IF THE FORM UPLOAD IS CLOSED, A CITIZEN CANNOT CONTINUE
       return next(new CantUploadProposal())
     }
   } else {
-    //console.log('Entre por false')
-    //console.log('=========================')
-    //console.log(req.body)
-    //console.log('=========================')
+    // console.log('Entre por false')
+    // console.log('=========================')
+    // console.log(req.body)
+    // console.log('=========================')
     req.body = Object.assign(
       defaultValues(),
       req.body
-    )
+      )
   }
   return next()
 }

@@ -146,6 +146,7 @@ class FormularioPropuesta extends Component {
       'attrs.genero': this.state.genero,
       'attrs.problema': this.state.problema,
       escuela: this.state.escuela,
+      'attrs.escuela': this.state.escuela,
       tags: this.state.tags.map(tag => tag.name)
     }
     if (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit') {
@@ -205,7 +206,7 @@ class FormularioPropuesta extends Component {
       let theTags = state.tags
       if(theTags.includes(tag)){
         return { tags: theTags.filter(t => t !== tag)}
-      }else if(theTags.length < 3)
+      }else if(theTags.length < 1)
         theTags.push(tag)
       return { tags: theTags }
     })
@@ -385,7 +386,7 @@ class FormularioPropuesta extends Component {
                 className='form-control'
                 required
                 type='text'
-                max='128'
+                maxLength='225'
                 name='titulo'
                 value={this.state['titulo']}
                 onChange={this.handleInputChange} />
