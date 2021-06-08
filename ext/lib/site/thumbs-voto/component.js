@@ -73,10 +73,9 @@ export default function ThumbsVoto(props) {
               className="que-propongo img-responsive"
               style={styleIcono2}>
             </div>
-            <h2 className="text-center">{ props.texts['home-icono2-titulo']}</h2>
+            <h2 className="text-center">{props.texts['home-icono2-titulo']}</h2>
             <p className="que-propongo-cont">
-              {/* props.texts['home-icono2-texto']*/}
-              En esta plataforma podrás elegir el proyecto que querés que se ejecute durante 2021. Presioná en el botón <strong>Ingresar</strong> para loguearte y entrá a la sección de votación. Allí encontrarás el listado de proyectos entre los que podrás votar tu preferido.Se te pedirá confirmar tu elección. Puede votar toda la comunidad de la UNR. Si tenés alguna consulta escribirnos a <a href="mailto:presupuestoparticipativo@unr.edu.ar">presupuestoparticipativo@unr.edu.ar</a>
+              {props.texts['home-icono2-texto']}
             </p>
 
           </div>
@@ -90,20 +89,20 @@ export default function ThumbsVoto(props) {
               { props.texts['home-icono3-titulo']}
             </h2>
             <p className="donde-voto-cont">
-              { props.texts['home-icono3-texto']} <a href='https://presupuestoparticipativo.unr.edu.ar/como-participo/' rel="noopener noreferer" target="_blank">Presupuesto Participativo UNR</a>
+              {props.texts['home-icono3-texto']}
             </p>
           </div>
 
         </div>
 
-        {/* <div
+        <div
           className='row'>
           <div className='cont-boton-azul'>
-            <Link to='/s/acerca-de' className="boton-azul">
-                    Más información
+            <Link to='https://presupuestoparticipativo.unr.edu.ar/como-participo/' className="boton-azul">
+              ¿Como participo?
             </Link>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   )

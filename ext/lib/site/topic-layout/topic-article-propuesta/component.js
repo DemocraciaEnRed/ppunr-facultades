@@ -15,6 +15,7 @@ import AdminActions from './admin-actions/component'
 import Proyectos from 'ext/lib/site/proyectos/component'
 import { Link } from 'react-router'
 import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
+import config from 'lib/config'
 
 class TopicArticle extends Component {
   constructor (props) {

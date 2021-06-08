@@ -121,9 +121,9 @@ class Header extends Component {
                 toggleOnClick={this.toggleUserMenu} />
             )}
 
-            {userState.fulfilled && userState.value && !userState.value.dni && !this.state.userMenu && (
+            {/* {userState.fulfilled && userState.value && !userState.value.dni && !this.state.userMenu && (
               <PopupMessage msg='¡Para votar completá tu perfil con tu DNI!' />
-            )}
+            )} */}
 
             <MobileMenu
               form={this.state.userForm}
@@ -198,9 +198,9 @@ class Header extends Component {
                 toggleOnClick={this.toggleUserMenu} />
             )}
 
-            {userState.fulfilled && userState.value && !userState.value.dni && !this.state.userMenu && (
+            {/* {userState.fulfilled && userState.value && !userState.value.dni && !this.state.userMenu && (
               <PopupMessage msg='¡Para votar completá tu perfil con tu DNI!' />
-            )}
+            )} */}
 
             {userState.rejected && (
               <AnonUser form={this.state.userForm} />

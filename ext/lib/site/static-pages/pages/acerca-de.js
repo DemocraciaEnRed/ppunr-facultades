@@ -40,7 +40,7 @@ export default class Page extends Component {
                   </div>
 
                   <div data-trigger="+ ¿Cómo participo?">
-                    <p className='p-padding'>Te invitamos a registrarte <Link to='/signup'>aquí</Link> para luego ingresar en UNR Decide y poder votar. Podrás elegir un proyecto que de resultar ganador se ejecutará durante 2021.</p>
+                    <p className='p-padding'>Te invitamos a registrarte <Link to='/signup'>aquí</Link> para luego ingresar en UNR Decide y poder votar. Podrás elegir un proyecto que de resultar ganador se ejecutará durante 2022.</p>
                   </div>
 
                   <div data-trigger="+ ¿Qué pasa si no puedo registrarme?">
@@ -66,7 +66,7 @@ export default class Page extends Component {
                     <p className='p-padding'>Dieciocho millones de pesos, de los cuales, cada Escuela tendrá disponible un millón para discutir en el marco de su comunidad, y el resto, quince millones, estarán destinado al PP Facultades.</p>
                   </div>
 
-                  <div data-trigger="+ ¿Cómo elegiremos los proyectos a ejecutarse en 2021?">
+                  <div data-trigger="+ ¿Cómo elegiremos los proyectos a ejecutarse en 2022?">
                     <p className='p-padding'>Previa difusión de los proyectos para que toda la comunidad de la UNR pueda conocerlos, se realizará la votación, a través de la cual se decidirá cuál/es será/n ejecutado/s hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Es decir que, de acuerdo al monto de los proyectos elegidos, podrán ejecutarse uno o más proyectos.</p>
                   </div>
 

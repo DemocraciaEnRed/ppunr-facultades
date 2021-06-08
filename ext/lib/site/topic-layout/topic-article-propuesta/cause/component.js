@@ -9,7 +9,8 @@ export class Cause extends Component {
     topicClosed: false,
     showLoginMessage: false,
     results: null,
-    forceProyectista: false
+    forceProyectista: false,
+    supported: null
   }
 
   componentWillMount () {
@@ -71,7 +72,7 @@ export class Cause extends Component {
     if (user.state.fulfilled && topic.privileges && !topic.privileges.canVote) return null
     return (
       <div className='topics-cause-propuesta'>
-        {isSistematizada || isIdeaProyecto  ?
+        {/*isSistematizada || isIdeaProyecto  ?
           /*<div
             className='proyectista-wrapper'>
             <button
@@ -80,14 +81,26 @@ export class Cause extends Component {
               disabled={isProyectista}>
               {isProyectista ? '¡Ya sos proyectista!' : '¡Quiero ser proyectista!'}
             </button>
-          </div>*/null
+          </div>
         :
           <div className='btn btn-primary' disabled={true}>
             Seguidores:&nbsp;
             {topic.action.count}&nbsp;
             <span className='icon-like' />
           </div>
-        }
+        */}
+        <div
+          className='proyectista-wrapper text-center'>
+        <button
+          className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+          onClick={(() => this.handleProyectista(topic.id, !isProyectista))}
+          disabled={isProyectista}>
+          {isProyectista ? '¡Gracias! ¡Registramos tu "Me gusta"!' : 'Me gusta'}&nbsp;&nbsp;({topic.proyectistas.length})&nbsp;&nbsp;<span className='icon-like' />
+        </button>
+        {/* {
+              !this.state.isFromEscuelaReactive && <p><span>Solo miembros de la escuela pueden enviar un "Me Gusta"</span></p>
+            } */}
+        </div>
         {/*supported && (
           <button
             className='btn btn-primary'

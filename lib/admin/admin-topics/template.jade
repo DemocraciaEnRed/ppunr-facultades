@@ -63,7 +63,15 @@
 
           h4.topic-title
             a(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle
-
+            - if (topic.attrs.state == 'pendiente')
+                span.placa.idea.text
+                  span.glyphicon.glyphicon-leaf
+                  span='  Idea'
+            - if (topic.attrs.state == 'proyecto')
+                span.placa.proyecto.text
+                  span.glyphicon.glyphicon-grain
+                  span='  Proyecto'
+                  
           span.topic-date.hide=topic.createdAt
 
           .topic-multi-tags

@@ -127,6 +127,7 @@ class FormularioPropuesta extends Component {
         facultad: user.facultad._id,
         claustro: user.claustro._id,
         email: user.email,
+        documento: user.dni,
         nombre: user.firstName + ' ' + user.lastName
       })
     }
@@ -199,7 +200,7 @@ class FormularioPropuesta extends Component {
       let theTags = state.tags
       if(theTags.includes(tag)){
         return { tags: theTags.filter(t => t !== tag)}
-      }else if(theTags.length < 3)
+      }else if(theTags.length < 1)
         theTags.push(tag)
       return { tags: theTags }
     })
@@ -326,7 +327,8 @@ class FormularioPropuesta extends Component {
               name='documento'
               placeholder=""
               value={this.state['documento']}
-              onChange={this.handleInputChange} />
+              onChange={this.handleInputChange}
+              disabled={true}/>
           </div>
           <div className='form-group'>
             <label className='required' htmlFor='genero'>

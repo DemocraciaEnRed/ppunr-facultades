@@ -4,6 +4,43 @@
       .heading
         .circle
           i.icon-lock
+         h2= 'Padron'
+        h3= 'Buscar por DNI'
+        .form-group
+          label= 'Busque por DNI nuevo'
+          input.form-control(
+            type='text',
+            data-name='busqueda-dni',
+            validate='required'
+          )
+        .form-group
+          button.btn.btn-primary.buscar-dni-button= 'Buscar'
+        pre#response-dni='Ingrese un DNI para buscar su informacion'
+        h4= 'Referencia Claustros'
+        pre
+          - each claustro in claustros
+            div ID: #{claustro.value} - Claustro #{claustro.name}
+        hr
+        h3= 'Agregar al padron'
+        .form-group
+          label= 'Ingrese el DNI nuevo'
+          input.form-control(
+            type='text',
+            data-name='new-dni',
+            validate='required'
+          )
+        //- .form-group
+        //-   label= 'Elija la escuela'
+        //-   select.form-control(data-name='new-escuela', validate='required')
+        //-     option(selected, disabled, value="")='- Elija una escuela -'
+        //-     - each escuela in escuelas
+        //-       option(value=escuela.value)
+        //-         = escuela.name
+        .form-group
+          button.btn.btn-primary.new-padron-button= 'Ingresar al padrón'
+        #success-new-dni.alert.alert-success(hidden=true)='Exito! Agregado al padron'        
+        #error-new-dni.alert.alert-danger(hidden=true)='Exito! Agregado al padron'        
+        hr
         h2= 'Contenido Portada'
       form.form(action='/api/text', method='post', role='form', autocomplete='off', autovalidate='autovalidate', autosubmit='autosubmit')
         ul.form-messages

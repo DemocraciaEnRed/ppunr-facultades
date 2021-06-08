@@ -17,9 +17,14 @@ import Anchor from 'ext/lib/site/anchor'
 import Select from 'react-select'; // ! VERSIÓN 2.4.4 !
 
 // Variables para fases de propuestas abiertas o cerrdas:
+// config.propuestasVisibles
 // config.propuestasAbiertas
 // config.propuestasTextoAbiertas
 // config.propuestasTextoCerradas
+// config.votacionVisible
+// config.votacionAbierta
+// config.votacionTextoAbierta
+// config.votacionTextoCerrada
 
 const defaultValues = {
   limit: 20,
@@ -28,7 +33,7 @@ const defaultValues = {
   tag: [],
   // 'barrio' o 'newest' o 'popular'
   sort: 'newest',
-  tipoIdea: ['proyecto']
+  tipoIdea: config.votacionVisible ? ['proyecto'] : (config.propuestasVisibles ? ['pendiente'] : [])
 }
 
 const filters = {
@@ -96,6 +101,8 @@ class HomePropuestas extends Component {
         tag,
         tiposIdea,
         forum,
+        // searchableProyectos: proyectos.filter(p => p.attrs.state == (config.votacionVisible ? 'proyecto' : 'pendiente')).map(p => ({label: `${p.mediaTitle}`, value: p._id}))
+        // searchableProyectos: config.votacionVisible ? proyectos.map(p => p.state == 'proyecto') : proyectos.map(p => p.state == 'pendiente')
         searchableProyectos: proyectos.map(p => ({label: `#${p.attrs && p.attrs.numero} ${p.mediaTitle}`, value: p._id}))
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
@@ -357,22 +364,37 @@ class HomePropuestas extends Component {
       <div className={`ext-home-ideas ${this.props.user.state.fulfilled ? 'user-logged' : ''}`}>
         <Anchor id='container'>
           <BannerListadoTopics
-          btnText={config.propuestasAbiertas && false ? 'Mandá tu idea' : undefined}
-          btnLink={config.propuestasAbiertas && false ? '/formulario-idea' : undefined}
+          btnText={config.propuestasAbiertas ? 'Mandá tu idea' : undefined}
+          btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
           title='Conocé los proyectos del PPUNR'
             />
 
           <div className='container'>
             <div className="row">
-              { config.propuestasAbiertas
-                ? (
+              {config.propuestasVisibles &&
+                (config.propuestasAbiertas
+                  ? (
                     <div className='notice'>
                       <h1>{config.propuestasTextoAbiertas}</h1>
                     </div>
-                ) : (
-                  <div className='notice'>
-                    <h1>{config.propuestasTextoCerradas}</h1>
-                  </div>
+                  ) : (
+                    <div className='notice'>
+                      <h1>{config.propuestasTextoCerradas}</h1>
+                    </div>
+                  )
+                )
+              }
+              {config.votacionVisible &&
+                (config.votacionAbierta
+                  ? (
+                    <div className='notice'>
+                      <h1>{config.votacionTextoAbierta}</h1>
+                    </div>
+                  ) : (
+                    <div className='notice'>
+                      <h1>{config.votacionTextoCerrada}</h1>
+                    </div>
+                  )
                 )
               }
             </div>
@@ -380,7 +402,7 @@ class HomePropuestas extends Component {
 
           <div className='container topics-container'>
 
-            {/*<FilterPropuestas
+            <FilterPropuestas
               facultades={this.state.facultades}
               facultad={this.state.facultad}
               claustros={this.state.claustros}
@@ -393,11 +415,11 @@ class HomePropuestas extends Component {
               handleFilter={this.handleFilter}
               handleDefaultFilter={this.handleDefaultFilter}
               clearFilter={this.clearFilter}
-              handleRemoveBadge={this.handleRemoveBadge} />*/}
+              handleRemoveBadge={this.handleRemoveBadge} />
 
             <div className='row'>
               <div className='col-md-10 offset-md-1'>
-
+              { config.votacionVisible && 
                 <div className='search-proyecto-wrapper'>
                   {/* para esto usamos react-select version 2.4.4 */}
                   <Select
@@ -407,11 +429,12 @@ class HomePropuestas extends Component {
                     placeholder='Buscá un proyecto por nombre'
                     isSearchable={true}
                     className='search-proyecto-select'
-                  />
+                    />
                   <button onClick={()=>this.setState({selectedProyecto: null})} disabled={selectedProyecto ? false : true}>
                     Limpiar filtro
                   </button>
                 </div>
+              }
 
                 {  this.renderSortFilter() }
                 {topics && topics.length === 0 && (

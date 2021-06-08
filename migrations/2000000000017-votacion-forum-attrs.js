@@ -13,12 +13,26 @@ const leaveOnlyFields = [
 ]
 
 const hideFields = [
-	'state',
+	// 'state',
 	'admin-comment',
 	'admin-comment-referencia'
 ]
 
 const newFields = [
+	{
+		"name": "genero",
+		"title": "Genero del postulante",
+		"description": "Opcional. El genero del postulante",
+		"kind": "String",
+		"mandatory": false,
+		"groupOrder": 0,
+		"group": "",
+		"order": 3,
+		"width": 6,
+		"icon": "",
+		"min": 1,
+		"max": 256
+	},
 	{
 		"name" : "numero",
 		"title" : "Número",

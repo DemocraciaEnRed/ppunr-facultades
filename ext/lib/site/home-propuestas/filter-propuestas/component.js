@@ -133,7 +133,7 @@ export default class FilterPropuestas extends Component {
             clearFilter={this.clearFilter}
             />*/}
 
-          <FilterBox
+          {/* <FilterBox
             name='tipoIdea'
             title='Tipo de idea'
             allOptions={tiposIdea}
@@ -144,7 +144,7 @@ export default class FilterPropuestas extends Component {
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
-            />
+            /> */}
 
           <FilterBox
             name='tag'

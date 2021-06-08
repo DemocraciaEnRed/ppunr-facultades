@@ -3,15 +3,17 @@ import { Link, browserHistory } from 'react-router'
 import moment from 'moment'
 import userConnector from 'lib/site/connectors/user'
 import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
+// import { config } from 'democracyos-notifier'
+import config from 'lib/config'
 
 const estados = (state) => {
   switch (state) {
-    case 'sistematizada':
-      return 'Sistematizada'
-      break
-    case 'idea-proyecto':
-      return 'Idea-Proyecto'
-      break
+    // case 'sistematizada':
+    //   return 'Sistematizada'
+    //   break
+    // case 'idea-proyecto':
+    //   return 'Idea-Proyecto'
+    //   break
     case 'pendiente':
       return 'Original'
       break
@@ -120,15 +122,14 @@ export class TopicCard extends Component {
           <p className='topic-card-description'>
             {createClauses(topic)}
           </p>
-
-        </div>
-
-        <div className='topic-card-footer'>
           {isProyecto && topic.attrs &&
             <div className='topic-card-presupuesto'>
               Monto estimado: ${topic.attrs.presupuesto.toLocaleString()}
             </div>
           }
+        </div>
+
+        <div className='topic-card-footer'>
           { topic.tags && topic.tags.length > 0 && (
               <div className='topic-card-tags'>
                 <span className="glyphicon glyphicon-tag"></span>
@@ -192,8 +193,20 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            {isProyecto &&
+            {isProyecto && config.votacionVisible &&
               <VotarButton topic={topic} onVote={onVote} />
+            }
+            {
+              !isProyecto && !config.votacionVisible && config.propuestasVisibles && config.habilitarApoyo &&
+                <div
+                  className='proyectista-wrapper'>
+                  <button
+                    className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+                    onClick={() => onProyectista(topic.id, !isProyectista)}
+                    disabled={isProyectista}>
+                  {isProyectista ? '¡Gracias! ¡Registramos tu "Me gusta"!' : 'Me gusta'}&nbsp;&nbsp;({topic.proyectistas.length})&nbsp;&nbsp;<span className='icon-like' />
+                  </button>
+                </div>
             }
           </div>
 

@@ -7,12 +7,12 @@ const nombreMigrationParaLog = 'editar forum attrs'
 
 const estadoOptions = [
 	{
-		"name" : "sistematizada",
-		"title" : "Sistematizada"
+		"name" : "proyecto",
+		"title" : "Proyecto"
 	},
 	{
 		"name" : "pendiente",
-		"title" : "Original"
+		"title" : "Idea"
 	}
 ]
 
@@ -70,7 +70,7 @@ exports.up = function up (done) {
 					let attr = copyAttrs.find(a => a.name == 'state')
 					attr.options = estadoOptions
 					attr.title = "Tipo de idea"
-					attr.description = "Si es cargada por alumnas/os (original) o si es sistematizada."
+					attr.description = "Si es cargada por alumnas/os (original) o si es proyecto."
 					attr.hide = false
 					attr.order = 0
 					attr.icon = ''
