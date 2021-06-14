@@ -13,6 +13,7 @@ import Footer from 'ext/lib/site/footer/component'
 // import forumStore from 'lib/stores/forum-store/forum-store'
 // import topicStore from 'lib/stores/topic-store/topic-store'
 import textStore from 'lib/stores/text-store'
+import TypeformButton from './typeform'
 
 export default class HomeMultiforumOverride extends Component {
   constructor (props) {
