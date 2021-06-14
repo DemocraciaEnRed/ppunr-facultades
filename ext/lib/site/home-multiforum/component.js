@@ -52,8 +52,8 @@ export default class HomeMultiforumOverride extends Component {
           <ThumbsVoto texts={this.state.texts} />
           <div className="banner-ideas">
             <img src="/ext/lib/site/home-multiforum/icon-idea.svg" alt="Ideas"/>
-            <p>Conocé los proyectos que podés votar para que sean realidad en el 2022.<br /><strong>¡Elegí uno y votá!</strong></p>
-            <Link to={'/propuestas'} className="boton-foro" href="">Ir a UNR DECIDE</Link>
+            <p><strong>¡Tenés tiempo hasta el 30 de junio!</strong> Subí tu idea o participá para mejorar con tus aportes otras ideas</p>
+            <Link to={'/propuestas'} className="boton-foro" href="">SUBÍ TU IDEA</Link>
           </div>
           {/* <Proyectos /> */}
           {/* <ProyectosFactibles /> */}
