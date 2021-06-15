@@ -42,7 +42,7 @@ export default function ThumbsVoto(props) {
               { config.propuestasAbiertas && false && <Link
                 to='/formulario-idea'
                 className="boton-mandar-idea">
-                Mandá tu idea
+                Subí tu idea
               </Link>
               }
               {/*<Link

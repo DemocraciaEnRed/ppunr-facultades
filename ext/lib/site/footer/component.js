@@ -33,6 +33,9 @@ const Footer = () => (
         <div className='logo'>
           <a className='logo-unr' href='https://www.unr.edu.ar/' rel="noopener noreferer" target="_blank" />
         </div>
+        <div className="logo-access">
+          <img src="/ext/lib/site/footer/accesibility-logo.png" alt="accesibilidad"/>
+        </div>
         <div className='logo-flor'>
           <img src="/ext/lib/site/footer/logo-flor.png" alt="Flor"/>
         </div>

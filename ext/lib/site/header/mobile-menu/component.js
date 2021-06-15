@@ -50,7 +50,7 @@ class MobileMenu extends Component {
                     className={`header-link ${!~window.location.pathname.includes('propuesta') ? 'active' : ''}`}
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}>
-                    UNR Decide
+                    Foro
                   </Link>
                 </div>
                 {/* <div className='header-item mobile-link'>
