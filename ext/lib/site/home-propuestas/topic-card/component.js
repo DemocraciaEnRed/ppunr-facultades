@@ -193,7 +193,7 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            {isProyecto && config.votacionVisible &&
+            {isProyecto && config.votacionVisible && config.votacionAbierta &&
               <VotarButton topic={topic} onVote={onVote} />
             }
             {
