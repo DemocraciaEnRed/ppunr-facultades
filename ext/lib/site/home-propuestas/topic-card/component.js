@@ -15,7 +15,7 @@ const estados = (state) => {
     //   return 'Idea-Proyecto'
     //   break
     case 'pendiente':
-      return 'Original'
+      return 'Idea'
       break
     case 'proyecto':
       return 'Proyecto'
