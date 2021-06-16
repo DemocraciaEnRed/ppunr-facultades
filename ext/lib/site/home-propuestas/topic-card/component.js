@@ -15,7 +15,7 @@ const estados = (state) => {
     //   return 'Idea-Proyecto'
     //   break
     case 'pendiente':
-      return 'Original'
+      return 'Idea'
       break
     case 'proyecto':
       return 'Proyecto'
@@ -193,7 +193,7 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            {isProyecto && config.votacionVisible &&
+            {isProyecto && config.votacionVisible && config.votacionAbierta &&
               <VotarButton topic={topic} onVote={onVote} />
             }
             {
