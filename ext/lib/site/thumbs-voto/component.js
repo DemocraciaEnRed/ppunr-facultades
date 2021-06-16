@@ -39,12 +39,12 @@ export default function ThumbsVoto(props) {
               //  <a href="https://forosvecinales.blob.core.windows.net/informes/Escrutinio-2019.xlsx">Ver Resultados</a>
               //</div>
               }
-              { config.propuestasAbiertas && false && <Link
+              <Link
                 to='/formulario-idea'
                 className="boton-mandar-idea">
                 Subí tu idea
               </Link>
-              }
+              
               {/*<Link
                 to='/proyectos'
                 className="boton-azul boton-blanco">
@@ -94,15 +94,16 @@ export default function ThumbsVoto(props) {
           </div>
 
         </div>
-
-        <div
-          className='row'>
+        {/*
+        <div className='row'>
           <div className='cont-boton-azul'>
             <Link to='https://presupuestoparticipativo.unr.edu.ar/como-participo/' className="boton-azul">
               ¿Como participo?
             </Link>
           </div>
         </div>
+        */}      
+        
       </div>
     </section>
   )
