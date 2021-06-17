@@ -207,7 +207,7 @@ export class TopicCard extends Component {
                   {isProyectista ? 'Te gusta' : 'Me gusta'}&nbsp;&nbsp;<span className='icon-like' /> {topic.proyectistas.length}
                   </button>
                   
-                  <Link className="btn comment" to={`/propuestas/topic/${topic.id}`}>Comentar <span className='icon-comment' /></Link>
+                  <Link className="btn comment" to={`/propuestas/topic/${topic.id}`}>Ver mas</Link>
               
                 </div>
             }
