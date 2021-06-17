@@ -492,7 +492,6 @@ class FormularioPropuesta extends Component {
           </div>
           <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
           </section>
-
         </form>
       </div>
     )

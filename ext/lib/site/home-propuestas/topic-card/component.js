@@ -62,7 +62,7 @@ export class TopicCard extends Component {
         {topic.action.count}
       </div>
     )
-
+    
     const subscribeCssClass = 'not-subscribed'
     const subscribesCountDiv = (
       <div className='participants'>
@@ -74,7 +74,7 @@ export class TopicCard extends Component {
       if (!str) return ''
       return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
-
+    console.log(topic)
     return (
       <div className='ext-topic-card ideas-topic-card' onClick={this.handleWrapperClick}>
         <div className='topic-card-info'>
@@ -82,7 +82,7 @@ export class TopicCard extends Component {
             {topic.eje &&
               <span className='badge badge-default'>{topic.eje.nombre}</span>
             }
-            <span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>
+            {/*<span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>*/}
           </div>
 
           {!isProyecto && (isSistematizada || isIdeaProyecto ?
@@ -201,11 +201,14 @@ export class TopicCard extends Component {
                 <div
                   className='proyectista-wrapper'>
                   <button
-                    className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
+                    className={`btn ${isProyectista ? '' : 'not-voted' }` }
                     onClick={() => onProyectista(topic.id, !isProyectista)}
                     disabled={isProyectista}>
-                  {isProyectista ? '¡Gracias! ¡Registramos tu "Me gusta"!' : 'Me gusta'}&nbsp;&nbsp;({topic.proyectistas.length})&nbsp;&nbsp;<span className='icon-like' />
+                  {isProyectista ? 'Te gusta' : 'Me gusta'}&nbsp;&nbsp;<span className='icon-like' /> {topic.proyectistas.length}
                   </button>
+                  
+                  <Link className="btn comment" to={`/propuestas/topic/${topic.id}`}>Comentar <span className='icon-comment' /></Link>
+              
                 </div>
             }
           </div>
