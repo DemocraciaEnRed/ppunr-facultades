@@ -250,16 +250,16 @@ class FormularioPropuesta extends Component {
     return (
       <div className='form-propuesta'>
         <div className='propuesta-header'>
-          <h1 className='text-center'>PRESUPUESTO PARTICIPATIVO 2020</h1>
-          <p>¡Acá vas a poder subir tu propuesta para el presupuesto participativo!</p>
+          <h1 className='text-center'>FORMULARIO PARA ENVIAR IDEAS</h1>
+          <p>¡Compartinos tus ideas para mejorar nuestra universidad!</p>
           {//<p>¡Gracias a todos y todas por participar!</p>
           }
         </div>
         {/* FORMULARIO GOES BEHIND THIS */}
         <form className='wrapper' onSubmit={this.handleSubmit}>
           <div className="bar-section">
-            <p className="section-intro">Todos estos datos son confidenciales</p>
-            <p className="section-title">Tus datos personales</p>
+            <p className="section-title">Tus datos</p>
+            <p className="section-subtitle">Todos estos datos son confidenciales</p>
           </div>
           <input type='hidden' name='forum' value={forum.id} />
           <div className='form-group'>
