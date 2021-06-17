@@ -413,8 +413,8 @@ class FormularioPropuesta extends Component {
             <label className='required' htmlFor='problema'>
               Tu idea
             </label>
-            <p className='help-text'>¿Qué problemas querés resolver? ¿a quiénes afecta? ¿Cómo?</p>
-              <p className='help-text'><strong>Recordá ingresar solo una idea por formulario</strong></p>
+            <p className='help-text'>¿Qué problemas querés resolver? ¿a quiénes afecta? ¿Cómo?¿Que querés proponer? ¿Para qué? ¿Quiénes se ven beneficiado/as?</p>
+            {/*<p className='help-text'><strong>Recordá ingresar solo una idea por formulario</strong></p>*/}
             <textarea
               className='form-control'
               required
