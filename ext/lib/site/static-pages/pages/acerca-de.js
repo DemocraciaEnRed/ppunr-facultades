@@ -40,7 +40,7 @@ export default class Page extends Component {
                   </div>
                   <div data-trigger="+ ¿En qué se basa la etapa de Foro del PPUNR?">
                     <p className='p-padding'>
-                      El Foro tiene por objetivo que las/os integrantes de la comunidad propongan ideas que aporten en la construcción de la Universidad que queremos. A su vez, podrán inscribirse para ser parte de la Comisión Universitaria, para transformar las ideas propuestas en proyectos. Estará abierto desde el 23 de junio al 8 de julio. 
+                      El Foro tiene por objetivo que las/os integrantes de la comunidad propongan ideas que aporten en la construcción de la Universidad que queremos. A su vez, podrán inscribirse para ser parte de la Comisión Universitaria, para transformar las ideas propuestas en proyectos. Estará abierto desde el 23 de junio al 7 de julio. 
                     </p>
                   </div>
                   <div data-trigger="+ ¿Cómo participo?">
@@ -86,7 +86,7 @@ export default class Page extends Component {
                   
                   <div data-trigger="+ ¿Cuándo se cierra el Foro?">
                     <p className="p-padding">
-                      El Foro se cerrará el 8 de Julio. Hasta entonces tenés tiempo para modificar tu idea e intercambiar sobre las ideas de otros/as participantes. También estará abierta hasta esa fecha la posibilidad de inscribirte para ser proyectista y formar parte de la Comisión Universitaria
+                      El Foro se cerrará el 7 de Julio. Hasta entonces tenés tiempo para modificar tu idea e intercambiar sobre las ideas de otros/as participantes. También estará abierta hasta esa fecha la posibilidad de inscribirte para ser proyectista y formar parte de la Comisión Universitaria
                     </p>
                   </div>
                   <div data-trigger="+ ¿Qué pasará con mi idea?">
