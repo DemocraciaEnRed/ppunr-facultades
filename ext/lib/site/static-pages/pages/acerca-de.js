@@ -44,11 +44,11 @@ export default class Page extends Component {
                     </p>
                   </div>
                   <div data-trigger="+ ¿Cómo participo?">
-                    <p className='p-padding'>Te invitamos a registrarte aquí (link) para sumar ideas y comentar las ideas de otros/as participantes. Podrás también expresar tu interés me gusta y comentar las mismas. Es muy importante que fomentemos el diálogo informado y respetuoso. Además podrás inscribirte como proyectista aquí (link)  para integrar la Comisión Universitaria. Como la comisión estará organizada en torno a áreas temáticas, podrás inscribirte en el área en la que quieras trabajar para transformar las ideas del foro en proyectos. No es necesario presentar una idea para ser proyectista. </p>
+                    <p className='p-padding'>Te invitamos a registrarte <Link to="/signup">aquí</Link> para sumar ideas y comentar las ideas de otros/as participantes. Podrás también expresar tu interés me gusta y comentar las mismas. Es muy importante que fomentemos el diálogo informado y respetuoso. Además podrás inscribirte como proyectista <Link to="/signup">aquí</Link>  para integrar la Comisión Universitaria. Como la comisión estará organizada en torno a áreas temáticas, podrás inscribirte en el área en la que quieras trabajar para transformar las ideas del foro en proyectos. No es necesario presentar una idea para ser proyectista. </p>
                   </div>
                   <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
                     <p className='p-padding'>
-                    Vas a encontrar en el formulario (link) una serie de etiquetas que refieren a diversas áreas temáticas. Sólo podrás elegir una, la que te parezca define más y mejor tu idea. La misma luego será retomada por el área temática respectiva dentro de la Comisión Universitaria pudiendo ser reasignada por parte del equipo el PPUNR. 
+                    Vas a encontrar en el <Link to="/formulario-idea">formulario</Link> una serie de etiquetas que refieren a diversas áreas temáticas. Sólo podrás elegir una, la que te parezca define más y mejor tu idea. La misma luego será retomada por el área temática respectiva dentro de la Comisión Universitaria pudiendo ser reasignada por parte del equipo el PPUNR. 
                     <br/>
                     <ul>
                       <li>Ambiente y Sustentabilidad</li>
@@ -64,7 +64,7 @@ export default class Page extends Component {
 
                   <div data-trigger="+ ¿Cómo subo una idea?">
                     <p className="p-padding">
-                      Encontrarás aquí (link a form) el espacio para proponer tu idea: incluí un título y escribí un breve párrafo explicándola. Agregá el área temática. Eso ayudará a agruparlas por afinidad para la próxima etapa: la Comisión Universitaria. 
+                      Encontrarás <Link to="/formulario-idea">aquí</Link> el espacio para proponer tu idea: incluí un título y escribí un breve párrafo explicándola. Agregá el área temática. Eso ayudará a agruparlas por afinidad para la próxima etapa: la Comisión Universitaria. 
                     </p>
                   </div>
 
@@ -95,7 +95,7 @@ export default class Page extends Component {
 
                   <div data-trigger="+ Si no participé de una etapa anterior, ¿puedo sumarme?">
                     <p className="p-padding">
-                    Podés sumarte en cualquier etapa del proceso aunque no hayas participado de las anteriores. Es decir, podés no haber propuesto o comentado ideas pero interesarte por ser proyectista. Tampoco será necesario que participes del Foro o formes parte de la Comisión Universitaria para votar.
+                      Podés sumarte en cualquier etapa del proceso aunque no hayas participado de las anteriores. Es decir, podés no haber propuesto o comentado ideas pero interesarte por ser proyectista. Tampoco será necesario que participes del Foro o formes parte de la Comisión Universitaria para votar.
                     </p>
                   </div>
                   <div data-trigger="+ ¿Qué implica ser proyectista?">
