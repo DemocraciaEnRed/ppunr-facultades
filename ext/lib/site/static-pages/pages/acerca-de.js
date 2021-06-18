@@ -103,17 +103,17 @@ export default class Page extends Component {
                       Luego de los Foros, la segunda etapa del PP es la conformación de la Comisión Universitaria. La misma estará integrada por todas las personas que se hayan propuesto para transformar las ideas en proyectos. Funcionará durante dos meses  (agosto- septiembre) en el marco de algunos encuentros organizados por área temática. En dichos encuentros se trabajará de manera colaborativa con el resto de los/as proyectistas y participarán técnicos de la Universidad que contribuirán a darle factibilidad a los proyectos que serán elegidos por la comunidad y ejecutados en 2022. 
                     </p>
                   </div>
-
-
                   <div data-trigger="+ ¿Qué condiciones deben respetar los proyectos?">
-                    <ul className='p-padding'>
-                      <li>Ser elaborados por integrantes de más de un claustro.</li>
-                      <li>Incluir resultados para más de dos unidades académicas o algún espacio común.</li>
-                      <li>No exceder el 70% del límite presupuestario.</li>
-                      <li>No exceder el ámbito de la Universidad.</li>
-                      <li>No afectar partidas presupuestarias de años posteriores.</li>
-                      <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegidos.</li>
-                    </ul>
+                    <p className="p-padding">
+                      <ul>
+                        <li>Ser elaborados por integrantes de más de un claustro.</li>
+                        <li>Incluir resultados para más de dos unidades académicas o algún espacio común.</li>
+                        <li>No exceder el 70% del límite presupuestario.</li>
+                        <li>No exceder el ámbito de la Universidad.</li>
+                        <li>No afectar partidas presupuestarias de años posteriores.</li>
+                        <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegidos.</li>
+                      </ul>
+                    </p>
                   </div>
                 <div data-trigger="+ ¿Qué espacios podemos intervenir con proyectos del PP?"> 
                   <p className="p-padding">
