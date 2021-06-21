@@ -17,15 +17,28 @@ module.exports = ({
 }) => emailTemplate({
   body: html`
     <p>Hola <strong>${userName}</strong>,</p>
-    <p>Hacé click acá para validar tu usuario y terminar de registrarte:</p>
-    ${buttonTemplate({
-      url: validateUrl,
-      text: 'Validá tu cuenta'
-    })}
-    <p>O copiá y pegá en tu navegador este link: <a href="${validateUrl}">${validateUrl}</a></p>
-    <p>Podrás votar tu proyecto preferido en el PPUNR.</p>
+    <p>Hacé click o copia y pega en tu navegador el siguiente link para validar tu usuario y terminar de registrarte.:</p>
+    <p><a href="${validateUrl}">${validateUrl}</a></p>
     <p>Te invitamos a seguir construyendo la Universidad que queremos.</p>
     <p>Muchas gracias.</p>
     <p><i>PD: si no te diste de alta en <a href="${baseUrl}" target="_blank">${baseUrl}</a> podés ignorar este correo.</i></p>
   `
 })
+// module.exports = ({
+//   userName,
+//   validateUrl
+// }) => emailTemplate({
+//   body: html`
+//     <p>Hola <strong>${userName}</strong>,</p>
+//     <p>Hacé click acá para validar tu usuario y terminar de registrarte:</p>
+//     ${buttonTemplate({
+//       url: validateUrl,
+//       text: 'Validá tu cuenta'
+//     })}
+//     <p>O copiá y pegá en tu navegador este link: <a href="${validateUrl}">${validateUrl}</a></p>
+//     <p>Podrás votar tu proyecto preferido en el PPUNR.</p>
+//     <p>Te invitamos a seguir construyendo la Universidad que queremos.</p>
+//     <p>Muchas gracias.</p>
+//     <p><i>PD: si no te diste de alta en <a href="${baseUrl}" target="_blank">${baseUrl}</a> podés ignorar este correo.</i></p>
+//   `
+// })
