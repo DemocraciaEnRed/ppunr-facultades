@@ -289,7 +289,14 @@ class HomePropuestas extends Component {
   renderSortFilter() {
     return (
       <div>
-        <h4 className="topics-title">Lista de proyectos</h4>
+        {
+          config.propuestasVisibles && 
+            <h4 className="topics-title">Lista de ideas</h4>
+        }
+        {
+          config.votacionVisible && 
+            <h4 className="topics-title">Lista de proyectos</h4>
+        }
         <div className='topics-filters'>
           {/*this.state.forumStates &&
             <div className='topics-filter topics-state-filter'>
@@ -366,7 +373,7 @@ class HomePropuestas extends Component {
           <BannerListadoTopics
           btnText={config.propuestasAbiertas ? 'Subí tu idea' : undefined}
           btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
-          title='Conocé los proyectos del PPUNR'
+            title={config.propuestasVisibles ? 'Conocé las ideas del PPUNR' : 'Conocé los proyectos del PPUNR'}
             />
 
           <div className='container'>
