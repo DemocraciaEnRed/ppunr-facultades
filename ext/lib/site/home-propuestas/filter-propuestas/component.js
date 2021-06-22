@@ -73,8 +73,8 @@ export default class FilterPropuestas extends Component {
     //console.log('Render filters')
 
     const {
-      //facultad, facultades,
-      //claustro, claustros,
+      facultad, facultades,
+      claustro, claustros,
       tags, tag,
       tiposIdea, tipoIdea,
       handleRemoveBadge
@@ -107,7 +107,7 @@ export default class FilterPropuestas extends Component {
     return (
       <nav id='filter-propuestas'>
         <div className='filters-nav center'>
-          {/*<FilterBox
+          {<FilterBox
             name='facultad'
             title='Facultad'
             allOptions={facultades}
@@ -118,9 +118,9 @@ export default class FilterPropuestas extends Component {
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
-            />*/}
+            />}
 
-          {/*<FilterBox
+          {<FilterBox
             name='claustro'
             title='Claustro'
             allOptions={claustros}
@@ -131,7 +131,7 @@ export default class FilterPropuestas extends Component {
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
-            />*/}
+            />}
 
           {/* <FilterBox
             name='tipoIdea'
