@@ -93,13 +93,16 @@ class Header extends Component {
       return (
         <nav className='navbar navbar-fixed-top navbar-vilo' style={styles}>
 
-          <Link
+          <Link 
             to={config.homeLink}
-            className='navbar-brand'>
+            className='navbar-brand'
+            >
             <img
               src={config.logo}
               className='d-inline-block align-top'
-              height='30' />
+              height='30'
+              alt="UNR Presupuesto participativo"
+              />
           </Link>
 
           <ul
