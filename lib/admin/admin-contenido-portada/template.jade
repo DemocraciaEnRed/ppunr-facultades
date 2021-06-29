@@ -20,6 +20,10 @@
         pre
           - each claustro in claustros
             div ID: #{claustro.value} - Claustro #{claustro.name}
+        h4= 'Referencia Facultades'
+        pre
+          - each facultad in facultades
+            div ID: #{facultad.value} - Facultad #{facultad.name}
         hr
         h3= 'Agregar al padron'
         .form-group
