@@ -52,8 +52,9 @@ export default class HomeMultiforumOverride extends Component {
           <ThumbsVoto texts={this.state.texts} />
           <div className="banner-ideas">
             <img src="/ext/lib/site/home-multiforum/icon-idea.svg" alt="Ideas"/>
-            <p><strong>¡Tenés tiempo hasta el 7 de Julio!</strong> Subí tu idea o participá para mejorar con tus aportes otras ideas</p>
-            <Link to={'/propuestas'} className="boton-foro" href="">SUBÍ TU IDEA</Link>
+            Cerró el plazo para subir ideas. Podés conocerlas aquí.
+            <p><strong>Cerró el plazo para subir ideas.</strong> Podés conocerlas aquí.</p>
+            <Link to={'/propuestas'} className="boton-foro" href="">VER IDEAS</Link>
           </div>
           {/* <Proyectos /> */}
           {/* <ProyectosFactibles /> */}

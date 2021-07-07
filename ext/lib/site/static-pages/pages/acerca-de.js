@@ -48,7 +48,7 @@ export default class Page extends Component {
                   </div>
                   <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
                     <p className='p-padding'>
-                    Vas a encontrar en el <Link to="/formulario-idea">formulario</Link> una serie de etiquetas que refieren a diversas áreas temáticas. Sólo podrás elegir una, la que te parezca define más y mejor tu idea. La misma luego será retomada por el área temática respectiva dentro de la Comisión Universitaria pudiendo ser reasignada por parte del equipo el PPUNR. 
+                    Vas a encontrar en el formulario una serie de etiquetas que refieren a diversas áreas temáticas. Sólo podrás elegir una, la que te parezca define más y mejor tu idea. La misma luego será retomada por el área temática respectiva dentro de la Comisión Universitaria pudiendo ser reasignada por parte del equipo el PPUNR. 
                     <br/>
                     <ul>
                       <li>Ambiente y Sustentabilidad</li>
@@ -64,7 +64,7 @@ export default class Page extends Component {
 
                   <div data-trigger="+ ¿Cómo subo una idea?">
                     <p className="p-padding">
-                      Encontrarás <Link to="/formulario-idea">aquí</Link> el espacio para proponer tu idea: incluí un título y escribí un breve párrafo explicándola. Agregá el área temática. Eso ayudará a agruparlas por afinidad para la próxima etapa: la Comisión Universitaria. 
+                      Encontrarás aquí el espacio para proponer tu idea: incluí un título y escribí un breve párrafo explicándola. Agregá el área temática. Eso ayudará a agruparlas por afinidad para la próxima etapa: la Comisión Universitaria. 
                     </p>
                   </div>
 
