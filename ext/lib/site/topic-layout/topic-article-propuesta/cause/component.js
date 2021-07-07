@@ -3,6 +3,7 @@ import t from 't-component'
 import { Link, browserHistory } from 'react-router'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import userConnector from 'lib/site/connectors/user'
+import config from 'lib/config'
 
 export class Cause extends Component {
   state = {
@@ -89,7 +90,8 @@ export class Cause extends Component {
             <span className='icon-like' />
           </div>
         */}
-        <div
+        {config.habilitarApoyo &&
+          <div
           className='proyectista-wrapper text-center'>
         <button
           className={`btn btn-primary btn-${isProyectista ? 'empty' : 'filled'}`}
@@ -101,6 +103,7 @@ export class Cause extends Component {
               !this.state.isFromEscuelaReactive && <p><span>Solo miembros de la escuela pueden enviar un "Me Gusta"</span></p>
             } */}
         </div>
+        }
         {/*supported && (
           <button
             className='btn btn-primary'
