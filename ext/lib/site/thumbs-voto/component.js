@@ -39,11 +39,15 @@ export default function ThumbsVoto(props) {
               //  <a href="https://forosvecinales.blob.core.windows.net/informes/Escrutinio-2019.xlsx">Ver Resultados</a>
               //</div>
               }
-              <Link
+              {/*
+                <Link
                 to='/formulario-idea'
                 className="boton-mandar-idea">
                 Subí tu idea
               </Link>
+              */
+              }
+              
               
               {/*<Link
                 to='/proyectos'
