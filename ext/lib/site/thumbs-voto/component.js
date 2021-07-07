@@ -40,6 +40,7 @@ export default function ThumbsVoto(props) {
               //</div>
               }
               <Link
+                tabIndex="6"
                 to='/formulario-idea'
                 className="boton-mandar-idea">
                 Subí tu idea

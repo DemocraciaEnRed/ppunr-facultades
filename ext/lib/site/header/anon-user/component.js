@@ -30,7 +30,8 @@ export default class AnonUser extends Component {
              <Link
                to='/signup'
                className='header-link anon-user'
-               onClick={this.props.toggleOnClick}>
+               onClick={this.props.toggleOnClick}
+               tabIndex="4">
                {t('header.signup')}
              </Link>
            )
@@ -46,7 +47,8 @@ export default class AnonUser extends Component {
                    : null
                }}
                className='header-link anon-user'
-               onClick={this.props.toggleOnClick}>
+               onClick={this.props.toggleOnClick}
+               tabIndex="5">
                {t('header.signin')}
              </Link>
            )

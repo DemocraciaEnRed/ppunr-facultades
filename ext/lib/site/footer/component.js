@@ -9,7 +9,7 @@ const Footer = () => (
         <p>
           <span>Coordinación y Secretaría Técnica PP UNR</span>
           <span>Maipú 1065</span>
-          <span>Email para consultas: <a href="mailto:presupuestoparticipativo@unr.edu.ar">presupuestoparticipativo@unr.edu.ar</a></span>
+          <span>Email para consultas: <a tabIndex="8" href="mailto:presupuestoparticipativo@unr.edu.ar">presupuestoparticipativo@unr.edu.ar</a></span>
         </p>
       </div>
       <div className='mapa-box'>
@@ -18,10 +18,10 @@ const Footer = () => (
         </div>
       </div>
       <div className='social-icon'>
-        <a className='social-facebook' href='https://facebook.com/unroficial/ ' target="_blank"/>
-        <a className='social-instagram' href='https://instagram.com/unroficial/' target="_blank" />
-        <a className='social-twitter' href='https://twitter.com/unroficial/' target="_blank" />
-        <a className='social-mail' href='mailto:presupuestoparticipativo@unr.edu.ar' target="_blank"/>
+        <a className='social-facebook' tabIndex="9"  href='https://facebook.com/unroficial/ ' target="_blank"/>
+        <a className='social-instagram' tabIndex="10"  href='https://instagram.com/unroficial/' target="_blank" />
+        <a className='social-twitter' tabIndex="11"  href='https://twitter.com/unroficial/' target="_blank" />
+        <a className='social-mail' tabIndex="12"  href='mailto:presupuestoparticipativo@unr.edu.ar' target="_blank"/>
       </div>
       <div className='logos'>
         <a href="https://democraciaenred.org/" rel="noopener noreferer" target="_blank">
@@ -44,9 +44,9 @@ const Footer = () => (
         </div>
       </div>
       <div className='terminos'>
-        <Link to='/s/terminos-y-condiciones'> Términos y condiciones
+        <Link to='/s/terminos-y-condiciones' tabIndex="13"> Términos y condiciones
         </Link>
-        <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" rel="noopener noreferer" target="_blank"> Reglamento
+        <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" tabIndex="14" rel="noopener noreferer" target="_blank"> Reglamento
         </a>
       </div>
     </div>

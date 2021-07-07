@@ -40,7 +40,9 @@ class MobileMenu extends Component {
                     to='/s/acerca-de'
                     className='header-link'
                     activeStyle={{ color: '#8C1E81' }}
-                    onClick={this.props.toggleOnClick}>
+                    onClick={this.props.toggleOnClick}
+                    tabIndex="2"
+                    >
                     Acerca de
                   </Link>
                 </div>
@@ -49,7 +51,8 @@ class MobileMenu extends Component {
                     to='/propuestas'
                     className={`header-link ${!~window.location.pathname.includes('propuesta') ? 'active' : ''}`}
                     activeStyle={{ color: '#8C1E81' }}
-                    onClick={this.props.toggleOnClick}>
+                    onClick={this.props.toggleOnClick}
+                    tabIndex="3">
                     Foro
                   </Link>
                 </div>
