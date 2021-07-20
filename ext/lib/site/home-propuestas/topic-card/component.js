@@ -196,21 +196,19 @@ export class TopicCard extends Component {
             {isProyecto && config.votacionVisible && config.votacionAbierta &&
               <VotarButton topic={topic} onVote={onVote} />
             }
-            {
-              !isProyecto && !config.votacionVisible && config.propuestasVisibles && config.habilitarApoyo &&
                 <div
                   className='proyectista-wrapper'>
+                  {
+                    !isProyecto && !config.votacionVisible && config.propuestasVisibles && config.habilitarApoyo &&
                   <button
                     className={`btn ${isProyectista ? '' : 'not-voted' }` }
                     onClick={() => onProyectista(topic.id, !isProyectista)}
                     disabled={isProyectista}>
                   {isProyectista ? 'Te gusta' : 'Me gusta'}&nbsp;&nbsp;<span className='icon-like' /> {topic.proyectistas.length}
                   </button>
-                  
-                  <Link className="btn comment" to={`/propuestas/topic/${topic.id}`}>Ver mas</Link>
-              
+                  } 
+                  <Link className='btn comment' to={`/propuestas/topic/${topic.id}`}>Ver más</Link>
                 </div>
-            }
           </div>
 
         </div>

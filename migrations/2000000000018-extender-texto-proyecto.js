@@ -28,7 +28,7 @@ exports.up = function up (done) {
 
 					const problemaAttr = copyAttrs.find(attr => attr.name == 'problema')
 					problemaAttr.description = 'Tenga en cuenta que solo se veran los primeros 400 caracteres en la portada'
-					problemaAttr.max = null
+					problemaAttr.max = 5000
 
 					// borramos todo y volvemos a generar
 					forumProyecto.topicsAttrs.splice(0)
