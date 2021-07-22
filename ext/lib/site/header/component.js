@@ -91,15 +91,19 @@ class Header extends Component {
     // MEDIA QUERY - Si es menor al breakpoint muestra un menú, si es mayor, otro
     if (window.matchMedia('(max-width: 975px)').matches) {
       return (
-        <nav className='navbar navbar-fixed-top navbar-vilo' style={styles}>
+        <nav className='navbar navbar-fixed-top navbar-vilo' style={styles} >
 
-          <Link
+          <Link 
             to={config.homeLink}
-            className='navbar-brand'>
+            className='navbar-brand'
+            tabIndex="1"
+            >
             <img
               src={config.logo}
               className='d-inline-block align-top'
-              height='30' />
+              height='30'
+              alt="UNR Presupuesto participativo"
+              />
           </Link>
 
           <ul
@@ -117,6 +121,7 @@ class Header extends Component {
 
             {userState.fulfilled && (
               <UserBadge
+                tabIndex="2"
                 menuOn={this.state.userMenu}
                 toggleOnClick={this.toggleUserMenu} />
             )}
@@ -138,7 +143,8 @@ class Header extends Component {
         <nav className='navbar navbar-fixed-top navbar-vilo' style={styles}>
           <Link
             to={config.homeLink}
-            className='navbar-brand'>
+            className='navbar-brand'
+            tabIndex="1">
             <img
               src={config.logo}
               className='d-inline-block align-top'
@@ -151,6 +157,7 @@ class Header extends Component {
               <Link
                 to='/s/acerca-de'
                 className='header-link'
+                tabIndex="2"
                 >
                   Acerca de
               </Link>
@@ -159,6 +166,7 @@ class Header extends Component {
               <Link
                 to='/propuestas'
                 className='header-link'
+                tabIndex="3"
                 >
                   Foro
               </Link>
@@ -168,6 +176,7 @@ class Header extends Component {
                 <Link
                   to='/proyectos/admin/topics'
                   className='header-link'
+                  tabIndex="4"
                   >
                     Admin
                 </Link>
