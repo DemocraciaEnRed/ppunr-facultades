@@ -13,7 +13,7 @@ export default function BannerListadoTopics(props) {
         <h2 className='proyectos-subtitle' dangerouslySetInnerHTML={{__html: props.subtitle}}></h2>
       }
       { props.btnText &&
-        <a className='proyectos-button boton-mandar-idea' href={props.btnLink}>{props.btnText}</a>
+        <a className='proyectos-button boton-mandar-idea' tabIndex="0" href={props.btnLink}>{props.btnText}</a>
       }
     </header>
   )

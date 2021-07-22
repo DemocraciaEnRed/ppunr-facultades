@@ -112,7 +112,7 @@ export default class FilterPropuestas extends Component {
             title='Facultad'
             allOptions={facultades}
             activeOptions={facultad}
-
+            tabIndex="0"
             activeDropdown={this.state.activeDropdown}
             clearedFilters={this.state.clearedFilters}
             handleDropdown={this.handleDropdown}
@@ -125,7 +125,7 @@ export default class FilterPropuestas extends Component {
             title='Claustro'
             allOptions={claustros}
             activeOptions={claustro}
-
+            tabIndex="0"
             activeDropdown={this.state.activeDropdown}
             clearedFilters={this.state.clearedFilters}
             handleDropdown={this.handleDropdown}
@@ -184,7 +184,9 @@ class FilterBox extends Component {
     const hasSelection = !clearedFilters.includes(name)
 
     return (
-      <div className={`button-container ${ name }`}>
+      <div className={`button-container ${ name }`} 
+        aria-controls="custom-select"
+        aria-expanded={activeDropdown === name}>
 
         <button className='dropdown-button' onClick={ handleDropdown(name) }>
           <div>
@@ -206,6 +208,7 @@ class FilterBox extends Component {
               { allOptions.map((obj) => (
                 <label className='option-label' key={ obj.value }>
                   <input
+                    role="checkbox"
                     type='checkbox'
                     value={ obj.value }
                     onChange={ handleFilter(name) }

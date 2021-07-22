@@ -408,7 +408,6 @@ class HomePropuestas extends Component {
           </div>
 
           <div className='container topics-container'>
-
             <FilterPropuestas
               facultades={this.state.facultades}
               facultad={this.state.facultad}

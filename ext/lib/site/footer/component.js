@@ -26,21 +26,21 @@ const Footer = () => (
       <div className='logos'>
         <a href="https://democraciaenred.org/" rel="noopener noreferer" target="_blank">
           <div className='logo-der'>
-            <img src="/ext/lib/site/footer/logo-der.png" alt="Democracia en Red"/>
+            <img src="/ext/lib/site/footer/logo-der.png" alt="Logo democracia en red"/>
             <span>Desarrollado por<br /><b>Democracia en red</b></span>
           </div>
         </a>
         <div className='logo'>
-          <a className='logo-unr' href='https://www.unr.edu.ar/' rel="noopener noreferer" target="_blank" />
+          <a className='logo-unr' href='https://www.unr.edu.ar/' aria-name="Link a pagina universidad nacional de rosario" rel="noopener noreferer" target="_blank" />
         </div>
         <div className="logo-access">
-          <img src="/ext/lib/site/footer/accesibility-logo.png" alt="accesibilidad"/>
+          <img src="/ext/lib/site/footer/accesibility-logo.png" alt="Logo accesibilidad universal"/>
         </div>
         <div className='logo-flor'>
-          <img src="/ext/lib/site/footer/logo-flor.png" alt="Flor"/>
+          <img src="/ext/lib/site/footer/logo-flor.png" alt="Logo dibujante Flor Balestra"/>
         </div>
         <div className='logo-universidad'>
-          <img src="/ext/lib/site/footer/logo-universidad-que-queremos.png" alt="Universidad que queremos"/>
+          <img src="/ext/lib/site/footer/logo-universidad-que-queremos.png" alt="Logo la universidad que queremos"/>
         </div>
       </div>
       <div className='terminos'>
