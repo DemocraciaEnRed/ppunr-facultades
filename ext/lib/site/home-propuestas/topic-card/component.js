@@ -74,7 +74,7 @@ export class TopicCard extends Component {
       if (!str) return ''
       return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
-    console.log(topic)
+    // console.log(topic)
     return (
       <div className='ext-topic-card ideas-topic-card' onClick={this.handleWrapperClick}>
         <div className='topic-card-info'>
