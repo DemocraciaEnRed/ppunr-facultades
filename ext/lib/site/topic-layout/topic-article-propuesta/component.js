@@ -15,6 +15,7 @@ import AdminActions from './admin-actions/component'
 import Proyectos from 'ext/lib/site/proyectos/component'
 import { Link } from 'react-router'
 import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/component'
+import VerTodosButton from 'ext/lib/site/home-propuestas/topic-card/ver-todos-button/component'
 import config from 'lib/config'
 
 class TopicArticle extends Component {
@@ -202,6 +203,8 @@ class TopicArticle extends Component {
           { isProyecto &&
             <VotarButton topic={topic} onVote={onVote} />
           }
+          &nbsp;
+          <VerTodosButton />
         </div>
         <Social
           topic={topic}
