@@ -2,7 +2,9 @@
   .topics-admin
     .top-buttons
       .export-resultados-wrapper
-        a.btn.btn-primary(href='/api/v2/export/topics/export-resultados?forum=proyectos')='Descargar resultados de votación'
+        a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-votantes?forum=proyectos')='Descargar votos por votantes'         
+      .export-resultados-wrapper
+        a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-proyectos?forum=proyectos')='Descargar resultados por proyectos'   
       .export-update-wrapper
       a.btn.btn-success.btn-block.new(href=urlBuilder.for('admin.topics.create', {forum: forum.name}))
         span.glyphicon.glyphicon-plus
