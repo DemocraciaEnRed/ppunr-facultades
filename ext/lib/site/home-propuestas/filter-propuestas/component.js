@@ -107,7 +107,7 @@ export default class FilterPropuestas extends Component {
     return (
       <nav id='filter-propuestas'>
         <div className='filters-nav center'>
-          {<FilterBox
+          {/* {<FilterBox
             name='facultad'
             title='Facultad'
             allOptions={facultades}
@@ -131,7 +131,7 @@ export default class FilterPropuestas extends Component {
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
-            />}
+            />} */}
 
           {/* <FilterBox
             name='tipoIdea'
