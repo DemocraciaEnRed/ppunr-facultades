@@ -373,7 +373,8 @@ class HomePropuestas extends Component {
           <BannerListadoTopics
           btnText={config.propuestasAbiertas ? 'Subí tu idea' : undefined}
           btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
-            title={config.propuestasVisibles ? 'Conocé las ideas del PPUNR' : 'Votá los proyectos del PPUNR'}
+          title={config.propuestasVisibles ? 'Conocé las ideas del PPUNR' : 'Votá los proyectos del PPUNR'}
+          user={this.props.user}
             />
 
           <div className='container'>
