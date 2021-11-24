@@ -82,7 +82,7 @@ export class TopicCard extends Component {
             {topic.eje &&
               <span className='badge badge-default'>{topic.eje.nombre}</span>
             }
-            {/*<span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>*/}
+            <span className={`estado ${topic.attrs.state}`}>{estados(topic.attrs.state)}</span>
           </div>
 
           {!isProyecto && (isSistematizada || isIdeaProyecto ?
