@@ -62,7 +62,7 @@ export default class Page extends Component {
 
                   <div data-trigger="+ ¿Cómo elegimos los proyectos a ejecutarse en 2022?">
                     <p className='p-padding'>
-                      Se realizarán jornadas de votación desde el 24/11 a las 10hs hasta el 03/12 a las 18hs, previa difusión de los proyectos elegibles, para que toda la comunidad de la UNR pueda decidir cuáles serán ejecutados hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Como ningún proyecto puede exceder el 70% del límite presupuestario, por lo menos dos proyectos serán los ganadores. 
+                      Se realizarán jornadas de votación desde el 24/11 a las 10hs hasta el 03/12 a las 23hs, previa difusión de los proyectos elegibles, para que toda la comunidad de la UNR pueda decidir cuáles serán ejecutados hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Como ningún proyecto puede exceder el 70% del límite presupuestario, por lo menos dos proyectos serán los ganadores. 
                     </p>
                   </div>
                   
