@@ -8,11 +8,13 @@
       ul.form-messages
       .form-group
         label= t('settings.first-name')
-        input.form-control(type='text', id='firstName', name='firstName', maxlength=100, placeholder=t('settings.first-name'), value='#{user.firstName}', validate='required firstname')
+        //- input.form-control(type='text', id='firstName', name='firstName', maxlength=100, placeholder=t('settings.first-name'), value='#{user.firstName}', validate='required firstname')
+        input.form-control(type='text', id='firstName', name='firstName', maxlength=100, placeholder=t('settings.first-name'), value='#{user.firstName}', validate='required')
 
       .form-group
         label= t('settings.last-name')
-        input.form-control(type='text', id='lastName', name='lastName', maxlength=100, placeholder=t('settings.last-name'), value='#{user.lastName}', validate='required lastname')
+        //- input.form-control(type='text', id='lastName', name='lastName', maxlength=100, placeholder=t('settings.last-name'), value='#{user.lastName}', validate='required lastname')
+        input.form-control(type='text', id='lastName', name='lastName', maxlength=100, placeholder=t('settings.last-name'), value='#{user.lastName}', validate='required')
 
       .form-group
         label='DNI'
@@ -25,6 +27,10 @@
       .form-group
         label= 'Facultad'
         select.form-control(disabled='disabled', id='facultad', name='facultad', placeholder='Facultad', value='#{user.facultad}', validate='required')
+
+      .form-group
+        label= '¿Queres ser proyectista?'
+        select.form-control(id='proyectista', name='proyectista', placeholder='¿Queres ser proyectista?', value='#{user.proyectista}', validate='required')
 
       .form-group
         label= t('signup.email')
