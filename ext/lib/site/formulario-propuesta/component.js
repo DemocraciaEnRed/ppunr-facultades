@@ -531,7 +531,7 @@ class FormularioPropuesta extends Component {
         </form>
         <hr/>
         {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
-          <div className="container">
+          <div id="album" className="container">
             <div className="row">
               <div className="col-md-12">
               <h2>Album de fotos</h2>

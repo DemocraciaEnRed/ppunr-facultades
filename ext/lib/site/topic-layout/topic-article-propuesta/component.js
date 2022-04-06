@@ -237,20 +237,30 @@ class TopicArticle extends Component {
             )
         }
         <div className="topic-article-content">
-          <h3>Album de fotos</h3>
           <div className='topic-article-album'>
-            {
+            <h3>Album de imagenes</h3>
+            <div className="row">
+              {
               topic.extra && topic.extra.album && topic.extra.album.length > 0 && topic.extra.album.map((image, i) => (
-                <div className="gallery-item" key={i}>
-                  <a href={image.url} target="_blank">
-                    <img src={image.thumbnailUrl} className="gallery-image" />
-                  </a>
+                  <div className='col-md-4 col-sm-3 col-xs-6' key={i}>
+                    <a href={image.url} target="_blank">
+                      <img src={image.thumbnailUrl} className="img-responsive" style={{marginBottom: '20px'}} />
+                    </a>
+                  </div>
+                // <div className="gallery-item" key={i}>
+                //   <a href={image.url} target="_blank">
+                //     <img src={image.thumbnailUrl} className="gallery-image" />
+                //   </a>
+                // </div>
+                ))
+              }
+              {
+                (!topic.extra || (topic.extra && !topic.extra.album) || (topic.extra && !topic.extra.album && topic.extra.album.length === 0)) && 
+                <div className='col-md-12 col-xs-12 col-sm-12 '>
+                  No hay fotos en este album
                 </div>
-              ))
-            }
-            {
-              (!topic.extra || (topic.extra && !topic.extra.album) || (topic.extra && !topic.extra.album && topic.extra.album.length === 0)) && <p>No hay fotos en este album</p>
-            }
+              }
+            </div>
           </div>
         </div>
         {
