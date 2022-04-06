@@ -503,42 +503,48 @@ class FormularioPropuesta extends Component {
                 onChange={this.handleInputChange} />
             </div>
           )}
+          <br/>
+
           {
-             this.hasErrors() &&
-             <div className="error-box">
-             <ul>
-                    {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" no puede quedar vacío</li> }
-                    {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" no puede quedar vacío</li> }
-                    {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" no puede quedar vacío</li> }
-                    {this.hasErrorsField('email') && <li className="error-li">El campo "Email" no puede quedar vacío</li> }
-                    {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" no puede quedar vacío</li> }
-                    {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" no puede quedar vacío</li> }
-                    {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" no puede quedar vacío</li> }
-                    {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
-                    {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" no puede quedar vacío</li> }
-             </ul>
-             </div>
+            this.hasErrors() &&
+            <div className="error-box">
+              <ul>
+                {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" no puede quedar vacío</li> }
+                {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" no puede quedar vacío</li> }
+                {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" no puede quedar vacío</li> }
+                {this.hasErrorsField('email') && <li className="error-li">El campo "Email" no puede quedar vacío</li> }
+                {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" no puede quedar vacío</li> }
+                {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" no puede quedar vacío</li> }
+                {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" no puede quedar vacío</li> }
+                {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
+                {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" no puede quedar vacío</li> }
+              </ul>
+            </div>
           }
           <div className='submit-div'>
             { !this.hasErrors() &&
-              <button type='submit' className='submit-btn'>
+              <button type='submit' className='submit-btn btn-block'>
                 {this.state.mode === 'new' ? 'Enviar idea' : 'Guardar idea'}
               </button>
             }
           </div>
+          { this.state.mode !== 'edit' &&
           <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
+          }
           </section>
         </form>
-        <hr/>
+        <div style={{ background: '#ccc', marginTop: '0px', marginBottom: '0px', height: '1px', width: '100%' }} />
         {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
-          <div id="album" className="container">
-            <div className="row">
-              <div className="col-md-12">
-              <h2>Album de fotos</h2>
-              <UploadImage
-                topicId={this.props.params.id}
-                album={album}
-              />
+          <div>
+            <div id="album" className="wrapper">
+              <div className="row">
+                <div className="col-md-12">
+                <h2>Album de fotos</h2>
+                <UploadImage
+                  topicId={this.props.params.id}
+                  album={album}
+                />
+                </div>
               </div>
             </div>
           </div>
