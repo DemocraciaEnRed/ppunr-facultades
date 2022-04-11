@@ -10,6 +10,7 @@ import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
 import userConnector from 'lib/site/connectors/user'
 import { Link } from 'react-router'
+import UploadImage from './upload-image'
 
 // const PROPOSALS_FORUM_NAME = 'propuestas'
 
@@ -32,7 +33,7 @@ class FormularioPropuesta extends Component {
       titulo: '',
       tags: [],
       problema: '',
-
+      album: [],
       state: '',
       adminComment: '',
       adminCommentReference: '',
@@ -88,6 +89,7 @@ class FormularioPropuesta extends Component {
           facultad: topic.attrs.facultad,
           claustro: topic.attrs.claustro,
           problema: topic.attrs.problema,
+          album: topic.extra.album ? topic.extra.album : [],
           // los tags se guardan por nombre (¿por qué?) así que buscamos su respectivo objeto
           tags: tags.filter(t => topic.tags.includes(t.name)),
           state: topic.attrs.state,
@@ -236,6 +238,40 @@ class FormularioPropuesta extends Component {
     });
   }
 
+  // handleSubmitImage(event) {
+  //   let formData = {
+  //     imagebase64: document.querySelector('input[name="imagebase64"]').value
+  //   }
+  //   window.fetch(`/api/v2/topics/${this.props.params.id}/photo`, {
+  //     method: 'POST',
+  //     credentials: 'include',
+  //     body: JSON.stringify(formData),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     }
+  //   })
+  //   .then((res) => {
+  //     if (res.status === 200) {
+  //       window.location.href = `/propuestas/topic/${this.props.params.id}`
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
+
+  // handleImageChange(event) {
+  //   const reader = new FileReader();
+  //   let file = document.querySelector('input[name="image"]').files[0];
+  //   reader.readAsDataURL(file);
+  //   reader.onload = () => {
+  //     console.log(reader.result)
+  //     document.querySelector('input[name="imagebase64"]').value = reader.result
+  //     // this.find('input[name="imagebase64"]')[0].value = reader.result
+  //   }
+  // }
+
   componentWillUpdate (props, state) {
     if (this.props.user.state.rejected) {
       browserHistory.push('/signin?ref=/formulario-idea')
@@ -243,7 +279,7 @@ class FormularioPropuesta extends Component {
   }
 
   render () {
-    const { forum, facultades, claustros } = this.state
+    const { forum, facultades, claustros, album } = this.state
 
     if (!forum) return null
     if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
@@ -467,32 +503,53 @@ class FormularioPropuesta extends Component {
                 onChange={this.handleInputChange} />
             </div>
           )}
+          <br/>
+
           {
-             this.hasErrors() &&
-             <div className="error-box">
-             <ul>
-                    {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" no puede quedar vacío</li> }
-                    {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" no puede quedar vacío</li> }
-                    {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" no puede quedar vacío</li> }
-                    {this.hasErrorsField('email') && <li className="error-li">El campo "Email" no puede quedar vacío</li> }
-                    {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" no puede quedar vacío</li> }
-                    {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" no puede quedar vacío</li> }
-                    {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" no puede quedar vacío</li> }
-                    {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
-                    {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" no puede quedar vacío</li> }
-             </ul>
-             </div>
+            this.hasErrors() &&
+            <div className="error-box">
+              <ul>
+                {this.hasErrorsField('nombre') && <li className="error-li">El campo "Nombre y apellido" no puede quedar vacío</li> }
+                {this.hasErrorsField('documento') && <li className="error-li">El campo "DNI" no puede quedar vacío</li> }
+                {this.hasErrorsField('genero') && <li className="error-li">El campo "Género" no puede quedar vacío</li> }
+                {this.hasErrorsField('email') && <li className="error-li">El campo "Email" no puede quedar vacío</li> }
+                {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" no puede quedar vacío</li> }
+                {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" no puede quedar vacío</li> }
+                {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" no puede quedar vacío</li> }
+                {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
+                {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" no puede quedar vacío</li> }
+              </ul>
+            </div>
           }
           <div className='submit-div'>
             { !this.hasErrors() &&
-              <button type='submit' className='submit-btn'>
+              <button type='submit' className='submit-btn btn-block'>
                 {this.state.mode === 'new' ? 'Enviar idea' : 'Guardar idea'}
               </button>
             }
           </div>
+          { this.state.mode !== 'edit' &&
           <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
+          }
           </section>
         </form>
+        <div style={{ background: '#ccc', marginTop: '0px', marginBottom: '0px', height: '1px', width: '100%' }} />
+        {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
+          <div>
+            <div id="album" className="wrapper">
+              <div className="row">
+                <div className="col-md-12">
+                <h2>Album de fotos</h2>
+                <UploadImage
+                  topicId={this.props.params.id}
+                  album={album}
+                />
+                </div>
+              </div>
+            </div>
+          </div>
+          )
+        }
       </div>
     )
 

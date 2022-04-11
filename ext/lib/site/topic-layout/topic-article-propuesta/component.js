@@ -236,7 +236,33 @@ class TopicArticle extends Component {
               </div>
             )
         }
-
+        <div className="topic-article-content">
+          <div className='topic-article-album'>
+            <h3>Album de imagenes</h3>
+            <div className="row">
+              {
+              topic.extra && topic.extra.album && topic.extra.album.length > 0 && topic.extra.album.map((image, i) => (
+                  <div className='col-md-4 col-sm-3 col-xs-6' key={i}>
+                    <a href={image.url} target="_blank">
+                      <img src={image.thumbnailUrl} className="img-responsive" style={{marginBottom: '20px'}} />
+                    </a>
+                  </div>
+                // <div className="gallery-item" key={i}>
+                //   <a href={image.url} target="_blank">
+                //     <img src={image.thumbnailUrl} className="gallery-image" />
+                //   </a>
+                // </div>
+                ))
+              }
+              {
+                (!topic.extra || (topic.extra && !topic.extra.album) || (topic.extra && !topic.extra.album && topic.extra.album.length === 0)) && 
+                <div className='col-md-12 col-xs-12 col-sm-12 '>
+                  No hay fotos en este album
+                </div>
+              }
+            </div>
+          </div>
+        </div>
         {
           !user.state.pending && !isSistematizada && !isIdeaProyecto && !isProyecto && <Comments forum={forum} topic={topic} />
         }
