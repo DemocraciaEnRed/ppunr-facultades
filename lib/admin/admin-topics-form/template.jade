@@ -58,5 +58,23 @@
           fieldset.attrs-wrapper
             div(data-attrs)
 
+        //- Pug upload image
+        div.panel.panel-default
+          div.panel-heading
+            span='Album de imagenes'
+          -if(form.type === 'edit')
+            div.panel-body='Para editar el album de imagenes, debe ir y editar el formulario de idea' 
+              br
+              a(href='/formulario-idea/'+topic.id+'#album', target='_blank')='Ir al formulario de idea'
+                | 
+                i.icon-arrow-right-circle
+          -else
+            div.panel-body='Debe primero crear la idea/proyecto para poder subir imagenes' 
+        
         input.btn.btn-success.hide(type='submit', value=t('admin-topics-form.button.submit'))
+
+      
+
+
     include commands
+    
