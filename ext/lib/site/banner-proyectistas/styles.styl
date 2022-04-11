@@ -1,0 +1,104 @@
+.banner-proyectistas
+  background-color: #f3f3f3;
+  padding: 50px 20px
+  text-align: center
+  p.title
+    color: #4b3c59;
+    font-size: 30px;
+    margin: 20px auto;
+    max-width: 50%;
+    line-height: 1.25;
+    @media (max-width: 600px)
+      max-width: 80%
+      font-size: 25px;
+  p.subtitle
+    color: #4b3c59;
+    margin: 20px auto;
+    max-width: 50%;
+    line-height: 1.25;
+    font-size: 22px;
+    @media (max-width: 600px)
+      max-width: 80%
+      font-size: 18px;
+  .learn-more
+    font-size: 14px;
+    text-decoration-line: underline;
+    font-weight: 400;
+    color: black;
+  .image-large
+    width: 110px
+  .boton-iniciar-sesion
+    border-radius: 5px;
+    box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.25);
+    background-color: #bf4588;
+    color: white
+    padding: 15px 30px
+    display: inline-block
+    margin-top: 10px
+    margin-bottom: 10px;
+    &:hover
+      background-color: #9c3b6e
+  .boton-ser-proyectista
+    border: none;
+    background: #BF4588;
+    box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25), inset -6px -6px 10px rgba(140, 3, 117, 0.5), inset 6px 6px 10px rgba(255, 136, 201, 0.5);
+    border-radius: 5px;
+    color: white
+    padding: 15px 30px
+    display: inline-block
+    margin-top: 10px
+    margin-bottom: 10px;
+    &:hover
+      background-color: #9c3b6e
+
+  .boton-soy-proyectista
+    border: none;
+    background: #0396A6;
+    box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+    color: white
+    padding: 15px 30px
+    display: inline-block
+    margin-top: 10px
+    margin-bottom: 10px;
+
+  .follow-container
+    position:fixed;
+    top:calc(50% - 250px);
+    right:0;
+    transition:width 300ms ease-out;
+    width:0;
+
+  .follow-proyectistas
+    box-sizing:border-box;
+    position:absolute;
+    top:300px;
+    width:250px;
+    height:34px;
+    padding:0 20px;
+    margin:0;
+    cursor:pointer;
+    background:#EBEBEB;
+    border-radius:4px 4px 0px 0px;
+    box-shadow: -4px 2px 4px rgba(0, 0, 0, 0.25);
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    transform:rotate(-90deg);
+    transform-origin:bottom left;
+    color:white;
+    text-decoration:none;
+    z-index:9999;
+  span.follow-text
+    text-decoration:none;
+    font-size:14px;
+    white-space:nowrap;
+    color: #BF4588;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    width:100%;text-align:center;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    img
+      width:25px;
+      margin-right:10px;

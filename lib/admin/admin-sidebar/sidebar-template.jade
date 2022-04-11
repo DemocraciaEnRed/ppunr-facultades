@@ -29,3 +29,8 @@ ul.admin-menu.nav.nav-pills.nav-stacked(class=forum.privileges.canChangeTopics ?
       a(href=urlBuilder.for('admin.contenido-portada', {forum: forum.name}) data-section='contenido-portada')
         span.glyphicon.glyphicon-home
         ='Portada & Padron'
+  - if (user.staff)
+    li
+      a(href=urlBuilder.for('admin.proyectistas', {forum: forum.name}) data-section='proyectistas')
+        span.glyphicon.glyphicon-list
+        ='Proyectistas'
