@@ -1060,7 +1060,12 @@ h3.underline
   .the-content
     margin-top: 150px;
     margin-bottom: 150px;
+    .alert.alert-success
+      width: 100%;
+      max-width: none;
+      margin-bottom: 50px;
   .agenda-container
+    margin-bottom: 50px;
     .agenda-top-head
       position: relative;
       height: 45px;
@@ -1069,19 +1074,19 @@ h3.underline
       border-top-right-radius: 18px;
       border: 1px solid #000;
       .tiki-left
-        height: 30px;
+        height: 35px;
         width: 15px;
         position: absolute;
         top: -15px;
-        left: 15%;
+        left: 20%;
         background: #000;
         border-radius: 10px;
       .tiki-right
-        height: 30px;
+        height: 35px;
         width: 15px;
         position: absolute;
         top: -15px;
-        right: 15%;
+        right: 20%;
         background: #000;
         border-radius: 10px;
     .agenda-content
@@ -1098,6 +1103,9 @@ h3.underline
       border-top: 0;
       text-align: center;
       p
+        margin-bottom: 0;
+      h5
+        font-size: 22px;
         margin-bottom: 0;
     .agenda-button-assist
       cursor: pointer;
@@ -1118,3 +1126,19 @@ h3.underline
       color: #FFF;
       font-weight: 700;
       box-shadow: inset -3.72576px -3.72576px 3.72576px rgba(255, 255, 255, 0.25), inset 3.72576px 3.72576px 3.72576px rgba(0, 0, 0, 0.25);
+    .add-to-calendar
+      margin-top: 5px;
+      text-align: right;
+      .add-to-calendar-link
+        color: #8C0375;
+        cursor: pointer;
+
+.past-event
+  opacity: 0.65;
+  .past-title
+    margin-bottom: 10px;
+    font-size: 20px;
+  .past-date
+    margin-bottom: 5px;
+  .past-place
+    margin-bottom: 0px;
