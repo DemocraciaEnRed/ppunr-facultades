@@ -41,6 +41,13 @@ class Page extends Component {
     .then((res) => {
       // filter past events from future events with today datetime
       let today = new Date()
+      res.forEach((event) => {
+        event.fechaInicio = new Date(`${event.fecha}T${event.hora}:00-0300`)
+        // add an hour to event.fechaInicio
+        event.fechaFin = new Date(`${event.fecha}T${event.hora}:00-0300`)
+        event.fechaFin.setHours(event.fechaFin.getHours() + 1)
+        event.calendarURL = `https://www.google.com/calendar/render?action=TEMPLATE&text=PP+UNR%3A+Foro+presencial+-+${event.nombre}&details=Te+invitamos+a+ser+parte+del+foro+para+sumar+tu+idea&location=${event.lugar}&dates=${event.fechaInicio.toISOString().replaceAll('-','').replaceAll(':','').replaceAll('.000','')}%2F${event.fechaFin.toISOString().replaceAll('-','').replaceAll(':','').replaceAll('.000','')}`
+      })
       let futureEvents = res.filter((item) => {
         let date = new Date(item.datetime)
         return date > today
@@ -99,7 +106,7 @@ class Page extends Component {
   }
 
   render () {
-    let { agenda, futureEvents, pastEvents, buttonPressed } = this.state
+    let { agenda, futureEvents, pastEvents, buttonPressed, isLoading } = this.state
     return (
       <div id="foro-presencial">
         <section className="the-banner">
@@ -119,8 +126,15 @@ class Page extends Component {
                 </div>
               </div>
             </div> */}
+            <h3 className="text-center">Próximos eventos</h3>
             <div className="row" style={{ justifyContent: 'center' }}>
-              { futureEvents.length > 0 && futureEvents.map((item, index) => (
+              {
+                isLoading && 
+                <div className="col-md-12">
+                  <p className="h6 text-center">Cargando eventos...</p>
+                </div>
+              }
+              { !isLoading && futureEvents.length > 0 && futureEvents.map((item, index) => (
                 <div className="col-md-4" key={index}>
                   <div className="agenda-container">
                     <div className="agenda-top-head">
@@ -160,17 +174,23 @@ class Page extends Component {
                         })()
                       }
                     </div>
-                    <div className="add-to-calendar"><small className="pull-right"><a className="add-to-calendar-link">+ Agregar a Google Calendar</a></small></div>
-
+                    <div className="add-to-calendar"><small className=""><a href={item.calendarURL} target="_blank" className="add-to-calendar-link">+ Agregar a Google Calendar</a></small></div>
                   </div>
                 </div>
               ))}
+              {
+                !isLoading && futureEvents.length === 0 && (
+                <div className="col-md-12">
+                  <p className="h6 text-center">No hay futuros eventos para listar</p>
+                </div>
+                )
+              }
             </div>
-
+            <br/>
             <h3 className="text-center">Eventos pasados</h3>
             <div className="row" style={{ justifyContent: 'center' }}>
               {
-                pastEvents.length > 0 && pastEvents.map((item, index) => (
+                !isLoading && pastEvents.length > 0 && pastEvents.map((item, index) => (
                   <div className="col-md-4" key={index}>
                     <div className="past-event panel panel-default">
                       <div className="panel-body text-center">
@@ -187,6 +207,19 @@ class Page extends Component {
                     </div>
                   </div>
                 ))
+              }
+              {
+                isLoading && 
+                <div className="col-md-12">
+                  <p className="h6 text-center">Cargando eventos...</p>
+                </div>
+              }
+              {
+                !isLoading && pastEvents.length === 0 && (
+                <div className="col-md-12">
+                  <p className="h6 text-center">No hay eventos pasados para listar</p>
+                </div>
+                )
               }
             </div>
           </div>
