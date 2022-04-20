@@ -14,10 +14,10 @@ export default ReactOutsideEvent(class CommentHeader extends Component {
 
     return (
       <header className={`meta ${comment.author.badge ? ' has-badge' : ''}`}>
-        <img
+        {/* <img
           className='avatar'
           src={comment.author.avatar}
-          alt={comment.author.fullName} />
+          alt={comment.author.fullName} /> */}
         <h3 className='name'>
           {comment.author.displayName}
           <div className='created-at'>

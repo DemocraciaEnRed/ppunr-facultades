@@ -13,10 +13,10 @@ export default ReactOutsideEvent(class ReplyHeader extends Component {
     const { reply } = this.props
     return (
       <header className={`meta ${(reply.author.badge ? ' has-badge' : '')}`}>
-        <img
+        {/* <img
           className='avatar'
           src={reply.author.avatar}
-          alt={reply.author.fullName} />
+          alt={reply.author.fullName} /> */}
         <h3 className='name'>
           {reply.author.displayName}
           <div className='created-at'>

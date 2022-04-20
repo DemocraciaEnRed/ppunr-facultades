@@ -92,13 +92,13 @@ class CommentsForm extends Component {
         id='comments-form'
         className={`topic-comments-form ${focusedClass}`}>
         {this.state.loading && <div className='loader' />}
-        <img
+        {/* <img
           className='avatar'
           src={userAttrs.avatar}
-          alt={userAttrs.fullName} />
-        {this.state.focused && (
+          alt={userAttrs.fullName} /> */}
+        {/* {this.state.focused && (
           <h3 className='name'>{userAttrs.displayName}</h3>
-        )}
+        )} */}
         <AutoGrowTextarea
           className='comments-create'
           value={this.state.text}
@@ -109,21 +109,21 @@ class CommentsForm extends Component {
           placeholder={t('comments.create.placeholder')}
           maxLength='4096'
           minLength='1'
-          rows='1'
+          rows='4'
           wrap='soft'
           required='required' />
         {this.state.focused && (
           <div className='actions'>
-            <button
-              className='btn btn-sm btn-outline-success'
-              type='submit'>
-              {t('comments.create.publish')}
-            </button>
             {this.state.error && (
               <div className='alert alert-danger error' role='alert'>
                 {t('modals.error.default')}
               </div>
             )}
+            <button
+              className='btn btn-submit-comment pull-right'
+              type='submit'>
+              {t('comments.create.publish')}
+            </button>
           </div>
         )}
       </form>
