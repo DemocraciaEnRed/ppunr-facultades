@@ -102,12 +102,13 @@ class Page extends Component {
   }
 
   goTop () {
-    Anchor.goTo('container')
+    Anchor.goTo('container-top')
   }
 
   render () {
     let { agenda, futureEvents, pastEvents, buttonPressed, isLoading } = this.state
     return (
+      <Anchor id='container-top'>
       <div id="foro-presencial">
         <section className="the-banner">
           Foro presencial
@@ -227,6 +228,7 @@ class Page extends Component {
         <Jump goTop={this.goTop} />
         <Footer />
       </div>
+      </Anchor>
     )
   }
 }
