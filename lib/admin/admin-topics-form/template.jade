@@ -63,9 +63,9 @@
           div.panel-heading
             span='Album de imagenes'
           -if(form.type === 'edit')
-            div.panel-body='Para editar el album de imagenes, debe ir y editar el formulario de idea' 
+            div.panel-body='Para subir o eliminar imagenes, haga clic en el boton "Editar album"' 
               br
-              a(href='/formulario-idea/'+topic.id+'#album', target='_blank')='Ir al formulario de idea'
+              a(href='/formulario-idea/'+topic.id+'/album', target='_blank')='Editar album'
                 | 
                 i.icon-arrow-right-circle
           -else

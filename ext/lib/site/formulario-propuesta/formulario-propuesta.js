@@ -11,3 +11,8 @@ router.childRoutes.unshift({
   path: 'formulario-idea/:id',
   component: CrearPropuesta
 })
+
+router.childRoutes.unshift({
+  path: 'formulario-idea/:id/album',
+  component: AlbumPropuesta
+})

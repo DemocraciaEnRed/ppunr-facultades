@@ -533,26 +533,8 @@ class FormularioPropuesta extends Component {
           }
           </section>
         </form>
-        <div style={{ background: '#ccc', marginTop: '0px', marginBottom: '0px', height: '1px', width: '100%' }} />
-        {this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit' && (
-          <div>
-            <div id="album" className="wrapper">
-              <div className="row">
-                <div className="col-md-12">
-                <h2>Album de fotos</h2>
-                <UploadImage
-                  topicId={this.props.params.id}
-                  album={album}
-                />
-                </div>
-              </div>
-            </div>
-          </div>
-          )
-        }
       </div>
     )
-
     } return (
       <div className='form-propuesta'>
         <div className='propuesta-header'>

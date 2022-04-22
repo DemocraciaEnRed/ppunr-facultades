@@ -238,6 +238,9 @@ class TopicArticle extends Component {
         }
         <div className="topic-article-content">
           <div className='topic-article-album'>
+            { ((forum.privileges && forum.privileges.canChangeTopics) || (topic.privileges && topic.privileges.canEdit)) &&
+              <Link href={`/formulario-idea/${topic.id}/album`} className="btn btn-primary btn-sm pull-right text-white"><i className="icon-pencil"></i> Editar</Link>
+            }
             <h3>Album de imagenes</h3>
             <div className="row">
               {
