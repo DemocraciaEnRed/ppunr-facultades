@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-import config from 'lib/config'
+// import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
-import claustroStore from 'lib/stores/claustro-store'
-import tagStore from 'lib/stores/tag-store/tag-store'
-import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
-import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
 import userConnector from 'lib/site/connectors/user'
 import { Link } from 'react-router'
-import UploadImage from './upload-image'
 
 // const PROPOSALS_FORUM_NAME = 'propuestas'
 
