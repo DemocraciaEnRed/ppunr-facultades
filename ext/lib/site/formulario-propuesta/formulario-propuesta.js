@@ -1,6 +1,7 @@
 import 'lib/boot/routes'
 import router from 'lib/site/boot/router'
 import CrearPropuesta from './component'
+import AlbumPropuesta from './componentAlbum'
 
 router.childRoutes.unshift({
   path: 'formulario-idea',
