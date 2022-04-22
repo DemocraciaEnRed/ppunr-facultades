@@ -90,13 +90,13 @@ class RepliesForm extends Component {
         id='comments-reply-form'
         className={`reply-comments-form ${focusedClass}`}>
         {this.state.loading && <div className='loader' />}
-        <img
+        {/* <img
           className='avatar'
           src={userAttrs.avatar}
           alt={userAttrs.fullName} />
         {this.state.focused && (
           <h3 className='name'>{userAttrs.displayName}</h3>
-        )}
+        )} */}
         <AutoGrowTextarea
           className='reply-create'
           value={this.state.text}
@@ -113,9 +113,9 @@ class RepliesForm extends Component {
         {this.state.focused && (
           <div className='actions'>
             <button
-              className='btn btn-sm btn-outline-success'
+              className='btn-submit-reply'
               type='submit'>
-              {t('comments.create.publish')}
+              <i className="icon-comment-alt"></i>&nbsp;<u>{t('comments.create.publish')}</u>
             </button>
             {this.state.error && (
               <div className='alert alert-danger error' role='alert'>
