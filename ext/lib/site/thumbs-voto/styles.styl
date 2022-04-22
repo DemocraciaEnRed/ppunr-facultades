@@ -58,9 +58,6 @@
       color: #fff
       @media(max-width: 465px)
         font-size:1em
-
-    .btn-container
-      margin: 2em
     p
       font-size:1.2em
       font-weight: 300
@@ -127,24 +124,24 @@
     box-shadow: none
     a:hover
       background-color: #fff
-
-.boton-mandar-idea
-  align-items: center
-  background-color: #fff
-  border-radius: 5px;
-  box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.25);
-  color: #4b3c59
-  display: inline-block
-  font-family: 'Roboto', sans-serif
-  font-weight: 500
-  text-transform: none
-  margin: 0px
-  line-height: 1
-  cursor: pointer
-  font-size: 20px
-  padding: 18px 22px
-  a:hover
-    background-color: #fff
+  .row.btn-container
+    justify-content: center;
+  .boton-mandar-idea
+      border: none;
+      width: 100%;
+      background: transparent;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      color: #fff
+      padding: 13px 30px
+      display: inline-block
+      margin-top: 10px
+      margin-bottom: 10px;
+      &:hover
+        cursor: pointer;
+        color: #9c3b6e;
+        border-color: #fff;
+        background-color: #fff
 
 // .thumbs h2
 //   min-height:2em !important

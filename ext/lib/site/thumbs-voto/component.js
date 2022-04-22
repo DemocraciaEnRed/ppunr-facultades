@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import config from 'lib/config'
 
 export default function ThumbsVoto(props) {
   let
@@ -33,28 +34,28 @@ export default function ThumbsVoto(props) {
               <h2>{ subtitle }</h2>
             }
             {/*<h3>Hasta el 31 de mayo inclusive tenés tiempo para presentar tus propuestas</h3> */}
-            <h3>{ props.texts['home-subtitle-text'] }</h3>
-            <div className="btn-container">
-              {//<div className="boton-azul boton-blanco">
-              //  <a href="https://forosvecinales.blob.core.windows.net/informes/Escrutinio-2019.xlsx">Ver Resultados</a>
-              //</div>
-              }
-              {/*
-                <Link
-                to='/formulario-idea'
-                className="boton-mandar-idea">
-                Subí tu idea
-              </Link>
-              */
-              }
-              
-              
-              {/*<Link
-                to='/proyectos'
-                className="boton-azul boton-blanco">
-                Ver Proyectos
-              </Link>*/}
+            <div className="container">
+              <h3>{ props.texts['home-subtitle-text'] }</h3>
             </div>
+            {
+              config.propuestasAbiertas && config.propuestasVisibles &&
+              <div className="row btn-container">
+                <div className="col-md-3">
+                  <Link
+                    to='/formulario-idea'
+                    className="boton-mandar-idea">
+                    Subí tu idea
+                  </Link>
+                </div>
+                {/* <div className="col-md-3">
+                  <Link
+                    to='/propuestas'
+                    className="boton-mandar-idea">
+                    Ver Proyectos
+                  </Link>
+                </div> */}
+              </div>
+            }
           </div>
         </div>
         <div className="row cont">
