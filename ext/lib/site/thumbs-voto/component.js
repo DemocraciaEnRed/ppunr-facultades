@@ -39,7 +39,7 @@ export default function ThumbsVoto(props) {
             </div>
             {
               config.propuestasAbiertas && config.propuestasVisibles &&
-              <div className="row btn-container">
+              <div className="row btn-container-home">
                 <div className="col-md-3">
                   <Link
                     to='/formulario-idea'
