@@ -41,6 +41,11 @@ app.get('/topics',
         format: 'tags',
         default: ''
       },
+      tag: {
+        type: 'string',
+        format: 'tag',
+        default: ''
+      },
       state: {
         type: 'string',
         format: 'states',
@@ -68,6 +73,7 @@ app.get('/topics',
   utils.parseFacultades,
   utils.parseClaustros,
   utils.parseTags,
+  utils.parseTag,
   middlewares.forums.privileges.canView,
   (req, res, next) => {
     const opts = Object.assign({}, req.query)

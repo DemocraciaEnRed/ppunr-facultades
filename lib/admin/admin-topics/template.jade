@@ -45,7 +45,7 @@
             select(name='tema')
               option(value="") Todos
               - each obj in uniqAttrs.tags
-                option(value="#{obj.name}") #{obj.name}
+                option(value="#{obj.value}") #{obj.name}
     #topic-list.list.list-group.col-xs-12
       - each topic in topics
         .list-group-item(data-topicid=topic.id, data-topic-ispublic=topic.public)
@@ -63,25 +63,37 @@
               option(value="anchor-title") > Cambiar título
               option(value="anchor-attrs.problema") > Cambiar texto
 
-          h4.topic-title
-            a(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle
-            - if (topic.attrs.state == 'pendiente')
-                span.placa.idea.text
-                  span.glyphicon.glyphicon-leaf
-                  span='  Idea'
-            - if (topic.attrs.state == 'proyecto')
-                span.placa.proyecto.text
-                  span.glyphicon.glyphicon-grain
-                  span='  Proyecto'
+          p.topic-title
+            a.h4.text-primary(href=urlBuilder.for('admin.topics.id', {id: topic.id, forum: forum.name}), rel="noopener noreferer", target="_blank")=topic.mediaTitle
+            //- - if (topic.attrs.state == 'pendiente')
+            //-     span.placa.idea.text
+            //-       span.glyphicon.glyphicon-leaf
+            //-       span='  Idea'
+            //- - if (topic.attrs.state == 'proyecto')
+            //-     span.placa.proyecto.text
+            //-       span.glyphicon.glyphicon-grain
+            //-       span='  Proyecto'
                   
           span.topic-date.hide=topic.createdAt
 
           .topic-multi-tags
             span.glyphicon.glyphicon-tag
-            span.text.topic-tag=topic.tag && topic.tag.name + ' - '
-            span.text.topic-tags=topic.tags.map(toTitleCase).join(', ')
-
+            span='Tema: '
+            - if(topic.tag)
+              span.placa.text.topic-tag(style={'background-color': topic.tag.color})=topic.tag && topic.tag.name
+          //- .topic-multi-tags
+          //-   span.glyphicon.glyphicon-tag
+            //- span.text.topic-tag=topic.tag && topic.tag.name + ' - '
+            //- span.text.topic-tags=topic.tags.map(toTitleCase).join(', ')
           .topic-status-data
+           - if (topic.attrs.state == 'pendiente')
+              span.placa.idea.text
+                span.glyphicon.glyphicon-leaf
+                span='  Idea'
+            - if (topic.attrs.state == 'proyecto')
+              span.placa.proyecto.text
+                span.glyphicon.glyphicon-grain
+                span='  Proyecto'
             - if (topic.owner && topic.owner.facultad)
               span.placa.text=topic.owner.facultad.abreviacion
             - if (topic.owner && topic.owner.claustro)

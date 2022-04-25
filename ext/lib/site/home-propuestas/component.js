@@ -86,7 +86,7 @@ class HomePropuestas extends Component {
     Promise.all([
       facultadStore.findAll(),
       claustroStore.findAll(),
-      tagStore.findAll({field: 'name'}),
+      tagStore.findAll(),
       forumStore.findOneByName('proyectos'),
       topicStore.findAllProyectos()
     ]).then(results => {
@@ -118,7 +118,8 @@ class HomePropuestas extends Component {
 
       facultades: this.state.facultad,
       claustros: this.state.claustro,
-      tags: this.state.tags.filter(t => this.state.tag.includes(t.value)).map(t => t.name),
+      // tags: this.state.tags.filter(t => this.state.tag.includes(t.value)).map(t => t.name),
+      tag: this.state.tag.join(','),
       sort: this.state.sort,
       tipoIdea: this.state.tipoIdea
     }
