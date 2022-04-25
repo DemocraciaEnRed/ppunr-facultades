@@ -3,6 +3,7 @@ import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import facultadStore from 'lib/stores/facultad-store'
+import ejeStore from 'lib/stores/eje-store'
 import claustroStore from 'lib/stores/claustro-store'
 import tagStore from 'lib/stores/tag-store/tag-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
@@ -32,13 +33,15 @@ class FormularioPropuesta extends Component {
       email: '',
       titulo: '',
       tags: [],
+      tag: '',
       problema: '',
       album: [],
       state: '',
+      eje: '',
       adminComment: '',
       adminCommentReference: '',
-
       availableTags: [],
+      availableEjes: [],
       facultades: [],
       claustros: []
     }
@@ -60,9 +63,11 @@ class FormularioPropuesta extends Component {
       // data del forum
       forumStore.findOneByName('proyectos'),
       // tags, facultades y claustros
-      tagStore.findAll({field: 'name'}),
+      // tagStore.findAll({field: 'name'}),
+      tagStore.findAll(),
       facultadStore.findAll(),
-      claustroStore.findAll()
+      claustroStore.findAll(),
+      ejeStore.findAll()
     ]
 
     // si es edición traemos data del topic también
@@ -71,13 +76,14 @@ class FormularioPropuesta extends Component {
 
     Promise.all(promises).then(results => {
       // topic queda en undefined si no estamos en edit
-      const [ forum, tags, facultades, claustros, topic] = results
+      const [ forum, tags, facultades, claustros, ejes, topic] = results
 
       let newState = {
         forum,
         availableTags: tags,
         facultades,
         claustros,
+        availableEjes: ejes,
         mode: isEdit ? 'edit' : 'new'
       }
 
@@ -92,9 +98,11 @@ class FormularioPropuesta extends Component {
           album: topic.extra.album ? topic.extra.album : [],
           // los tags se guardan por nombre (¿por qué?) así que buscamos su respectivo objeto
           tags: tags.filter(t => topic.tags.includes(t.name)),
+          tag: topic.tag.id,
           state: topic.attrs.state,
           adminComment: topic.attrs['admin-comment'],
-          adminCommentReference: topic.attrs['admin-comment-reference']
+          adminCommentReference: topic.attrs['admin-comment-reference'],
+          topic: topic
         })
 
       console.log(isEdit, newState)
@@ -143,7 +151,8 @@ class FormularioPropuesta extends Component {
       'attrs.documento': this.state.documento,
       'attrs.genero': this.state.genero,
       'attrs.problema': this.state.problema,
-      tags: this.state.tags.map(tag => tag.name)
+      tags: this.state.tags.map(tag => tag.name),
+      tag: this.state.tag
     }
     if (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics && this.state.mode === 'edit') {
       formData['attrs.admin-comment'] = this.state.adminComment
@@ -196,16 +205,33 @@ class FormularioPropuesta extends Component {
     })
   }
 
-  toggleTag = (tag) => (e) => {
+  // toggleTag = (tag) => (e) => {
+  //   // If is inside state.tags, remove from there
+  //   this.setState((state) => {
+  //     let theTags = state.tags
+  //     if(theTags.includes(tag)){
+  //       return { tags: theTags.filter(t => t !== tag)}
+  //     }else if(theTags.length < 1)
+  //       theTags.push(tag)
+  //     return { tags: theTags }
+  //   })
+  // }
+
+  selectTag = (tag) => (e) => {
     // If is inside state.tags, remove from there
-    this.setState((state) => {
-      let theTags = state.tags
-      if(theTags.includes(tag)){
-        return { tags: theTags.filter(t => t !== tag)}
-      }else if(theTags.length < 1)
-        theTags.push(tag)
-      return { tags: theTags }
+    this.setState({
+      tag: tag.id
     })
+  }
+
+  getStyleSelected = (tag) => {
+    if (this.state.tag === tag.id) {
+      return {
+        backgroundColor: tag.color
+      }
+    } else {
+      return {}
+    }
   }
 
   hasErrors = () => {
@@ -217,7 +243,8 @@ class FormularioPropuesta extends Component {
     if (this.state.facultad === '') return true
     if (this.state.claustro === '') return true
     if (this.state.problema === '') return true
-    if (!this.state.tags || this.state.tags.length == 0) return true
+    if (this.state.tag === '') return true
+    // if (!this.state.tags || this.state.tags.length == 0) return true
     return false;
 
   }
@@ -279,7 +306,7 @@ class FormularioPropuesta extends Component {
   }
 
   render () {
-    const { forum, facultades, claustros, album } = this.state
+    const { forum, facultades, claustros, availableTags, availableEjes, eje } = this.state
 
     if (!forum) return null
     if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
@@ -417,28 +444,16 @@ class FormularioPropuesta extends Component {
           </div>
           <div className='tags-autocomplete'>
             <label className='required'>
-                Temas
+                Tema
             </label>
-            <p className='help-text'>Elegí los temas relacionados a tu idea. Tenés un máximo de 1 tema.</p>
+            <p className='help-text'>Elegí el tema relacionado con tu idea (solo uno).</p>
             {
-              this.state.mode === 'edit' && this.state.tags &&
+              this.state.tags &&
                 <ul className="tags">
                 {
-                  this.state.availableTags.map((tag) => {
+                  availableTags.map((tag) => {
                     return (
-                      <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
-                    )
-                  })
-                }
-                </ul>
-            }
-            {
-              this.state.mode === 'new' &&
-                <ul className="tags">
-                {
-                  this.state.availableTags.map((tag) => {
-                    return (
-                      <li key={tag.id}><span onClick={this.toggleTag(tag)} value={tag.id} className={this.state.tags.includes(tag) ? 'tag active' : 'tag'}>{tag.name}</span></li>
+                      <li key={tag.id}><span onClick={this.selectTag(tag)} value={tag.id} className='tag' style={this.getStyleSelected(tag)}>{tag.name}</span></li>
                     )
                   })
                 }
@@ -450,11 +465,10 @@ class FormularioPropuesta extends Component {
               Tu idea
             </label>
               <p className='help-text'>¿Que querés proponer? ¿Para qué? ¿Quiénes se ven beneficiado/as?</p>
-            {/*<p className='help-text'><strong>Recordá ingresar solo una idea por formulario</strong></p>*/}
             <textarea
               className='form-control'
               required
-              rows='6'
+              rows='8'
               max='5000'
               name='problema'
               value={this.state['problema']}
@@ -516,7 +530,7 @@ class FormularioPropuesta extends Component {
                 {this.hasErrorsField('titulo') && <li className="error-li">El campo "Título" no puede quedar vacío</li> }
                 {this.hasErrorsField('facultad') && <li className="error-li">El campo "Facultad" no puede quedar vacío</li> }
                 {this.hasErrorsField('claustro') && <li className="error-li">El campo "Claustro" no puede quedar vacío</li> }
-                {this.hasErrorsField('tags') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
+                {this.hasErrorsField('tag') && <li className="error-li">El campo "Temas" no puede quedar vacío</li> }
                 {this.hasErrorsField('problema') && <li className="error-li">El campo "Tu idea" no puede quedar vacío</li> }
               </ul>
             </div>

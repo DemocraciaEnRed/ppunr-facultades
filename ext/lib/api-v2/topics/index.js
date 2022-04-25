@@ -29,7 +29,7 @@ const EDITABLE_KEYS = [
   'attrs.subscribers',
   'attrs.genero',
   'attrs.facultad',
-  'eje'
+  'tag'
 ]
 
 class CantUploadProposal extends Error {
@@ -45,7 +45,7 @@ const defaultValues = () => ({
   'attrs.anio': config.currentEdition, //TODO Variable de entorno que se pueda setear el año
   'attrs.state': 'pendiente',
   'action.method': 'cause',
-  tag: '59665fe8724f61003327eb2f' //Esto debe ser un id de un document de la collection "tags" de la bd.
+  // tag: '59665fe8724f61003327eb2f' //Esto debe ser un id de un document de la collection "tags" de la bd.
 })
 
 // Only allow to edit specific keys when is a proposal
