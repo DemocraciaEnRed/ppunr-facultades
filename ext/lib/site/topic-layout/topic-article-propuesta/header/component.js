@@ -59,9 +59,9 @@ export default class Header extends Component {
     }
     return (
       <header className='topic-article-header topic-article-content'>
-        { this.props.children }
+        {/* { this.props.children }
         {learnMore}
-        {closingAt}
+        {closingAt} */}
         <h1>{this.props.numero && `#${this.props.numero} ` }{this.props.mediaTitle}</h1>
 
 

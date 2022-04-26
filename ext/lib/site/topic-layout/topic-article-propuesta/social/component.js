@@ -8,9 +8,11 @@ export default (props) => {
   const messageWp = `Sumate a pensar la Universidad que queremos. Votá este proyecto: ${mediaTitle} ` + socialLinksUrl
   return (
     <div className='topic-article-content topic-social-vilo'>
+      
       <div className='share-links'>
-        <a target='_blank' href={`http://www.facebook.com/sharer.php?u=${socialLinksUrl}`} rel='noopener noreferrer' className='facebook-icon'></a>
-        <a target='_blank' href={`http://twitter.com/share?text=${twitterText}&url=${socialLinksUrl}`} rel='noopener noreferrer' className='twitter-icon'></a>
+        <span className="atitle"><b>Compartir</b></span>
+        <a target='_blank' href={`https://www.facebook.com/sharer.php?u=${socialLinksUrl}`} rel='noopener noreferrer' className='facebook-icon'></a>
+        <a target='_blank' href={`https://twitter.com/share?text=${twitterText}&url=${socialLinksUrl}`} rel='noopener noreferrer' className='twitter-icon'></a>
         {
           window.innerWidth <= 630 &&
             <a href={`whatsapp://send?text=${messageWp}`} rel='noopener noreferrer' className='wp'></a>
