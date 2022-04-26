@@ -36,7 +36,7 @@
           input.form-control(type='text', maxlength='200', id='mediaTitle', name='mediaTitle', placeholder=t('admin-topics-form.label.mediaTitle'), value=topic.mediaTitle, validate='required')
 
         .form-group
-          label= 'Eje'
+          label= 'Tema'
           - if (te('admin-topics-form.description.tag'))
             span.help-text= t('admin-topics-form.description.tag')
           select.form-control(name='tag', validate='required')
