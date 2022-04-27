@@ -1,27 +1,19 @@
 .topics-cause-propuesta
-  margin: 0 30px;
-  .btn
-    background: #8c1e80
-    margin: 0 10px 0 0
+  .btn-like
+    margin: 10px;
     width: auto
-    border: none
-  .likes-total
-    font-weight: 400
-    color: #000
-    display: inline-block
-    span
-      font-weight: normal
-      color: #8c1e80
-  .overlay-vote
-    position: absolute
-    background: rgba(255, 255, 255, 0.71)
-    width: 100%
-    height: 100%
-    border-radius: 10px
-    top: 2px
-    display: flex
-    align-content: center
-    justify-content: center
-    span
-      align-self: center
-      color: #555
+    border-radius: 32px;
+    padding: 8px 20px;
+    font-weight: 700;
+    &.btn-like-empty
+      background: transparent
+      color: #8C0375
+      border: 2px solid #8C0375;
+      &:hover
+        background: #8C0375
+        color: #fff
+    &.btn-like-filled
+      background: #8C0375
+      color: #FFF;
+      border: 2px solid #8C0375;
+      opacity: 0.5
