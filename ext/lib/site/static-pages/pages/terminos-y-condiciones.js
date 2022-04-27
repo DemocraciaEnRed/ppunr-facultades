@@ -15,16 +15,20 @@ export default class Page extends Component {
   render () {
     return (
       <div>
-        <section className="banner-static">
+        {/* <section className="banner-static">
           <div className="banner"></div>
           <div className='contenedor largo'>
             <div className='fondo-titulo'>
               <h1>Términos y Condiciones</h1>
             </div>
           </div>
+        </section> */
+        }
+        <section className="banner-static-2022">
+          <h1>Términos y condiciones</h1>
         </section>
         <Anchor id='container'>
-          <div className='ext-terminos-y-condiciones'>
+          <div className='container'>
             <h2><span>Descripción</span></h2>
             <p>Los siguientes Términos y Condiciones regulan el uso de la Plataforma UNR Presupuesto Participativo.<br/>
               El registro y uso de la plataforma por parte de usuarios/as indica la aceptación absoluta de los Términos y Condiciones presentes y de la Política de Privacidad.<br/>
@@ -95,6 +99,8 @@ export default class Page extends Component {
             </p>
 
             <p><span></span></p>
+            <br />
+            <br />
           </div>
         </Anchor>
         <Jump goTop={this.goTop} />

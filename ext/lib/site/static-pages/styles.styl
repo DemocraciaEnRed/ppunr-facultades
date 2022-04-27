@@ -13,22 +13,6 @@
 .ext-terminos-y-condiciones
 .ext-reglamento
 .ext-herramientas
-  position: relative
-  @media screen and (max-width: 500px)
-    padding: 0
-    max-width: 630px
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6
-    & > a
-      color: inherit
-
-      &:hover
-        border-bottom: 1px solid #666
 
   .thumbs
     background: transparent
@@ -183,12 +167,12 @@
       span:first-child
         font-weight: bold
 
-.container-imagen-acerca-de
-    @media (min-width: 768px)
-      background-image: unquote("url('ext/lib/site/static-pages/acercade.png')")
-      background-repeat: no-repeat;
-      background-position: right bottom -50px;
-      background-size: 30%;
+//.container-imagen-acerca-de
+//    @media (min-width: 768px)
+//      background-image: unquote("url('ext/lib/site/static-pages/acercade.png')")
+//      background-repeat: no-repeat;
+//      background-position: right bottom -50px;
+//      background-size: 30%;
 
 .ext-herramientas
 .ext-reglamento
@@ -544,32 +528,6 @@
       width: 60%
 
 // BANNER TERMINOS Y CONDICIONES
-
-.ext-terminos-y-condiciones
-  padding: 0 15px 15px
-  @media screen and (max-width: 768px)
-    padding: 0 15px
-  h2
-    color: #7cbb42
-.ext-reglamento
-  p, ul li
-    color: #555
-  .articulo
-    font-weight: bold
-  .underline
-    text-decoration: underline
-  h2
-    color: #7cbb42
-  h4
-    color: #444
-
-  .tabla-presupuestos
-    tbody
-      tr
-        td
-          padding: 10px
-        td:first-child
-          font-weight: bold
 
 .carousel-distribucion-proyectos
   max-width: 1000px
@@ -989,44 +947,13 @@ h3.underline
     -webkit-transform: scale(1)
     transform: scale(1)
 
-.action-btns
-  display: flex
-  justify-content: center
-  margin-bottom: 20px
-  .boton-azul
-    font-size: 16px
-    padding: 10px 20px
-    span
-      font-size: 16px
-      padding: 0 20px 0 0
-
-  .btns-descargas
-  text-align: center
-  a
-    margin: 10px
-    &::before
-      content: ''
-      background-image: unquote("url('ext/lib/site/static-pages/DownloadFile.svg')")
-      padding-left: 30px
-      background-size: contain
-      background-repeat: no-repeat
-  .boton-azul
-    font-size: 16px
-    padding: 10px 20px
-
-.mapa-municipio
-.flyer-pp
-  width: 100%
-  margin-bottom: 50px
-
 .Collapsible
   text-align: left;
-  margin-bottom: 10px;
   border-top: 1px solid #7cbb42;
-  padding-top: 10px;
+  padding: 20px 0px;
 
 .Collapsible__trigger
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 700;
   cursor: pointer;
 
@@ -1135,13 +1062,26 @@ h3.underline
       .add-to-calendar-link
         color: #8C0375;
         cursor: pointer;
+  .past-event
+    opacity: 0.65;
+    .past-title
+      margin-bottom: 10px;
+      font-size: 20px;
+    .past-date
+      margin-bottom: 5px;
+    .past-place
+      margin-bottom: 0px;
 
-.past-event
-  opacity: 0.65;
-  .past-title
-    margin-bottom: 10px;
-    font-size: 20px;
-  .past-date
-    margin-bottom: 5px;
-  .past-place
-    margin-bottom: 0px;
+.banner-static-2022
+  padding: 80px 0;
+  text-align: center;
+  color: #8C0375
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+.post-banner-static-2022
+  padding: 15px;
+  margin-top: -30px;
+  margin-bottom: 50px;
+  background-color: #BF4588
+  text-align: center;
+  font-weight: 700;
+  color: #FFF;
