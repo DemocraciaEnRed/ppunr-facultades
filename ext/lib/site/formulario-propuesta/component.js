@@ -432,7 +432,7 @@ class FormularioPropuesta extends Component {
             <label className='required' htmlFor='titulo'>
               Título
             </label>
-            <p className="help-text">Elegí un título</p>
+            <p className="help-text">Creá un título</p>
             <input
               className='form-control'
               required
