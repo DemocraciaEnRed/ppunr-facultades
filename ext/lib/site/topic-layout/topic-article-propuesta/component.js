@@ -181,7 +181,7 @@ class TopicArticle extends Component {
           { /* <h2 className='topic-article-subtitulo'>subtítulo de la propuesta</h2> */ }
           <div className="panel panel-default pre-info" style={{borderLeftColor: topic.tag.color }}>
             <div className="panel-body">
-              { !isProyecto && <div><b>Autor</b><br />{topic.owner.firstName}</div> }
+              { !isProyecto && <div><b>Creado por</b><br />{topic.owner.firstName}</div> }
               <div><b>Tema</b><br /><div className="tema" style={{backgroundColor: topic.tag.color }}>{ topic.tag.name }</div></div>
               <div><b>Tipo</b><br />{ isProyecto ? 'Proyecto' : 'Idea' }</div>
               {isProyecto && <div><b>Monto estimado</b><br />${topic.attrs.presupuesto.toLocaleString()}</div>}
@@ -249,7 +249,7 @@ class TopicArticle extends Component {
             { ((forum.privileges && forum.privileges.canChangeTopics) || (topic.privileges && topic.privileges.canEdit)) &&
               <Link href={`/formulario-idea/${topic.id}/album`} className="btn btn-default btn-sm pull-right"><i className="icon-pencil"></i> Editar album</Link>
             }
-            <h3>Album de imagenes</h3>
+            <h3>Albúm de imágenes</h3>
             <div className="row">
               {
               topic.extra && topic.extra.album && topic.extra.album.length > 0 && topic.extra.album.map((image, i) => (
