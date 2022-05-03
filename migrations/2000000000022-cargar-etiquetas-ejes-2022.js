@@ -8,9 +8,9 @@ const Eje = models.Eje
 const ejes = [
   { nombre: 'Bienestar Universitario', color: '#DCAAC5', hash: 'bienestar-universitario' },
   { nombre: 'Deporte y cultura', color: '#EFA47E', hash: 'deporte-cultura' },
-  { nombre: 'Espacio Comunes', color: '#0396A6', hash: 'espacios-comunes' },
+  { nombre: 'Espacio Comunes', color: '#EDC200', hash: 'espacios-comunes' },
   { nombre: 'Ambiente y sustentabilidad', color: '#5DBE6B', hash: 'ambiente-sustentabilidad' },
-  { nombre: 'Tecnologia e innovación', color: '#50A0C6', hash: 'tecnologia-innovacion' }
+  { nombre: 'Tecnologias e innovación', color: '#50A0C6', hash: 'tecnologia-innovacion' }
 ]
 
 const tags = ejes.map(eje => {
