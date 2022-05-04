@@ -65,7 +65,7 @@ const queryTopics = (opts) => {
   if (tag && tag.length > 0) query.tag = { $in: tag }
   if (state && state.length > 0) query['attrs.state'] = { $in: state }
   if (related && related.length > 0) query['attrs.admin-comment-referencia'] = { $regex: `.*${related}.*` }
-  console.log(query)
+  //console.log(query)
   return api.topics.find().where(query)
 }
 
