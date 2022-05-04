@@ -59,17 +59,18 @@
             div(data-attrs)
 
         //- Pug upload image
-        div.panel.panel-default
-          div.panel-heading
-            span='Albúm de imágenes'
-          -if(form.type === 'edit')
-            div.panel-body='Para subir o eliminar imagenes, haga clic en el boton "Editar album"' 
-              br
-              a(href='/formulario-idea/'+topic.id+'/album', target='_blank')='Editar album'
-                | 
-                i.icon-arrow-right-circle
-          -else
-            div.panel-body='Debe primero crear la idea/proyecto para poder subir imagenes' 
+        -if(form.albumEnabled)
+          div.panel.panel-default
+            div.panel-heading
+              span='Albúm de imágenes'
+            -if(form.type === 'edit')
+              div.panel-body='Para subir o eliminar imagenes, haga clic en el boton "Editar album"' 
+                br
+                a(href='/formulario-idea/'+topic.id+'/album', target='_blank')='Editar album'
+                  | 
+                  i.icon-arrow-right-circle
+            -else
+              div.panel-body='Debe primero crear la idea/proyecto para poder subir imagenes' 
         
         input.btn.btn-success.hide(type='submit', value=t('admin-topics-form.button.submit'))
 

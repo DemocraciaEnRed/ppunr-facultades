@@ -159,6 +159,19 @@ class AlbumPropuesta extends Component {
 
   render () {
     let { album, mediaTitle, buttonDisabled, topic } = this.state
+    if (!config.enableUploadPictures) {
+      return (
+        <div className="container" style={{marginTop: '150px', marginBottom: '50px'}}>
+           {
+            topic &&
+          <Link href={`/propuestas/topic/${topic.id}`}><i className="icon-circle-arrow-left"></i> Volver a la idea</Link>
+          }
+          <hr />
+          <p className="h2"><b>Albúm de Imagenes deshabilitado</b></p>
+          <p className="h3"><small>Por favor, contacte al admin</small></p>
+        </div>
+        )
+      }
     return (
       <div className="container" style={{marginTop: '150px', marginBottom: '50px'}}>
         {
