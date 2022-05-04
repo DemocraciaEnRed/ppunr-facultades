@@ -35,7 +35,7 @@ function getAllTags (req, res, next) {
       log('error serving tags from DB:', err)
       return res.status(500).end()
     }
-    console.log(tags)
+    //console.log(tags)
     tags.forEach(t => tagsName[t.id] = t.name)
     req.tagsName = tagsName
     next()
@@ -83,7 +83,7 @@ function postCsv (req, res) {
       log('get csv: array to csv error', err)
       return res.status(500).end()
     }
-    console.log(json)
+    //console.log(json)
     const attrs = req.forum.topicsAttrs
     Topic.find({ _id: { $in: json.map((t) => t['Topic ID']) } })
       .then((topics) => {
