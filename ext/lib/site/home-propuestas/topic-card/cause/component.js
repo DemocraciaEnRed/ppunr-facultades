@@ -71,7 +71,7 @@ export class Cause extends Component {
 
     const { supported, topicClosed } = this.state
     if (user.state.fulfilled && topic.privileges && !topic.privileges.canVote) return null
-    //if (!config.habilitarApoyo) return null
+    // if (!config.habilitarApoyo) return null
 
     return (
       <div className='topics-cause-propuesta'>

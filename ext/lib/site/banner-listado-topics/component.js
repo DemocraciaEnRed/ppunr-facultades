@@ -19,13 +19,13 @@ export default function BannerListadoTopics(props) {
 
   return (
     <div>
-      {props.user.state.fulfilled && 
+      {/* {props.user.state.fulfilled && 
         <header className='banner-votos'>
           <h1 className='votos-title'>
             <div dangerouslySetInnerHTML={{__html: messageVoto(votos)}} />
           </h1>
         </header>
-      }
+      } */}
     <header className='banner-proyectos'>
       {/* <h1 className='proyectos-title'>{stage === 'votacion' ? 'Proyectos ganadores' : 'Seguimiento de proyectos' }</h1> */}
       {/* <h2 className='proyectos-subtitle'>{stage === 'votacion' ? 'Acá podes encontrar los proyectos ganadores de 2019' : 'Acá podés encontrar los proyectos que fueron aprobados en votaciones anteriores y ver en qué estado de su ejecución se encuentran.'}</h2> */}
