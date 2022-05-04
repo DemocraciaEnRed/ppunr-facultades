@@ -6,9 +6,6 @@ import BannerForoVecinal from 'ext/lib/site/banner-foro-vecinal/component'
 import BannerWelcome from 'ext/lib/site/banner-welcome/component'
 import ThumbsVoto from 'ext/lib/site/thumbs-voto/component'
 // import Barrios from 'ext/lib/site/barrios/component'
-// import Proyectos from 'ext/lib/site/proyectos/component'
-// import ProyectosFactibles from 'ext/lib/site/proyectosFactibles/component'
-// import ProyectosGanadores from 'ext/lib/site/proyectosGanadores/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Footer from 'ext/lib/site/footer/component'
 // import forumStore from 'lib/stores/forum-store/forum-store'
@@ -56,9 +53,6 @@ export default class HomeMultiforumOverride extends Component {
             <p>Conocé <strong>los proyectos </strong>que podés votar para que sean realidad en el 2022. <strong>¡Elegí hasta tres proyectos y votá!</strong>. Podés conocerlas aquí.</p>
             <Link to={'/propuestas'} className="boton-foro" href="">Ir a UNR DECIDE</Link>
           </div> */}
-          {/* <Proyectos /> */}
-          {/* <ProyectosFactibles /> */}
-          {/* <ProyectosGanadores /> */}
           {/* <Barrios /> */}
           <BannerWelcome />
           <Jump goTop={this.goTop} />
