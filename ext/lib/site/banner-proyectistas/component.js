@@ -83,7 +83,7 @@ class BannerProyectistas extends Component {
       }
       {this.props.user.state.rejected && (
         <div>
-          <p><i>Para sumarte como proyectista, tenes que iniciar sesión</i></p>
+          <p><i>Para sumarte como proyectista tenés que iniciar sesión</i></p>
           <Link to={'/signin'} className="boton-iniciar-sesion">Iniciar Sesión</Link>
         </div>
       )}
