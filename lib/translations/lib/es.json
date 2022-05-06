@@ -387,7 +387,7 @@
   "signin.error.using-facebook": "La dirección de correo electrónico ya fue usada ingresando con Facebook",
   "signin.errors.attempt-too-soon": "La cuenta esta bloqueada por reiterados intentos fallidos",
   "signin.errors.incorrect-password": "¡La contraseña no es correcta! Revisá si esta ingresada correctamente.<br>Si no te acordas, hace clic aquí para <a href='/forgot'>reestablecer tu contraseña</a>",
-  "signin.errors.incorrect-username": "No tenemos este correo registrado. Por favor, revisá si tu email esta bien ingresado, o si no, te invitamos a registrarte",
+  "signin.errors.incorrect-username": "No tenemos éste correo registrado. Si tu correo está bien escrito, para poder participar te invitamos a registrarte haciendo clic en el botón violeta que se encuentra más abajo.",
   "signin.errors.must-reset-password": "Tu contraseña ha expirado, por favor haz click aquí para <a href='/forgot'>reestablecer tu contraseña</a> para volver a configurarla.",
   "signin.errors.too-many-attempts": "La cuenta esta bloqueada por reiterados intentos fallidos",
   "signin.login": "Ingresar",

@@ -542,7 +542,7 @@ class FormularioPropuesta extends Component {
             }
           </div>
           { this.state.mode !== 'edit' &&
-          <p className="more-info add-color">¡Luego de mandarla, podes volver a editarla!</p>
+          <p className="more-info add-color">¡Luego de mandarla, podés volver a editarla!</p>
           }
           </section>
         </form>
