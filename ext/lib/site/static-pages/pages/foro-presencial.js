@@ -115,7 +115,7 @@ class Page extends Component {
         </section>
         <div className="the-subbanner-container">
           <div className="the-subbanner container">
-            Si queres podes sumar tu idea también en los foros presenciales.<br>Si ya participaste de manera presencial podes encontrar tu idea en el foro virtual
+            Si queres podes sumar tu idea también en los foros presenciales.<br />Si ya participaste de manera presencial podes encontrar tu idea en el foro virtual
           </div>
         </div>
         <div className="the-content">
