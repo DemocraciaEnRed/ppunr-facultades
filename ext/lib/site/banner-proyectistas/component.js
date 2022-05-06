@@ -88,7 +88,7 @@ class BannerProyectistas extends Component {
         </div>
       )}
       <div>
-        <Link to={'/s/acerca-de'} className="learn-more">Conocé más sobre las tareas de un proyectista</Link>
+        <Link to={'/s/acerca-de?q=proyectista'} className="learn-more">Conocé más sobre las tareas de un proyectista</Link>
       </div>
     </div>
 

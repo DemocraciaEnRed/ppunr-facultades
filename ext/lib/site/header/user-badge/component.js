@@ -60,7 +60,7 @@ export class UserBadge extends Component {
       <div className={classes.join(' ')} onClick={this.props.toggleOnClick}>
         <button className='header-link'>
           <img src={userAttrs.avatar} alt='' />
-          {userAttrs.firstName}
+          <span className="hidden-xs">{userAttrs.firstName}</span>
           <span className="glyphicon glyphicon-triangle-bottom"></span>
         </button>
         <ul

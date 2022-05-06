@@ -7,26 +7,26 @@ import Anchor from 'ext/lib/site/anchor'
 import Accordion from 'react-responsive-accordion';
 
 export default class Page extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      openSection: this.props.location.query.q === 'proyectista' ? 12 : 0
+    }
+  }
+
   componentDidMount () {
-    this.goTop()
+    this.goTop(this.props.location.query.q || 'container')
   }
 
-  goTop () {
-    Anchor.goTo('container')
+  goTop (anchorId) {
+    Anchor.goTo(anchorId)
   }
-
 
   render () {
+    let { openSection } = this.state
     return (
       <div>
-        {/* <section className="banner-static">
-          <div className="banner"></div>
-          <div className='contenedor'>
-            <div className='fondo-titulo'>
-              <h1>Presupuesto Participativo UNR</h1>
-            </div>
-          </div>
-        </section> */}
         <section className="banner-static-2022">
           <h1>Acerca de</h1>
         </section>
@@ -40,7 +40,7 @@ export default class Page extends Component {
                 <p className='h4 text-center'>Podés leer el reglamento completo haciendo click <a href="https://presupuestoparticipativo.unr.edu.ar/reglamento/" rel="noopener noreferer" target="_blank">aquí</a></p>
                 <br />
                 <br />
-                <Accordion>
+                <Accordion startPosition={openSection}>
                   <div data-trigger="+ ¿Quiénes pueden participar del PP Facultades?">
                     <p className='p-padding'>
                       Pueden participar docentes, nodocentes, estudiantes y graduados/as de las 12 Facultades y otras Sedes y dependencias de la UNR.
@@ -56,31 +56,26 @@ export default class Page extends Component {
                   </div>
                   <div data-trigger="+ ¿Cómo participo?">
                     <p className='p-padding'>
-                    Te invitamos a <Link href="/signup" class="text-primary">registrarte</Link> aquí para sumar ideas y comentar las ideas de otros/as participantes. Podrás también expresar tu interés en apoyar y sumarte a alguna de las propuestas. Es muy importante que fomentemos el diálogo informado y respetuoso.
+                    Te invitamos a <Link href="/signup" className="text-primary">registrarte aquí</Link> para sumar ideas y comentar las ideas de otros/as participantes. Podrás también expresar tu interés en apoyar y sumarte a alguna de las propuestas. Es muy importante que fomentemos el diálogo informado y respetuoso.
                     </p>
                     <p className='p-padding'>
                     También podrás inscribirte para ser proyectista de la Comisión Universitaria. Como la comisión estará organizada en torno a áreas temáticas, te proponemos elegir el área en la que quieras trabajar para transformar las ideas del foro en proyectos. No es necesario presentar una idea para ser proyectista.    
                     </p>
                     <p className='p-padding'>
-                    Además, habrá encuentros presenciales paralelamente al Foro virtual para que puedas acercarte a dejar tu idea, construirla con otros/as y anotarte para ser proyectista. Podes ver el calendario haciendo <Link href="/s/foro-presencial" class="text-primary">clic acá</Link>. 
-                    </p>
-                  </div>
-                  <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
-                    <p className='p-padding'>
-                    Vas a encontrar en el formulario una serie de etiquetas que refieren a diversos temas:
+                    Además, habrá encuentros presenciales paralelamente al Foro virtual para que puedas acercarte a dejar tu idea, construirla con otros/as y anotarte para ser proyectista. Podes ver el calendario haciendo <Link href="/s/foro-presencial" className="text-primary">clic acá</Link>. 
                     </p>
                   </div>
                   <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
                     <p className='p-padding'>
                       Vas a encontrar en el formulario una serie de etiquetas que refieren a diversos temas:
                     </p>
-                    <p className='p-padding'>
+                    <ul className='p-padding'>
                       <li>Bienestar universitario</li>
                       <li>Deporte y Cultura</li>
                       <li>Espacios comunes</li>
                       <li>Ambiente y Sustentabilidad</li>
                       <li>Tecnologías e innovación</li>
-                    </p>
+                    </ul>
                     <p className='p-padding'>
                     Sólo podrás elegir una, la que te parezca define más y mejor tu idea. La misma luego será retomada por el área temática respectiva dentro de la Comisión Universitaria, pudiendo ser reasignada por parte del equipo el PPUNR.
                     </p>
@@ -125,22 +120,22 @@ export default class Page extends Component {
                     Podés sumarte en cualquier etapa del proceso aunque no hayas participado de las anteriores. Es decir, podés no haber propuesto o comentado ideas pero interesarte por sumar tu aporte como proyectista.
                     </p>
                   </div>
-                  <div data-trigger="+ ¿Qué implica ser proyectista?">
-                    <p className='p-padding'>
-                    Luego de los Foros, la segunda etapa del PP es la conformación de la Comisión Universitaria. La misma estará integrada por todas las personas que se hayan propuesto para transformar las ideas en proyectos. En unos pocos encuentros le daremos forma a las ideas a partir de intercambios con técnicos de la Universidad que contribuirán a darle factibilidad a los proyectos que serán elegidos por la comunidad para ser ejecutados en 2023.
-                    </p>
+                  <div data-trigger="+ ¿Qué implica ser proyectista?" >
+                    <Anchor id='proyectista'>
+                      <p className='p-padding'>
+                      Luego de los Foros, la segunda etapa del PP es la conformación de la Comisión Universitaria. La misma estará integrada por todas las personas que se hayan propuesto para transformar las ideas en proyectos. En unos pocos encuentros le daremos forma a las ideas a partir de intercambios con técnicos de la Universidad que contribuirán a darle factibilidad a los proyectos que serán elegidos por la comunidad para ser ejecutados en 2023.
+                      </p>
+                    </Anchor>
                   </div>
                   <div data-trigger="+ ¿Qué condiciones deben respetar los proyectos?">
-                    <p className='p-padding'>
-                      <ul>
-                        <li>Incluir resultados para al menos tres unidades académicas o algún espacio común.</li>
-                        <li>El monto de cada proyecto no puede superar el 70% de la partida asignada.</li>
-                        <li>No exceder el límite presupuestario.</li>
-                        <li>No exceder el ámbito de la Universidad.</li>
-                        <li>No afectar partidas presupuestarias de años posteriores.</li>
-                        <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegidos.</li>
-                      </ul>
-                    </p>
+                    <ul className='p-padding'>
+                      <li>Incluir resultados para al menos tres unidades académicas o algún espacio común.</li>
+                      <li>El monto de cada proyecto no puede superar el 70% de la partida asignada.</li>
+                      <li>No exceder el límite presupuestario.</li>
+                      <li>No exceder el ámbito de la Universidad.</li>
+                      <li>No afectar partidas presupuestarias de años posteriores.</li>
+                      <li>Ser factibles técnicamente para poder ser ejecutados en caso de ser elegidos.</li>
+                    </ul>
                   </div>
                   <div data-trigger="+ ¿Qué espacios podemos intervenir con proyectos del PP?">
                     <p className='p-padding'>
