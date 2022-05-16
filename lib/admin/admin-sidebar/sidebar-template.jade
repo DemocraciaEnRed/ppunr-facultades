@@ -44,3 +44,8 @@ ul.admin-menu.nav.nav-pills.nav-stacked(class=forum.privileges.canChangeTopics ?
       a(href=urlBuilder.for('admin.agenda', {forum: forum.name}) data-section='agenda')
         span.glyphicon.glyphicon-calendar
         ='Agenda'
+  - if (user.staff)
+    li
+      a(href=urlBuilder.for('admin.stats', {forum: forum.name}) data-section='stats')
+        span.glyphicon.glyphicon-stats
+        ='stats'
