@@ -25,13 +25,13 @@ const tags = etiquetas.map(etiqueta => {
 })
 
 const ejes = [
-  { nombre: 'Innovación' },
-  { nombre: 'Proximidad y sustentabilidad' },
-  { nombre: 'Género e inclusión' },
-  { nombre: 'Aprendizajes, investigación e internacionalización' },
-  { nombre: 'Modernización y transparencia' },
-  { nombre: 'Bioseguridad' },
-  { nombre: 'Otro' },
+  { nombre: 'Innovación', hash: 'innovacion' },
+  { nombre: 'Proximidad y sustentabilidad', hash: 'proximidad-sustentabilidad' },
+  { nombre: 'Género e inclusión', hash: 'genero-inclusion' },
+  { nombre: 'Aprendizajes, investigación e internacionalización', hash: 'aprendizajes-investigacion-internacionalizacion' },
+  { nombre: 'Modernización y transparencia', hash: 'modernizacion-transparencia' },
+  { nombre: 'Bioseguridad', hash: 'bioseguridad' },
+  { nombre: 'Otro', hash: 'otro' }
 ]
 
 /**

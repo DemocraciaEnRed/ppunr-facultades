@@ -1,7 +1,7 @@
 const dbReady = require('lib/models').ready
 const models = require('lib/models')
 
-const nombreMigrationParaLog = 'cargar etiquetas y ejes'
+const nombreMigrationParaLog = 'cargar etiquetas y ejes 2022'
 const Tag = models.Tag
 const Eje = models.Eje
 
