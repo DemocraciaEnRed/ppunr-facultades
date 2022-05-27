@@ -85,11 +85,13 @@ app.get('/export/topics/xlsx',
       if (topic.attrs === undefined) {
         topic.attrs = {}
       }
+      console.log(topic)
       let theTopic = {
         'Idea ID': topic.id,
         'Idea Fecha': `${escapeTxt(moment(topic.createdAt, '', req.locale).format('LL LT'))}`,
         'Idea Título': `${escapeTxt(topic.mediaTitle)}`,
-        'Idea Temas': `${escapeTxt(topic.tags.join(', '))}`,
+        // 'Idea Temas': `${escapeTxt(topic.tags.join(', '))}`,
+        'Idea Tema': `${topic.tag ? escapeTxt(topic.tag.name) : '-'}`,
         'Idea Facultad': `${escapeTxt(topic.owner.facultad && topic.owner.facultad.abreviacion)}`,
         'Idea Texto': `${escapeTxt(topic.attrs['problema'])}`,
         'Autor/a nombre': `${escapeTxt(topic.owner.firstName)}`,
