@@ -43,7 +43,7 @@ export class TopicCard extends Component {
   }
 
   render() {
-    const { topic, onVote, onProyectista, user } = this.props
+    const { topic, onVote, onProyectista, user, voterInformation } = this.props
 
     const isStaff = !user.state.rejected && user.state.value.staff
     const isLoggedIn = user.state && user.state.fulfilled
@@ -160,6 +160,9 @@ export class TopicCard extends Component {
               isLoggedIn && config.habilitarComentarios &&
               <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Comentar <i className="icon-comment-alt"></i></Link>
             }
+            { isProyecto && config.votacionVisible && config.votacionAbierta &&
+              <VotarButton topic={topic} onVote={onVote} voterInformation={voterInformation} />
+            }            
             {
               !isLoggedIn &&
               <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Ver más</Link>
@@ -213,9 +216,7 @@ export class TopicCard extends Component {
                 </button>
               </div>
             */}
-            { isProyecto && config.votacionVisible && config.votacionAbierta &&
-              <VotarButton topic={topic} onVote={onVote} />
-            }
+
                 {/* <div
                   className='proyectista-wrapper'>
                   {

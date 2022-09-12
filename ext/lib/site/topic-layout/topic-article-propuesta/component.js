@@ -173,8 +173,7 @@ class TopicArticle extends Component {
                    </Link>
                  </div>
                )
-
-        }
+              }
         </div>
           {/* { !isProyecto && <div className='topic-article-nombre'>Autor: {topic.owner.firstName}</div> }
           { isProyecto && <div className='topic-article-presupuesto'>Monto estimado: ${topic.attrs.presupuesto.toLocaleString()}</div> } */}
@@ -210,9 +209,9 @@ class TopicArticle extends Component {
           { !noUser && !isProyecto && config.habilitarApoyo && <Cause
             topic={topic}
             canVoteAndComment={forum.privileges.canVoteAndComment} /> }
-          { !noUser && isProyecto && config.votacionAbierta &&
+          {/* { !noUser && isProyecto && config.votacionAbierta &&
             <VotarButton topic={topic} onVote={onVote} />
-          }
+          } */}
           {/* <VerTodosButton /> */}
           <Link href="/proyectos" className="btn btn-go">
             Ver todas las ideas

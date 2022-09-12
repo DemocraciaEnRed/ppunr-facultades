@@ -8,16 +8,12 @@ class VotarButton extends Component {
   }
 
   render() {
-    const { topic, onVote, user } = this.props
+    const { topic, onVote, user, voterInformation } = this.props
     let { openQuestion } = this.state
 
-    const userLoggedIn = user.state && user.state.fulfilled
-    const userVoto = userLoggedIn && user.state.value && user.state.value.voto
-    const userDNI = userLoggedIn && user.state.value.dni
-    const topicVoted = userVoto && user.state.value.voto.includes(topic.id)
-
+    const topicVoted = voterInformation.votes && voterInformation.votes.includes(topic.id)
     // si ya votó algo y no es este topic, no muestres botón
-    if (userVoto && userVoto.length >= 3 && !topicVoted) return null
+    if (voterInformation.votes && voterInformation.votes.length >= 3 && !topicVoted) return null
 
     if (topicVoted) openQuestion = false
 
@@ -33,12 +29,12 @@ class VotarButton extends Component {
             <button
               className={`btn btn-primary btn-${topicVoted ? 'voted' : 'filled'}`}
               onClick={
-                userLoggedIn ?
+                voterInformation.userLoggedIn ?
                   !topicVoted && (() => this.setState({openQuestion: true}))
                 :
                  () => window.location.href = `/signin?ref=${encodeURIComponent(window.location.pathname)}`
               }
-              disabled={userLoggedIn && !userDNI}>
+              disabled={voterInformation.userLoggedIn && !voterInformation.dni}>
             {topicVoted ? <span><span className="glyphicon glyphicon-ok" />&nbsp;&nbsp;Votaste este proyecto</span> : 'Votar este proyecto'}
             </button>
           }
