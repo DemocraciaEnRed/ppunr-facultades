@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function BannerListadoTopics(props) {
 
-  const {votes, dni } = props.voterInformation
+  const {votes, dni, userLoggedIn } = props.voterInformation
 
   const socialLinksUrl = window.location
   const twitterText = `Sumate a pensar la Universidad que queremos. ` + socialLinksUrl
@@ -19,7 +19,7 @@ export default function BannerListadoTopics(props) {
 
   return (
     <div>
-      {props.user.state.fulfilled && dni !== '' && votes && 
+      {userLoggedIn && dni !== '' && votes && 
         <header className='banner-votos'>
           <h1 className='votos-title'>
             <div dangerouslySetInnerHTML={{__html: messageVoto(votes)}} />
@@ -33,7 +33,7 @@ export default function BannerListadoTopics(props) {
       {/* <h2 className='proyectos-subtitle'>{stage === 'votacion' ? 'Acá podés encontrar los proyectos ganadores que vamos a ejecutar en 2020' : 'Acá podés encontrar los proyectos que fueron aprobados en votaciones anteriores y ver en qué estado de su ejecución se encuentran.'}</h2> */}
       {/* <h1 className='proyectos-title'>Estamos trabajando, falta poco para que publiquemos los proyectos a votacion.</h1> */}
       {
-      props.handlerVotacion ? 
+      (userLoggedIn && props.handlerVotacion) ? 
       <button className='iniciar-votacion' onClick={props.handlerVotacion}>Iniciar Votación</button> :
       <h1 className='proyectos-title'>{props.title}</h1>
       }

@@ -7,6 +7,7 @@ class VotarButton extends Component {
     openQuestion: false
   }
 
+
   render() {
     const { topic, onVote, user, voterInformation } = this.props
     let { openQuestion } = this.state
@@ -16,6 +17,7 @@ class VotarButton extends Component {
     if (voterInformation.votes && voterInformation.votes.length >= 3 && !topicVoted) return null
 
     if (topicVoted) openQuestion = false
+    if (!voterInformation.dni) return <div></div>
 
     return (
         <div
@@ -30,7 +32,7 @@ class VotarButton extends Component {
               className={`btn btn-primary btn-${topicVoted ? 'voted' : 'filled'}`}
               onClick={
                 voterInformation.userLoggedIn ?
-                  !topicVoted && (() => this.setState({openQuestion: true}))
+                  !topicVoted && (() => this.setState({openQuestion: true}, () => setTimeout(() => this.setState({openQuestion: false}), 10000)))
                 :
                  () => window.location.href = `/signin?ref=${encodeURIComponent(window.location.pathname)}`
               }
