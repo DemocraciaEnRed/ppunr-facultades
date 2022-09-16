@@ -235,9 +235,11 @@ class HomePropuestas extends Component {
 
   // esta misma función está en ext/lib/site/topic-layout/component.js
   handleVote = (id, isVoted) => {
+    const { forum } = this.state
     const { user } = this.props
     const voterInformation = this.getVoterInformation()
 
+    // si el usuario no esta logueado, escapa por aca.
     if (user.state.rejected) {
       return browserHistory.push({
         pathname: '/signin',
@@ -251,10 +253,14 @@ class HomePropuestas extends Component {
                 const topics = this.state.topics
                 const index = topics.findIndex((t) => t.id === id)
                 topics[index] = res
-                user.fetch(true).then(() => this.setState({ topics }))
+                user.fetch(true).then(() => {
+                  this.setState({ topics })
+                })
               })
               .then((res) => {
-                this.checkPadron()
+                if (forum.privileges && forum.privileges.canEdit) {
+                  this.checkPadron()
+                }
               })
               .catch((err) => { throw err })
   }
