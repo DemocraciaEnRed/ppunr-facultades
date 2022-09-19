@@ -25,6 +25,11 @@ const estados = (state) => {
 }
 
 export class TopicCard extends Component {
+  state = {
+    fullText: false
+  }
+
+
   handleWrapperClick = (e) => {
     // https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
     function findAncestor (el, cls) {
@@ -43,6 +48,7 @@ export class TopicCard extends Component {
   }
 
   render() {
+    const { fullText } = this.state
     const { topic, onVote, onProyectista, user, voterInformation } = this.props
 
     const isStaff = !user.state.rejected && user.state.value.staff
@@ -79,8 +85,12 @@ export class TopicCard extends Component {
     }
     // console.log(topic)
     if (!topic) return null
+
+
+    const text = createClauses(topic, fullText)
+
     return (
-      <div id="ideas-topic-card" className='ext-topic-card' style={{ borderColor: (topic.tag && topic.tag.color) || '' }}>
+      <div id="ideas-topic-card" className={`ext-topic-card ${fullText ? 'focus' : ''}`} style={{ borderColor: (topic.tag && topic.tag.color) || '' }}>
           {/* <div className='topic-card-attrs'>
             {topic.eje &&
               <span className='badge badge-default'>{topic.eje.nombre}</span>
@@ -125,7 +135,7 @@ export class TopicCard extends Component {
           <div className="topic-fecha">{moment(topic.createdAt).format('D-M-YYYY')}</div>
         </div>
         <p className='topic-card-description'>
-          {createClauses(topic)}
+          {text}
         </p>
         {isProyecto && topic.attrs &&
           <div className='topic-card-description'>
@@ -164,8 +174,9 @@ export class TopicCard extends Component {
               <VotarButton topic={topic} onVote={onVote} voterInformation={voterInformation} />
             }            
             {
-              !isLoggedIn &&
-              <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Ver más</Link>
+              true &&// !isLoggedIn &&
+              <button className='btn btn-go' onClick={() => this.setState({fullText: !fullText})}>{fullText ? "Ver menos" : "Ver más"}</button>
+              // <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Ver más</Link>
             }
             {/* antes en className estaba tmb ${likesCssClass} */}
             {/*!isSistematizada && !isIdeaProyecto &&
@@ -238,7 +249,7 @@ export class TopicCard extends Component {
   }
 }
 
-function createClauses({ attrs, clauses }) {
+function createClauses({ attrs, clauses }, fullText=false) {
   let div = document.createElement('div')
   let content
   if (!attrs) {
@@ -256,6 +267,9 @@ function createClauses({ attrs, clauses }) {
   }
   div.innerHTML = content
   let returnText = div.textContent.replace(/\r?\n|\r/g, '')
+  if (fullText) {
+    return returnText
+  }
   return returnText.length > 400 ? returnText.slice(0, 400) + '...' : returnText
 }
 
