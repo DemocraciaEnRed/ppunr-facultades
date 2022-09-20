@@ -12,12 +12,19 @@ exports.up = function up (done) {
   dbReady()
     .then(() => {
       return new Promise((resolve, reject) => {
-        Vote.collection.dropIndex({ topic: 1, author: 1 }, (err) => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve()
-          }
+        Vote.collection.getIndexes({ topic: 1, author: 1 })
+        .then((indexes) => {
+          Object.keys(indexes).forEach((i) => {
+            if (i === "topic_1_author_1") {
+              Vote.collection.dropIndex({ topic: 1, author: 1 }, (err) => {
+                if (err) {
+                  reject(err)
+                } else {
+                  resolve()
+                }
+              })
+            }
+          })
         })
       })
     })

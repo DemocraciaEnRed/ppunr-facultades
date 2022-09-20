@@ -34,7 +34,7 @@ export default function BannerListadoTopics(props) {
       {/* <h1 className='proyectos-title'>Estamos trabajando, falta poco para que publiquemos los proyectos a votacion.</h1> */}
       {
       (userLoggedIn && props.handlerVotacion) ? 
-      <button className='iniciar-votacion' onClick={props.handlerVotacion}>Iniciar Votación</button> :
+      <button className='iniciar-votacion' onClick={props.handlerVotacion}>{dni === '' ? 'Iniciar Votación': 'Finalizar Votación'}</button> :
       <h1 className='proyectos-title'>{props.title}</h1>
       }
       { props.subtitle &&
