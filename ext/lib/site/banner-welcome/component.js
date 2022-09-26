@@ -15,8 +15,14 @@ class BannerWelcome extends Component {
     return (
       <div id='bannerwelcome' className='banner-welcome'>
         <img src="/ext/lib/site/banner-welcome/vector.png" className="image-large" alt="Icono proyectistas"/>
-        <p className="title"><strong>¡Iniciamos el PPUNR {config.currentEdition}!</strong></p>
-        <p className="subtitle">Te invitamos a conocer las ideas subidas en el Foro  virtual o conocer más sobre los foros presenciales</p>
+        <p className="title"><strong>{
+          config.votacionAbierta ? '¡Ya iniciamos la votación!' : 
+          `¡Iniciamos el PPUNR ${config.currentEdition}!` 
+          }</strong></p>
+        <p className="subtitle">{
+        config.votacionAbierta ? 'Podés votar hasta 3 proyectos' : 
+        'Te invitamos a conocer las ideas subidas en el Foro  virtual o conocer más sobre los foros presenciales'
+        }</p>
 
         <div className="container">
         <div className="row">
@@ -24,7 +30,7 @@ class BannerWelcome extends Component {
             <Link to={'/propuestas'} className="boton-foro-virtual" href="">Foro Virtual</Link>
           </div>
           <div className="col-md-3">
-            <Link to={'/s/foro-presencial'} className="boton-foro-presencial" href="">Foro Presencial</Link>
+            <Link to={'/s/foro-presencial'} className="boton-foro-presencial" href="">Votación Presencial</Link>
           </div>
         </div>
       </div>

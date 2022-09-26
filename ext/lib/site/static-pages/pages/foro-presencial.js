@@ -111,11 +111,11 @@ class Page extends Component {
       <Anchor id='container-top'>
       <div id="foro-presencial">
         <section className="the-banner">
-          Foro presencial
+          Votación Presencial
         </section>
         <div className="the-subbanner-container">
           <div className="the-subbanner container">
-            Finalizó la etapa de los Foros.<br />¡Ingresá para conocer las ideas!
+            En estos puntos UNR Decide podrás votar de manera presencial
           </div>
         </div>
         <div className="the-content">

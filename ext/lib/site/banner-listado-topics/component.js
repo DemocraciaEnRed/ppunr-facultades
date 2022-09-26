@@ -5,7 +5,7 @@ export default function BannerListadoTopics(props) {
   const {votes, dni, userLoggedIn } = props.voterInformation
 
   const socialLinksUrl = window.location
-  const twitterText = `Sumate a pensar la Universidad que queremos. ` + socialLinksUrl
+  const twitterText = `Sumate a elegir proyectos para la Universidad que queremos. ` + socialLinksUrl
   
   const messageVoto = (votes) => {
     switch (3 - votes.length) {
