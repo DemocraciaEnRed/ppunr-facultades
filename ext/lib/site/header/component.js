@@ -168,7 +168,7 @@ class Header extends Component {
                 className='header-link'
                 tabIndex="3"
                 >
-                  FORO VIRTUAL
+                  UNR DECIDE
               </Link>
             </div>
             <div className={`header-item ${window.location.pathname.includes('/foro-presencial') ? 'active' : ''}`}>

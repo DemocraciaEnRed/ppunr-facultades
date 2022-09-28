@@ -27,11 +27,11 @@ class BannerWelcome extends Component {
         <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <Link to={'/propuestas'} className="boton-foro-virtual" href="">Foro Virtual</Link>
+            <Link to={'/propuestas'} className="boton-foro-virtual" href="">VOTÁ</Link>
           </div>
-          <div className="col-md-3">
+          {/* <div className="col-md-3">
             <Link to={'/s/foro-presencial'} className="boton-foro-presencial" href="">Votación Presencial</Link>
-          </div>
+          </div> */}
         </div>
       </div>
       </div>

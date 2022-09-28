@@ -53,7 +53,7 @@ class MobileMenu extends Component {
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}
                     tabIndex="3">
-                    FORO VIRTUAL
+                    UNR DECIDE
                   </Link>
                 </div>
                 <div className='header-item'>
