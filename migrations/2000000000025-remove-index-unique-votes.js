@@ -13,20 +13,16 @@ exports.up = function up (done) {
     .then(() => {
       return new Promise((resolve, reject) => {
         // Encontrame todas las indexes con topic y author = 1
-        Vote.collection.getIndexes({ topic: 1, author: 1 })
+        Vote.collection.getIndexes()
         .then((indexes) => {
           // Si hay alguna, borrala
-          if (indexes.length > 0) {
+          if ('topic_1_author_1' in indexes) {
             // Sip, hay una.. por las dudas si hay mas de una (?) eliminarla.
-            Object.keys(indexes).forEach((i) => {
-              if (i === "topic_1_author_1") {
-                Vote.collection.dropIndex({ topic: 1, author: 1 }, (err) => {
-                  if (err) {
-                    reject(err)
-                  } else {
-                    resolve()
-                  }
-                })
+            Vote.collection.dropIndex({ topic: 1, author: 1 }, (err) => {
+              if (err) {
+                reject(err)
+              } else {
+                resolve()
               }
             })
           } else {
