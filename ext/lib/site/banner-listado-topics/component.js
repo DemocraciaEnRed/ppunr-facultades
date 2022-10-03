@@ -11,7 +11,7 @@ export default function BannerListadoTopics(props) {
     switch (3 - votes.length) {
       case 3: return "Tenés 3 votos disponibles"
       case 2: return "Todavía podés votar 2 proyectos!"
-      case 1: return "Todavía podés votar 1 proyectos!"
+      case 1: return "Todavía podés votar 1 proyecto!"
       case 0: return `Ya votaste tres proyectos. <a target='_blank' href='http://twitter.com/share?text=${twitterText}' rel='noopener noreferrer'>Compartí para que más personas voten</a>`
       default: return false
     }
