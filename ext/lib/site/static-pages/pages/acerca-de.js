@@ -46,26 +46,31 @@ export default class Page extends Component {
                       Pueden participar docentes, nodocentes, estudiantes y graduados/as de las 12 Facultades y otras Sedes y dependencias de la UNR.
                     </p>
                   </div>
-                  <div data-trigger="+ ¿En qué se basa la etapa de Foro del PPUNR?">
+                  {/* <div data-trigger="+ ¿En qué se basa la etapa de Foro del PPUNR?">
                     <p className='p-padding'>
                     El Foro tiene por objetivo que los/as integrantes de la comunidad propongan ideas que aporten en la construcción de la Universidad que queremos. Estará abierto desde el 10 de Mayo al 24 de Mayo.        También podrás en esta instancia sumarte como proyectista.
                     </p>
                     <p className='p-padding'>
                     Además, habrá encuentros presenciales paralelamente al Foro virtual para que puedas acercarte a dejar tu idea, construirla con otros/as y anotarte para ser proyectista.
                     </p>
-                  </div>
+                  </div> */}
                   <div data-trigger="+ ¿Cómo participo?">
                     <p className='p-padding'>
-                    Te invitamos a <Link href="/signup" className="text-primary">registrarte aquí</Link> para sumar ideas y comentar las ideas de otros/as participantes. Podrás también expresar tu interés en apoyar y sumarte a alguna de las propuestas. Es muy importante que fomentemos el diálogo informado y respetuoso.
+                    Te invitamos a <Link href="/signup" className="text-primary">registrarte aquí</Link> para votar. Además, habrá postas presenciales de votación paralelamente al proceso virtual. Podés ver el calendario haciendo <Link href="/s/foro-presencial" className="text-primary">clic acá</Link>.
                     </p>
-                    <p className='p-padding'>
+                    {/* <p className='p-padding'>
                     También podrás inscribirte para ser proyectista de la Comisión Universitaria. Como la comisión estará organizada en torno a áreas temáticas, te proponemos elegir el área en la que quieras trabajar para transformar las ideas del foro en proyectos. No es necesario presentar una idea para ser proyectista.    
                     </p>
                     <p className='p-padding'>
                     Además, habrá encuentros presenciales paralelamente al Foro virtual para que puedas acercarte a dejar tu idea, construirla con otros/as y anotarte para ser proyectista. Podes ver el calendario haciendo <Link href="/s/foro-presencial" className="text-primary">clic acá</Link>. 
-                    </p>
+                    </p> */}
                   </div>
-                  <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
+                  <div data-trigger="+ Si no participé de una etapa anterior, ¿puedo sumarme?">
+                    <p className='p-padding'>
+                    Podés sumarte en cualquier etapa del proceso aunque no hayas participado de las anteriores. Es decir, podés no haber propuesto o comentado ideas pero interesarte por sumar tu aporte como proyectista o elegir en la votación tus proyectos favoritos para ser ejecutados. 
+                    </p>
+                  </div>                  
+                  {/* <div data-trigger="+ ¿Cuáles son los temas para proponer ideas?">
                     <p className='p-padding'>
                       Vas a encontrar en el formulario una serie de etiquetas que refieren a diversos temas:
                     </p>
@@ -109,7 +114,7 @@ export default class Page extends Component {
                     <p className='p-padding'>
                     El Foro se cerrará el 24 de mayo. Hasta entonces tenés tiempo para modificar tu idea, intercambiar sobre las ideas de otros/as participantes y anotarte para ser proyectista.
                     </p>
-                  </div>
+                  </div> 
                   <div data-trigger="+ ¿Qué pasará con mi idea?">
                     <p className='p-padding'>
                     Otros/as participantes pueden comentar tu idea o apoyarla. Te invitamos a entrar en diálogo con otros/as participantes. Luego de cerrado el Foro haremos una sistematización de ideas por temas y quienes se inscriban como proyectistas podrán transformarlas en proyectos en el marco de la Comisión Universitaria.
@@ -126,7 +131,7 @@ export default class Page extends Component {
                       Luego de los Foros, la segunda etapa del PP es la conformación de la Comisión Universitaria. La misma estará integrada por todas las personas que se hayan propuesto para transformar las ideas en proyectos. En unos pocos encuentros le daremos forma a las ideas a partir de intercambios con técnicos de la Universidad que contribuirán a darle factibilidad a los proyectos que serán elegidos por la comunidad para ser ejecutados en 2023.
                       </p>
                     </Anchor>
-                  </div>
+                  </div> */}
                   <div data-trigger="+ ¿Qué condiciones deben respetar los proyectos?">
                     <ul className='p-padding'>
                       <li>Incluir resultados para al menos tres unidades académicas o algún espacio común.</li>
@@ -149,7 +154,7 @@ export default class Page extends Component {
                   </div>
                   <div data-trigger="+ ¿Cómo elegiremos los proyectos a ejecutarse en 2023?">
                     <p className='p-padding'>
-                    Se realizarán jornadas de votación previa difusión de los proyectos elegibles, para que toda la comunidad de la UNR pueda decidir cuáles serán ejecutados hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Como ningún proyecto puede superar el 70% de la partida, al menos dos proyectos serán ganadores.
+                    Se realizarán jornadas de votación (del 12 al 21 de octubre de 2022) previa difusión de los proyectos elegibles, para que toda la comunidad de la UNR pueda decidir cuáles serán ejecutados hasta alcanzar el total de la partida presupuestaria afectada al PP Facultades. Como ningún proyecto puede superar el 70% de la partida, al menos dos proyectos serán ganadores.
                     </p>
                   </div>
                   <div data-trigger="+ Puedo participar si pertenezco a las Sedes, Gimnasio UNR, ECU, comedores y otras dependencias?">
