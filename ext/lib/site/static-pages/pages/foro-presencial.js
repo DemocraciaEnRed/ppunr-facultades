@@ -115,7 +115,7 @@ class Page extends Component {
         </section>
         <div className="the-subbanner-container">
           <div className="the-subbanner container">
-            En estos puntos UNR Decide podrás votar de manera presencial
+            En estos puntos UNR Decide podrás votar de manera presencial. Te esperamos!
           </div>
         </div>
         <div className="the-content">
