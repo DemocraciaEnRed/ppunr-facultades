@@ -31,7 +31,9 @@ export default function ThumbsVoto(props) {
             { subtitleUrl ?
               <h2 dangerouslySetInnerHTML={{__html: subtitle}} />
               :
-              <h2>{ subtitle }</h2>
+              <h2>
+                <a tabIndex="20" href={config.propuestasAbiertas ? '/formulario-idea' : '/propuestas'}>{ subtitle }</a>
+              </h2>
             }
             {/*<h3>Hasta el 31 de mayo inclusive tenés tiempo para presentar tus propuestas</h3> */}
             <div className="container">
