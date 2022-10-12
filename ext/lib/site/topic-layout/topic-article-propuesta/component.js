@@ -214,7 +214,8 @@ class TopicArticle extends Component {
           } */}
           {/* <VerTodosButton /> */}
           <Link href="/proyectos" className="btn btn-go">
-            Ver todas las ideas
+            {/* Ver todas las ideas */}
+            Ver todos los proyectos
           </Link>
         </div>
         {/* <div className='topic-tags topic-article-content'>
