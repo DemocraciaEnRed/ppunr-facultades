@@ -14,7 +14,7 @@ import Jump from 'ext/lib/site/jump-button/component'
 import Footer from 'ext/lib/site/footer/component'
 import Anchor from 'ext/lib/site/anchor'
 // https://www.npmjs.com/package/react-select/v/2.4.4
-import Select from 'react-select'; // ! VERSIÓN 2.4.4 !
+import Select from 'react-select' // ! VERSIÓN 2.4.4 !
 
 // Variables para fases de propuestas abiertas o cerrdas:
 // config.propuestasVisibles
@@ -39,12 +39,12 @@ const defaultValues = {
 const filters = {
   popular: {
     text: 'Más Populares',
-    sort: 'popular',
+    sort: 'popular'
   },
   newest: {
     text: 'Más Actualizados',
-    sort: 'newest',
-  },
+    sort: 'newest'
+  }
 }
 
 class HomePropuestas extends Component {
@@ -64,7 +64,6 @@ class HomePropuestas extends Component {
       tiposIdea: [],
       tipoIdea: defaultValues.tipoIdea,
       sort: defaultValues.sort,
-      tipoIdea: defaultValues.tipoIdea,
 
       page: null,
       noMore: null,
@@ -87,10 +86,8 @@ class HomePropuestas extends Component {
   }
 
   componentDidMount () {
-    window.scrollTo(0,0)
-    if (this.props.location.query.tags)
-      defaultValues.tag.push(this.props.location.query.tags)
-    
+    window.scrollTo(0, 0)
+    if (this.props.location.query.tags) { defaultValues.tag.push(this.props.location.query.tags) }
 
     // igual que filtros de admin (lib/admin/admin/admin.js)
     Promise.all([
@@ -99,21 +96,21 @@ class HomePropuestas extends Component {
       tagStore.findAll(),
       forumStore.findOneByName('proyectos'),
       topicStore.findAllProyectos()
-    ]).then(results => {
+    ]).then((results) => {
       const [facultades, claustros, tags, forum, proyectos] = results
-      const tagsMap = tags.map(tag => { return {value: tag.id, name: tag.name}; });
-      const tag = this.props.location.query.tags ? [tagsMap.find(j => j.name == this.props.location.query.tags).value] : [];
-      const tiposIdea = forum.topicsAttrs.find(a => a.name=='state').options.map(state => { return {value: state.name, name: state.title}; })
+      const tagsMap = tags.map((tag) => { return { value: tag.id, name: tag.name } })
+      const tag = this.props.location.query.tags ? [tagsMap.find((j) => j.name == this.props.location.query.tags).value] : []
+      const tiposIdea = forum.topicsAttrs.find((a) => a.name == 'state').options.map((state) => { return { value: state.name, name: state.title } })
       this.setState({
-        facultades: facultades.map(facultad => { return {value: facultad._id, name: facultad.abreviacion}; }),
-        claustros: claustros.map(claustro => { return {value: claustro._id, name: claustro.nombre}; }),
+        facultades: facultades.map((facultad) => { return { value: facultad._id, name: facultad.abreviacion } }),
+        claustros: claustros.map((claustro) => { return { value: claustro._id, name: claustro.nombre } }),
         tags: tagsMap,
         tag,
         tiposIdea,
         forum,
         // searchableProyectos: proyectos.filter(p => p.attrs.state == (config.votacionVisible ? 'proyecto' : 'pendiente')).map(p => ({label: `${p.mediaTitle}`, value: p._id}))
         // searchableProyectos: config.votacionVisible ? proyectos.map(p => p.state == 'proyecto') : proyectos.map(p => p.state == 'pendiente')
-        searchableProyectos: proyectos.map(p => ({label: `#${p.attrs && p.attrs.numero} ${p.mediaTitle}`, value: p._id}))
+        searchableProyectos: proyectos.map((p) => ({ label: `#${p.attrs && p.attrs.numero} ${p.mediaTitle}`, value: p._id }))
       }, () => this.fetchTopics())
     }).catch((err) => { throw err })
   }
@@ -136,11 +133,11 @@ class HomePropuestas extends Component {
 
     let queryString = Object.keys(query)
       .filter((k) => query[k] && query[k].length > 0)
-      .map((k) => `${k}=${ Array.isArray(query[k]) ?  query[k].join(',') : query[k] }`)
+      .map((k) => `${k}=${Array.isArray(query[k]) ? query[k].join(',') : query[k]}`)
       .join('&')
 
     return window
-      .fetch(`/ext/api/topics?${queryString}`, {credentials: 'include'})
+      .fetch(`/ext/api/topics?${queryString}`, { credentials: 'include' })
       .then((res) => res.json())
       .then((res) => {
         let topics = res.results ? res.results.topics : []
@@ -149,23 +146,23 @@ class HomePropuestas extends Component {
 
         // How to Randomize (shuffle) a JavaScript Array
         // https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
-        function shuffleArray(array) {
-          let curId = array.length;
+        function shuffleArray (array) {
+          let curId = array.length
           // There remain elements to shuffle
-          while (0 !== curId) {
+          while (curId !== 0) {
             // Pick a remaining element
-            let randId = Math.floor(Math.random() * curId);
-            curId -= 1;
+            let randId = Math.floor(Math.random() * curId)
+            curId -= 1
             // Swap it with the current element.
-            let tmp = array[curId];
-            array[curId] = array[randId];
-            array[randId] = tmp;
+            let tmp = array[curId]
+            array[curId] = array[randId]
+            array[randId] = tmp
           }
-          return array;
+          return array
         }
         topics = shuffleArray(topics)
 
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
           topics: page == 1 ? topics : prevState.topics.concat(topics),
           page: page,
           noMore: noMore
@@ -199,10 +196,10 @@ class HomePropuestas extends Component {
   }
 
   handleFilter = (filter, value) => {
-    if (filter == 'tipoIdea'){
+    if (filter == 'tipoIdea') {
       // solo permitir una elección en tipo de idea
-      this.handleDefaultFilter(filter,value)
-    }else{
+      this.handleDefaultFilter(filter, value)
+    } else {
       // If the value is not included in the filter array, add it
       if (!this.state[filter].includes(value)) {
         this.setState({
@@ -235,7 +232,7 @@ class HomePropuestas extends Component {
 
   // esta misma función está en ext/lib/site/topic-layout/component.js
   handleVote = (id, isVoted) => {
-    const { forum } = this.state
+    const { forum, facultadP, claustroP } = this.state
     const { user } = this.props
     const voterInformation = this.getVoterInformation()
 
@@ -246,9 +243,11 @@ class HomePropuestas extends Component {
         query: { ref: window.location.pathname }
       })
     }
+    const facultad = facultadP || user.state.value.facultad._id
+    const claustro = claustroP || user.state.value.claustro._id
 
     // topicStore.vote(id, !isVoted ? 'apoyo-idea' : 'no-apoyo-idea').then((res) => {
-    topicStore.vote(id, 'voto', voterInformation.dni)
+    topicStore.vote(id, 'voto', voterInformation.dni, facultad, claustro)
               .then((res) => {
                 const topics = this.state.topics
                 const index = topics.findIndex((t) => t.id === id)
@@ -285,20 +284,20 @@ class HomePropuestas extends Component {
 
   handleRemoveBadge = (option) => (e) => {
     // feísimo, feísimo
-    if (this.state.facultad.includes(option)){
-      this.setState({ facultad: this.state.facultad.filter(i => i != option) }
-      ,() => this.fetchTopics());
-    }else if (this.state.claustro.includes(option)){
-      this.setState({ claustro: this.state.claustro.filter(i => i != option) }
-      ,() => this.fetchTopics());
-    }else if (this.state.tag.includes(option)){
-      this.setState({ tag: this.state.tag.filter(i => i != option) }
-      ,() => this.fetchTopics());
+    if (this.state.facultad.includes(option)) {
+      this.setState({ facultad: this.state.facultad.filter((i) => i != option) }
+      , () => this.fetchTopics())
+    } else if (this.state.claustro.includes(option)) {
+      this.setState({ claustro: this.state.claustro.filter((i) => i != option) }
+      , () => this.fetchTopics())
+    } else if (this.state.tag.includes(option)) {
+      this.setState({ tag: this.state.tag.filter((i) => i != option) }
+      , () => this.fetchTopics())
     }
   }
 
   onChangeSortFilter = (key) => {
-    this.setState({ sort: key }, () => this.fetchTopics());
+    this.setState({ sort: key }, () => this.fetchTopics())
   }
 
   goTop () {
@@ -306,22 +305,22 @@ class HomePropuestas extends Component {
   }
 
   onChangeTipoIdeaFilter = (name) => {
-    this.setState({ tipoIdea: name }, () => this.fetchTopics());
+    this.setState({ tipoIdea: name }, () => this.fetchTopics())
   }
 
-  renderSortFilter() {
+  renderSortFilter () {
     return (
       <div>
         {
-          config.propuestasVisibles && 
-            <h4 className="topics-title">Lista de ideas</h4>
+          config.propuestasVisibles &&
+            <h4 className='topics-title'>Lista de ideas</h4>
         }
         {
-          config.votacionVisible && 
-            <h4 className="topics-title">Lista de proyectos</h4>
+          config.votacionVisible &&
+            <h4 className='topics-title'>Lista de proyectos</h4>
         }
         <div className='topics-filters'>
-          {/*this.state.forumStates &&
+          {/* this.state.forumStates &&
             <div className='topics-filter topics-state-filter'>
               <span>Mostrar ideas</span>
               {this.state.forumStates.map((state) => (
@@ -339,7 +338,7 @@ class HomePropuestas extends Component {
                 ))}
             </div>
           */}
-          {/*this.state.topics && this.state.topics.length > 0 &&
+          {/* this.state.topics && this.state.topics.length > 0 &&
             <div className='topics-filter topics-sort-filter'>
               <span>Ordenar por</span>
               {Object.keys(filters).map((key) => (
@@ -359,25 +358,24 @@ class HomePropuestas extends Component {
   }
 
   handleSelectedProyecto = (selectedProyecto) => {
-    //console.log(`Option selected:`, selectedProyecto);
+    // console.log(`Option selected:`, selectedProyecto);
 
     const topicId = selectedProyecto.value
-    if (this.state.topics.find(t => t.id == selectedProyecto.value) == undefined){
+    if (this.state.topics.find((t) => t.id == selectedProyecto.value) == undefined) {
       // si el topic no está en la actual lista de resultados lo vamos a buscar
-      //console.log('Topic not found, searching it:', topicId)
-      topicStore.getTopic(topicId).then(topic => {
-        if (!topic)
-          return
+      // console.log('Topic not found, searching it:', topicId)
+      topicStore.getTopic(topicId).then((topic) => {
+        if (!topic) { return }
 
-        //console.log('Adding topic:', topic.id)
-        this.setState(prevState => ({
+        // console.log('Adding topic:', topic.id)
+        this.setState((prevState) => ({
           topics: prevState.topics.concat(topic),
           selectedProyecto
-        }));
+        }))
       })
-    }else{
-      //console.log('Topic found, filtering it')
-      this.setState({ selectedProyecto });
+    } else {
+      // console.log('Topic found, filtering it')
+      this.setState({ selectedProyecto })
     }
   }
 
@@ -388,11 +386,10 @@ class HomePropuestas extends Component {
   }
 
   checkPadron = () => {
-
-    const {dniP, facultadP, claustroP, forum} = this.state
+    const { dniP, facultadP, claustroP, forum } = this.state
 
     this.setState({
-      dialogMessage: null,
+      dialogMessage: null
     }, () => {
       window.fetch(`api/padron/search/dni?dni=${dniP}&forum=${forum.name}`, {
         method: 'GET',
@@ -402,23 +399,23 @@ class HomePropuestas extends Component {
           'Accept': 'application/json'
         }
       })
-      .then(res => res.json())
-      .then(res => {
+      .then((res) => res.json())
+      .then((res) => {
         // if response is an empty object
-        if (Object.keys(res).length === 0){
+        if (Object.keys(res).length === 0) {
           // then user is not in padron
           this.setState({
-            dialogMessage: "El DNI solicitado no se encuentra en el Padrón"
+            dialogMessage: 'El DNI solicitado no se encuentra en el Padrón'
           })
         } else {
-          this.setState({dialogVotacion: false, isDNIInPadron: true, votesP: res.votes})
+          this.setState({ dialogVotacion: false, isDNIInPadron: true, votesP: res.votes })
         }
       })
     })
   }
 
-  getVoterInformation() {
-    const { forum, dniP, isDNIInPadron, votesP} = this.state
+  getVoterInformation () {
+    const { forum, dniP, isDNIInPadron, votesP } = this.state
     const { user } = this.props
     const userLoggedIn = user.state && user.state.fulfilled
     let dni = ''
@@ -436,28 +433,23 @@ class HomePropuestas extends Component {
         dni = user.state.value.dni
         votes = userLoggedIn && user.state.value && user.state.value.voto
       }
-
     }
-    
-    
-    return {userLoggedIn, dni, votes }
+
+    return { userLoggedIn, dni, votes }
   }
 
-
   render () {
-
-    const { 
-        forum, topics, facultades, 
-        searchableProyectos, selectedProyecto, dialogVotacion, 
-        claustros, dialogMessage, 
+    const {
+        forum, topics, facultades,
+        searchableProyectos, selectedProyecto, dialogVotacion,
+        claustros, dialogMessage,
         dniP, facultadP, claustroP
       } = this.state
     const { user } = this.props
     // console.log(facultades, claustros)
-    let filteredTopics;
+    let filteredTopics
 
-    if (selectedProyecto)
-      filteredTopics = topics.filter(t => t.id == selectedProyecto.value)
+    if (selectedProyecto) { filteredTopics = topics.filter((t) => t.id == selectedProyecto.value) }
 
     const voterInformation = this.getVoterInformation()
 
@@ -465,46 +457,41 @@ class HomePropuestas extends Component {
       <div className={`ext-home-ideas ${user.state.fulfilled ? 'user-logged' : ''}`}>
 
         {dialogVotacion && <dialog
-                    className='dialog-votacion '
-                    open
-                >
-                  <span onClick={this.handlerVotacion}>&times;</span>
-                  <p className='intro text-center'>* Módulo de votación presencial, para administradores</p>
-                  <h4 className='text-center'>Bienvenida/o a la votación de PPUNR 2022</h4>
-                  <h5 className='text-center'>Ingrese los datos del Votante</h5>
-                  <label htmlFor="dniP">DNI</label>
-                  <input id="dniP" type="text" name="dniP" className='form-control' onChange={(e) => this.setState({dniP: e.target.value})} />
-                  <label htmlFor="facultadP">Facultad</label>
-                  <select id="facultadP" type="text" name="facultadP" className='form-control' onChange={(e) => this.setState({facultadP: e.target.value})} >
-                    <option value=""> --- </option>
-                    {facultades.map(f => <option value={f.value}>{f.name}</option>)}
-                  </select>                  
-                  <label htmlFor="claustroP">Claustro</label>
-                  <select id="claustroP" type="text" name="claustroP" className='form-control' onChange={(e) => this.setState({claustroP: e.target.value})} >
-                    <option value=""> --- </option>
-                    {claustros.map(c => <option value={c.value}>{c.name}</option>)}
-                  </select>                                    
-                  {dialogMessage && <h5 className='text-danger'>{dialogMessage}</h5>}
-                  <br />
-                  <button disabled={(!dniP || !facultadP || !claustroP)} className='btn btn-aceptar' onClick={() => this.checkPadron()}>Aceptar</button>
-              </dialog>
+          className='dialog-votacion '
+          open>
+          <span onClick={this.handlerVotacion}>&times;</span>
+          <p className='intro text-center'>* Módulo de votación presencial, para administradores</p>
+          <h4 className='text-center'>Bienvenida/o a la votación de PPUNR 2022</h4>
+          <h5 className='text-center'>Ingrese los datos del Votante</h5>
+          <label htmlFor='dniP'>DNI</label>
+          <input id='dniP' type='text' name='dniP' className='form-control' onChange={(e) => this.setState({ dniP: e.target.value })} />
+          <label htmlFor='facultadP'>Facultad</label>
+          <select id='facultadP' type='text' name='facultadP' className='form-control' onChange={(e) => this.setState({ facultadP: e.target.value })} >
+            <option value=''> --- </option>
+            {facultades.map((f) => <option value={f.value}>{f.name}</option>)}
+          </select>
+          <label htmlFor='claustroP'>Claustro</label>
+          <select id='claustroP' type='text' name='claustroP' className='form-control' onChange={(e) => this.setState({ claustroP: e.target.value })} >
+            <option value=''> --- </option>
+            {claustros.map((c) => <option value={c.value}>{c.name}</option>)}
+          </select>
+          {dialogMessage && <h5 className='text-danger'>{dialogMessage}</h5>}
+          <br />
+          <button disabled={(!dniP || !facultadP || !claustroP)} className='btn btn-aceptar' onClick={() => this.checkPadron()}>Aceptar</button>
+        </dialog>
         }
-
-
-
 
         <Anchor id='container'>
           <BannerListadoTopics
-          btnText={config.propuestasAbiertas ? 'Subí tu idea' : undefined}
-          btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
-          title={config.propuestasVisibles ? 'Conocé las ideas del PPUNR' : 'Bienvenido/a a la votación del PPUNR'}
-          handlerVotacion={config.votacionAbierta && forum && forum.privileges && forum.privileges.canEdit && this.handlerVotacion}
-          user={user}
-          voterInformation={voterInformation}
-            />
+            btnText={config.propuestasAbiertas ? 'Subí tu idea' : undefined}
+            btnLink={config.propuestasAbiertas ? '/formulario-idea' : undefined}
+            title={config.propuestasVisibles ? 'Conocé las ideas del PPUNR' : 'Bienvenido/a a la votación del PPUNR'}
+            handlerVotacion={config.votacionAbierta && forum && forum.privileges && forum.privileges.canEdit && this.handlerVotacion}
+            user={user}
+            voterInformation={voterInformation} />
 
           <div className='container'>
-            <div className="row">
+            <div className='row'>
               {config.propuestasVisibles &&
                 (config.propuestasAbiertas
                   ? (
@@ -544,7 +531,7 @@ class HomePropuestas extends Component {
               tag={this.state.tag}
               tiposIdea={this.state.tiposIdea}
               tipoIdea={this.state.tipoIdea}
-              openVotation={true}
+              openVotation
               handleFilter={this.handleFilter}
               handleDefaultFilter={this.handleDefaultFilter}
               clearFilter={this.clearFilter}
@@ -552,7 +539,7 @@ class HomePropuestas extends Component {
 
             <div className='row'>
               <div className='col-md-10 offset-md-1'>
-              { config.votacionVisible && 
+                { config.votacionVisible &&
                 <div className='search-proyecto-wrapper'>
                   {/* para esto usamos react-select version 2.4.4 */}
                   <Select
@@ -560,16 +547,15 @@ class HomePropuestas extends Component {
                     onChange={this.handleSelectedProyecto}
                     options={searchableProyectos}
                     placeholder='Buscá un proyecto por nombre'
-                    isSearchable={true}
-                    className='search-proyecto-select'
-                    />
-                  <button onClick={()=>this.setState({selectedProyecto: null})} disabled={selectedProyecto ? false : true}>
+                    isSearchable
+                    className='search-proyecto-select' />
+                  <button onClick={() => this.setState({ selectedProyecto: null })} disabled={!selectedProyecto}>
                     Limpiar filtro
                   </button>
                 </div>
               }
 
-                {  this.renderSortFilter() }
+                { this.renderSortFilter() }
                 {topics && topics.length === 0 && (
                   <div className='empty-msg'>
                     <div className='alert alert-success' role='alert'>
@@ -585,8 +571,7 @@ class HomePropuestas extends Component {
                     forum={forum}
                     topic={topic}
                     facultades={facultades}
-                    voterInformation={voterInformation}
-                     />
+                    voterInformation={voterInformation} />
                 ))}
                 {!filteredTopics && topics && !this.state.noMore && (
                   <div className='more-topics'>

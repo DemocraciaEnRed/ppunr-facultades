@@ -296,18 +296,132 @@ app.get('/export/topics/export-resultados-votantes',
     // No vamos a filtrar por staff
     req.votantes.forEach((votante) => {
       let theVotante = {
-        'ID Votante': `${escapeTxt(votante.user._id)}`,
-        'Facultad': `${escapeTxt(req.facultadesName[votante.user.facultad])}`,
-        'Claustro': `${escapeTxt(req.claustrosName[votante.user.claustro])}`,
+        'DNI': `${escapeTxt(votante._id)}`,
+        // 'Tipo Voto': null,
+        'Facultad': null,
+        'Claustro': null,
         'Cantidad Votos': votante.totalVotes,
         'Voto 1': `${escapeTxt(votante.votes[0] ? votante.votes[0].mediaTitle : '')}`,
         'Voto 2': `${escapeTxt(votante.votes[1] ? votante.votes[1].mediaTitle : '')}`,
         'Voto 3': `${escapeTxt(votante.votes[2] ? votante.votes[2].mediaTitle : '')}`,
       }
+      if(votante.userIndex == null) {
+        // no user found with that dni, it must have been presencial
+        // theVotante['Tipo Voto'] = 'Voto presencial'
+        if (votante.facultad && votante.facultad[0]) {
+          theVotante['Facultad'] = `${escapeTxt(req.facultadesName[votante.facultad[0]])}`
+        }
+        if (votante.claustro && votante.claustro[0]) {
+          theVotante['Claustro'] = `${escapeTxt(req.claustrosName[votante.claustro[0]])}`
+        }
+      } else {
+        // if (votante.author[0].toString() == votante.user._id.toString()) {
+        //   theVotante['Tipo Voto'] = 'Voto online'
+        // } else {
+        //   theVotante['Tipo Voto'] = 'Voto presencial'
+        // }
+        if (votante.user) {
+          if (votante.user.facultad) {
+            theVotante['Facultad'] = `${escapeTxt(req.facultadesName[votante.user.facultad])}`
+          }
+          if (votante.user.claustro) {
+            theVotante['Claustro'] = `${escapeTxt(req.claustrosName[votante.user.claustro])}`
+          }
+        } else {
+          if (votante.facultad && votante.facultad[0]) {
+            theVotante['Facultad'] = `${escapeTxt(req.facultadesName[votante.facultad[0]])}`
+          }
+          if (votante.claustro && votante.claustro[0]) {
+            theVotante['Claustro'] = `${escapeTxt(req.claustrosName[votante.claustro[0]])}`
+          }
+        }
+      }
       infoVotantes.push(theVotante);
     });
     try {
       res.xls(`resultados-votacion-votantes.xlsx`, infoVotantes);
+    } catch (err) {
+      log('get csv: array to csv error', err)
+      return res.status(500).end()
+    }
+})
+
+
+app.get('/export/topics/export-resultados-votos',
+  middlewares.users.restrict,
+  middlewares.forums.findByName,
+  middlewares.topics.findAllFromForum,
+  middlewares.forums.privileges.canChangeTopics,
+  // cargar facultades a req
+  (req, res, next) => {
+    api.facultad.all(function (err, facultades) {
+      let facultadesName = {}
+      if (err) {
+        log('error serving facultades from DB:', err)
+        return res.status(500).end()
+      }
+      facultades.forEach(e => facultadesName[e._id] = e.abreviacion)
+      req.facultadesName = facultadesName
+      next()
+    })
+  },
+  // cargar claustros a req
+  (req, res, next) =>
+    api.claustro.all(function (err, claustros) {
+      let claustrosName = {}
+      if (err) {
+        log('error serving claustros from DB:', err)
+        return res.status(500).end()
+      }
+      claustros.forEach(c => claustrosName[c._id] = c.nombre)
+      req.claustrosName = claustrosName
+      next()
+    }),  
+  // cargamos votos con sus usuarios y los topics de cada voto (pipelines)
+  (req, res, next) => {
+    api.vote.getAllVotesPipeline().then(votes => {
+        req.votos = votes || []
+        next()
+      }
+    )
+  },
+  function getXlsx(req, res, next) {
+    let infoVoto = []
+    // No vamos a filtrar por staff
+    req.votos.forEach((votante) => {
+      let theVoto = {
+        'Envia Voto': `${escapeTxt(votante.author.firstName + ' ' + votante.author.lastName)}`,
+        'DNI': `${escapeTxt(votante.dni)}`,
+        'Votante': `${votante.user ? escapeTxt(votante.user.firstName + ' ' + votante.user.lastName) : '-No registrado-'}`,
+        'Tipo Voto': null,
+        'Facultad': null,
+        'Claustro': null,
+        'Proyecto': `${escapeTxt(votante.topic ? votante.topic.mediaTitle : '')}`,
+      }
+      if(votante.author.dni == votante.dni) {
+        theVoto['Tipo Voto'] = 'Voto online'
+      } else {
+        theVoto['Tipo Voto'] = 'Voto presencial'
+      }
+      if (votante.user) {
+        if (votante.user.facultad) {
+          theVoto['Facultad'] = `${escapeTxt(req.facultadesName[votante.user.facultad])}`
+        }
+        if (votante.user.claustro) {
+          theVoto['Claustro'] = `${escapeTxt(req.claustrosName[votante.user.claustro])}`
+        }
+      } else {
+        if (votante.facultad) {
+          theVoto['Facultad'] = `${escapeTxt(req.facultadesName[votante.facultad])}`
+        }
+        if (votante.claustro) {
+          theVoto['Claustro'] = `${escapeTxt(req.claustrosName[votante.claustro])}`
+        }
+      }
+      infoVoto.push(theVoto);
+    });
+    try {
+      res.xls(`resultados-votacion-votos.xlsx`, infoVoto);
     } catch (err) {
       log('get csv: array to csv error', err)
       return res.status(500).end()

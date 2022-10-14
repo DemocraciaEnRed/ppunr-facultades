@@ -3,10 +3,20 @@ import userConnector from 'lib/site/connectors/user'
 import config from 'lib/config'
 
 class VotarButton extends Component {
-  state = {
-    openQuestion: false
+  constructor () {
+    super()
+    
+    this.state = {
+      openQuestion: false,
+      disabled: false
+    }
+    this.handleVote = this.handleVote.bind(this)
   }
 
+  handleVote = (topicId) => () => {
+    this.setState({disabled: true})
+    this.props.onVote(topicId, false)
+  }
 
   render() {
     const { topic, onVote, user, voterInformation } = this.props
@@ -42,15 +52,17 @@ class VotarButton extends Component {
           }
         { config.votacionAbierta && openQuestion &&
             <div>
-              <span className='confirmas-voto'>¿Confirmás tu voto?</span>
+              <span className='confirmas-voto'>{ this.state.disabled ? 'Enviando..' : '¿Confirmás tu voto?'}</span>
               <button
                 className={`btn btn-primary btn-filled btn-si`}
-                onClick={() => onVote(topic.id, false)}>
+                onClick={this.handleVote(topic.id)}
+                disabled={this.state.disabled}>
                 Sí
               </button>
               <button
                 className={`btn btn-primary btn-filled`}
-                onClick={() => this.setState({openQuestion: false})}>
+                onClick={() => this.setState({openQuestion: false})}
+                disabled={this.state.disabled}>
                 No
               </button>
             </div>
