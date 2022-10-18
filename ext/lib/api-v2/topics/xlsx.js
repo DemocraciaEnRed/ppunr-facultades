@@ -397,6 +397,7 @@ app.get('/export/topics/export-resultados-votos',
         'Facultad': null,
         'Claustro': null,
         'Proyecto': `${escapeTxt(votante.topic ? votante.topic.mediaTitle : '')}`,
+        'Hora Voto': `${escapeTxt(moment(votante.createdAt).format('YYYY/MM/DD HH:mm:ss'))}`
       }
       if(votante.author.dni == votante.dni) {
         theVoto['Tipo Voto'] = 'Voto online'

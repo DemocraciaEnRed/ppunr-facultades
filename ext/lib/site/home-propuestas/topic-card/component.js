@@ -89,6 +89,15 @@ export class TopicCard extends Component {
 
     const text = createClauses(topic, fullText)
 
+    const renderVotarButton = () => {
+      if (isProyecto && config.votacionVisible && config.votacionAbierta) {
+        return (<VotarButton topic={topic} onVote={onVote} voterInformation={voterInformation} key={`votar-${voterInformation.dni}-${topic.id}`} />)
+      } else {
+        return null
+      }
+    }
+
+
     return (
       <div id="ideas-topic-card" className={`ext-topic-card ${fullText ? 'focus' : ''}`} style={{ borderColor: (topic.tag && topic.tag.color) || '' }}>
           {/* <div className='topic-card-attrs'>
@@ -170,9 +179,7 @@ export class TopicCard extends Component {
               isLoggedIn && config.habilitarComentarios &&
               <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Comentar <i className="icon-comment-alt"></i></Link>
             }
-            { isProyecto && config.votacionVisible && config.votacionAbierta &&
-              <VotarButton topic={topic} onVote={onVote} voterInformation={voterInformation} />
-            }            
+            { renderVotarButton() }
             {
               true &&// !isLoggedIn &&
               <button className='btn btn-go' onClick={() => this.setState({fullText: !fullText})}>{fullText ? "Ver menos" : "Ver más"}</button>
