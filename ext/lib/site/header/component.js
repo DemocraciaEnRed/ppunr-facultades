@@ -155,7 +155,7 @@ class Header extends Component {
 
             <div className={`header-item ${window.location.pathname.includes('/acerca-de') ? 'active' : ''}`}>
               <Link
-                to='/s/acerca-de'
+                to='/acerca-de'
                 className='header-link'
                 tabIndex="2"
                 >
