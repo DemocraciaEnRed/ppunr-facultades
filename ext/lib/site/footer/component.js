@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 import BannerProyectistas from '../banner-proyectistas/component'
 import config from 'lib/config'
+import forumStore from 'lib/stores/forum-store/forum-store'
 
-const Footer = () => (
-  <div>
+
+class Footer extends Component {
+  constructor(){
+    super()
+    this.state={
+      forum:null
+    }
+  }
+
+  componentDidMount(){
+    forumStore.findOneByName('proyectos')
+      .then((forum) => {
+        this.setState({
+          forum: forum,
+          name: name
+        })
+      })
+      .catch((err) => {
+        if (err.status === 404) {
+          window.location = '/404'
+          return
+        }
+
+        throw err
+      })
+  }
+  
+  
+  render(){
+    const { forum } = this.state
+    return(<div>
     {
-      config.mostrarFormulariosProyectistas && <BannerProyectistas />
+      forum && forum.config.mostrarFormulariosProyectistas && <BannerProyectistas />
     }
     <footer className='footer-static'>
       <div className='container'>
@@ -59,5 +89,5 @@ const Footer = () => (
     </footer>
   </div>
 )
-
+}}
 export default Footer

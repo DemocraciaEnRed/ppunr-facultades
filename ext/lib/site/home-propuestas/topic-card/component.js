@@ -6,6 +6,8 @@ import VotarButton from 'ext/lib/site/home-propuestas/topic-card/votar-button/co
 // import { config } from 'democracyos-notifier'
 import config from 'lib/config'
 import Cause from './cause/component'
+import forumStore from 'lib/stores/forum-store/forum-store'
+
 
 const estados = (state) => {
   switch (state) {
@@ -26,7 +28,16 @@ const estados = (state) => {
 
 export class TopicCard extends Component {
   state = {
-    fullText: false
+    fullText: false,
+    forum:null
+  }
+  
+  componentDidMount () {
+    forumStore.findOneByName(config.forumProyectos).then(forum =>{
+      this.setState({
+        forum
+      })
+    })
   }
 
 
@@ -48,7 +59,7 @@ export class TopicCard extends Component {
   }
 
   render() {
-    const { fullText } = this.state
+    const { fullText, forum } = this.state
     const { topic, onVote, onProyectista, user, voterInformation } = this.props
 
     const isStaff = !user.state.rejected && user.state.value.staff
@@ -90,8 +101,8 @@ export class TopicCard extends Component {
     const text = createClauses(topic, fullText)
 
     const renderVotarButton = () => {
-      if (isProyecto && config.votacionVisible && config.votacionAbierta) {
-        return (<VotarButton topic={topic} onVote={onVote} voterInformation={voterInformation} key={`votar-${voterInformation.dni}-${topic.id}`} />)
+      if (forum && isProyecto && forum.config.votacion) {
+        return (<VotarButton topic={topic} onVote={onVote} voterInformation={voterInformation} key={`votar-${voterInformation.dni}-${topic.id}`} forumConfig={forum.config} />)
       } else {
         return null
       }

@@ -40,7 +40,7 @@ export default function ThumbsVoto(props) {
               <h3>{ props.texts['home-subtitle-text'] }</h3>
             </div>
             {
-              config.propuestasAbiertas && config.propuestasVisibles &&
+              props.forumConfig.propuestasAbiertas &&  props.forumConfig.ideacion &&
               <div className="row btn-container-home">
                 <div className="col-md-3">
                   <Link

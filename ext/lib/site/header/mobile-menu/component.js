@@ -22,6 +22,7 @@ class MobileMenu extends Component {
   }
 
   render () {
+    const {configForum} = this.props
     return (
       <nav className='mobile-nav'>
         <a
@@ -56,16 +57,16 @@ class MobileMenu extends Component {
                     UNR DECIDE
                   </Link>
                 </div>
-                <div className='header-item'>
+                {configForum && configForum.mostrarSeccionEventos && <div className='header-item'>
                   <Link
                     to='s/foro-presencial'
                     className={`header-link ${!~window.location.pathname.includes('foro-presencial') ? 'active' : ''}`}
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}
                     tabIndex="4">
-                    Votación Presencial
+                    Foro Presencial
                   </Link>
-                </div>
+                </div>}
                 {/* <div className='header-item mobile-link'>
                   <ProyectosLink />
                 </div>
