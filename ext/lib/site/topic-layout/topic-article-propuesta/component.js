@@ -150,7 +150,7 @@ class TopicArticle extends Component {
         <div className='topic-article-content entry-content skeleton-propuesta'>
          <div className='topic-article-status-container'>
         {
-          (forum.privileges && forum.privileges.canChangeTopics && config.propuestasAbiertas)
+          (forum.privileges && forum.privileges.canChangeTopics && forum.config.propuestasAbiertas)
             ? (
               <div className='topic-article-content topic-admin-actions'>
                   <Link href={editUrl} className='btn btn-default btn-block btn-sm'>
@@ -160,7 +160,7 @@ class TopicArticle extends Component {
                   </Link>
               </div>
             )
-            : (topic.privileges && topic.privileges.canEdit && config.propuestasAbiertas) &&
+            : (topic.privileges && topic.privileges.canEdit && forum.config.propuestasAbiertas) &&
 
                (
                  <div className='topic-article-content topic-admin-actions'>

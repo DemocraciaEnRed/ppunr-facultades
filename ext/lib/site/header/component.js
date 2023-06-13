@@ -17,7 +17,8 @@ class Header extends Component {
       userForm: null,
       mobileMenu: false,
       userMenu: false,
-      userPrivileges: null
+      userPrivileges: null,
+      configForum:null
     }
 
     props.user.onChange(this.onUserStateChange)
@@ -25,6 +26,11 @@ class Header extends Component {
 
   componentWillMount () {
     bus.on('user-form:load', this.onLoadUserForm)
+    forumStore.findOneByName(config.forumProyectos).then(
+      forum => this.setState({ 
+        configForum:forum.config
+       })
+    )
   }
 
   componentWillUnmount () {
@@ -84,6 +90,8 @@ class Header extends Component {
       color: config.headerFontColor,
       backgroundColor: config.headerBackgroundColor
     }
+    const { configForum} = this.state
+
     const showAdmin = this.state.userPrivileges && this.state.userPrivileges.canChangeTopics
 
     const userState = this.props.user.state
@@ -133,7 +141,8 @@ class Header extends Component {
             <MobileMenu
               form={this.state.userForm}
               menuOn={this.state.mobileMenu}
-              toggleOnClick={this.toggleMobileMenu} />
+              toggleOnClick={this.toggleMobileMenu} 
+              configForum={configForum} />
 
           </ul>
         </nav>
@@ -171,15 +180,15 @@ class Header extends Component {
                   UNR DECIDE
               </Link>
             </div>
-            {/* <div className={`header-item ${window.location.pathname.includes('/foro-presencial') ? 'active' : ''}`}>
+            { configForum && configForum.mostrarSeccionEventos && <div className={`header-item ${window.location.pathname.includes('/foro-presencial') ? 'active' : ''}`}>
               <Link
                 to='/s/foro-presencial'
                 className='header-link'
                 tabIndex="4"
                 >
-                  Votación Presencial
+                  Foro Presencial
               </Link>
-            </div> */}
+            </div> }
             { showAdmin &&
               <div className={`header-item ${window.location.pathname.includes('/admin') ? 'active' : ''}`}>
                 <Link

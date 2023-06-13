@@ -19,7 +19,7 @@ class VotarButton extends Component {
   }
 
   render() {
-    const { topic, onVote, user, voterInformation } = this.props
+    const { topic, onVote, user, voterInformation, forumConfig } = this.props
     let { openQuestion } = this.state
 
     const topicVoted = voterInformation.votes && voterInformation.votes.includes(topic.id)
@@ -32,12 +32,12 @@ class VotarButton extends Component {
     return (
         <div
           className='votar-button-wrapper'>
-          { !config.votacionAbierta && topicVoted &&
+          { !forumConfig.votacion && topicVoted &&
             <button className='btn btn-primary btn-voted'>
               Votaste este proyecto
             </button>
           }
-          { config.votacionAbierta && !openQuestion &&
+          { forumConfig.votacion && !openQuestion &&
             <button
               className={`btn btn-primary btn-${topicVoted ? 'voted' : 'filled'}`}
               onClick={
@@ -50,7 +50,7 @@ class VotarButton extends Component {
             {topicVoted ? <span><span className="glyphicon glyphicon-ok" />&nbsp;&nbsp;Votaste este proyecto</span> : 'Votar este proyecto'}
             </button>
           }
-        { config.votacionAbierta && openQuestion &&
+        { forumConfig.votacion && openQuestion &&
             <div>
               <span className='confirmas-voto'>{ this.state.disabled ? 'Enviando..' : '¿Confirmás tu voto?'}</span>
               <button

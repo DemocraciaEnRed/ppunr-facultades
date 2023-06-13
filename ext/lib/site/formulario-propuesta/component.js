@@ -105,7 +105,7 @@ class FormularioPropuesta extends Component {
           topic: topic
         })
 
-      console.log(isEdit, newState)
+      //console.log(isEdit, newState)
       this.setState(newState, () => {
         // updateamos campos de usuario
         // (recién dps del setState tendremos facultades y claustros cargados)
@@ -309,7 +309,7 @@ class FormularioPropuesta extends Component {
     const { forum, facultades, claustros, availableTags, availableEjes, eje } = this.state
 
     if (!forum) return null
-    if(config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
+    if(forum.config.propuestasAbiertas || (this.state.forum.privileges && this.state.forum.privileges.canChangeTopics)) {
     return (
       <div className='form-propuesta'>
         <div className='propuesta-header'>

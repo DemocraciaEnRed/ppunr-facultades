@@ -11,6 +11,8 @@ import Footer from 'ext/lib/site/footer/component'
 // import forumStore from 'lib/stores/forum-store/forum-store'
 // import topicStore from 'lib/stores/topic-store/topic-store'
 import textStore from 'lib/stores/text-store'
+import forumStore from 'lib/stores/forum-store/forum-store'
+
 import TypeformButton from './typeform'
 
 export default class HomeMultiforumOverride extends Component {
@@ -18,18 +20,27 @@ export default class HomeMultiforumOverride extends Component {
     super(props)
 
     this.state = {
-      texts: {}
+      texts: {},
+      forum:{config:{}},
     }
   }
 
   componentWillMount () {
-    textStore.findAllDict().then((textsDict) => {
+    Promise.all([
+      textStore.findAllDict(),
+      forumStore.findOneByName('proyectos')
+    ])
+    .then((results) => {
+      const [textsDict, forum] = results
+
       this.setState({
-        texts: textsDict
+        texts: textsDict,
+        forum
       })
     }).catch((err) => {
       this.state = {
-        texts: {}
+        texts: {},
+        forum:null
       }
     })
   }
@@ -47,7 +58,7 @@ export default class HomeMultiforumOverride extends Component {
       <div className='ext-home-multiforum'>
         <Anchor id='container'>
           <BannerForoVecinal title="Presupuesto participativo - Facultades" texts={this.state.texts} />
-          <ThumbsVoto texts={this.state.texts} />
+          <ThumbsVoto texts={this.state.texts} forumConfig={this.state.forum.config} />
           {/* <div className="banner-ideas">
             <img src="/ext/lib/site/home-multiforum/icon-idea.svg" alt="Ideas"/>
             <p>Conocé <strong>los proyectos </strong>que podés votar para que sean realidad en el 2022. <strong>¡Elegí hasta tres proyectos y votá!</strong>. Podés conocerlas aquí.</p>
