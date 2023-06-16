@@ -168,7 +168,7 @@ class Header extends Component {
                 className='header-link'
                 tabIndex="2"
                 >
-                  Acerca de
+                  Información
               </Link>
             </div>
             <div className={`header-item ${window.location.pathname.includes('/propuestas') ? 'active' : ''}`}>
@@ -177,16 +177,16 @@ class Header extends Component {
                 className='header-link'
                 tabIndex="3"
                 >
-                  UNR DECIDE
+                  FORO UNR
               </Link>
             </div>
-            { configForum && configForum.mostrarSeccionEventos && <div className={`header-item ${window.location.pathname.includes('/foro-presencial') ? 'active' : ''}`}>
+            { configForum && configForum.mostrarSeccionEventos && <div className={`header-item ${window.location.pathname.includes('/agenda') ? 'active' : ''}`}>
               <Link
-                to='/s/foro-presencial'
+                to='/s/agenda'
                 className='header-link'
                 tabIndex="4"
                 >
-                  Foro Presencial
+                  Agenda
               </Link>
             </div> }
             { showAdmin &&

@@ -44,7 +44,7 @@ class MobileMenu extends Component {
                     onClick={this.props.toggleOnClick}
                     tabIndex="2"
                     >
-                    Acerca de
+                    Información
                   </Link>
                 </div>
                 <div className='header-item'>
@@ -54,17 +54,17 @@ class MobileMenu extends Component {
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}
                     tabIndex="3">
-                    UNR DECIDE
+                    FORO UNR
                   </Link>
                 </div>
                 {configForum && configForum.mostrarSeccionEventos && <div className='header-item'>
                   <Link
-                    to='s/foro-presencial'
-                    className={`header-link ${!~window.location.pathname.includes('foro-presencial') ? 'active' : ''}`}
+                    to='/s/agenda'
+                    className={`header-link ${!~window.location.pathname.includes('agenda') ? 'active' : ''}`}
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}
                     tabIndex="4">
-                    Foro Presencial
+                    Agenda
                   </Link>
                 </div>}
                 {/* <div className='header-item mobile-link'>
