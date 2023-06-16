@@ -181,13 +181,13 @@ export class TopicCard extends Component {
           ) } */}
 
           <div className='buttons-wrapper'>
-            { isLoggedIn && !isProyecto && config.habilitarApoyo &&
+            {forum && isLoggedIn && !isProyecto && forum.config.ideacion &&
               <Cause
                 topic={topic}
                 canVoteAndComment={true} />
             }
             {
-              isLoggedIn && config.habilitarComentarios &&
+              forum && isLoggedIn && forum.config.ideacion &&
               <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Comentar <i className="icon-comment-alt"></i></Link>
             }
             { renderVotarButton() }

@@ -12,6 +12,7 @@ class BannerWelcome extends Component {
   }
 
   render () {
+    const { forumConfig } = this.props
     return (
       <div id='bannerwelcome' className='banner-welcome'>
         <img src="/ext/lib/site/banner-welcome/vector.png" className="image-large" alt="Icono proyectistas"/>
@@ -27,10 +28,10 @@ class BannerWelcome extends Component {
         <div className="container">
         <div className="row">
           <div className="col-md-3">
-            <Link to={'/propuestas'} className="boton-foro-virtual" href="">PROYECTOS</Link>
+            <Link to={'/propuestas'} className="boton-foro-virtual" href="">{forumConfig.ideacion? 'IDEAS' : 'PROYECTOS'}</Link>
           </div>
           {/* <div className="col-md-3">
-            <Link to={'/s/foro-presencial'} className="boton-foro-presencial" href="">Votación Presencial</Link>
+            <Link to={'/s/agenda'} className="boton-foro-presencial" href="">Votación Presencial</Link>
           </div> */}
         </div>
       </div>

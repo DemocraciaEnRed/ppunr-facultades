@@ -56,13 +56,13 @@ export default class Page extends Component {
                   </div> */}
                   <div data-trigger="+ ¿Cómo participo?">
                     <p className='p-padding'>
-                    Te invitamos a <Link href="/signup" className="text-primary">registrarte aquí</Link> para votar. Además, habrá postas presenciales de votación paralelamente al proceso virtual. Podés ver el calendario haciendo <Link href="/s/foro-presencial" className="text-primary">clic acá</Link>.
+                    Te invitamos a <Link href="/signup" className="text-primary">registrarte aquí</Link> para votar. Además, habrá postas presenciales de votación paralelamente al proceso virtual. Podés ver el calendario haciendo <Link href="/s/agenda" className="text-primary">clic acá</Link>.
                     </p>
                     {/* <p className='p-padding'>
                     También podrás inscribirte para ser proyectista de la Comisión Universitaria. Como la comisión estará organizada en torno a áreas temáticas, te proponemos elegir el área en la que quieras trabajar para transformar las ideas del foro en proyectos. No es necesario presentar una idea para ser proyectista.    
                     </p>
                     <p className='p-padding'>
-                    Además, habrá encuentros presenciales paralelamente al Foro virtual para que puedas acercarte a dejar tu idea, construirla con otros/as y anotarte para ser proyectista. Podes ver el calendario haciendo <Link href="/s/foro-presencial" className="text-primary">clic acá</Link>. 
+                    Además, habrá encuentros presenciales paralelamente al Foro virtual para que puedas acercarte a dejar tu idea, construirla con otros/as y anotarte para ser proyectista. Podes ver el calendario haciendo <Link href="/s/agenda" className="text-primary">clic acá</Link>. 
                     </p> */}
                   </div>
                   <div data-trigger="+ Si no participé de una etapa anterior, ¿puedo sumarme?">

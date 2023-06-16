@@ -2,11 +2,11 @@ import React from 'react'
 
 export default function BannerListadoTopics(props) {
 
-  const {votes, dni, userLoggedIn } = props.voterInformation
+  const {votes, dni, userLoggedIn, votacion } = props.voterInformation
 
   const socialLinksUrl = window.location
   const twitterText = `Sumate a elegir proyectos para la Universidad que queremos. ` + socialLinksUrl
-  
+
   const messageVoto = (votes) => {
     switch (3 - votes.length) {
       case 3: return "Tenés 3 votos disponibles"
@@ -19,7 +19,7 @@ export default function BannerListadoTopics(props) {
 
   return (
     <div>
-      {userLoggedIn && dni !== '' && votes && 
+      { votacion && userLoggedIn && dni !== '' && votes && 
         <header className='banner-votos'>
           <h1 className='votos-title'>
             <div dangerouslySetInnerHTML={{__html: messageVoto(votes)}} />

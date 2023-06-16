@@ -26,9 +26,9 @@ export class Comments extends Component {
   }
 
   render () {
-    const { commentsFetch } = this.props
+    const { commentsFetch, forum } = this.props
 
-    const enabled = config.habilitarComentarios
+    const enabled = forum.config.ideacion
 
     return (
       <div className='topic-comments'>
