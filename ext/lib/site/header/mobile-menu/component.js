@@ -22,7 +22,7 @@ class MobileMenu extends Component {
   }
 
   render () {
-    const {configForum} = this.props
+    const {configForum, texts} = this.props
     return (
       <nav className='mobile-nav'>
         <a
@@ -54,7 +54,7 @@ class MobileMenu extends Component {
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}
                     tabIndex="3">
-                    FORO UNR
+                    {texts['foro-pestaña']}
                   </Link>
                 </div>
                 {configForum && configForum.mostrarSeccionEventos && <div className='header-item'>
@@ -64,7 +64,7 @@ class MobileMenu extends Component {
                     activeStyle={{ color: '#8C1E81' }}
                     onClick={this.props.toggleOnClick}
                     tabIndex="4">
-                    Agenda
+                    {texts['evento-pestaña']}
                   </Link>
                 </div>}
                 {/* <div className='header-item mobile-link'>

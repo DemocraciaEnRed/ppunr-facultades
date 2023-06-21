@@ -4,6 +4,7 @@ import Footer from   'ext/lib/site/footer/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Anchor from 'ext/lib/site/anchor'
 import userConnector from 'lib/site/connectors/user'
+import textStore from 'lib/stores/text-store'
 
 class Page extends Component {
   constructor (props) {
@@ -14,13 +15,20 @@ class Page extends Component {
       futureEvents: [],
       pastEvents: [],
       buttonPressed: [],
-      isLoading: true
+      isLoading: true,
+      texts:{}
     }
   }
 
   componentDidMount () {
     this.goTop()
     this.getAgenda()
+    textStore.findAllDict()
+    .then(
+      texts =>this.setState({ 
+        texts
+       })
+    )
   }
 
   getAgenda = () => {
@@ -106,16 +114,16 @@ class Page extends Component {
   }
 
   render () {
-    let { agenda, futureEvents, pastEvents, buttonPressed, isLoading } = this.state
+    let { agenda, futureEvents, pastEvents, buttonPressed, isLoading, texts } = this.state
     return (
       <Anchor id='container-top'>
       <div id="foro-presencial">
         <section className="the-banner">
-          Agenda
+          {texts['evento-titulo']}
         </section>
         <div className="the-subbanner-container">
           <div className="the-subbanner container">
-            En estos puntos podrás dejar tus ideas de forma presencial
+          {texts['evento-bajada']}
           </div>
         </div>
         <div className="the-content">
