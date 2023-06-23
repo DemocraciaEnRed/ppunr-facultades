@@ -188,7 +188,7 @@ export class TopicCard extends Component {
             }
             {
               forum && isLoggedIn && forum.config.ideacion &&
-              <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Comentar <i className="icon-comment-alt"></i></Link>
+              <Link className='btn btn-go' to={`/propuestas/topic/${topic.id}`}>Comentarios {topic.commentsCount > 0 && `( ${topic.commentsCount} )`} <i className="icon-comment-alt"></i></Link>
             }
             { renderVotarButton() }
             {
