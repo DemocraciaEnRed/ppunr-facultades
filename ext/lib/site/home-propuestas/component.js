@@ -7,6 +7,7 @@ import userConnector from 'lib/site/connectors/user'
 import tagStore from 'lib/stores/tag-store/tag-store'
 import facultadStore from 'lib/stores/facultad-store'
 import claustroStore from 'lib/stores/claustro-store'
+import textStore from 'lib/stores/text-store'
 import TopicCard from './topic-card/component'
 import BannerListadoTopics from 'ext/lib/site/banner-listado-topics/component'
 import FilterPropuestas from './filter-propuestas/component'
@@ -54,6 +55,7 @@ class HomePropuestas extends Component {
     this.state = {
       forum: null,
       topics: null,
+      texts:{},
 
       facultades: [],
       facultad: defaultValues.facultad,
@@ -95,9 +97,10 @@ class HomePropuestas extends Component {
       claustroStore.findAll(),
       tagStore.findAll(),
       forumStore.findOneByName('proyectos'),
-      topicStore.findAllProyectos()
+      topicStore.findAllProyectos(),
+      textStore.findAllDict()
     ]).then((results) => {
-      const [facultades, claustros, tags, forum, proyectos] = results
+      const [facultades, claustros, tags, forum, proyectos, texts] = results
       const tagsMap = tags.map((tag) => { return { value: tag.id, name: tag.name } })
       const tag = this.props.location.query.tags ? [tagsMap.find((j) => j.name == this.props.location.query.tags).value] : []
       const tiposIdea = forum.topicsAttrs.find((a) => a.name == 'state').options.map((state) => { return { value: state.name, name: state.title } })
@@ -110,6 +113,7 @@ class HomePropuestas extends Component {
         tiposIdea,
         tipoIdea,
         forum,
+        texts,
         // searchableProyectos: proyectos.filter(p => p.attrs.state == (config.votacionVisible ? 'proyecto' : 'pendiente')).map(p => ({label: `${p.mediaTitle}`, value: p._id}))
         // searchableProyectos: config.votacionVisible ? proyectos.map(p => p.state == 'proyecto') : proyectos.map(p => p.state == 'pendiente')
         searchableProyectos: proyectos.map((p) => ({ label: `#${p.attrs && p.attrs.numero} ${p.mediaTitle}`, value: p._id }))
@@ -449,7 +453,7 @@ class HomePropuestas extends Component {
         forum, topics, facultades,
         searchableProyectos, selectedProyecto, dialogVotacion,
         claustros, dialogMessage,
-        dniP, facultadP, claustroP,tipoIdea
+        dniP, facultadP, claustroP,tipoIdea, texts
       } = this.state
     const { user } = this.props
     // console.log(facultades, claustros)
@@ -491,7 +495,7 @@ class HomePropuestas extends Component {
           { forum && <BannerListadoTopics
             btnText={forum.config.propuestasAbiertas ? 'Subí tu idea' : undefined}
             btnLink={forum.config.propuestasAbiertas ? '/formulario-idea' : undefined}
-            title={forum.config.ideacion ? 'Conocé las ideas del PPUNR' : 'PPUNR 2022'}
+            title={texts['foro-titulo']}
             handlerVotacion={forum && forum.config.votacion && forum && forum.privileges && forum.privileges.canEdit && this.handlerVotacion}
             user={user}
             voterInformation={voterInformation} />}
@@ -525,7 +529,7 @@ class HomePropuestas extends Component {
                 )
               } */}
               {forum && <div className='notice'>
-                <h1>{forum.config.noticeTexto }</h1>
+                <h1>{ texts['foro-bajada'] }</h1>
               </div>}
             </div>
           </div>

@@ -8,6 +8,7 @@ import PopupMessage from 'ext/lib/site/header/popup-message/component'
 import MobileMenu from 'ext/lib/site/header/mobile-menu/component'
 import AnonUser from 'ext/lib/site/header/anon-user/component'
 import forumStore from 'lib/stores/forum-store/forum-store'
+import textStore from 'lib/stores/text-store'
 
 class Header extends Component {
   constructor (props) {
@@ -18,7 +19,8 @@ class Header extends Component {
       mobileMenu: false,
       userMenu: false,
       userPrivileges: null,
-      configForum:null
+      configForum:null,
+      texts:{}
     }
 
     props.user.onChange(this.onUserStateChange)
@@ -26,10 +28,17 @@ class Header extends Component {
 
   componentWillMount () {
     bus.on('user-form:load', this.onLoadUserForm)
-    forumStore.findOneByName(config.forumProyectos).then(
-      forum => this.setState({ 
-        configForum:forum.config
+    Promise.all([
+      forumStore.findOneByName(config.forumProyectos),
+      textStore.findAllDict()
+    ])
+    .then(result =>{
+      const [forum,texts] = result
+      this.setState({ 
+        configForum:forum.config,
+        texts
        })
+    }
     )
   }
 
@@ -90,7 +99,7 @@ class Header extends Component {
       color: config.headerFontColor,
       backgroundColor: config.headerBackgroundColor
     }
-    const { configForum} = this.state
+    const { configForum, texts} = this.state
 
     const showAdmin = this.state.userPrivileges && this.state.userPrivileges.canChangeTopics
 
@@ -142,7 +151,8 @@ class Header extends Component {
               form={this.state.userForm}
               menuOn={this.state.mobileMenu}
               toggleOnClick={this.toggleMobileMenu} 
-              configForum={configForum} />
+              configForum={configForum}
+              texts={texts} />
 
           </ul>
         </nav>
@@ -177,7 +187,7 @@ class Header extends Component {
                 className='header-link'
                 tabIndex="3"
                 >
-                  FORO UNR
+                  {texts['foro-pestaña']}
               </Link>
             </div>
             { configForum && configForum.mostrarSeccionEventos && <div className={`header-item ${window.location.pathname.includes('/agenda') ? 'active' : ''}`}>
@@ -186,7 +196,7 @@ class Header extends Component {
                 className='header-link'
                 tabIndex="4"
                 >
-                  Agenda
+                  {texts['evento-pestaña']}
               </Link>
             </div> }
             { showAdmin &&

@@ -7,23 +7,27 @@ import Footer from 'ext/lib/site/footer/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Anchor from 'ext/lib/site/anchor'
 import forumStore from 'lib/stores/forum-store/forum-store'
-
+import textStore from 'lib/stores/text-store'
 export default class HomeAbout extends Component {
-  constructor () {
+  constructor() {
     super()
 
     this.state = {
       forum: null,
-      faqs: null
+      faqs: null,
+      texts:{}
     }
   }
 
-  componentDidMount () {
-    aboutStore
-      .findAll()
-      .then((faqs) => this.setState({ faqs }))
+  componentDidMount() {
+    Promise.all([
+      aboutStore.findAll(),
+      textStore.findAllDict()
+  ]).then(([faqs, texts]) => {
+      this.setState({ faqs, texts })
+  })
       .catch((err) => {
-        throw err
+          throw err
       })
     const u = new window.URLSearchParams(window.location.search)
     if (u.get('scroll') === 'cronograma') return Anchor.goTo('cronograma')
@@ -38,28 +42,29 @@ export default class HomeAbout extends Component {
       })
   }
 
-  goTop () {
+  goTop() {
     window.scrollTo(0, 0)
   }
 
-  render () {
-    const faqs = this.state.faqs
+  render() {
+    const {faqs, texts} = this.state
 
     return (
       <div>
-        <section className='banner-static'>
-          <div className='banner'></div>
-          <div className='contenedor'>
-            <div className='fondo-titulo'>
-              <h1>Presupuesto Participativo</h1>
-            </div>
-          </div>
+        <section className="banner-static-2022">
+          <h1>INFORMACIÓN</h1>
         </section>
+        {texts && <div className="post-banner-static-2022 container">
+          <span> {texts['info-bajada']}</span>
+        </div>}
+        {texts && <div className=' text-center' dangerouslySetInnerHTML={{ __html: texts['info-reglamento'] }} />}
+        <br />
+        <br />
         <div id='container'>
           <div className='ext-acerca-de container'>
             <div>
               <div className='faq text-left'>
-                {faqs && 
+                {faqs &&
                   <Accordion startPosition={-1}>
                     {faqs.map((faq) => (
                       <div key={faq.id} data-trigger={`${faq.question}`}>
@@ -82,7 +87,7 @@ export default class HomeAbout extends Component {
                     </div>
                   </div>
                 </Anchor>
-                
+
               </div>
             </div>
           </div>

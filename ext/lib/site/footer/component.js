@@ -3,20 +3,27 @@ import { Link } from 'react-router'
 import BannerProyectistas from '../banner-proyectistas/component'
 import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
+import textStore from 'lib/stores/text-store'
 
 
 class Footer extends Component {
   constructor(){
     super()
     this.state={
-      forum:null
+      forum:null,
+      texts:{}
     }
   }
 
   componentDidMount(){
-    forumStore.findOneByName('proyectos')
-      .then((forum) => {
+    Promise.all([
+      forumStore.findOneByName('proyectos'),
+      textStore.findAllDict()
+    ])
+      .then(result => {
+        const [forum, texts] = result
         this.setState({
+          texts,
           forum: forum,
           name: name
         })
@@ -33,7 +40,7 @@ class Footer extends Component {
   
   
   render(){
-    const { forum } = this.state
+    const { forum, texts } = this.state
     return(<div>
     {
       forum && forum.config.mostrarFormulariosProyectistas && <BannerProyectistas />
@@ -82,7 +89,7 @@ class Footer extends Component {
         <div className='terminos'>
           <Link to='/s/terminos-y-condiciones' tabIndex="13"> Términos y condiciones
           </Link>
-          <a href="https://presupuestoparticipativo.unr.edu.ar/?page_id=1551" tabIndex="14" rel="noopener noreferer" target="_blank"> Reglamento
+          <a href={texts['reglamento-link']} tabIndex="14" rel="noopener noreferer" target="_blank"> Reglamento
           </a>
         </div>
       </div>
