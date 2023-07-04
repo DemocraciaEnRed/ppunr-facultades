@@ -1,18 +1,24 @@
 #topics-wrapper
   .topics-admin
     .top-buttons
-      .export-resultados-wrapper
-        a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-votantes?forum=proyectos')='votos x/ votantes'         
+      .row
+        .col-md-4
+          a.btn.btn-success.btn-block.new(href=urlBuilder.for('admin.topics.create', {forum: forum.name}))
+            span.glyphicon.glyphicon-plus
+            = ' ' + t('admin-topics.list.add-topic')
+          .delete-topics-wrapper
+            button.btn.btn-danger.delete-topics='Eliminar proyectos e ideas'
+        .col-md-8.row 
+          .col-md-6.exportColum
+            .export-resultados-wrapper
+              a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-votantes?forum=proyectos')='votos x/ votantes'         
+            .export-resultados-wrapper
+              a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-proyectos?forum=proyectos')='resultados x/ proyectos'   
+          .col-md-6.exportColum
+            .download-old-topics-wrapper
+            .export-update-wrapper
       //- .export-resultados-wrapper
       //-   a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-votos?forum=proyectos')='votos'         
-      .delete-topics-wrapper
-        button.btn.btn-primary.delete-topics()='Eliminar proyectos e ideas' 
-      .export-resultados-wrapper
-        a.btn.btn-primary(href='/api/v2/export/topics/export-resultados-proyectos?forum=proyectos')='resultados x/ proyectos'   
-      .export-update-wrapper
-      a.btn.btn-success.btn-block.new(href=urlBuilder.for('admin.topics.create', {forum: forum.name}))
-        span.glyphicon.glyphicon-plus
-        = ' ' + t('admin-topics.list.add-topic')
     .well.well-lg.clearfix
       .row
         .col-md-6.col-xs-12.text-center

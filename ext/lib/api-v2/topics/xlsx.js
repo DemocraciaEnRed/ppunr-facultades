@@ -118,6 +118,103 @@ app.get('/export/topics/xlsx',
     }
   })
 
+  app.get('/export/old-topics',
+  middlewares.users.restrict,
+  middlewares.forums.findFromQuery,
+  middlewares.topics.findDeletedFromForum,
+  middlewares.forums.privileges.canChangeTopics,
+  function getAllUserMails(req, res, next) {
+    api.user.all(function (err, users) {
+      let usersMail = {}
+      if (err) {
+        log('error serving users from DB:', err)
+        return res.status(500).end()
+      }
+      users.forEach(u => usersMail[u._id] = u.email)
+      req.usersMail = usersMail
+      next()
+    })
+  },
+  (req, res, next) => Promise.all(
+    // populamos owners (parecido a populateOwners)
+    req.topics.map(topic =>
+      api.user.getFullUserById(topic.owner, true).then(user => {
+        topic.owner = user
+        return topic
+      })
+    )
+  ).then((topics) => Promise.all(
+    // populamos votos
+    topics.map(topic =>
+      api.vote.getVotesByTopic(topic._id).then(votes => {
+        topic.action.results = votes.map(v => req.usersMail[v.author])
+        return topic
+      })
+    )
+  )).then((topics) => {
+    req.topics = topics
+    next()
+  }),
+  (req, res, next) =>
+    api.user.populateProyectistas(req.topics).then(() => next())
+  ,
+  function getXlsx(req, res, next) {
+    let infoTopics = []
+    const attrsNames = req.forum.topicsAttrs
+      .map((attr) => attr.name)
+
+      let listTopics= req.topics
+      if(req.query.sort==='voted'){
+        listTopics.sort(function(a, b){return b.votesLength-a.votesLength})
+      }else if(req.query.sort==='newest'){
+        listTopics.sort(function(a, b){return new Date(b.createdAt) - new Date(a.createdAt)})
+      }else if(req.query.sort==='latest'){
+        listTopics.sort(function(a, b){return  new Date(a.createdAt) - new Date(b.createdAt)})
+      }
+  
+      if(req.query.years){
+        let listYears = req.query.years.split(',').map(Number)
+        listTopics = listTopics.filter(topic =>  listYears.includes(topic.createdAt.getFullYear()))
+      }  
+
+    req.topics.forEach((topic) => {
+      if (topic.attrs === undefined) {
+        topic.attrs = {}
+      }
+      console.log(topic)
+      let theTopic = {
+        'Idea ID': topic.id,
+        'Idea Fecha': `${escapeTxt(moment(topic.createdAt, '', req.locale).format('LL LT'))}`,
+        'Idea Título': `${escapeTxt(topic.mediaTitle)}`,
+        // 'Idea Temas': `${escapeTxt(topic.tags.join(', '))}`,
+        'Idea Tema': `${topic.tag ? escapeTxt(topic.tag.name) : '-'}`,
+        'Idea Facultad': `${escapeTxt(topic.owner.facultad && topic.owner.facultad.abreviacion)}`,
+        'Idea Texto': `${escapeTxt(topic.attrs['problema'])}`,
+        'Autor/a nombre': `${escapeTxt(topic.owner.firstName)}`,
+        'Autor/a apellido': `${escapeTxt(topic.owner.lastName)}`,
+        'Autor/a email': `${escapeTxt(topic.owner.email)}`,
+        'Autor/a claustro': `${escapeTxt(topic.owner.claustro && topic.owner.claustro.nombre)}`,
+        'Autor/a género': `${escapeTxt(topic.attrs['genero'])}`,
+        'Seguidores cantidad': `${escapeTxt(topic.action.count)}`,
+        'Seguidores emails': `${escapeTxt(topic.action.results.join(', '))}`,
+        'Proyectistas cantidad': `${escapeTxt(topic.proyectistas && topic.proyectistas.length)}`,
+        'Proyectistas emails': `${escapeTxt(topic.proyectistas && topic.proyectistas.map(p=>p.email).join(','))}`
+      }
+
+      /*attrsNames.map((name) => {
+        theTopic[name] = `${escapeTxt(topic.attrs[name])}` || ''
+      });*/
+      infoTopics.push(theTopic);
+    });
+    try {
+      res.xls(`ideas-facultades.xlsx`, infoTopics);
+    } catch (err) {
+      log('get csv: array to csv error', err)
+      return res.status(500).end()
+    }
+  })
+
+
 app.get('/export/topics/export-resultados',
   middlewares.users.restrict,
   middlewares.forums.findByName,
