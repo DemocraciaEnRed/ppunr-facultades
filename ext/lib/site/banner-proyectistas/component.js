@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import userConnector from 'lib/site/connectors/user'
 import config from 'lib/config'
+import NanoModal from 'nanomodal';
+
+let modalRef = null
 
 class BannerProyectistas extends Component {
   constructor (props) {
@@ -9,6 +12,37 @@ class BannerProyectistas extends Component {
     this.state = {
       buttonPressed: false
     }
+  }
+
+  componentDidMount() {
+    // Crea una instancia de NanoModal y asigna su referencia al ref del componente
+    modalRef = NanoModal("¿Querés inscribirte como proyectista?", {
+      classes: 'modalContent',
+      overlayClose: true, // Can't close the modal by clicking on the overlay.
+      buttons: [{
+        text: "SI",
+        handler: (modal) => {
+          // do something...
+          this.onButtonPressed()
+          modal.hide();
+        },
+        classes: 'boton boton-primary',
+      }, {
+        text: "NO",
+        classes: 'boton boton-error',
+        handler: "hide"
+      }],
+    });
+    modalRef.customShow = function (defaultShow, modalAPI) {
+      modalAPI.overlay.el.style.position = 'fixed'
+      modalAPI.overlay.el.style.display = 'block';
+      modalAPI.modal.el.style.display = 'block';
+    };
+  }
+
+  openModal = () => {
+    modalRef.customShow(modalRef.show, modalRef);
+    // Abre el modal cuando se hace clic en el botón
   }
 
   onButtonPressed = () => {
@@ -71,7 +105,7 @@ class BannerProyectistas extends Component {
           }
           if (this.props.user.state.fulfilled && !this.props.user.state.value.proyectista && !buttonPressed) {
             return (
-              <button type="button" onClick={this.onButtonPressed} className="boton-ser-proyectista">QUIERO SER PROYECTISTA</button>
+              <button type="button" onClick={this.openModal} className="boton-ser-proyectista">QUIERO SER PROYECTISTA</button>
             )
           }
         })()
