@@ -14,3 +14,14 @@
     - each tag in tags
       a.list-group-item(href=urlBuilder.for('admin.tags.id', {id: tag.id, forum: forum.name}))
         span.tag-title= tag.name
+        - if (tag.enabled)
+          span.label.label-success.pull-right
+            span.glyphicon.glyphicon-ok
+            = ' Habilitado'
+        - else
+          span.label.label-danger.pull-right
+            span.glyphicon.glyphicon-remove
+            = ' Deshabilitado'
+  //- - each tag in tags
+  //-   //- show all tag data raw
+  //-   pre= JSON.stringify(tag, null, 2)

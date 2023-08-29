@@ -80,7 +80,7 @@ class FormularioPropuesta extends Component {
 
       let newState = {
         forum,
-        availableTags: tags,
+        availableTags: tags.filter(t => t.enabled),
         facultades,
         claustros,
         availableEjes: ejes,

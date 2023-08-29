@@ -9,14 +9,26 @@
       .form-group
         label= t('admin-tags-form.label.name')
         input.form-control(type='text', maxlength='50', id="name", name='name', placeholder=t('admin-tags-form.placeholder.name'), value=tag.name, validate='required')
+      //- Color input
       .form-group
-        label= t('admin-tags-form.label.image')
-        .tag-images
-          - each image in images
-            - const id = 'tag-image-' + image.name
-            .tag-image(style='background-image: url(' + image.url + ')')
-              input(type='radio', name='image', value=image.name, checked= tag.image === image.name, validate='any:image', id=id)
-              label(for=id)
+        label= 'Color'
+        input.form-control(type='color', id="color", name='color', placeholder=t('admin-tags-form.placeholder.color'), value=tag.color)
+      //- Checkbox for enabled
+      .form-group
+        label= 'Habilitado en el formulario de ideas'
+        p.small= 'Habilite o deshabilite la tematica en el formulario de ideas. Si esta deshabilitado, no se podra seleccionar en el formulario de ideas, aunque como administrador usted puede "forzar" la tematica en el formulario de ideas del administrador.'
+        select.form-control(name="enabled")
+          option(value="true")= '✅ Habilitado'
+          option(value="false")= '❌ Deshabilitado'
+        
+      //- .form-group
+      //-   label= t('admin-tags-form.label.image')
+      //-   .tag-images
+      //-     - each image in images
+      //-       - const id = 'tag-image-' + image.name
+      //-       .tag-image(style='background-image: url(' + image.url + ')')
+      //-         input(type='radio', name='image', value=image.name, checked= tag.image === image.name, validate='any:image', id=id)
+      //-         label(for=id)
       .form-group
         button.btn.btn-success.btn-block.btn-lg
           = t('admin-tags-form.button.submit')
