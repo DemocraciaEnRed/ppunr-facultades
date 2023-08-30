@@ -13,6 +13,7 @@
   .list.list-group
     - each tag in tags
       a.list-group-item(href=urlBuilder.for('admin.tags.id', {id: tag.id, forum: forum.name}))
+        div(style='background-color: ' + tag.color + ';border-radius: 50px; display: inline-block; width: 15px; height: 15px; margin-right: 10px;')
         span.tag-title= tag.name
         - if (tag.enabled)
           span.label.label-success.pull-right
