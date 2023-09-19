@@ -10,16 +10,26 @@
     width: 200px;
     margin-bottom: 10px;
 
-  .export-update-wrapper
-    float: right;
-    .export-update
-      margin-top: 0px
-      .btn
-        margin-right: 0;
+  .top-buttons
+    display: flex; 
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    @media screen and (min-width: 769px)
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
 
-  .export-resultados-wrapper
-    float: right;
-    margin-left: 8px;
+  // .export-update-wrapper
+  //   float: right;
+  //   .export-update
+  //     margin-top: 0px
+  //     .btn
+  //       margin-right: 0;
+
+  // .export-resultados-wrapper
+  //   float: right;
+  //   margin-left: 8px;
 
   .busqueda-wrapper
     width: 100%
