@@ -42,9 +42,6 @@ html(lang=locale)
       include includes/segment
 
     include includes/analytics
-      
-    - if (config.env !== 'development' && config.warnHTTP && config.protocol !== 'https')
-      include includes/ssl-warning
     
     //-
     //-   Scripts
